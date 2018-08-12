@@ -8,7 +8,16 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-
+const createLintingRule = () => ({
+  test: /\.(js|vue)$/,
+  loader: 'eslint-loader',
+  enforce: 'pre',
+  include: [resolve('src'), resolve('test')],
+  options: {
+    formatter: require('eslint-friendly-formatter'),
+    emitWarning: !config.dev.showEslintErrorsInOverlay
+  }
+})
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
@@ -36,14 +45,11 @@ module.exports = {
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
-      { 
-        test: /\.css$/, 
-        include: [ 
-         /src/,//表示在src目录下的css需要编译 
-         '/node_modules/element-ui/lib/'  //增加此项 
-        ], 
-        loader: 'style-loader!css-loader'
-       },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [resolve('src'), resolve('test')]
+      },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
@@ -70,6 +76,9 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    disableHostCheck: true,
+  },//找不到网站头
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).

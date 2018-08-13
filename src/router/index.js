@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Home from '@/views/Home'
 import Integral from '@/views/Integral'
+import Capital from '@/views/Capital'
 Vue.use(Router)
 
 export default new Router({
@@ -26,6 +27,11 @@ export default new Router({
       path: '/integral',
       name: 'Integral',
       component: Integral
+    },
+    {
+      path: '/capital',
+      name: 'Capital',
+      component: Capital
     },
    
   ]

@@ -1,7 +1,5 @@
 <template>
-    <div class="Integral">
-        我是积分信息页面
-    </div>
+  <div>我是资金页面</div>
 </template>
 <script>
     export default{
@@ -13,5 +11,5 @@
     }
 </script>
 <style scoped>
-
+  
 </style>

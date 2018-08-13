@@ -41,12 +41,12 @@
               </el-submenu>
             </el-submenu>
 
-            <el-menu-item index="3" @click="$router.push('Integral')">
+            <el-menu-item index="3"  @click="$router.push('Capital')">
               <i class="el-icon-goods"></i>
               <span slot="title">账户资金</span>
             </el-menu-item>
             <!-- disabled==禁用 -->
-            <el-menu-item index="4">
+            <el-menu-item index="4"  @click="$router.push('Integral')">
               <i class="el-icon-star-on"></i>
               <span slot="title">积分信息</span>
             </el-menu-item>

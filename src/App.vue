@@ -2,12 +2,13 @@
   <div id="app">
     <v-header></v-header>
     <div class="fiex">
-      <v-sidenav></v-sidenav>
-      <div class="box">
-        <img src="./assets/logo.png">
-      <router-view/>
-      </div>
-      
+        <v-sidenav></v-sidenav>
+
+        <div class="box">
+             <router-view>
+               
+             </router-view>
+        </div>      
     </div>
     
     <v-footer></v-footer>

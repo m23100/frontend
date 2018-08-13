@@ -1,5 +1,7 @@
 <template>
-  <div>login</div>
+    <div class="Submission">
+        Submission
+    </div>
 </template>
 <script>
     export default{
@@ -11,6 +13,5 @@
     }
 </script>
 <style scoped>
-  
-</style>
 
+</style>

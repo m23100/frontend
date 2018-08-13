@@ -1,30 +1,32 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Login from '../views/pages/Login'
-import Home from '../views/pages/Home'
+import Home from '@/views/Home'
+import Integral from '@/views/Integral'
 Vue.use(Router)
 
 export default new Router({
 
   routes: [
+    // {
+    //   path: '',
+    //   name: 'views',
+    //   component: Home,
+    //   redirect:'/home',
+    //   children: [
+        
+    //   ]
+    // },
     {
-      path: '',
-      redirect: '/home',
-      name: 'Pages',
-      component: Home,
-      children: [
-        {
-          path: 'login',
-          name: 'Login',
-          component: Login
-        },
-        {
-          path: 'home',
-          name: 'Home',
-          component: Home
-        },
-      ]
-    }
+      path: '/home',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/integral',
+      name: 'Integral',
+      component: Integral
+    },
+   
   ]
 })

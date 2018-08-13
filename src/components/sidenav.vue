@@ -15,7 +15,7 @@
       <el-row class="tac">
         <el-col :span="24">
           <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-            <el-menu-item index="1">
+            <el-menu-item index="1" @click="$router.push('Home')">
               <i class="el-icon-search"></i>
               <span slot="title">首页</span>
             </el-menu-item>
@@ -41,7 +41,7 @@
               </el-submenu>
             </el-submenu>
 
-            <el-menu-item index="3">
+            <el-menu-item index="3" @click="$router.push('Integral')">
               <i class="el-icon-goods"></i>
               <span slot="title">账户资金</span>
             </el-menu-item>

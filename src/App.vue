@@ -43,17 +43,21 @@ export default {
 <style>
   body{
     background-color: #e3e3e3 !important;
+    font-family: "微软雅黑";
   }
   .fiex{
      width: 1200px;
-     margin: 6px auto;
+     margin: 10px auto 30px;
      display: flex;justify-content: space-between;
      background-color: #f4f4f4;
+     border-radius: 10px;
   }
   .box{
     width: 100%;
-    background-color: #fff;
-    margin: 20px 20px 0 20px;
+    margin: 24px 20px 0 17px;
+  }
+  .el-row{
+    width: 200px !important;
   }
   .el-menu-item:focus, .el-menu-item:hover {
     outline: 0;

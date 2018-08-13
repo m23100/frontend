@@ -1,5 +1,5 @@
 <template>
-  <div class="Capital">我是资金页面
+  <div class="Personal">我是个人资料页面
       <div class="navdata">1111</div>
       </div>
 </template>

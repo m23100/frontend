@@ -109,16 +109,14 @@
 </script>
 <style>
   .sidenav {
-    width: 254px;
+    width: 241px;
     height: 100%;
     background-color: #fff;
     border: 1px solid #eee;
+    border-top-left-radius: 10px;
   }
 
   .sidenav .nav {
-    width: 100%;
-    height: 1018px;
-    /* text-align: center; */
   }
   .user{
         text-align: center;

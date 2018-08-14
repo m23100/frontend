@@ -25,19 +25,19 @@
                 <span>放单平台</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="2-2">提交新单</el-menu-item>
+                <el-menu-item index="2-2" @click="$router.push('Submission')">提交新单</el-menu-item>
               </el-menu-item-group>
-              <el-submenu index="2-2">
-                <template slot="title">平推单</template>
-                <el-menu-item index="2-2-1">审核中</el-menu-item>
-                <el-menu-item index="2-2-2">审核被拒</el-menu-item>
-                <el-menu-item index="2-2-3">审核通过</el-menu-item>
+              <el-submenu index="2-2" @click="$router.push('Viptesting')">
+                <template slot="title" >平推单</template>
+                <el-menu-item index="2-2-1" @click="$router.push('Viptesting')">审核中</el-menu-item>
+                <el-menu-item index="2-2-2" @click="$router.push('Viptestok')">审核通过</el-menu-item>
+                <el-menu-item index="2-2-3" @click="$router.push('Viptestno')">审核被拒</el-menu-item>
               </el-submenu>
               <el-submenu index="2-3">
                 <template slot="title">爆款单</template>
                 <el-menu-item index="2-3-1">审核中</el-menu-item>
-                <el-menu-item index="2-3-2">审核被拒</el-menu-item>
-                <el-menu-item index="21-3-3">审核通过</el-menu-item>
+                <el-menu-item index="2-3-2">审核通过</el-menu-item>
+                <el-menu-item index="2-3-3">审核被拒</el-menu-item>
               </el-submenu>
             </el-submenu>
 
@@ -73,14 +73,9 @@
                 <span>设置管理</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="8-1" @click="$router.push({name:'personal'})">
-                  <i class="iconfont icon-home-o"></i>个人信息</el-menu-item>
-                <el-menu-item index="8-2" @click="$router.push({name:'publicsetup'})">
-                  <i class="iconfont icon-home-p"></i>公众号设置</el-menu-item>
-                <el-menu-item index="8-3" @click="$router.push({name:'publicaccess'})">
-                  <i class="iconfont icon-home-q"></i>公众号接入</el-menu-item>
-                <el-menu-item index="8-3" @click="$router.push({name:'changeaccount'})">
-                  <i class="iconfont icon-home-r"></i>切换账号</el-menu-item>
+                <el-menu-item index="9-1" @click="$router.push({name:'settlement'})"><i class="iconfont icon-home-k"></i>我的结算单</el-menu-item>
+              <el-menu-item index="9-2" @click="$router.push({name:'putforward'})"><i class="iconfont icon-home-l"></i>提现记录</el-menu-item>
+              <el-menu-item index="9-3" @click="$router.push({name:'receivables'})"><i class="iconfont icon-home-m"></i>收款信息</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
           </el-menu>

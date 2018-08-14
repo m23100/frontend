@@ -1,7 +1,7 @@
 <template>
    <div class="head">
        <div class="header">
-           <ul class="fl">若梦TV首页</ul>
+           <ul class="fl" @click="$router.push('Home')">若梦TV首页</ul>
            <ul class="fr">
                <!-- <li> <a href="">开发API</a> </li> -->
                <li>开发API</li>
@@ -39,6 +39,10 @@
   line-height: 38px;
   letter-spacing: 0px;
   color: #ffffff;
+  cursor: pointer;
+}
+.fl:hover{
+  color: #49a6f7;
 }
 
 .fr {
@@ -58,6 +62,10 @@
   font-size: 14px;
   line-height: 40px;
   color: #fff;
+  cursor: pointer;
+}
+.fr li:hover{
+  color: #49a6f7
 }
 </style>
 

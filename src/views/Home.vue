@@ -76,8 +76,7 @@ export default {
 <style scoped>
 .flex{
     display: flex;
-    justify-content: space-between;
-      
+    justify-content: space-between;      
 }
 .Home {
 }
@@ -154,7 +153,8 @@ export default {
      line-height: 46px;     
 }
 .flex .blue{
-        color: #49a6f7;
+    color: #49a6f7;
+    cursor: pointer;
 }
 .left-list{
      border-bottom: 1px solid #f4f4f4;

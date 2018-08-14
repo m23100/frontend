@@ -64,12 +64,18 @@ export default {
     background-color: #d1e9fd !important;
     border-left: 5px solid #49a6f7;
 }
+.el-submenu__title{
+  color: #a0a0a0;
+}
 .el-submenu__title:hover {
     background-color: #d1e9fd !important;
     border-left: 5px solid #49a6f7;
 }
 .el-icon-setting{
   padding: 0 20 0 15px !important;
+}
+.el-menu-item {
+  color: #a0a0a0;
 }
 </style>
 

@@ -142,16 +142,5 @@ export default {
   line-height: 24px;
   cursor: pointer;
 }
-/* .modify{
-    width: 30px;height: 16px;
-    border-right: 1px solid #eee;
-    padding-right: 10px;
-    cursor: pointer;
-}
-.again{
-    width: 58px;height: 16px;
-    border-left: 1px solid #eee;
-    padding-left: 10px;
-    cursor: pointer;
-} */
+
 </style>

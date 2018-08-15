@@ -14,6 +14,8 @@ import Viptestno from '@/views/platform/Vip/Viptestno'
 
 //爆款单
 import Sviptesting from '@/views/platform/Svip/Sviptesting' 
+import Sviptestok from '@/views/platform/Svip/Sviptestok' 
+import Sviptestno from '@/views/platform/Svip/Sviptestno' 
 Vue.use(Router)
 
 export default new Router({
@@ -71,6 +73,16 @@ export default new Router({
       path: '/sviptesting',
       name: 'Sviptesting',
       component: Sviptesting
+    },
+    {
+      path: '/sviptestok',
+      name: 'Sviptestok',
+      component: Sviptestok
+    },
+    {
+      path: '/sviptestno',
+      name: 'Sviptestno',
+      component: Sviptestno
     },
   ]
 })

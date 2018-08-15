@@ -2,87 +2,111 @@
     <div class="Viptestok">
 
         <div class="list-head">
-            <div style=" width: 50%;text-align: left;">商品名</div>
-            <div style=" width: 25%;">被拒原因</div>
-            <div style=" width: 25%;">操作</div>
+            <div style=" width: 30%;text-align: left;">商品名</div>
+            <div style=" width: 15%;">通用时间</div>
+            <div style=" width: 20%;">增长量</div>
+            <div style=" width: 15%;">领券信息</div>
+            <div style=" width: 20%;">操作</div>
         </div>
         <div class="content">
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                <div style=" width: 15%;">2018-06-08  09:23</div>
+                <div style=" width: 20%;">999件</div>
+                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                <div style=" width: 15%;">2018-06-08  09:23</div>
+                <div style=" width: 20%;">999件</div>
+                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 20%;"><span>主动下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                <div style=" width: 15%;">2018-06-08  09:23</div>
+                <div style=" width: 20%;">999件</div>
+                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                <div style=" width: 15%;">2018-06-08  09:23</div>
+                <div style=" width: 20%;">999件</div>
+                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 20%;"><span>主动下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                <div style=" width: 15%;">2018-06-08  09:23</div>
+                <div style=" width: 20%;">999件</div>
+                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                <div style=" width: 15%;">2018-06-08  09:23</div>
+                <div style=" width: 20%;">999件</div>
+                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 20%;"><span>主动下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                <div style=" width: 15%;">2018-06-08  09:23</div>
+                <div style=" width: 20%;">999件</div>
+                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                <div style=" width: 15%;">2018-06-08  09:23</div>
+                <div style=" width: 20%;">999件</div>
+                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 20%;"><span>主动下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                <div style=" width: 15%;">2018-06-08  09:23</div>
+                <div style=" width: 20%;">999件</div>
+                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                <div style=" width: 15%;">2018-06-08  09:23</div>
+                <div style=" width: 20%;">999件</div>
+                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 20%;"><span>主动下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                <div style=" width: 15%;">2018-06-08  09:23</div>
+                <div style=" width: 20%;">999件</div>
+                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
         </div>
     </div>
@@ -124,10 +148,10 @@ export default {
     cursor: pointer;
 }
 .testlist .commodity {
-   width: 50%;
+  width: 30%;
   text-align: left;
 }
-.commodity > span {   
+.commodity > span {
   margin-left: 20px;
 }
 .testlist .preview {
@@ -142,7 +166,7 @@ export default {
   line-height: 24px;
   cursor: pointer;
 }
-/* .modify{
+.modify{
     width: 30px;height: 16px;
     border-right: 1px solid #eee;
     padding-right: 10px;
@@ -153,5 +177,5 @@ export default {
     border-left: 1px solid #eee;
     padding-left: 10px;
     cursor: pointer;
-} */
+}
 </style>

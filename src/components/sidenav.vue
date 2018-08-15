@@ -27,17 +27,17 @@
               <el-menu-item-group>
                 <el-menu-item index="2-2" @click="$router.push('Submission')">提交新单</el-menu-item>
               </el-menu-item-group>
-              <el-submenu index="2-2" @click="$router.push('Viptesting')">
-                <template slot="title" >平推单</template>
+              <el-submenu index="2-2">
+                <template slot="title" @click="$router.push('Viptesting')">平推单</template>
                 <el-menu-item index="2-2-1" @click="$router.push('Viptesting')">审核中</el-menu-item>
                 <el-menu-item index="2-2-2" @click="$router.push('Viptestok')">审核通过</el-menu-item>
                 <el-menu-item index="2-2-3" @click="$router.push('Viptestno')">审核被拒</el-menu-item>
               </el-submenu>
               <el-submenu index="2-3">
                 <template slot="title">爆款单</template>
-                <el-menu-item index="2-3-1">审核中</el-menu-item>
-                <el-menu-item index="2-3-2">审核通过</el-menu-item>
-                <el-menu-item index="2-3-3">审核被拒</el-menu-item>
+                <el-menu-item index="2-3-1" @click="$router.push('Sviptesting')">审核中</el-menu-item>
+                <el-menu-item index="2-3-2" @click="$router.push('Sviptestok')">审核通过</el-menu-item>
+                <el-menu-item index="2-3-3" @click="$router.push('Sviptestno')">审核被拒</el-menu-item>
               </el-submenu>
             </el-submenu>
 

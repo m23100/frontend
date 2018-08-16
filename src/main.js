@@ -9,9 +9,9 @@ Vue.config.productionTip = false
 Vue.use(ElementUI);
 /* eslint-disable no-new */
 
-Vue.prototype.codeHttp = 'http://dev.ruomengtv.com/'
-Vue.prototype.HTTP = 'http://dev.ruomengtv.com/'
-axios.defaults.baseURL = 'http://dev.ruomengtv.com/'
+// Vue.prototype.codeHttp = 'http://dev.ruomengtv.com/'
+// Vue.prototype.HTTP = 'http://dev.ruomengtv.com/'
+// axios.defaults.baseURL = 'http://dev.ruomengtv.com/'
 
 
 new Vue({

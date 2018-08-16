@@ -70,12 +70,12 @@
             <el-submenu index="9">
               <template slot="title">
                 <i class="el-icon-setting"></i>
-                <span>设置管理</span>
+                <span>测试二级目录</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="9-1" @click="$router.push({name:'settlement'})"><i class="iconfont icon-home-k"></i>我的结算单</el-menu-item>
-              <el-menu-item index="9-2" @click="$router.push({name:'putforward'})"><i class="iconfont icon-home-l"></i>提现记录</el-menu-item>
-              <el-menu-item index="9-3" @click="$router.push({name:'receivables'})"><i class="iconfont icon-home-m"></i>收款信息</el-menu-item>
+                <el-menu-item index="9-1" @click="$router.push({name:'settlement'})"><i class="iconfont icon-home-k"></i>1</el-menu-item>
+              <el-menu-item index="9-2" @click="$router.push({name:'putforward'})"><i class="iconfont icon-home-l"></i>2</el-menu-item>
+              <el-menu-item index="9-3" @click="$router.push({name:'receivables'})"><i class="iconfont icon-home-m"></i>3</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
           </el-menu>

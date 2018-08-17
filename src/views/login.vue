@@ -1,5 +1,4 @@
 <template>
-  <div class="Integral">
     <div class="login">
       <!-- 登录头部 -->
       <div class="login-head">
@@ -42,10 +41,9 @@
               <li>验证码登录</li>
             </ul>
             <div class="form-box">
-              <from class="login-from" id="tab1">
-                <input class="loginphone" type="text" placeholder="手机号">
-                <input class="loginpwd" type="password" placeholder="密码">
-                <!-- <button class="img-verification box">点击进行图片验证</button> -->
+              <div class="login-from" id="tab1">
+                <input v-model="phone" type="text" placeholder="手机号">
+                <input v-model="password" type="password" placeholder="密码">
                 <div id="check-code" class="code-box" style='margin-bottom:0;'>
                   <input type="text" id="reg-code" maxlength="5" placeholder="验证码">
                   <div class="code" id="data_code" data-value="A4agC" style="color: rgb(94, 68, 68);
@@ -56,19 +54,19 @@
                   <img src="../public/img/choiceno.png" class='changeimg' alt="">
                   <span>记住登录状态</span>
                 </div>
-                <button class="login-button" onclick="login()">登录</button>
-              </from>
-              <from class="login-from item" id="tab2">
+                <button class="login-button" @click="save1">登录</button>
+              </div>
+              <div class="login-from item" id="tab2">
                 <input type="text" class="phonelogin" placeholder="手机号">
                 <div class="code-box">
                   <input type="text" placeholder="手机短信验证码">
                   <span class="spacer2"></span>
                   <button class="code">获取验证码</button>
                 </div>
-                <button class="login-button" onclick="phonelogin()">登录</button>
-              </from>
+                <button class="login-button" @click="save">登录</button>
+              </div>
             </div>
-
+      
             <div class="other">
               <a href="">注册</a>
               <a href="">忘记密码？</a>
@@ -90,13 +88,101 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 <script>
+import Vue from 'vue'
+
   export default {
     data() {
-      return {};
+      return {
+      phone: "",
+      password: "",
+      };
+    },
+      methods: {
+     
+     save1:function(){
+       this.axios('http://dev.ruomengtv.com/api/login?phone=18658831530&password=123456', {  
+          method: 'POST',  
+          mode: 'no-cors',  
+          headers: {  
+            'Access-Control-Allow-Origin': '*',  
+            'Content-Type': 'application/json',  
+          },  
+          withCredentials: true,  
+          credentials: 'same-origin',  
+        }).then(response => {
+              console.log(response);
+
+        })  
+     },
+     
+    //登录并检查输入信息
+    save:function(){
+        let that=this;
+        console.log(this.phone)
+        console.log(this.password)
+        that.axios.post('http://dev.ruomengtv.com/api/login?phone=18658831530&password=123456',{
+          phone: that.phone,
+          password: that.password,
+          })
+          .then(function (response) {
+              console.log(1)
+              console.log(response);
+          })
+          .catch(function (error) {
+              console.log(error);
+          })
+    },
+    // save: function () {
+    //   console.log(this.phone)
+    //   console.log(this.password)
+        // let that=this;
+        // that.axios.post('/login', {
+        // phone: that.phone,
+        // password: that.password,
+    //   }).then(res => {
+    //     console.log(res)
+        // if (res.data.code == 200) {
+        //   if (that.phone == res.data.data.name && that.password == res.data.data.password) {
+        //     localStorage.userInfo = JSON.stringify(res.data.data);
+        //     that.$message({
+        //       showClose: false,
+        //       message: '登录成功',
+        //       type: 'success',
+        //       center: false
+        //     })
+        //     that.$router.push({
+        //       path: '/home'
+        //     })
+        //   } else {
+        //     that.$message({
+        //       showClose: true,
+        //       message: '账号密码不匹配',
+        //       type: 'error',
+        //       center: true
+        //     });
+        //   }
+        // }else{
+        //     that.$message({
+        //         showClose: true,
+        //         message: '网络异常或账号密码不匹配',
+        //         type: 'error',
+        //         center: true
+        //       });
+        // }
+
+    //   })
+    // },
+    
+
+    goregistered: function () {
+      this.$router.push({
+        path: 'home'
+      })
     }
+  },
+
   };
 </script>
 <style scoped>

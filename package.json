@@ -1,7 +1,7 @@
 {
   "name": "discountshop",
   "version": "1.0.0",
-  "description": "分销后台管理系统",
+  "description": "后台管理系统",
   "author": "zm",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "vue-axios": "^2.1.3",
     "bootstrap": "^3.3.7",
     "echarts": "^3.8.5",
     "element-ui": "^2.0.8",

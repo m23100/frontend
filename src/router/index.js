@@ -20,8 +20,7 @@ import Sviptestok from '@/views/platform/Svip/Sviptestok'
 import Sviptestno from '@/views/platform/Svip/Sviptestno'
 Vue.use(Router)
 
-export default new Router({
-
+const router = new Router({
   routes: [
     //登录
     {
@@ -40,7 +39,10 @@ export default new Router({
         {
           path: '/home',
           name: 'Home',
-          component: Home
+          component: Home,
+          meta:{
+            requireAuth:true
+          }
         },
         //积分信息
         {
@@ -110,3 +112,20 @@ export default new Router({
 
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  let token = localStorage.getItem('token')
+  if(to.meta.requireAuth) {
+    if(token) {
+      next()
+    } else {
+      next({
+        path: '/'
+      })
+    }
+  } else {
+    next()
+  }
+})
+
+export default router

@@ -1,7 +1,4 @@
 import axios from 'axios'
-import qs from 'qs'
-
-import * as _ from '../util/tool'
 
 const api = axios.create();
 api.defaults.baseURL = 'http://dev.ruomengtv.com/api';

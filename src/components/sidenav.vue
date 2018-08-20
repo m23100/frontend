@@ -25,7 +25,7 @@
                 <span>放单平台</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="2-2" @click="$router.push('Submission')">提交新单</el-menu-item>
+                <el-menu-item index="2-2" @click="$router.push('Apply')">提交新单</el-menu-item>
               </el-menu-item-group>
               <el-submenu index="2-2">
                 <template slot="title" @click="$router.push('Viptesting')">平推单</template>

@@ -4,43 +4,43 @@ import qs from 'qs'
 import * as _ from '../util/tool'
 
 const api = axios.create();
-api.defaults.baseURL = 'http://dev.ruomengtv.com';
+api.defaults.baseURL = 'http://dev.ruomengtv.com/api';
 api.defaults.timeout = 5000;
-api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+api.defaults.headers.post['Content-Type'] = 'application/json';
 api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
-let token = document.head.querySelector('meta[name="csrf-token"]');
 
-if (token) {
-  axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-}
 
 //POST传参序列化
-axios.interceptors.request.use((config) => {
-    if(config.method  === 'post'){
-        config.data = qs.stringify(config.data);
+api.interceptors.request.use(
+  config => {
+    console.log(localStorage.getItem('token'))
+    if (localStorage.getItem('token')) {
+      config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
     }
-    return config;
-},(error) =>{
-     _.toast("错误的传参", 'fail');
-    return Promise.reject(error);
-});
+    return config
+  },
+  err => {
+    return Promise.reject(err)
+  },
+)
+
 
 //返回状态判断
-axios.interceptors.response.use((res) =>{
-    if(!res.data.success){
+api.interceptors.response.use((res) =>{
+    if(!res.data){
         // _.toast(res.data.msg);
         return Promise.reject(res);
     }
     return res;
 }, (error) => {
-    _.toast("网络异常", 'fail');
+    // _.toast("网络异常", 'fail');
     return Promise.reject(error);
 });
 
 
 export function fetch(url, params) {
     return new Promise((resolve, reject) => {
-        axios.post(url, params)
+        api.post(url, params)
             .then(response => {
                 resolve(response.data);
             }, err => {
@@ -59,5 +59,7 @@ export default {
     Login(params) {
         return fetch('/login', params)
     },
-
+    UserInfo() {
+        return fetch('/userinfo')
+    },
 }

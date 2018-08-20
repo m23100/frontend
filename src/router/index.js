@@ -9,6 +9,7 @@ import Personal from '@/views/Personal'
 //放单平台
 import Apply from '@/views/platform/Apply'
 import Submission from '@/views/platform/Submission'
+import LinkDetection from '@/views/platform/LinkDetection'
 //平推单
 import Viptesting from '@/views/platform/Vip/Viptesting'
 import Viptestok from '@/views/platform/Vip/Viptestok'
@@ -101,10 +102,17 @@ const router = new Router({
           name: 'Sviptestno',
           component: Sviptestno
         },
+        //放单申请
         {
           path:'/apply',
           name:'Apply',
           component:Apply
+        },
+        //商品链接检测
+        {
+          path:'/linkDetection',
+          name:'LinkDetection',
+          component:LinkDetection
         }
       ]
     },

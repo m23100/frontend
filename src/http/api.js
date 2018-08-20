@@ -13,7 +13,6 @@ api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
 //POST传参序列化
 api.interceptors.request.use(
   config => {
-    console.log(localStorage.getItem('token'))
     if (localStorage.getItem('token')) {
       config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
     }

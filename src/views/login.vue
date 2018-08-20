@@ -91,48 +91,62 @@
 </template>
 <script>
 import Vue from 'vue'
+import axios from 'axios';
+
+import { mapActions } from 'vuex'
+import api from '../http/api'
 
   export default {
     data() {
       return {
-      phone: "",
-      password: "",
+        phone: "",
+        password: "",
       };
     },
-      methods: {
+    methods: {
+        ...mapActions({ setUserInfo: 'setUserInfo' }),
      
      save1:function(){
-       this.axios('http://dev.ruomengtv.com/api/login?phone=18658831530&password=123456', {  
-          method: 'POST',  
-          mode: 'no-cors',  
-          headers: {  
-            'Access-Control-Allow-Origin': '*',  
-            'Content-Type': 'application/json',  
-          },  
-          withCredentials: true,  
-          credentials: 'same-origin',  
-        }).then(response => {
-              console.log(response);
+        let data = {
+            phone: this.phone,
+            password: this.password
+        }
+        api.Login(data)
+            .then(res => {
+                if(res.code == 0) {
+                  this.setUserInfo(res)
+                  api.UserInfo().then(
+                    res => {
+                      this.$router.replace('/home')
+                    }
+                  )
+                    
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
 
-        })  
+
+
      },
      
     //登录并检查输入信息
     save:function(){
-        let that=this;
-        console.log(this.phone)
-        console.log(this.password)
-        that.axios.post('http://dev.ruomengtv.com/api/login?phone=18658831530&password=123456',{
-          phone: that.phone,
-          password: that.password,
-          })
-          .then(function (response) {
-              console.log(1)
-              console.log(response);
-          })
-          .catch(function (error) {
-              console.log(error);
-          })
+        // let that=this;
+          // console.log(this.phone)
+
+        // that.axios.post('http://dev.ruomengtv.com/api/login?phone=18658831530&password=123456',{
+        //   phone: that.phone,
+        //   password: that.password,
+        //   })
+        //   .then(function (response) {
+        //       console.log(1)
+        //       console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //       console.log(error);
+        //   })
     },
     // save: function () {
     //   console.log(this.phone)

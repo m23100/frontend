@@ -18,8 +18,9 @@ const actions = {
     setUserInfo({ commit }, res) {
         localStorage.setItem('userInfo', JSON.stringify(res))
         localStorage.setItem('loginStatus', true)
+        localStorage.setItem('token', res.data.access_token)
         commit(types.SET_USER_INFO, res)
-        commit(types.SET_LOGIN_STATUS, true)
+        commit(types.SET_LOGIN_STATUS, res)
     },
 
     /**
@@ -28,6 +29,7 @@ const actions = {
     setSignOut({ commit }) {
         localStorage.removeItem('loginStatus')
         localStorage.removeItem('userInfo')
+        localStorage.removeItem('token')
         commit(types.SET_LOGIN_STATUS, false)
         commit(types.SET_USER_INFO, {})
     },

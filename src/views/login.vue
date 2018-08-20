@@ -104,7 +104,7 @@ import api from '../http/api'
       };
     },
     methods: {
-        ...mapActions({ setUserInfo: 'setUserInfo' }),
+        ...mapActions({ setUserInfo: 'setUserInfo', setUserToken:'setUserToken'}),
      
      save1:function(){
         let data = {
@@ -114,9 +114,10 @@ import api from '../http/api'
         api.Login(data)
             .then(res => {
                 if(res.code == 0) {
-                  this.setUserInfo(res)
+                  this.setUserToken(res.data)
                   api.UserInfo().then(
                     res => {
+                      this.setUserInfo(res.data)
                       this.$router.replace('/home')
                     }
                   )

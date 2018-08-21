@@ -4,7 +4,7 @@
             <img src="../../public/img/vip.png" alt="">
         </div>
         <div class="centent">
-            <h2 class="Title">商品链接检测</h2>
+            <h2 class="Title">填写商品信息</h2>
             <div class="detection"><input type="text" placeholder="将商品链接粘贴于此"><span class="start">开始测试</span></div>
             <div class="text">
                 说明：<br/>
@@ -13,7 +13,7 @@
                 3.店铺D.S.R店铺三绿,任一分数低于4.6的不能提交<br/>
                 4.与描述相符分低于4.7分的商品不能提交
             </div>
-            <div class="bottom">
+            <div class="bottom" @click="go">
                 <span>下一步</span>
             </div>
         </div>
@@ -27,7 +27,7 @@ export default {
  methods:{
       go: function() {
       this.$router.push({
-        path: ""
+        path: "/Flatfrom"
       });
     },
  }
@@ -84,6 +84,22 @@ export default {
     font-size: 14px;
     color: #afafaf;
     line-height: 24px;
+}
+.bottom{
+    margin-top: 210px;
+    padding-top: 25px;
+    border-top:1px solid #eee;
+}
+.bottom>span{
+    display: block;
+    width: 110px;
+    line-height: 38px;
+    background-color: red;
+    text-align: center;
+    color: #fff;
+    margin: 0 auto;
+    border-radius: 6px;
+    cursor: pointer;
 }
 </style>
              

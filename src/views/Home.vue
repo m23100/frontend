@@ -4,64 +4,28 @@
       <div class="navdata">
           <h2 class="Title">实时数据</h2>
           <div class="dataimg">
-              <div class="data1"><h1>18</h1><h4>当前正常在架</h4></div>
-              <div class="data2"><h1>21</h1><h4>今日已提交</h4></div>
-              <div class="data3"><h1>4</h1><h4>今日被审拒</h4></div>
-              <div class="data4"><h1>13</h1><h4>等待审核中</h4></div>
+              <div class="data1"><h1>{{getUserData.realdata.shelfCount}}</h1><h4>当前正常在架</h4></div>
+              <div class="data2"><h1>{{getUserData.realdata.todayCreate}}</h1><h4>今日已提交</h4></div>
+              <div class="data3"><h1>{{getUserData.realdata.todayRefuse}}</h1><h4>今日被审拒</h4></div>
+              <div class="data4"><h1>{{getUserData.realdata.waitAudit}}</h1><h4>等待审核中</h4></div>
           </div>
       </div>
       <div class="centent">
           <div class="centent-left">
               <h2 class="Title">审核动态</h2>
               <div class="dynamic">
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
+                  <div class="flex left-list" v-for="item in getUserData.auditdata">
+                      <h1>商品[<span class="blue">{{item.title}}</span>]{{item.state}}</h1>
+                      <div>{{item.created_at}}</div>
                   </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
+                  
               </div>
           </div>
           <div class="centent-right">
               <h2 class="Title">公告</h2>
               <div class="rule">
                   <ul>
-                      <li>若梦TV开放API接口文档说明</li>
-                      <li>若梦TV放单平台功能更新改版说明</li>
-                      <li>招商淘客商品提交规范</li>
-                      <li>用户积分规则及注意事项</li>
-                      <li>放单平台商品审核流程审核标准说明</li>
-                      <li>用户认证流程及审核评判规则说明</li>
+                      <li v-for="item in getUserData.advertdata" >{{item.title}}</li>
                   </ul>
               </div>
           </div>
@@ -69,11 +33,24 @@
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {};
-  }
-};
+  import { mapGetters } from 'vuex'
+
+  export default {
+    data(){
+      return {
+      }
+    },
+    created() {
+        if (this.getUserData.length == 0) {
+            this.$store.dispatch('getUserData')
+        }
+    },
+    computed: {
+      ...mapGetters([
+        'getUserData'
+      ])
+    }
+  };
 </script>
 <style scoped>
 .flex{

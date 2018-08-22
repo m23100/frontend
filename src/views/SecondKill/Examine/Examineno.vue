@@ -2,87 +2,111 @@
     <!-- 秒杀单审核被拒 -->
     <div class="Examineno">
         <div class="list-head">
-            <div style=" width: 50%;text-align: left;">商品名</div>
-            <div style=" width: 25%;">被拒原因</div>
-            <div style=" width: 25%;">操作</div>
+            <div style=" width: 30%;text-align: left;">商品名</div>
+            <div style=" width: 15%;">秒杀日期</div>
+            <div style=" width: 15%;">秒杀场次</div>
+            <div style=" width: 20%;">被拒原因</div>
+            <div style=" width: 20%;">操作</div>
         </div>
         <div class="content">
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                 <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 15%;">09:00</div>
+                <div style=" width: 20%;">优惠力度过低</div>
+                <div style=" width: 20%;">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                 <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 15%;">09:00</div>
+                <div style=" width: 20%;">优惠力度过低</div>
+                <div style=" width: 20%;">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                 <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 15%;">09:00</div>
+                <div style=" width: 20%;">优惠力度过低</div>
+                <div style=" width: 20%;">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                 <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 15%;">09:00</div>
+                <div style=" width: 20%;">优惠力度过低</div>
+                <div style=" width: 20%;">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                 <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 15%;">09:00</div>
+                <div style=" width: 20%;">优惠力度过低</div>
+                <div style=" width: 20%;">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                 <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 15%;">09:00</div>
+                <div style=" width: 20%;">优惠力度过低</div>
+                <div style=" width: 20%;">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                 <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 15%;">09:00</div>
+                <div style=" width: 20%;">优惠力度过低</div>
+                <div style=" width: 20%;">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                 <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 15%;">09:00</div>
+                <div style=" width: 20%;">优惠力度过低</div>
+                <div style=" width: 20%;">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                 <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 15%;">09:00</div>
+                <div style=" width: 20%;">优惠力度过低</div>
+                <div style=" width: 20%;">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                 <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 15%;">09:00</div>
+                <div style=" width: 20%;">优惠力度过低</div>
+                <div style=" width: 20%;">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
+                 <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 15%;">09:00</div>
+                <div style=" width: 20%;">优惠力度过低</div>
+                <div style=" width: 20%;">修改并重新提交</div>
             </div>
         </div>
     </div>
@@ -124,7 +148,7 @@ export default {
     cursor: pointer;
 }
 .testlist .commodity {
-   width: 50%;
+   width: 30%;
   text-align: left;
 }
 .commodity > span {   

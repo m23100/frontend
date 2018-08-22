@@ -58,4 +58,7 @@ export default {
     UserInfo() {
         return fetch('/userinfo')
     },
+    UserData(params) {
+        return fetch('/usercenter/indexdata')
+    },
 }

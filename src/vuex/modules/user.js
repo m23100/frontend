@@ -46,12 +46,10 @@ const actions = {
      * 请求用户信息
      */
     getUserData({ commit }, id) {
-        commit(types.COM_LOADING_STATUS, true)
-        api.UserInfo(id)
-            .then(res => {
-                commit(types.COM_LOADING_STATUS, false)
-                commit(types.GET_USER_DATA, res.data)
-            })
+        api.UserData()
+        .then(res => {
+            commit(types.GET_USER_DATA, res.data)
+        })
     }
 }
 

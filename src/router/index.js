@@ -9,6 +9,9 @@ import Personal from '@/views/Personal'
 //放单平台
 import Apply from '@/views/platform/Apply'
 import Submission from '@/views/platform/Submission'
+import LinkDetection from '@/views/platform/LinkDetection'
+import Firefrom from '@/views/platform/Firefrom'
+import Flatfrom from '@/views/platform/Flatfrom'
 //平推单
 import Viptesting from '@/views/platform/Vip/Viptesting'
 import Viptestok from '@/views/platform/Vip/Viptestok'
@@ -18,6 +21,15 @@ import Viptestno from '@/views/platform/Vip/Viptestno'
 import Sviptesting from '@/views/platform/Svip/Sviptesting'
 import Sviptestok from '@/views/platform/Svip/Sviptestok'
 import Sviptestno from '@/views/platform/Svip/Sviptestno'
+//放单end
+
+//秒杀平台
+import Testing from '@/views/SecondKill/Testing'
+import Seconddata from '@/views/SecondKill/Seconddata'
+import Secondfrom from '@/views/SecondKill/Secondfrom'
+import Examineing from '@/views/SecondKill/Examine/Examineing'
+import Examineno from '@/views/SecondKill/Examine/Examineno'
+import Examineok from '@/views/SecondKill/Examine/Examineok'
 Vue.use(Router)
 
 const router = new Router({
@@ -48,65 +60,182 @@ const router = new Router({
         {
           path: '/integral',
           name: 'Integral',
-          component: Integral
+          component: Integral,
+          meta:{
+            requireAuth:true
+          }
         },
         //账户资金
         {
           path: '/capital',
           name: 'Capital',
-          component: Capital
+          component: Capital,
+          meta:{
+            requireAuth:true
+          }
         },
         //个人资料
         {
           path: '/personal',
           name: 'Personal',
-          component: Personal
+          component: Personal,
+          meta:{
+            requireAuth:true
+          }
         },
-
+        //放单平台
         //提交订单
         {
           path: '/submission',
           name: 'Submission',
-          component: Submission
+          component: Submission,
+          meta:{
+            requireAuth:true
+          }
         },
-        //平推单
+        //平推单审核
         {
           path: '/viptesting',
           name: 'Viptesting',
-          component: Viptesting
+          component: Viptesting,
+          meta:{
+            requireAuth:true
+          }
         },
         {
           path: '/viptestok',
           name: 'Viptestok',
-          component: Viptestok
+          component: Viptestok,
+          meta:{
+            requireAuth:true
+          }
         },
         {
           path: '/viptestno',
           name: 'Viptestno',
-          component: Viptestno
+          component: Viptestno,
+          meta:{
+            requireAuth:true
+          }
         },
-        //爆款单
+        //爆款单审核
         {
           path: '/sviptesting',
           name: 'Sviptesting',
-          component: Sviptesting
+          component: Sviptesting,
+          meta:{
+            requireAuth:true
+          }
         },
         {
           path: '/sviptestok',
           name: 'Sviptestok',
-          component: Sviptestok
+          component: Sviptestok,
+          meta:{
+            requireAuth:true
+          }
         },
         {
           path: '/sviptestno',
           name: 'Sviptestno',
-          component: Sviptestno
+          component: Sviptestno,
+          meta:{
+            requireAuth:true
+          }
         },
+        //放单申请
         {
           path:'/apply',
           name:'Apply',
-          component:Apply
-        }
+          component:Apply,
+          meta:{
+            requireAuth:true
+          }
+        },
+        //商品链接检测
+        {
+          path:'/linkDetection',
+          name:'LinkDetection',
+          component:LinkDetection,
+          meta:{
+            requireAuth:true
+          }
+        },
+        //爆款表单
+        {
+          path:'/firefrom',
+          name:'Firefrom',
+          component:Firefrom,
+          meta:{
+            requireAuth:true
+          }
+        },
+        //平推表单
+        {
+          path:'/flatfrom',
+          name:'Flatfrom',
+          component:Flatfrom,
+          meta:{
+            requireAuth:true
+          }
+        },
+        //放单平台end
+
+        //秒杀平台
+        //秒杀单链接检测
+        {
+          path:'/testing',
+          name:'Testing',
+          component:Testing,
+          meta:{
+            requireAuth:true
+          }
+        },
+        //秒杀数据视图
+        {
+          path:'/seconddata',
+          name:'Seconddata',
+          component:Seconddata,
+          meta:{
+            requireAuth:true
+          }
+        },
+        //秒杀审核
+        {
+          path:'/examineing',
+          name:'Examineing',
+          component:Examineing,
+          meta:{
+            requireAuth:true
+          }
+        },
+        {
+          path:'/examineno',
+          name:'Examineno',
+          component:Examineno,
+          meta:{
+            requireAuth:true
+          }
+        },
+        {
+          path:'/examineok',
+          name:'Examineok',
+          component:Examineok,
+          meta:{
+            requireAuth:true
+          }
+        },
+        //秒杀表单
+        {
+          path:'/secondfrom',
+          name:'Secondfrom',
+          component:Secondfrom,
+          meta:{
+            requireAuth:true
+          }
+        },
       ]
+      
     },
 
 

@@ -6,8 +6,8 @@
         <div class="centent">
             <h2 class="Title">选择放单类型</h2>
             <div class="twoChoice">
-                <img src="../../public/img/choice1.png" alt="">
-                <img src="../../public/img/choice2.png" alt="入口">
+                <img src="../../public/img/choice1.png" alt="入口" @click="go">
+                <img src="../../public/img/choice2.png" alt="入口" @click="gofire">
             </div>
         </div>
     </div>
@@ -16,7 +16,19 @@
 export default {
   data() {
     return {};
-  }
+  },
+  methods:{
+      go: function() {
+        this.$router.push({
+          path: "/LinkDetection"
+        });
+      },
+     gofire: function() {
+        this.$router.push({
+          path: "/Firefrom"
+        });
+     },
+ }
 };
 </script>
 <style scoped>
@@ -47,6 +59,7 @@ export default {
 .twoChoice img{
     margin: 0 30px;
     cursor: pointer;
+    display: block;
 }
 </style>
              

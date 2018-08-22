@@ -1,4 +1,5 @@
 <template>
+   <!-- 首页 -->
   <div class="Home">
       <div class="navdata">
           <h2 class="Title">实时数据</h2>

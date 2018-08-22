@@ -1,11 +1,8 @@
 <template>
-    <!-- 放单平台商品检测 -->
-    <div class="LinkDetection">
-         <div class="vipimg">
-            <img src="../../public/img/vip.png" alt="">
-        </div>
+    <!-- 秒杀单检测页 -->
+    <div class="Testing">
+         <h2 class="Title">商品链接测试</h2>
         <div class="centent">
-            <h2 class="Title">填写商品信息</h2>
             <div class="detection"><input type="text" placeholder="将商品链接粘贴于此"><span class="start">开始测试</span></div>
             <div class="text">
                 说明：<br/>
@@ -13,6 +10,31 @@
                 2.等级低于4皇冠的C店不能提交<br/>
                 3.店铺D.S.R店铺三绿,任一分数低于4.6的不能提交<br/>
                 4.与描述相符分低于4.7分的商品不能提交
+            </div>
+            <div class="date">
+                <div class="flex">
+                     <h2 class="title">秒杀日期</h2>
+                     <span>说明:为保证商品及优惠券有效性，只能预约近3天的秒杀</span>
+                </div>
+               
+                <el-date-picker
+                v-model="value1"
+                type="date"
+                placeholder="选择日期">
+                </el-date-picker>
+            </div>
+            <div class="Second">
+                <h2 class="title">秒杀场次</h2>
+                <div class="site">
+                    <el-radio v-model="radio" label="1">9点场</el-radio>
+                    <el-radio v-model="radio" label="2">10点场</el-radio>
+                    <el-radio v-model="radio" label="3">11点场</el-radio>
+                    <el-radio v-model="radio" label="4">12点场</el-radio>
+                    <el-radio v-model="radio" label="5">14点场</el-radio>
+                    <el-radio v-model="radio" label="6">19点场</el-radio>
+                    <el-radio v-model="radio" label="7">20点场</el-radio>
+                    <el-radio v-model="radio" label="8">21点场</el-radio>
+                </div>
             </div>
             <div class="bottom" @click="go">
                 <span>下一步</span>
@@ -24,17 +46,23 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+        value1:'',
+        radio:'1'
+    };
   },
  methods:{
+     //下一步
       go: function() {
         this.$router.push({
-            path: "/Flatfrom"
+            path: "/Secondfrom"
         });
       },
+      //取消
       Backoff: function() {
+          console.log('取消')
         this.$router.push({
-            path: "/Submission"
+            path: "/"
         });
       },
  }
@@ -47,7 +75,7 @@ export default {
 .centent {
   padding: 15px 10px;
   background-color: #fff;
-  height: 528px;
+  /* height: 528px; */
   margin-bottom: 20px;
 }
 .Title {
@@ -92,6 +120,30 @@ export default {
     color: #afafaf;
     line-height: 24px;
 }
+.date{
+    width: 60%;
+    margin: 10px auto;    
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+.title{
+    color: #2d203c;
+    font-size: 14px;
+    margin: 20px 0;
+}
+.flex>span{
+    color: #d0d0d0;
+    font-size: 14px;
+    margin: 20px 0;
+}
+.Second{
+    margin-left: 20%;
+}
+.site{
+    display: flex;
+}
 .bottom{
     margin-top: 110px;
     padding-top: 25px;
@@ -121,5 +173,6 @@ export default {
     text-align: center;
     cursor: pointer;
 }
+
 </style>
              

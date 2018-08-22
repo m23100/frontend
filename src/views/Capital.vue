@@ -1,4 +1,5 @@
 <template>
+   <!-- 账户资金 -->
   <div class="Capital">
       <div class="navdata">
           <h2 class="Title">我都点券</h2>

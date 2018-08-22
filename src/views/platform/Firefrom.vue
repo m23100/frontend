@@ -1,4 +1,5 @@
 <template>
+    <!-- 爆款表单 -->
     <div class="Firefrom">
         <h2 class="Title">商品链接检测</h2>
         <div class="centent">

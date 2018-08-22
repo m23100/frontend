@@ -21,6 +21,15 @@ import Viptestno from '@/views/platform/Vip/Viptestno'
 import Sviptesting from '@/views/platform/Svip/Sviptesting'
 import Sviptestok from '@/views/platform/Svip/Sviptestok'
 import Sviptestno from '@/views/platform/Svip/Sviptestno'
+//放单end
+
+//秒杀平台
+import Testing from '@/views/SecondKill/Testing'
+import Seconddata from '@/views/SecondKill/Seconddata'
+import Secondfrom from '@/views/SecondKill/Secondfrom'
+import Examineing from '@/views/SecondKill/Examine/Examineing'
+import Examineno from '@/views/SecondKill/Examine/Examineno'
+import Examineok from '@/views/SecondKill/Examine/Examineok'
 Vue.use(Router)
 
 const router = new Router({
@@ -74,7 +83,7 @@ const router = new Router({
             requireAuth:true
           }
         },
-
+        //放单平台
         //提交订单
         {
           path: '/submission',
@@ -84,7 +93,7 @@ const router = new Router({
             requireAuth:true
           }
         },
-        //平推单
+        //平推单审核
         {
           path: '/viptesting',
           name: 'Viptesting',
@@ -109,7 +118,7 @@ const router = new Router({
             requireAuth:true
           }
         },
-        //爆款单
+        //爆款单审核
         {
           path: '/sviptesting',
           name: 'Sviptesting',
@@ -152,6 +161,7 @@ const router = new Router({
             requireAuth:true
           }
         },
+        //爆款表单
         {
           path:'/firefrom',
           name:'Firefrom',
@@ -160,6 +170,7 @@ const router = new Router({
             requireAuth:true
           }
         },
+        //平推表单
         {
           path:'/flatfrom',
           name:'Flatfrom',
@@ -167,8 +178,64 @@ const router = new Router({
           meta:{
             requireAuth:true
           }
-        }
+        },
+        //放单平台end
+
+        //秒杀平台
+        //秒杀单链接检测
+        {
+          path:'/testing',
+          name:'Testing',
+          component:Testing,
+          meta:{
+            requireAuth:true
+          }
+        },
+        //秒杀数据视图
+        {
+          path:'/seconddata',
+          name:'Seconddata',
+          component:Seconddata,
+          meta:{
+            requireAuth:true
+          }
+        },
+        //秒杀审核
+        {
+          path:'/examineing',
+          name:'Examineing',
+          component:Examineing,
+          meta:{
+            requireAuth:true
+          }
+        },
+        {
+          path:'/examineno',
+          name:'Examineno',
+          component:Examineno,
+          meta:{
+            requireAuth:true
+          }
+        },
+        {
+          path:'/examineok',
+          name:'Examineok',
+          component:Examineok,
+          meta:{
+            requireAuth:true
+          }
+        },
+        //秒杀表单
+        {
+          path:'/secondfrom',
+          name:'Secondfrom',
+          component:Secondfrom,
+          meta:{
+            requireAuth:true
+          }
+        },
       ]
+      
     },
 
 

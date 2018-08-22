@@ -8,7 +8,7 @@
           <dd class="user-dd2">业内知名招商大户</dd>
         </dl>
         <div class="deposit">
-          <div class="depositdian"><span>点券</span>1000</div>
+          <div class="depositdian"><span>点券</span>10000</div>
           <div class="depositfen"><span>积分</span>20</div>
         </div>
       </div>
@@ -16,12 +16,12 @@
         <el-col :span="24">
           <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
             <el-menu-item index="1" @click="$router.push('Home')">
-              <i class="el-icon-search"></i>
+              <i class="iconfont icon-homepage_fill"></i>
               <span slot="title">首页</span>
             </el-menu-item>
             <el-submenu index="2">
               <template slot="title">
-                <i class="el-icon-message"></i>
+                <i class="iconfont icon-service_fill"></i>
                 <span>放单平台</span>
               </template>
               <el-menu-item-group>
@@ -40,44 +40,46 @@
                 <el-menu-item index="2-3-3" @click="$router.push('Sviptestno')">审核被拒</el-menu-item>
               </el-submenu>
             </el-submenu>
-
+             <el-submenu index="9">
+              <template slot="title">
+                <i class="iconfont icon-clock_fill"></i>
+                <span>秒杀平台</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="9-1" @click="$router.push({name:'Seconddata'})"><i class="iconfont icon-home-l"></i>秒杀数据</el-menu-item>
+                <el-menu-item index="9-2" @click="$router.push({name:'Testing'})"><i class="iconfont icon-home-k"></i>提交秒杀</el-menu-item>
+                <el-menu-item index="9-3" @click="$router.push({name:'Examineing'})"><i class="iconfont icon-home-l"></i>审核中</el-menu-item>
+                <el-menu-item index="9-4" @click="$router.push({name:'Examineok'})"><i class="iconfont icon-home-m"></i>审核通过</el-menu-item>
+                <el-menu-item index="9-5" @click="$router.push({name:'Examineno'})"><i class="iconfont icon-home-m"></i>审核被拒</el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
             <el-menu-item index="3"  @click="$router.push('Capital')">
-              <i class="el-icon-goods"></i>
+              <i class="iconfont icon-financial_fill"></i>
               <span slot="title">账户资金</span>
             </el-menu-item>
             <!-- disabled==禁用 -->
             <el-menu-item index="4"  @click="$router.push('Integral')">
-              <i class="el-icon-star-on"></i>
+              <i class="iconfont icon-integral_fill"></i>
               <span slot="title">积分信息</span>
             </el-menu-item>
 
-            <el-menu-item index="5">
-              <i class="el-icon-view"></i>
+            <el-menu-item index="5" @click="$router.push('Personal')">
+              <i class="iconfont icon-gerenziliao"></i>
               <span slot="title">个人资料</span>
             </el-menu-item>
             <el-menu-item index="6">
-              <i class="el-icon-location"></i>
+              <i class="iconfont icon-renzhengshangjia"></i>
               <span slot="title">认证信息</span>
             </el-menu-item>
             <el-menu-item index="7">
-              <i class="el-icon-setting"></i>
+              <i class="iconfont icon-iconfont5"></i>
               <span slot="title">账户安全</span>
             </el-menu-item>
             <el-menu-item index="8">
-              <i class="el-icon-service"></i>
+              <i class="iconfont icon-customerservice_fill"></i>
               <span slot="title">客服帮助</span>
             </el-menu-item>
-            <el-submenu index="9">
-              <template slot="title">
-                <i class="el-icon-setting"></i>
-                <span>测试二级目录</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item index="9-1" @click="$router.push({name:'settlement'})"><i class="iconfont icon-home-k"></i>1</el-menu-item>
-              <el-menu-item index="9-2" @click="$router.push({name:'putforward'})"><i class="iconfont icon-home-l"></i>2</el-menu-item>
-              <el-menu-item index="9-3" @click="$router.push({name:'receivables'})"><i class="iconfont icon-home-m"></i>3</el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
+           
           </el-menu>
         </el-col>
       </el-row>

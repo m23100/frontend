@@ -1,4 +1,5 @@
 <template>
+    <!-- 提交订单审核页 -->
     <div class="Apply">
          <div class="vipimg">
             <img src="../../public/img/vip.png" alt="">

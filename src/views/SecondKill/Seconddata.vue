@@ -1,13 +1,13 @@
 <template>
-   <!-- 首页 -->
-  <div class="Home">
+   <!-- 秒杀数据 -->
+  <div class="Seconddata">
       <div class="navdata">
-          <h2 class="Title">实时数据</h2>
+          <h2 class="Title">秒杀数据</h2>
           <div class="dataimg">
-              <div class="data1"><h1>18</h1><h4>当前正常在架</h4></div>
-              <div class="data2"><h1>21</h1><h4>今日已提交</h4></div>
-              <div class="data3"><h1>4</h1><h4>今日被审拒</h4></div>
-              <div class="data4"><h1>13</h1><h4>等待审核中</h4></div>
+              <div class="data1"><h1>1</h1><h4>正在秒杀中</h4></div>
+              <div class="data2"><h1>13</h1><h4>已提交</h4></div>
+              <div class="data3"><h1>11</h1><h4>被审拒</h4></div>
+              <div class="data4"><h1>1</h1><h4>待审核中</h4></div>
           </div>
       </div>
       <div class="centent">
@@ -23,45 +23,64 @@
                       <div>2018-05-18</div>
                   </div>
                   <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
+                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
                       <div>2018-05-18</div>
                   </div>
                   <div class="flex left-list">
                       <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
                       <div>2018-05-18</div>
                   </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
+                   <div class="flex left-list">
+                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
                       <div>2018-05-18</div>
                   </div>
                   <div class="flex left-list">
                       <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
                       <div>2018-05-18</div>
                   </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
+                   <div class="flex left-list">
+                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
                       <div>2018-05-18</div>
                   </div>
                   <div class="flex left-list">
                       <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
                       <div>2018-05-18</div>
                   </div>
+                   <div class="flex left-list">
+                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
+                      <div>2018-05-18</div>
+                  </div>
+                   <div class="flex left-list">
+                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
+                      <div>2018-05-18</div>
+                  </div>
                   <div class="flex left-list">
                       <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
+                      <div>2018-05-18</div>
+                  </div>
+                   <div class="flex left-list">
+                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
+                      <div>2018-05-18</div>
+                  </div>
+                  <div class="flex left-list">
+                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
+                      <div>2018-05-18</div>
+                  </div>
+                   <div class="flex left-list">
+                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
                       <div>2018-05-18</div>
                   </div>
               </div>
           </div>
           <div class="centent-right">
-              <h2 class="Title">公告</h2>
+              <h2 class="Title">秒杀规则</h2>
               <div class="rule">
                   <ul>
-                      <li>若梦TV开放API接口文档说明</li>
-                      <li>若梦TV放单平台功能更新改版说明</li>
-                      <li>招商淘客商品提交规范</li>
-                      <li>用户积分规则及注意事项</li>
-                      <li>放单平台商品审核流程审核标准说明</li>
-                      <li>用户认证流程及审核评判规则说明</li>
+                      <li>每个秒杀单提交成功并审核通过将会消耗500点券</li>
+                      <li>确认秒杀单力度明显大于普通平推单</li>
+                      <li>确认店铺DSR不低于4.7，动态偏移非三绿</li>
+                      <li>确认单品具有一定基础销量和基础评价，不低于10</li>
+                      <li>确认店铺为C店时等级不低于4皇冠</li>
                   </ul>
               </div>
           </div>
@@ -80,7 +99,7 @@ export default {
     display: flex;
     justify-content: space-between;      
 }
-.Home {
+.Seconddata {
 }
 .navdata {
   background-color: #fff;
@@ -118,19 +137,19 @@ export default {
   font-weight: 400;
 }
 .dataimg .data1{
-    background: url("../public/img/data1.png") no-repeat;
+    background: url("../../public/img/data1.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data2{
-    background: url("../public/img/data2.png") no-repeat;
+    background: url("../../public/img/data2.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data3{
-    background: url("../public/img/data3.png") no-repeat;
+    background: url("../../public/img/data3.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data4{
-    background: url("../public/img/data4.png") no-repeat;
+    background: url("../../public/img/data4.png") no-repeat;
     background-size: 100% 100%;
 }
 .centent{
@@ -147,19 +166,19 @@ export default {
     background-color: #fff;
 }
 .dynamic .flex>h1{
-     font-size: 12px;
-     line-height: 46px;     
+    font-size: 12px;
+    line-height: 46px;     
 }
 .dynamic .flex>div{
-     font-size: 12px;
-     line-height: 46px;     
+    font-size: 12px;
+    line-height: 46px;     
 }
 .flex .blue{
     color: #49a6f7;
     cursor: pointer;
 }
 .left-list{
-     border-bottom: 1px solid #f4f4f4;
+    border-bottom: 1px solid #f4f4f4;
 }
 .centent-right{
     width: 38%;

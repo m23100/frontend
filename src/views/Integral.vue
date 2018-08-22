@@ -1,4 +1,5 @@
 <template>
+   <!-- 积分信息页面 -->
   <div class="Integral">
        <div class="vipimg">
             <img src="../public/img/vip.png" alt="">
@@ -38,7 +39,7 @@
               </div>
           </div>
           <div class="centent-right">
-              <h2 class="Title">秒杀规则</h2>
+              <h2 class="Title">扣分规则</h2>
               <div class="rule">
                   <ul>
                       <li>总分为20分，积分减为0时，将失去提交功能</li>

@@ -105,9 +105,10 @@
                         placeholder="要求：20-200字精简文案，突出产品亮点，需求交痛点，为什么值得买！注意不要用空格"></textarea>
                     </div>                    
                 </div>
-                 <div class="bottom" @click="go">
-                <span>提交审核</span>
-            </div>
+                 <div class="bottom">
+                        <span @click="go">提交审核</span>
+                        <button @click="cancel">取消</button>
+                </div>
         </div>
     </div>
 </template>
@@ -139,6 +140,11 @@ export default {
             path: "/Flatfrom"
         });
       },
+      cancel:function(){
+          this.$route.push({
+              path:"/Apply"
+          })
+      }
 
   }
 };
@@ -238,9 +244,10 @@ export default {
 
 }
 .bottom{
-    margin-top: 62px;
+    margin-top: 110px;
     padding-top: 25px;
     border-top:1px solid #eee;
+    position: relative;
 }
 .bottom>span{
     display: block;
@@ -251,6 +258,18 @@ export default {
     color: #fff;
     margin: 0 auto;
     border-radius: 6px;
+    cursor: pointer;
+}
+.bottom>button{
+    position: absolute;
+    right: 40px;
+    bottom: 6px;
+    width: 68px;
+    height: 28px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: solid 1px #a4a4a4;
+    text-align: center;
     cursor: pointer;
 }
 </style>

@@ -36,9 +36,9 @@
                     <el-radio v-model="radio" label="8">21点场</el-radio>
                 </div>
             </div>
-            <div class="bottom" @click="go">
-                <span>下一步</span>
-                <button @click="Backoff">取消</button>
+            <div class="bottom">
+                <span @click="go">下一步</span>
+                <button @click="cancel">取消</button>
             </div>
         </div>
     </div>
@@ -59,10 +59,10 @@ export default {
         });
       },
       //取消
-      Backoff: function() {
+      cancel: function() {
           console.log('取消')
-        this.$router.push({
-            path: "/"
+          this.$router.push({
+            path: "/Seconddata"
         });
       },
  }

@@ -2,7 +2,7 @@
     <!-- 秒杀单审核中 -->
     <div class="Examineing">
         <div class="list-head">
-            <div style=" width: 30%;text-align: left;">商品名</div>
+            <div style=" width: 50%;text-align: left;">商品名</div>
             <div style=" width: 15%;">秒杀日期</div>
             <div style=" width: 20%;">秒杀场次</div>
             <div style=" width: 20%;">操作</div>
@@ -12,99 +12,88 @@
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">立即开始</div>
                 <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">立即开始</div>
                 <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">立即开始</div>
                 <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">立即开始</div>
                 <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">立即开始</div>
                 <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">立即开始</div>
                 <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">立即开始</div>
                 <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">立即开始</div>
                 <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">立即开始</div>
                 <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">立即开始</div>
                 <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">立即开始</div>
                 <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
             </div>
         </div>
@@ -143,7 +132,7 @@ export default {
   line-height: 32px;
 }
 .testlist .commodity {
-  width: 30%;
+  width: 50%;
   text-align: left;
 }
 .commodity > span {

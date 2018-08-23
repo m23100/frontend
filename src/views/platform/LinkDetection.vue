@@ -14,8 +14,8 @@
                 3.店铺D.S.R店铺三绿,任一分数低于4.6的不能提交<br/>
                 4.与描述相符分低于4.7分的商品不能提交
             </div>
-            <div class="bottom" @click="go">
-                <span>下一步</span>
+            <div class="bottom">
+                <span @click="go">下一步</span>
                 <button @click="Backoff">取消</button>
             </div>
         </div>

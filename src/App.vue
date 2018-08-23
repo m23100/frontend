@@ -32,30 +32,9 @@
 }
 
 .el-upload--picture-card {
-    background-color: #f23539;
-    border:1px solid #f23539;
-    outline:none; 
-    position: relative;
-    /* upimg */
-    border-radius: 6px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 88px;
-    height: 29px;
-    line-height: 146px;
-    vertical-align: text-bottom;
+
 }
-/* .el-step .is-success {
-    color: #43b5f9!important;
-    border-color: #43b5f9!important;
-}
-.el-step .el-step__title {
-    color: #43b5f9!important;
-    border-color: #43b5f9!important;
-}
-.el-step__main{
-  display: none;
-} */
+
 /* ueditor引入VUE */
 </style>
 

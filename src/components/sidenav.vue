@@ -67,7 +67,7 @@
               <i class="iconfont icon-gerenziliao"></i>
               <span slot="title">个人资料</span>
             </el-menu-item>
-            <el-menu-item index="6">
+            <el-menu-item index="6" @click="$router.push('Authentication')">
               <i class="iconfont icon-renzhengshangjia"></i>
               <span slot="title">认证信息</span>
             </el-menu-item>

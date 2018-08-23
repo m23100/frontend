@@ -6,6 +6,7 @@ import Home from '@/views/Home'
 import Integral from '@/views/Integral'
 import Capital from '@/views/Capital'
 import Personal from '@/views/Personal'
+
 //放单平台
 import Apply from '@/views/platform/Apply'
 import Submission from '@/views/platform/Submission'
@@ -16,7 +17,6 @@ import Flatfrom from '@/views/platform/Flatfrom'
 import Viptesting from '@/views/platform/Vip/Viptesting'
 import Viptestok from '@/views/platform/Vip/Viptestok'
 import Viptestno from '@/views/platform/Vip/Viptestno'
-
 //爆款单
 import Sviptesting from '@/views/platform/Svip/Sviptesting'
 import Sviptestok from '@/views/platform/Svip/Sviptestok'
@@ -30,6 +30,9 @@ import Secondfrom from '@/views/SecondKill/Secondfrom'
 import Examineing from '@/views/SecondKill/Examine/Examineing'
 import Examineno from '@/views/SecondKill/Examine/Examineno'
 import Examineok from '@/views/SecondKill/Examine/Examineok'
+
+//认证信息
+import Authentication from '@/views/Authentication'
 Vue.use(Router)
 
 const router = new Router({
@@ -234,6 +237,15 @@ const router = new Router({
             requireAuth:true
           }
         },
+        //认证信息
+        {
+          path:'/authentication',
+          name:'Authentication',
+          component:Authentication,
+          meta:{
+            requireAuth:true
+          }
+        }
       ]
       
     },

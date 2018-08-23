@@ -7,12 +7,13 @@
                     <h2>封面图</h2>
                     <div class="Choice">
                         <el-upload
-                        
+                        :limit="1"
                         action="https://jsonplaceholder.typicode.com/posts/"
                         list-type="picture-card"
                         :on-preview="handlePictureCardPreview"
                         :on-remove="handleRemove">
                         <!-- <i class="el-icon-plus"></i> -->
+                        <el-button slot="trigger" size="small" type="primary">上传封面</el-button>
                         </el-upload>
                         <el-dialog :visible.sync="dialogVisible">
                         <img width="100%" :src="dialogImageUrl" alt="">
@@ -55,22 +56,18 @@
                        <span class="span">要求：优惠券跟商品对应，券名无敏感词，总量不能少于5000张</span>
                     </div>                                        
                 </div>
-                <div class="component">
+                <div class="component upwenan">
                     <h2>文案主图</h2>
-                    <div class="Choice">
-                        <el-upload
-                        
+                    <el-upload
+                        :limit="1"
+                        class="upload-demo"
                         action="https://jsonplaceholder.typicode.com/posts/"
-                        list-type="picture-card"
-                        :on-preview="handlePictureCardPreview"
-                        :on-remove="handleRemove">
-                        <!-- <i class="el-icon-plus"></i> -->
-                        </el-upload>
-                        <el-dialog :visible.sync="dialogVisible">
-                        <img width="100%" :src="dialogImageUrl" alt="">
-                        </el-dialog>
-                        <span>要求：图片大小400*400px，干净清晰，突显产品,不能出现牛皮癣、大量文字</span> 
-                    </div>                                       
+                        :on-preview="handlePreview"
+                        :on-remove="handleRemove"
+                        list-type="picture">
+                        <el-button size="small" type="primary">点击上传</el-button>
+                        <span>要求：图片大小800*1200px，干净清晰，结构美观，突出产品卖点</span>
+                    </el-upload>                                     
                 </div>
                  <div class="component">
                     <h2>商品链接</h2>
@@ -94,14 +91,16 @@
                  <div class="component">
                     <h2>活动类型</h2>
                     <div class="Choice">
-                        <el-radio v-model="radio1" label="1">备选项</el-radio>
-                        <el-radio v-model="radio1" label="2">备选项</el-radio>
-                        <el-radio v-model="radio1" label="3">备选项</el-radio>
+                        <el-radio v-model="radio1" label="1">无活动</el-radio>
+                        <el-radio v-model="radio1" label="2">淘抢购</el-radio>
+                        <el-radio v-model="radio1" label="3">聚划算</el-radio>
                     </div>                    
                 </div>
-                 <div class="bottom" @click="go">
-                <span>提交审核</span>
-            </div>
+                <div class="bottom">
+                    <div class="up">
+                        <span class="upone">上一步</span><span class="Submission">提交</span>
+                    </div>
+                </div>
         </div>
     </div>
 </template>
@@ -126,6 +125,9 @@ export default {
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
         console.log(this.dialogImageUrl, this.dialogVisible);
+      },
+      handlePreview(file) {
+        console.log(file);
       },
     
       go: function() {
@@ -180,6 +182,10 @@ export default {
 }
 .component {
 }
+.upwenan{
+    width: 52%;
+    margin-bottom: 20px;
+}
 .component > h2 {
   font-weight: 400;
 }
@@ -191,7 +197,7 @@ export default {
     outline:none; 
 }
 .Choice>textarea{
-     width: 64.5%;
+    width: 64.5%;
     border-radius: 4px;
     border: solid 1px #d3d3d3;
     padding: 10px;
@@ -220,7 +226,7 @@ export default {
 }
 
 .Price{
-      height: 40px;
+    height: 40px;
     border-radius: 10px;
     width: 80px;
     padding-left: 20px;
@@ -240,7 +246,25 @@ export default {
     padding-top: 25px;
     border-top:1px solid #eee;
 }
-.bottom>span{
+.up{
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+    margin: 0 auto;
+}
+.upone{   
+    display: block;
+    width: 110px;
+    line-height: 38px;
+    background-color: #fff;
+    text-align: center;
+    color: #848484;
+    margin: 0 auto;
+    border:1px solid #848484;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.Submission{
     display: block;
     width: 110px;
     line-height: 38px;

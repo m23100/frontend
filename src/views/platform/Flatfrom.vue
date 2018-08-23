@@ -137,11 +137,11 @@ export default {
 
       go: function() {
         this.$router.push({
-            path: "/Flatfrom"
+            path: "/Viptesting"
         });
       },
       cancel:function(){
-          this.$route.push({
+          this.$router.push({
               path:"/Apply"
           })
       }

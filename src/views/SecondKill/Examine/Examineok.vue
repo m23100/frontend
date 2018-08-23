@@ -2,10 +2,9 @@
     <!-- 秒杀单审核通过 -->
     <div class="Examineok">
         <div class="list-head">
-            <div style=" width: 30%;text-align: left;">商品名</div>
-            <div style=" width: 15%;">通用时间</div>
-            <div style=" width: 20%;">增长量</div>
-            <div style=" width: 15%;">领券信息</div>
+            <div style=" width: 45%;text-align: left;">商品名</div>
+            <div style=" width: 15%;">秒杀日期</div>
+            <div style=" width: 20%;">秒杀场次</div>
             <div style=" width: 20%;">操作</div>
         </div>
         <div class="content">
@@ -13,99 +12,88 @@
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">09:00</div>
                 <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">09:00</div>
                 <div style=" width: 20%;"><span>主动下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">09:00</div>
                 <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">09:00</div>
                 <div style=" width: 20%;"><span>主动下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">09:00</div>
                 <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">09:00</div>
                 <div style=" width: 20%;"><span>主动下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">09:00</div>
                 <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">09:00</div>
                 <div style=" width: 20%;"><span>主动下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">09:00</div>
                 <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">09:00</div>
                 <div style=" width: 20%;"><span>主动下架</span></div>
             </div>
             <div class="testlist">
                <div class="commodity">
                    <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
+                <div style=" width: 15%;">2018-06-08</div>
+                <div style=" width: 20%;">09:00</div>
                 <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
         </div>
@@ -148,7 +136,7 @@ export default {
     cursor: pointer;
 }
 .testlist .commodity {
-  width: 30%;
+  width: 45%;
   text-align: left;
 }
 .commodity > span {

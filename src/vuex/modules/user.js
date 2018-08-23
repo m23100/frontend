@@ -8,10 +8,19 @@ const state = {
     // 用户登录信息
     userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
     // 用户数据信息
-    userData: []
+    userData: [],
+    userToken: JSON.parse(localStorage.getItem('userToken')) || {},
+
 }
 
 const actions = {
+    /**
+     * 用户登录
+     */
+    setUserToken({ commit }, res) {
+        localStorage.setItem('token', res.access_token)
+    }, 
+
     /**
      * 用户登录
      */
@@ -19,7 +28,7 @@ const actions = {
         localStorage.setItem('userInfo', JSON.stringify(res))
         localStorage.setItem('loginStatus', true)
         commit(types.SET_USER_INFO, res)
-        commit(types.SET_LOGIN_STATUS, true)
+        commit(types.SET_LOGIN_STATUS, res)
     },
 
     /**
@@ -28,6 +37,7 @@ const actions = {
     setSignOut({ commit }) {
         localStorage.removeItem('loginStatus')
         localStorage.removeItem('userInfo')
+        localStorage.removeItem('token')
         commit(types.SET_LOGIN_STATUS, false)
         commit(types.SET_USER_INFO, {})
     },
@@ -36,12 +46,10 @@ const actions = {
      * 请求用户信息
      */
     getUserData({ commit }, id) {
-        commit(types.COM_LOADING_STATUS, true)
-        api.UserInfo(id)
-            .then(res => {
-                commit(types.COM_LOADING_STATUS, false)
-                commit(types.GET_USER_DATA, res.data)
-            })
+        api.UserData()
+        .then(res => {
+            commit(types.GET_USER_DATA, res.data)
+        })
     }
 }
 

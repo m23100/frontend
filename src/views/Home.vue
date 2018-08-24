@@ -95,19 +95,19 @@
   font-weight: 400;
 }
 .dataimg .data1{
-    background: url("../public/img/data1.png") no-repeat;
+    background: url("../assets/img/data1.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data2{
-    background: url("../public/img/data2.png") no-repeat;
+    background: url("../assets/img/data2.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data3{
-    background: url("../public/img/data3.png") no-repeat;
+    background: url("../assets/img/data3.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data4{
-    background: url("../public/img/data4.png") no-repeat;
+    background: url("../assets/img/data4.png") no-repeat;
     background-size: 100% 100%;
 }
 .centent{

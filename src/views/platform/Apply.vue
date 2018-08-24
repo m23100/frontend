@@ -2,33 +2,33 @@
     <!-- 提交订单审核页 -->
     <div class="Apply">
          <div class="vipimg">
-            <img src="../../public/img/vip.png" alt="">
+            <img src="../../assets/img/vip.png" alt="">
         </div>
         <!-- 去申请 -->
         <div class="box" v-if="state==='3'">
             <h2 class="Title">实时数据</h2>
-            <div class="centent"><img src="../../public/img/imgone.png" alt=""></div>
+            <div class="centent"><img src="../../assets/img/imgone.png" alt=""></div>
             <h3>您的放单权限处于未申请状态</h3>
             <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = true">去申请</el-button></div>            
         </div>
         <!-- 审核中 -->
          <div class="box" v-else-if="state==='0'">
             <h2 class="Title">实时数据</h2>
-            <div class="centent"><img src="../../public/img/imgtwo.png" alt=""></div>
+            <div class="centent"><img src="../../assets/img/imgtwo.png" alt=""></div>
             <h3>放单权限资格正在全力审核中，请耐心等待</h3>
             <div class="center"><el-button type="text" class="test">审核中</el-button></div>            
         </div>
         <!-- 拥有放单权限 -->
         <div class="box" v-else-if="state==='1'">
             <h2 class="Title">实时数据</h2>
-            <div class="centent"><img src="../../public/img/imgthree.png" alt=""></div>
+            <div class="centent"><img src="../../assets/img/imgthree.png" alt=""></div>
             <h3>上传时请注意仔细阅读积分规则，以免扣分影响正常放单权限~</h3>
             <div class="center"><el-button type="text" class="test" @click="Submission">去放单</el-button></div>            
         </div>
         <!-- 审核失败 -->
         <div class="box" v-else-if="state==='2'">
             <h2 class="Title">实时数据</h2>
-            <div class="centent"><img src="../../public/img/imgfour.png" alt=""></div>
+            <div class="centent"><img src="../../assets/img/imgfour.png" alt=""></div>
             <h3>审核未通过！<span class="Tips">被拒原因：无法联系到填写的QQ</span></h3>
             <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = true">重新审核</el-button></div>            
         </div>

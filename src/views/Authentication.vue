@@ -1,12 +1,12 @@
 <template>
     <div class="Authentication">
         <div class="vipimg">
-            <img src="../public/img/vip.png" alt="">
+            <img src="../assets/img/vip.png" alt="">
         </div>
         <!-- 未认证 -->
         <div class="centent" v-if="state==='0'">
             <h2 class="Title">认证信息</h2>
-             <div class="xx"><img src="../public/img/renzhenxiong.png" alt=""></div>
+             <div class="xx"><img src="../assets/img/renzhenxiong.png" alt=""></div>
             <h3>当前处于未认证状态</h3>
             <div class="xxx"><el-button type="text" class="test" @click="centerDialogVisible = true">去认证</el-button></div> 
         </div>

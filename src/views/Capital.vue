@@ -118,19 +118,19 @@ export default {
   font-weight: 400;
 }
 .dataimg .data1{
-    background: url("../public/img/capital1.png") no-repeat;
+    background: url("../assets/img/capital1.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data2{
-    background: url("../public/img/capital2.png") no-repeat;
+    background: url("../assets/img/capital2.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data3{
-    background: url("../public/img/capital3.png") no-repeat;
+    background: url("../assets/img/capital3.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data4{
-    background: url("../public/img/capital4.png") no-repeat;
+    background: url("../assets/img/capital4.png") no-repeat;
     background-size: 100% 100%;
 }
 .centent{

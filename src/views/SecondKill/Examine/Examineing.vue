@@ -10,7 +10,7 @@
         <div class="content">
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
                 <div style=" width: 15%;">2018-06-08</div>
                 <div style=" width: 20%;">立即开始</div>
@@ -18,7 +18,7 @@
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
                 <div style=" width: 15%;">2018-06-08</div>
                 <div style=" width: 20%;">立即开始</div>
@@ -26,7 +26,7 @@
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
                 <div style=" width: 15%;">2018-06-08</div>
                 <div style=" width: 20%;">立即开始</div>
@@ -34,7 +34,7 @@
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
                 <div style=" width: 15%;">2018-06-08</div>
                 <div style=" width: 20%;">立即开始</div>
@@ -42,7 +42,7 @@
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
                 <div style=" width: 15%;">2018-06-08</div>
                 <div style=" width: 20%;">立即开始</div>
@@ -50,7 +50,7 @@
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
                 <div style=" width: 15%;">2018-06-08</div>
                 <div style=" width: 20%;">立即开始</div>
@@ -58,7 +58,7 @@
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
                 <div style=" width: 15%;">2018-06-08</div>
                 <div style=" width: 20%;">立即开始</div>
@@ -66,7 +66,7 @@
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
                 <div style=" width: 15%;">2018-06-08</div>
                 <div style=" width: 20%;">立即开始</div>
@@ -74,7 +74,7 @@
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
                 <div style=" width: 15%;">2018-06-08</div>
                 <div style=" width: 20%;">立即开始</div>
@@ -82,7 +82,7 @@
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
                 <div style=" width: 15%;">2018-06-08</div>
                 <div style=" width: 20%;">立即开始</div>
@@ -90,7 +90,7 @@
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
                </div>
                 <div style=" width: 15%;">2018-06-08</div>
                 <div style=" width: 20%;">立即开始</div>

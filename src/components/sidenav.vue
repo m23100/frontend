@@ -3,7 +3,7 @@
     <div class="nav">
       <div class="user">
         <dl>
-          <dt class="userimg"><img src="../public/img/userimg.png" alt=""></dt>
+          <dt class="userimg"><img src="../assets/img/userimg.png" alt=""></dt>
           <dd class="user-dd1">ABC团队</dd>
           <dd class="user-dd2">业内知名招商大户</dd>
         </dl>

@@ -2,29 +2,29 @@
     <div class="login">
       <!-- 登录头部 -->
       <div class="login-head">
-        <img src="../public/img/loginlogo.png" alt="">
+        <img src="../assets/img/loginlogo.png" alt="">
         <div class="icon">
           <dl>
             <dt>
-              <img src="../public/img/icon1.png" alt="">
+              <img src="../assets/img/icon1.png" alt="">
             </dt>
             <dd>爆款秒杀</dd>
           </dl>
           <dl>
             <dt>
-              <img src="../public/img/icon2.png" alt="">
+              <img src="../assets/img/icon2.png" alt="">
             </dt>
             <dd>人工审核</dd>
           </dl>
           <dl>
             <dt>
-              <img src="../public/img/icon3.png" alt="">
+              <img src="../assets/img/icon3.png" alt="">
             </dt>
             <dd>卓越优质</dd>
           </dl>
           <dl>
             <dt>
-              <img src="../public/img/icon4.png" alt="">
+              <img src="../assets/img/icon4.png" alt="">
             </dt>
             <dd>实况数据</dd>
           </dl>
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="choice">
-                  <img src="../public/img/choiceno.png" class='changeimg' alt="">
+                  <img src="../assets/img/choiceno.png" class='changeimg' alt="">
                   <span>记住登录状态</span>
                 </div>
                 <button class="login-button" @click="save1">登录</button>
@@ -238,7 +238,7 @@ import api from '../http/api'
   .door {
     width: 100%;
     height: 606px;
-    background: url("../public/img/logobg.jpg") no-repeat;
+    background: url("../assets/img/logobg.jpg") no-repeat;
     background-size: 100% 100%;
   }
 

@@ -9,77 +9,77 @@
         <div class="content">
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
                 <div style=" width: 25%;">优惠力度过低</div>
                 <div style=" width: 25%;" class="shou">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
                 <div style=" width: 25%;">优惠力度过低</div>
                 <div style=" width: 25%;" class="shou">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
                 <div style=" width: 25%;">优惠力度过低</div>
                 <div style=" width: 25%;" class="shou">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
                 <div style=" width: 25%;">优惠力度过低</div>
                 <div style=" width: 25%;" class="shou">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
                 <div style=" width: 25%;">优惠力度过低</div>
                 <div style=" width: 25%;" class="shou">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
                 <div style=" width: 25%;">优惠力度过低</div>
                 <div style=" width: 25%;" class="shou">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
                 <div style=" width: 25%;">优惠力度过低</div>
                 <div style=" width: 25%;" class="shou">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
                 <div style=" width: 25%;">优惠力度过低</div>
                 <div style=" width: 25%;" class="shou">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
                 <div style=" width: 25%;">优惠力度过低</div>
                 <div style=" width: 25%;" class="shou">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
                 <div style=" width: 25%;">优惠力度过低</div>
                 <div style=" width: 25%;" class="shou">修改并重新提交</div>
             </div>
             <div class="testlist">
                <div class="commodity">
-                   <img src="../../../public/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
+                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
                </div>
                 <div style=" width: 25%;">优惠力度过低</div>
                 <div style=" width: 25%;" class="shou">修改并重新提交</div>

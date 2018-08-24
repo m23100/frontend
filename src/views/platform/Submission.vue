@@ -1,13 +1,13 @@
 <template>
     <div class="Submission">
          <div class="vipimg">
-            <img src="../../public/img/vip.png" alt="">
+            <img src="../../assets/img/vip.png" alt="">
         </div>
         <div class="centent">
             <h2 class="Title">选择放单类型</h2>
             <div class="twoChoice">
-                <img src="../../public/img/choice1.png" alt="入口" @click="go">
-                <img src="../../public/img/choice2.png" alt="入口" @click="gofire">
+                <img src="../../assets/img/choice1.png" alt="入口" @click="go">
+                <img src="../../assets/img/choice2.png" alt="入口" @click="gofire">
             </div>
         </div>
     </div>

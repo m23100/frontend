@@ -1,0 +1,107 @@
+<template>
+    <div class="Customer">
+        <div class="call">
+            <h2 class="Title">运营客服</h2>
+            <div class="four">
+                <div class="kefu">
+                    <img src="..//img/qq.png" alt="">
+                    <span>客服UU</span>
+                </div>
+                <div class="kefu">
+                    <img src="..//img/qq.png" alt="">
+                    <span>客服UU</span>
+                </div>
+                <div class="kefu">
+                    <img src="..//img/qq.png" alt="">
+                    <span>客服UU</span>
+                </div>
+                <div class="kefu">
+                    <img src="..//img/qq.png" alt="">
+                    <span>客服UU</span>
+                </div>
+            </div>
+        </div>
+         <div class="call">
+            <h2 class="Title">商务合作客服</h2>
+            <div class="four">
+                <div class="kefu">
+                    <img src="..//img/qq.png" alt="">
+                    <span>客服UU</span>
+                </div>
+                <div class="kefu">
+                    <img src="..//img/qq.png" alt="">
+                    <span>客服UU</span>
+                </div>
+                <div class="kefu">
+                    <img src="..//img/qq.png" alt="">
+                    <span>客服UU</span>
+                </div>
+                <div class="kefu">
+                    <img src="..//img/qq.png" alt="">
+                    <span>客服UU</span>
+                </div>
+            </div>
+        </div>
+         <div class="call">
+            <h2 class="Title">技术客服</h2>
+            <div class="four">
+                <div class="kefu">
+                    <img src="..//img/qq.png" alt="">
+                    <span>客服UU</span>
+                </div>
+                <div class="kefu">
+                    <img src="..//img/qq.png" alt="">
+                    <span>客服UU</span>
+                </div>
+                <div class="kefu">
+                    <img src="..//img/qq.png" alt="">
+                    <span>客服UU</span>
+                </div>
+                <div class="kefu">
+                    <img src="..//img/qq.png" alt="">
+                    <span>客服UU</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    export default{
+        data(){
+           return{
+
+           }
+        }           
+        
+    }
+</script>
+<style>
+.call{
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+    padding: 20px 10px;
+}
+.Title {
+  font-size: 18px;
+  color: #000;
+  border-left: 4px solid #43b5f9;
+  line-height: 22px;
+  padding-left: 10px;
+  font-weight: 400;
+}
+.four{
+    padding: 20px 100px 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+kefu{
+    display: flex;
+    justify-content: space-between;
+}
+.kefu>span{
+    color: #43b5f9;
+    font-size: 14px;
+    line-height: 24px;
+}
+</style>

@@ -2,7 +2,7 @@
     <!-- 放单平台商品检测 -->
     <div class="LinkDetection">
          <div class="vipimg">
-            <img src="../../public/img/vip.png" alt="">
+            <img src="../../assets/img/vip.png" alt="">
         </div>
         <div class="centent">
             <h2 class="Title">填写商品信息</h2>

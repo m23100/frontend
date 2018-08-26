@@ -43,7 +43,9 @@ a:hover,a:active,a:focus{color:#c00;text-decoration:underline;}
 .el-upload--picture-card {
 
 }
-
+.el-input--suffix .el-input__inner {
+    background-color: #f0f0f0;
+}
 /* ueditor引入VUE */
 </style>
 

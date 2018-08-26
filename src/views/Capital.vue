@@ -15,7 +15,7 @@
               <h2 class="Title">消费记录</h2>
               <div class="dynamic">
                   <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]发布成功，使用100点券</h1>
+                      <h1>商品[<span class="blue" v-for="item in getAccountFunds">{{item.current_page}}</span>]发布成功，使用100点券</h1>
                       <div>2018-05-18</div>
                   </div>
                   <div class="flex left-list">
@@ -56,7 +56,7 @@
               <h2 class="Title">充值记录</h2>
               <div class="rule">
                   <ul>
-                      <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
+                     <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
                      <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
                      <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
                      <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
@@ -69,11 +69,28 @@
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {};
-  }
-};
+  import { mapGetters } from 'vuex'
+
+  export default {
+    data(){
+      return {
+      }
+    },
+    created() {
+        if (this.getAccountFunds) {
+            this.$store.dispatch('getAccountFunds')
+        }
+    },
+    computed: {
+      ...mapGetters([
+          
+        'getAccountFunds',
+        // console.log(res.data)
+      ]),
+      
+      
+    }
+  };
 </script>
 <style scoped>
 .flex{

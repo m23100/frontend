@@ -4,19 +4,19 @@
             <h2 class="Title">运营客服</h2>
             <div class="four">
                 <div class="kefu">
-                    <img src="..//img/qq.png" alt="">
+                    <img src="../assets/img/qq.png" alt="">
                     <span>客服UU</span>
                 </div>
                 <div class="kefu">
-                    <img src="..//img/qq.png" alt="">
+                    <img src="../assets/img/qq.png" alt="">
                     <span>客服UU</span>
                 </div>
                 <div class="kefu">
-                    <img src="..//img/qq.png" alt="">
+                    <img src="../assets/img/qq.png" alt="">
                     <span>客服UU</span>
                 </div>
                 <div class="kefu">
-                    <img src="..//img/qq.png" alt="">
+                    <img src="../assets/img/qq.png" alt="">
                     <span>客服UU</span>
                 </div>
             </div>
@@ -25,19 +25,19 @@
             <h2 class="Title">商务合作客服</h2>
             <div class="four">
                 <div class="kefu">
-                    <img src="..//img/qq.png" alt="">
+                    <img src="../assets/img/qq.png" alt="">
                     <span>客服UU</span>
                 </div>
                 <div class="kefu">
-                    <img src="..//img/qq.png" alt="">
+                    <img src="../assets/img/qq.png" alt="">
                     <span>客服UU</span>
                 </div>
                 <div class="kefu">
-                    <img src="..//img/qq.png" alt="">
+                    <img src="../assets/img/qq.png" alt="">
                     <span>客服UU</span>
                 </div>
                 <div class="kefu">
-                    <img src="..//img/qq.png" alt="">
+                    <img src="../assets/img/qq.png" alt="">
                     <span>客服UU</span>
                 </div>
             </div>
@@ -46,19 +46,19 @@
             <h2 class="Title">技术客服</h2>
             <div class="four">
                 <div class="kefu">
-                    <img src="..//img/qq.png" alt="">
+                    <img src="../assets/img/qq.png" alt="">
                     <span>客服UU</span>
                 </div>
                 <div class="kefu">
-                    <img src="..//img/qq.png" alt="">
+                    <img src="../assets/img/qq.png" alt="">
                     <span>客服UU</span>
                 </div>
                 <div class="kefu">
-                    <img src="..//img/qq.png" alt="">
+                    <img src="../assets/img/qq.png" alt="">
                     <span>客服UU</span>
                 </div>
                 <div class="kefu">
-                    <img src="..//img/qq.png" alt="">
+                    <img src="../assets/img/qq.png" alt="">
                     <span>客服UU</span>
                 </div>
             </div>

@@ -34,7 +34,7 @@
 </template>
 <script>
   import { mapGetters } from 'vuex'
-
+  
   export default {
     data(){
       return {
@@ -58,6 +58,7 @@
     justify-content: space-between;      
 }
 .Home {
+
 }
 .navdata {
   background-color: #fff;

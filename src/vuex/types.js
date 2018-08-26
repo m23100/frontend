@@ -16,3 +16,4 @@ export const COM_SHOW_TIME_PICKER = 'COM_SHOW_TIME_PICKER'  //显示timepicker
 export const SET_USER_INFO      = 'SETUSERINFO'      //设置用户信息
 export const SET_LOGIN_STATUS   = 'SET_LOGIN_STATUS' //设置登录状态
 export const GET_USER_DATA      = 'GET_USER_DATA'    //获取用户数据信息
+export const GET_ACCOUNT_FUNDS      = 'GET_ACCOUNT_FUNDS'    //获取账户资金信息

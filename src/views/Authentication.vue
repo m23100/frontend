@@ -32,19 +32,18 @@
                 </div>                
             </div>
             <div class="update">
-                <span>申请更新</span>
+                <span @click="centerDialogVisible = true">申请更新</span>
             </div>
         </div>
         <!-- 弹窗提交申请放单表单 -->
         <el-dialog
           title="上传放单权限资格申请资料"
-          :visible.sync="centerDialogVisible" width="45%" center>
+          :visible.sync="centerDialogVisible" width="36%" center>
           <div class="from">
             <div class="flex"><span>行业名称</span> <input type="text" v-model="name" placeholder="填写行业内熟知的名称"></div>
             <div class="flex"><span>联系人</span> <input type="text" v-model="name" placeholder="填写帐号联系人真实姓名"></div>
             <div class="flex"><span>联系QQ</span> <input type="text" v-model="name" placeholder="填写行业内熟知的名称"></div>
             <div class="flex"><span>手机号</span> <input type="text" v-model="name" placeholder="填写帐号联系人的11位手机号码"></div>
-            <div class="textarea"><span>详细介绍</span><textarea name="" id="" cols="30" rows="10"  placeholder="详细介绍描述个人/团队情况，所在地、成员人数、收入实力等"></textarea></div>
           </div>
           <span slot="footer" class="dialog-footer">
             <el-button @click="centerDialogVisible = false">取 消</el-button>
@@ -184,5 +183,30 @@ export default {
     cursor: pointer;
     float: right;
     text-align:center;
+}
+/* 弹窗 */
+.flex {
+  display: flex;
+  justify-content: space-between;
+  width: 65%;
+  margin: 12px 0;
+}
+.flex > span {
+  /* span */
+  /* padding: 30px 20px; */
+  color: #989898;
+  font-size: 14px;
+  line-height: 36px;
+}
+.flex > input {
+  width: 300px;
+  border-radius: 4px;
+  border: solid 1px #d3d3d3;
+  padding: 10px;
+}
+.textarea {
+  display: flex;
+  justify-content: space-between;
+  width: 84%;
 }
 </style>

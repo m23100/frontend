@@ -56,7 +56,7 @@
               <h2 class="Title">充值记录</h2>
               <div class="rule">
                   <ul>
-                     <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
+                    <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
                      <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
                      <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
                      <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>

@@ -46,6 +46,20 @@ a:hover,a:active,a:focus{color:#c00;text-decoration:underline;}
 .el-input--suffix .el-input__inner {
     background-color: #f0f0f0;
 }
+.el-upload--picture-card{
+    width: 115px;
+    height: 115px;
+    line-height: 115px;
+}
+.el-upload-list--picture-card .el-upload-list__item{
+  width: 115px;height: 115px;
+}
+.el-dialog__header{
+  border-bottom: 1px solid #eee;
+}
+.el-dialog__footer{
+  border-top: 1px solid #eee;
+}
 /* ueditor引入VUE */
 </style>
 

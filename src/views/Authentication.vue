@@ -24,7 +24,14 @@
                 </div>
                  <div class="income" >
                     <span>收入水平</span>
-                    <div>5-10W/月"</div>
+                   <el-select v-model="value" placeholder="请选择">
+                        <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                        </el-option>
+                    </el-select>
                 </div>
                 <div class="channel">
                     <span>自有渠道</span>
@@ -40,14 +47,53 @@
           title="上传放单权限资格申请资料"
           :visible.sync="centerDialogVisible" width="36%" center>
           <div class="from">
-            <div class="flex"><span>行业名称</span> <input type="text" v-model="name" placeholder="填写行业内熟知的名称"></div>
-            <div class="flex"><span>联系人</span> <input type="text" v-model="name" placeholder="填写帐号联系人真实姓名"></div>
-            <div class="flex"><span>联系QQ</span> <input type="text" v-model="name" placeholder="填写行业内熟知的名称"></div>
+            <div class="flex"><span>真实姓名</span> <input type="text" v-model="name" placeholder="填写真实姓名"></div>
+            <div class="flex"><span>身份证号</span> <input type="text" v-model="name" placeholder="填写身份证号码"></div>
+            <div class="flex2">
+                <span>上传图片</span>
+                 <el-upload
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    list-type="picture-card"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove">
+                    <i class="el-icon-plus"></i>
+                    </el-upload>
+                    <el-dialog :visible.sync="dialogVisible">
+                    <img width="100%" :src="dialogImageUrl" alt="">
+                </el-dialog>
+            </div>
+            <div class="flex1"><span>自有渠道</span> <input type="text" v-model="name" placeholder="填写自有渠道信息"></div>
+            <div class="flex2">
+                <span>上传图片</span>
+                 <el-upload
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    list-type="picture-card"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove">
+                    <i class="el-icon-plus"></i>
+                    </el-upload>
+                    <el-dialog :visible.sync="dialogVisible">
+                    <img width="100%" :src="dialogImageUrl" alt="">
+                </el-dialog>
+            </div>
             <div class="flex"><span>手机号</span> <input type="text" v-model="name" placeholder="填写帐号联系人的11位手机号码"></div>
+            <div class="flex2">
+                <span>上传图片</span>
+                 <el-upload
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    list-type="picture-card"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove">
+                    <i class="el-icon-plus"></i>
+                    </el-upload>
+                    <el-dialog :visible.sync="dialogVisible">
+                    <img width="100%" :src="dialogImageUrl" alt="">
+                </el-dialog>
+            </div>
           </div>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="centerDialogVisible = false">取 消</el-button>
-            <el-button type="primary" >确 定</el-button>
+            <el-button @click="centerDialogVisible = false">提交</el-button>
+            <el-button @click="centerDialogVisible = false" type="primary">取消</el-button>
           </span>
         </el-dialog>
     </div>
@@ -56,17 +102,62 @@
 export default {
   data() {
     return {
-        centerDialogVisible: false,
-        state:'1',
-        name:''
+      dialogImageUrl: '',
+      dialogVisible: false,
+      centerDialogVisible: false,
+      state: "1",
+      name: "",
+      options: [
+        {
+          value: "选项1",
+          label: "5-10W/月"
+        },
+        {
+          value: "选项2",
+          label: "5-10W/月"
+        },
+        {
+          value: "选项3",
+          label: "5-10W/月"
+        },
+        {
+          value: "选项4",
+          label: "5-10W/月"
+        },
+        {
+          value: "选项5",
+          label: "5-10W/月"
+        }
+      ],
+      value: ""
     };
-  }
+  },
+  
+    methods: {
+    //   handleAvatarSuccess(res, file) {
+    //     this.imageUrl = URL.createObjectURL(file.raw);
+    //   },
+    //   beforeAvatarUpload(file) {
+    //     const isJPG = file.type === 'image/jpeg';
+    //     const isLt2M = file.size / 1024 / 1024 < 2;
+ 
+    //     if (!isJPG) {
+    //       this.$message.error('上传头像图片只能是 JPG 格式!');
+    //     }
+    //     if (!isLt2M) {
+    //       this.$message.error('上传头像图片大小不能超过 2MB!');
+    //     }
+    //     return isJPG && isLt2M;
+    //   }
+    }
+
+  
 };
 </script>
 <style scoped>
 .Authentication {
-
 }
+
 .Title {
   font-size: 18px;
   color: #000;
@@ -89,7 +180,7 @@ export default {
   text-align: center;
   margin: 20px 0;
 }
-.xxx{
+.xxx {
   text-align: center;
   margin: 0 auto;
 }
@@ -101,88 +192,84 @@ export default {
   border-radius: 8px;
   font-size: 14px;
   /* line-height: 36px; */
-  color: #fff; 
+  color: #fff;
   cursor: pointer;
 }
-.PersonalData{
-    padding: 5px 25px;
+.PersonalData {
+  padding: 5px 25px;
 }
-.PersonalData>div{
-    padding: 12px 0;
+.PersonalData > div {
+  padding: 12px 0;
 }
-.PersonalData>div>div{
-    padding-left: 12px;
-    color: #394853;
+.PersonalData > div > div {
+  padding-left: 12px;
+  color: #394853;
 }
-.PersonalData>div>span{
-    font-size: 14px;
-   line-height: 36px;
-   color: #989898;
+.PersonalData > div > span {
+  font-size: 14px;
+  line-height: 36px;
+  color: #989898;
 }
-.name,.number{
-    display: flex;
-    justify-content: space-between;
-    width: 400px;
+.name,
+.number {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
 }
-.name>div{
-    width: 323px;
-    height: 36px;
-    line-height: 36px;
-	background-color: #f0f0f0;
-    border-radius: 4px;
-    text-align: left;
+.name > div {
+  width: 323px;
+  height: 36px;
+  line-height: 36px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  text-align: left;
 }
-.number>div{
-    width: 323px;
-    height: 36px;
-    line-height: 36px;
-    color: #394853;
-	background-color: #f0f0f0;
-    border-radius: 4px;
-    text-align: left;
+.number > div {
+  width: 323px;
+  height: 36px;
+  line-height: 36px;
+  color: #394853;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  text-align: left;
 }
-.income{
-    display: flex;
-    justify-content: space-between;
-    width: 238px;
+.income {
+  display: flex;
+  justify-content: space-between;
+  width: 241px;
 }
-.income>div{
-    width: 160px;
-    height: 36px;
-    line-height: 36px;
-    color: #394853;
-	background-color: #f0f0f0;
-    border-radius: 4px;
-    text-align: left;
+.income > div {
+  width: 173px;
+  height: 36px;
 }
-.channel{
-    display: flex;
-    justify-content: space-between;
-    width: 660px;
+.channel {
+  display: flex;
+  justify-content: space-between;
+  width: 660px;
 }
-.channel>div{
-    width: 586px;
-    height: 36px;
-    line-height: 36px;
-    color: #394853;
-	background-color: #f0f0f0;
-    border-radius: 4px;
-    text-align: left;
+.channel > div {
+  width: 586px;
+  height: 36px;
+  line-height: 36px;
+  color: #394853;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  text-align: left;
 }
-.update{
-    width: 100%;
+.update {
+  width: 100%;
 }
-.update>span{
-    width: 88px;
-    height: 36px;
-    background-color: #49a6f7;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 36px;
-    color: #fff;
-    cursor: pointer;
-    float: right;
-    text-align:center;
+.update > span {
+  width: 88px;
+  height: 36px;
+  background-color: #49a6f7;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 36px;
+  color: #fff;
+  cursor: pointer;
+  float: right;
+  text-align: center;
 }
 /* 弹窗 */
 .flex {
@@ -200,6 +287,40 @@ export default {
 }
 .flex > input {
   width: 300px;
+  border-radius: 4px;
+  border: solid 1px #d3d3d3;
+  padding: 10px;
+}
+.flex1 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 12px 0;
+}
+.flex1 > span {
+  color: #989898;
+  font-size: 14px;
+  line-height: 36px;
+}
+.flex1 > input {
+  width: 525px;
+  border-radius: 4px;
+  border: solid 1px #d3d3d3;
+  padding: 10px;
+}
+.flex2 {
+  display: flex;
+  width: 100%;
+  margin: 12px 0;
+}
+.flex2 > span {
+  color: #989898;
+  font-size: 14px;
+  line-height: 36px;
+  margin-right: 35px;
+}
+.flex2 > input {
+  width: 525px;
   border-radius: 4px;
   border: solid 1px #d3d3d3;
   padding: 10px;

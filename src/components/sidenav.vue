@@ -3,7 +3,7 @@
     <div class="nav">
       <div class="user">
         <dl>
-          <dt class="userimg"><img src="../public/img/userimg.png" alt=""></dt>
+          <dt class="userimg"><img src="../assets/img/userimg.png" alt=""></dt>
           <dd class="user-dd1">ABC团队</dd>
           <dd class="user-dd2">业内知名招商大户</dd>
         </dl>
@@ -67,15 +67,15 @@
               <i class="iconfont icon-gerenziliao"></i>
               <span slot="title">个人资料</span>
             </el-menu-item>
-            <el-menu-item index="6">
+            <el-menu-item index="6" @click="$router.push('Authentication')">
               <i class="iconfont icon-renzhengshangjia"></i>
               <span slot="title">认证信息</span>
             </el-menu-item>
-            <el-menu-item index="7">
+            <el-menu-item index="7"  @click="$router.push('demo')">
               <i class="iconfont icon-iconfont5"></i>
               <span slot="title">账户安全</span>
             </el-menu-item>
-            <el-menu-item index="8">
+            <el-menu-item index="8" @click="$router.push('Customer')">
               <i class="iconfont icon-customerservice_fill"></i>
               <span slot="title">客服帮助</span>
             </el-menu-item>

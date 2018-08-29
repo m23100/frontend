@@ -61,4 +61,8 @@ export default {
     UserData(params) {
         return fetch('/usercenter/indexdata')
     },
+    Accountfunds(params){
+        return fetch('user/getVoucherLogList?page=1')
+    }
+
 }

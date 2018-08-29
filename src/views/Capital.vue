@@ -15,7 +15,7 @@
               <h2 class="Title">消费记录</h2>
               <div class="dynamic">
                   <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]发布成功，使用100点券</h1>
+                      <h1>商品[<span class="blue" v-for="item in getAccountFunds" :key="item">{{item.current_page}}</span>]发布成功，使用100点券</h1>
                       <div>2018-05-18</div>
                   </div>
                   <div class="flex left-list">
@@ -56,7 +56,7 @@
               <h2 class="Title">充值记录</h2>
               <div class="rule">
                   <ul>
-                      <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
+                    <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
                      <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
                      <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
                      <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
@@ -69,11 +69,28 @@
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {};
-  }
-};
+  import { mapGetters } from 'vuex'
+
+  export default {
+    data(){
+      return {
+      }
+    },
+    created() {
+        if (this.getAccountFunds) {
+            this.$store.dispatch('getAccountFunds')
+        }
+    },
+    computed: {
+      ...mapGetters([
+          
+        'getAccountFunds',
+        // console.log(res.data)
+      ]),
+      
+      
+    }
+  };
 </script>
 <style scoped>
 .flex{
@@ -118,19 +135,19 @@ export default {
   font-weight: 400;
 }
 .dataimg .data1{
-    background: url("../public/img/capital1.png") no-repeat;
+    background: url("../assets/img/capital1.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data2{
-    background: url("../public/img/capital2.png") no-repeat;
+    background: url("../assets/img/capital2.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data3{
-    background: url("../public/img/capital3.png") no-repeat;
+    background: url("../assets/img/capital3.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data4{
-    background: url("../public/img/capital4.png") no-repeat;
+    background: url("../assets/img/capital4.png") no-repeat;
     background-size: 100% 100%;
 }
 .centent{

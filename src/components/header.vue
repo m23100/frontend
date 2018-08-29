@@ -10,7 +10,7 @@
                <li class="spacer"></li>
                <li>积分规则</li>
                <li class="spacer"></li>
-               <li>客服帮助</li>
+               <li @click="$router.push('Customer')">客服帮助</li>
            </ul>
        </div>
    </div>

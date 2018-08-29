@@ -2,35 +2,35 @@
    <!-- 积分信息页面 -->
   <div class="Integral">
        <div class="vipimg">
-            <img src="../public/img/vip.png" alt="">
+            <img src="../assets/img/vip.png" alt="">
         </div>
       <div class="centent">
           <div class="centent-left">
               <h2 class="Title">扣分详情</h2>
               <div class="dynamic">
                   <div>
-                      <img class="somllicon" src="../public/img/qier.jpg" alt="">
+                      <img class="somllicon" src="../assets/img/qier.jpg" alt="">
                       <div class="deduction">
                           <div><span class="large">扣除一分</span><span class="samll">2018-05-28</span></div>
                           <h2>【蚨布斯】新款夏季短袖t恤男士打底衫，因该商品：标题描述与商品实情不符 ，被扣1积分</h2>
                       </div>
                   </div>
                   <div>
-                      <img class="somllicon" src="../public/img/qier.jpg" alt="">
+                      <img class="somllicon" src="../assets/img/qier.jpg" alt="">
                       <div class="deduction">
                           <div><span class="large">扣除一分</span><span class="samll">2018-05-28</span></div>
                           <h2>【蚨布斯】新款夏季短袖t恤男士打底衫，因该商品：标题描述与商品实情不符 ，被扣1积分</h2>
                       </div>
                   </div>
                   <div>
-                      <img class="somllicon" src="../public/img/qier.jpg" alt="">
+                      <img class="somllicon" src="../assets/img/qier.jpg" alt="">
                       <div class="deduction">
                           <div><span class="large">扣除一分</span><span class="samll">2018-05-28</span></div>
                           <h2>【蚨布斯】新款夏季短袖t恤男士打底衫，因该商品：标题描述与商品实情不符 ，被扣1积分</h2>
                       </div>
                   </div>
                   <div>
-                      <img class="somllicon" src="../public/img/qier.jpg" alt="">
+                      <img class="somllicon" src="../assets/img/qier.jpg" alt="">
                       <div class="deduction">
                           <div><span class="large">扣除一分</span><span class="samll">2018-05-28</span></div>
                           <h2>【蚨布斯】新款夏季短袖t恤男士打底衫，因该商品：标题描述与商品实情不符 ，被扣1积分</h2>

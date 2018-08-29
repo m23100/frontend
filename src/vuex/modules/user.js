@@ -8,8 +8,13 @@ const state = {
     // 用户登录信息
     userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
     // 用户数据信息
-    userData: [],
+    userData:  {
+        realdata: {},
+        auditdata: {},
+        advertdata: {}
+    },
     userToken: JSON.parse(localStorage.getItem('userToken')) || {},
+    AccountFunds:[]
 
 }
 
@@ -50,10 +55,18 @@ const actions = {
         .then(res => {
             commit(types.GET_USER_DATA, res.data)
         })
+    },
+    // 账户资金
+    getAccountFunds({commit}){
+        api.Accountfunds()
+        .then(res =>{
+            commit(types.GET_ACCOUNT_FUNDS, res.data)
+        })
     }
 }
 
 const getters = {
+    getAccountFunds: state => state.accountFunds,
     getUserData: state => state.userData,
     loginStatus: state => state.loginStatus,
     userInfo: state => state.userInfo
@@ -70,6 +83,9 @@ const mutations = {
 
     [types.GET_USER_DATA](state, res) {
         state.userData = res
+    },
+    [types.GET_ACCOUNT_FUNDS](state,res){
+        state.accountFunds = res
     }
     
 }

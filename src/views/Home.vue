@@ -14,7 +14,7 @@
           <div class="centent-left">
               <h2 class="Title">审核动态</h2>
               <div class="dynamic">
-                  <div class="flex left-list" v-for="item in getUserData.auditdata" :key="item">
+                  <div class="flex left-list" v-for="(item,index) in getUserData.auditdata" :key="index">
                       <h1>商品[<span class="blue">{{item.title}}</span>]{{item.state}}</h1>
                       <div>{{item.created_at}}</div>
                   </div>
@@ -25,7 +25,7 @@
               <h2 class="Title">公告</h2>
               <div class="rule">
                   <ul>
-                      <li v-for="item in getUserData.advertdata" :key="item">{{item.title}}</li>
+                      <li v-for="(item,index) in getUserData.advertdata" :key="index">{{item.title}}</li>
                   </ul>
               </div>
           </div>
@@ -34,7 +34,7 @@
 </template>
 <script>
   import { mapGetters } from 'vuex'
-
+  
   export default {
     data(){
       return {
@@ -58,6 +58,7 @@
     justify-content: space-between;      
 }
 .Home {
+
 }
 .navdata {
   background-color: #fff;
@@ -95,19 +96,19 @@
   font-weight: 400;
 }
 .dataimg .data1{
-    background: url("../public/img/data1.png") no-repeat;
+    background: url("../assets/img/data1.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data2{
-    background: url("../public/img/data2.png") no-repeat;
+    background: url("../assets/img/data2.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data3{
-    background: url("../public/img/data3.png") no-repeat;
+    background: url("../assets/img/data3.png") no-repeat;
     background-size: 100% 100%;
 }
 .dataimg .data4{
-    background: url("../public/img/data4.png") no-repeat;
+    background: url("../assets/img/data4.png") no-repeat;
     background-size: 100% 100%;
 }
 .centent{

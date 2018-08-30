@@ -121,7 +121,7 @@ import api from '../http/api'
                       this.$router.replace('/home')
                     }
                   )
-                    
+
                 }
             })
             .catch(error => {

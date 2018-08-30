@@ -8,32 +8,11 @@
           <div class="centent-left">
               <h2 class="Title">扣分详情</h2>
               <div class="dynamic">
-                  <div>
+                  <div v-for="(item,index) in integral" :key="index">
                       <img class="somllicon" src="../assets/img/qier.jpg" alt="">
                       <div class="deduction">
-                          <div><span class="large">扣除一分</span><span class="samll">2018-05-28</span></div>
-                          <h2>【蚨布斯】新款夏季短袖t恤男士打底衫，因该商品：标题描述与商品实情不符 ，被扣1积分</h2>
-                      </div>
-                  </div>
-                  <div>
-                      <img class="somllicon" src="../assets/img/qier.jpg" alt="">
-                      <div class="deduction">
-                          <div><span class="large">扣除一分</span><span class="samll">2018-05-28</span></div>
-                          <h2>【蚨布斯】新款夏季短袖t恤男士打底衫，因该商品：标题描述与商品实情不符 ，被扣1积分</h2>
-                      </div>
-                  </div>
-                  <div>
-                      <img class="somllicon" src="../assets/img/qier.jpg" alt="">
-                      <div class="deduction">
-                          <div><span class="large">扣除一分</span><span class="samll">2018-05-28</span></div>
-                          <h2>【蚨布斯】新款夏季短袖t恤男士打底衫，因该商品：标题描述与商品实情不符 ，被扣1积分</h2>
-                      </div>
-                  </div>
-                  <div>
-                      <img class="somllicon" src="../assets/img/qier.jpg" alt="">
-                      <div class="deduction">
-                          <div><span class="large">扣除一分</span><span class="samll">2018-05-28</span></div>
-                          <h2>【蚨布斯】新款夏季短袖t恤男士打底衫，因该商品：标题描述与商品实情不符 ，被扣1积分</h2>
+                          <div><span class="large">扣除{{item.number}}积分</span><span class="samll">{{item.created_at}}</span></div>
+                          <h2>{{item.content}}，被扣1积分</h2>
                       </div>
                   </div>
               </div>
@@ -60,9 +39,33 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import api from '../http/api'
+console.log('积分')
 export default {
   data() {
-    return {};
+    return {
+        integral:[],
+        rule:[]
+    };
+  },
+  methods:{
+
+  },
+  created(){
+      //获取用户的积分扣分详情
+      api.getUserIntegralLog().then(res =>{
+          console.log('获取用户的积分扣分详情')
+          console.log(res.data)
+          this.integral=res.data.data
+          console.log(this.integral)
+      })
+      //获取用户的积分规则
+      api.getIntegralRule().then(res =>{
+          console.log(res.data)
+          this.rule=res.data
+          console.log(this.rule)
+      })
   }
 };
 </script>
@@ -112,6 +115,9 @@ export default {
 .somllicon{
     width: 72px;height: 72px;
     background-size: 100%;
+}
+.deduction{
+    width: 486px;
 }
 .deduction>h2{
     font-size: 12px;

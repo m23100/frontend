@@ -61,22 +61,8 @@ export default {
     UserData(params) {
         return fetch('/usercenter/indexdata')
     },
-    // 账户资金
     Accountfunds(params){
         return fetch('user/getVoucherLogList?page=1')
-    },
-    getUserVoucher(params){
-        return fetch('user/getUserVoucher')
-    },
-    getRechargeLog(params){
-        return fetch('user/getRechargeLog?page=1')
-    },
-    //end
-    //积分信息
-    getUserIntegralLog(params){
-        return fetch('integral/getUserIntegralLog?page=1')
-    },
-    getIntegralRule(params){
-        return fetch('integral/getIntegralRule')
     }
+
 }

@@ -112,8 +112,8 @@ export default {
       radio: "1",
       radio1: "1",
       radio2:'1',
-      dialogImageUrl: '',
-      dialogVisible: false
+       dialogImageUrl: '',
+        dialogVisible: false
     };
   },
 

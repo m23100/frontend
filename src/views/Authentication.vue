@@ -45,10 +45,10 @@
         <!-- 弹窗提交申请放单表单 -->
         <el-dialog
           title="上传放单权限资格申请资料"
-          :visible.sync="centerDialogVisible" width="685px" center>
+          :visible.sync="centerDialogVisible" width="36%" center>
           <div class="from">
             <div class="flex"><span>真实姓名</span> <input type="text" v-model="name" placeholder="填写真实姓名"></div>
-            <div class="flex"><span>身份证号</span> <input type="text" v-model="idnumber" placeholder="填写身份证号码"></div>
+            <div class="flex"><span>身份证号</span> <input type="text" v-model="name" placeholder="填写身份证号码"></div>
             <div class="flex2">
                 <span>上传图片</span>
                  <el-upload
@@ -62,7 +62,7 @@
                     <img width="100%" :src="dialogImageUrl" alt="">
                 </el-dialog>
             </div>
-            <div class="flex1"><span>自有渠道</span> <input type="text" v-model="channel" placeholder="填写自有渠道信息"></div>
+            <div class="flex1"><span>自有渠道</span> <input type="text" v-model="name" placeholder="填写自有渠道信息"></div>
             <div class="flex2">
                 <span>上传图片</span>
                  <el-upload
@@ -76,7 +76,7 @@
                     <img width="100%" :src="dialogImageUrl" alt="">
                 </el-dialog>
             </div>
-            <div class="flex"><span>手机号</span> <input type="text" v-model="plonenumber" placeholder="填写帐号联系人的11位手机号码"></div>
+            <div class="flex"><span>手机号</span> <input type="text" v-model="name" placeholder="填写帐号联系人的11位手机号码"></div>
             <div class="flex2">
                 <span>上传图片</span>
                  <el-upload
@@ -93,7 +93,7 @@
           </div>
           <span slot="footer" class="dialog-footer">
             <el-button @click="centerDialogVisible = false">提交</el-button>
-            <el-button @click="go" type="primary" >取消</el-button>
+            <el-button @click="centerDialogVisible = false" type="primary">取消</el-button>
           </span>
         </el-dialog>
     </div>
@@ -134,10 +134,6 @@ export default {
   },
   
     methods: {
-      go(){
-         this.$router.go(-1);
-      }
-      
     //   handleAvatarSuccess(res, file) {
     //     this.imageUrl = URL.createObjectURL(file.raw);
     //   },

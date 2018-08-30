@@ -63,7 +63,6 @@ const actions = {
             commit(types.GET_ACCOUNT_FUNDS, res.data)
         })
     }
-
 }
 
 const getters = {

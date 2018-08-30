@@ -4,9 +4,9 @@
       <div class="navdata">
           <h2 class="Title">我都点券</h2>
           <div class="dataimg">
-              <div class="data1"><h1>{{Voucher.dayNumer}}</h1><h4>可以点券</h4></div>
-              <div class="data2"><h1>{{Voucher.mouthNumber}}</h1><h4>今日已使用</h4></div>
-              <div class="data3"><h1>{{Voucher.userVoucherNumber}}</h1><h4>单月共用</h4></div>
+              <div class="data1"><h1>10000</h1><h4>可以点券</h4></div>
+              <div class="data2"><h1>200</h1><h4>今日已使用</h4></div>
+              <div class="data3"><h1>3600</h1><h4>单月共用</h4></div>
               <div class="data4"><h1 style="margin-top:28px;">充值</h1></div>
           </div>
       </div>
@@ -14,17 +14,54 @@
           <div class="centent-left">
               <h2 class="Title">消费记录</h2>
               <div class="dynamic">
-                  <div class="flex left-list" v-for="item in capital" :key="item">
-                      <h1>商品[<span class="blue">{{item.goodstitle}}</span>]发布成功，使用100点券</h1>
-                      <div>{{item.created_at}}</div>
+                  <div class="flex left-list">
+                      <h1>商品[<span class="blue" v-for="item in getAccountFunds">{{item.current_page}}</span>]发布成功，使用100点券</h1>
+                      <div>2018-05-18</div>
+                  </div>
+                  <div class="flex left-list">
+                      <h1>商品[<span class="blue">仙醇兰花香铁观音盒装250g</span>]发布成功，使用100点券</h1>
+                      <div>2018-05-18</div>
+                  </div>
+                  <div class="flex left-list">
+                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]发布成功，使用100点券</h1>
+                      <div>2018-05-18</div>
+                  </div>
+                  <div class="flex left-list">
+                      <h1>商品[<span class="blue">仙醇兰花香铁观音盒装250g</span>]发布成功，使用100点券</h1>
+                      <div>2018-05-18</div>
+                  </div>
+                  <div class="flex left-list">
+                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]发布成功，使用100点券</h1>
+                      <div>2018-05-18</div>
+                  </div>
+                  <div class="flex left-list">
+                      <h1>商品[<span class="blue">仙醇兰花香铁观音盒装250g</span>]发布成功，使用100点券</h1>
+                      <div>2018-05-18</div>
+                  </div>
+                  <div class="flex left-list">
+                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]发布成功，使用100点券</h1>
+                      <div>2018-05-18</div>
+                  </div>
+                  <div class="flex left-list">
+                      <h1>商品[<span class="blue">仙醇兰花香铁观音盒装250g</span>]发布成功，使用100点券</h1>
+                      <div>2018-05-18</div>
+                  </div>
+                  <div class="flex left-list">
+                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]发布成功，使用100点券</h1>
+                      <div>2018-05-18</div>
                   </div>
               </div>
           </div>
           <div class="centent-right">
               <h2 class="Title">充值记录</h2>
               <div class="rule">
-                  <ul v-for="(item,index) in Record" :key="index">
-                     <li><span>{{item.money}}</span><span class="span">{{item.created_at}}</span></li>
+                  <ul>
+                    <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
+                     <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
+                     <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
+                     <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
+                     <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
+                     <li><span>成功充值1000元</span><span class="span">2018-05-18</span></li>
                   </ul>
               </div>
           </div>
@@ -33,47 +70,24 @@
 </template>
 <script>
   import { mapGetters } from 'vuex'
-  import api from '../http/api'
-  console.log('a')
+
   export default {
     data(){
       return {
-          capital:[],
-          Voucher:{},
-          Record:[]
       }
     },
-    methods:{
-       setmenu() {
-       let that = this;
-     
-    }
-    },
     created() {
-        //获取用户使用点券记录
-        api.Accountfunds().then(res =>{
-            console.log(res.data)
-            this.capital= res.data.data
-            console.log(this.capital)
-        })
-       
-        //获取用户点券信息
-        api.getUserVoucher().then(res =>{
-            console.log(res.data)
-            this.Voucher=res.data
-            console.log(this.Voucher)
-        })
-        //获取用户充值记录
-        api.getRechargeLog().then(res =>{
-            console.log(res.data)
-            this.Record=res.data.data
-            console.log(this.Record)
-        })
+        if (this.getAccountFunds) {
+            this.$store.dispatch('getAccountFunds')
+        }
     },
     computed: {
-      ...mapGetters([          
+      ...mapGetters([
+          
         'getAccountFunds',
-      ]),     
+        // console.log(res.data)
+      ]),
+      
       
     }
   };

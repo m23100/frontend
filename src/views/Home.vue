@@ -17,8 +17,7 @@
                   <div class="flex left-list" v-for="item in getUserData.auditdata" :key="item">
                       <h1>商品[<span class="blue">{{item.title}}</span>]{{item.state}}</h1>
                       <div>{{item.created_at}}</div>
-                  </div>
-                  
+                  </div>                  
               </div>
           </div>
           <div class="centent-right">
@@ -38,9 +37,11 @@
   export default {
     data(){
       return {
+
       }
     },
     created() {
+        console.log('home')
         if (this.getUserData.length == 0) {
             this.$store.dispatch('getUserData')
         }

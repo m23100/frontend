@@ -5,32 +5,39 @@
             <img src="../../assets/img/vip.png" alt="">
         </div>
         <!-- 去申请 -->
-        <div class="box" v-if="state==='3'">
+        <div class="box" v-if="state =='3'">
             <h2 class="Title">实时数据</h2>
             <div class="centent"><img src="../../assets/img/imgone.png" alt=""></div>
             <h3>您的放单权限处于未申请状态</h3>
             <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = true">去申请</el-button></div>            
         </div>
         <!-- 审核中 -->
-         <div class="box" v-else-if="state==='0'">
+         <div class="box" v-else-if="state =='0'">
             <h2 class="Title">实时数据</h2>
             <div class="centent"><img src="../../assets/img/imgtwo.png" alt=""></div>
             <h3>放单权限资格正在全力审核中，请耐心等待</h3>
-            <div class="center"><el-button type="text" class="test">审核中</el-button></div>            
+            <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = false">审核中</el-button></div>            
         </div>
         <!-- 拥有放单权限 -->
-        <div class="box" v-else-if="state==='1'">
+        <div class="box" v-else-if="state =='1'">
             <h2 class="Title">实时数据</h2>
             <div class="centent"><img src="../../assets/img/imgthree.png" alt=""></div>
             <h3>上传时请注意仔细阅读积分规则，以免扣分影响正常放单权限~</h3>
-            <div class="center"><el-button type="text" class="test" @click="Submission">去放单</el-button></div>            
+            <div class="center"><el-button type="text" class="test" @click="go">去放单</el-button></div>            
         </div>
         <!-- 审核失败 -->
-        <div class="box" v-else-if="state==='2'">
+        <div class="box" v-else-if="state =='2'">
             <h2 class="Title">实时数据</h2>
             <div class="centent"><img src="../../assets/img/imgfour.png" alt=""></div>
             <h3>审核未通过！<span class="Tips">被拒原因：无法联系到填写的QQ</span></h3>
             <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = true">重新审核</el-button></div>            
+        </div>
+        <!-- 积分被扣完 -->
+        <div class="box" v-else>
+            <h2 class="Title">实时数据</h2>
+            <div class="centent"><img src="../../assets/img/imgfour.png" alt=""></div>
+            <h3>您的积分被扣完了!<span class="Tips">放单资格将在下月1号恢复</span></h3>
+            <div class="center"><el-button type="text" class="test">默默等待</el-button></div>            
         </div>
         <!-- 弹窗提交申请放单表单 -->
         <el-dialog
@@ -38,10 +45,10 @@
           :visible.sync="centerDialogVisible" width="45%" center>
           <div  class="from">
             <div class="flex"><span>行业名称</span> <input type="text" v-model="name" placeholder="填写行业内熟知的名称"></div>
-            <div class="flex"><span>联系人</span> <input type="text" v-model="name" placeholder="填写帐号联系人真实姓名"></div>
-            <div class="flex"><span>联系QQ</span> <input type="text" v-model="name" placeholder="填写行业内熟知的名称"></div>
-            <div class="flex"><span>手机号</span> <input type="text" v-model="name" placeholder="填写帐号联系人的11位手机号码"></div>
-            <div class="textarea"><span>详细介绍</span><textarea name="" id="" cols="30" rows="10"  placeholder="详细介绍描述个人/团队情况，所在地、成员人数、收入实力等"></textarea></div>
+            <div class="flex"><span>联系人</span> <input type="text" v-model="people" placeholder="填写帐号联系人真实姓名"></div>
+            <div class="flex"><span>联系QQ</span> <input type="number" v-model="qq" placeholder="填写行业内熟知的名称"></div>
+            <div class="flex"><span>手机号</span> <input type="number" v-model="plonenumber" placeholder="填写帐号联系人的11位手机号码"></div>
+            <div class="textarea"><span>详细介绍</span><textarea v-model="text" name="" id="" cols="30" rows="10"  placeholder="详细介绍描述个人/团队情况，所在地、成员人数、收入实力等"></textarea></div>
           </div>
           <span slot="footer" class="dialog-footer">
             <el-button @click="centerDialogVisible = false">取 消</el-button>
@@ -52,11 +59,17 @@
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import api from '../../http/api'
 export default {
   data() {
     return {
       centerDialogVisible: false,
       name: "",
+      people:'',
+      qq:'',
+      plonenumber:'',
+      text:'',
       state:'3'
     };
   },
@@ -66,12 +79,38 @@ export default {
         path: "/Submission"
       });
     },
-    Submission: function() {
-      console.log(this.name);
-      this.$router.push({
-        path: "/Submission"
-      });
+
+    //用户上传放单权限资格申请资料
+    Submission:function(){
+      let data ={
+          industry:this.name,
+          linker:this.people,
+          qq:this.qq,
+          phone:this.plonenumber,
+          content:this.text
+      }
+      console.log(data)
+      api.applyaudit(data).then(res =>{
+          if(res.code == 0) {
+              console.log(res)
+            //   this.$router.push({
+            //   path: "/Submission"
+            // });
+          }        
+      })
+      .catch(error => {
+          console.log(error)
+      })
     }
+  },
+  created(){
+      console.log(this.state)
+    //用户获取放单权限资格申请资料审核数据
+     api.lastapply().then(res =>{
+        console.log(res.data)
+        this.state=res.data[0].state
+        console.log(this.state)
+     })
   }
 };
 </script>

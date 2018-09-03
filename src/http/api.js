@@ -78,5 +78,16 @@ export default {
     },
     getIntegralRule(params){
         return fetch('integral/getIntegralRule')
+    },
+    //end
+    //放单平台
+    applyaudit(params){
+        return fetch('usercenter/applyaudit',params)
+    },
+    lastapply(params){
+        return fetch('usercenter/lastapply') 
+    },
+    checklink(params){
+        return fetch('usercenter/checklink',params)
     }
 }

@@ -6,32 +6,38 @@
                 <div class="component">
                     <h2>商品ID</h2>
                     <div class="detection">
-                        <!-- <input type="text" placeholder="{{msg}}"> -->
-                        <div>{{msg}}</div>
+                        <!-- <input type="text" placeholder="{{link}}"> -->
+                        <div>{{goodslink}}</div>
                         <span class="start">已检测通过</span>
                     </div>
                 </div>
                 <div class="component">
                     <h2>开始时间</h2>
                     <div class="Choice">
-                         <el-radio v-model="radio" label="1">立即开始</el-radio>
-                         <el-radio v-model="radio" label="2">预约开始</el-radio>
+                         <el-radio v-model="radio" label="立即开始">立即开始</el-radio>
+                         <el-radio v-model="radio" label="预约开始">预约开始</el-radio>
+                    </div>                   
+                </div>
+                <div class="component">
+                    <h2>优惠券类型</h2>
+                    <div class="Choice">
+                         <el-radio v-model="radio3" label="2">阿里妈妈优惠券</el-radio>
                     </div>                   
                 </div>
                 <div class="component">
                     <h2>活动类型</h2>
                     <div class="Choice">
-                        <el-radio v-model="radio1" label="1">无活动</el-radio>
-                        <el-radio v-model="radio1" label="2">淘抢购</el-radio>
-                        <el-radio v-model="radio1" label="3">聚划算</el-radio>
+                        <el-radio v-model="radio1" label="0">无活动</el-radio>
+                        <el-radio v-model="radio1" label="1">淘抢购</el-radio>
+                        <el-radio v-model="radio1" label="2">聚划算</el-radio>
                     </div>                    
                 </div>
                 <div class="component">
                     <h2>封面图</h2>
                     <div class="Choice">
                         <el-upload
-                        
-                        action="http://dev.ruomengtv.com/image/imageUpload"
+                        :limit="1"
+                        action="http://dev.ruomengtv.com/api/image/imageUpload"
                         list-type="picture-card"
                         :on-preview="handlePictureCardPreview"
                         :on-remove="handleRemove">
@@ -53,7 +59,7 @@
                         list-type="picture-card"
                         :on-preview="handlePictureCardPreview"
                         :on-remove="handleRemove">
-                        <!-- <i class="el-icon-plus"></i> -->
+                        <i class="el-icon-plus"></i>
                         </el-upload>
                         <el-dialog :visible.sync="dialogVisible">
                         <img width="100%" :src="dialogImageUrl" alt="">
@@ -64,38 +70,38 @@
                 <div class="component">
                     <h2>短标题</h2>
                     <div class="Choice flex">
-                       <input class="input" type="text" placeholder="将产品短标题输入或粘贴于此">
+                       <input class="input" type="text" v-model="title" placeholder="将产品短标题输入或粘贴于此">
                        <span class="span">要求：精简干练，表达重点信息,如品牌、产品名、数量、克重等</span>
                     </div>                                        
                 </div>
                 <div class="component">
                     <h2>券后价</h2>
                     <div class="Choice">
-                       <input class="Price" type="number"><span class="rmb">元</span>
+                       <input class="Price" v-model="Price" type="number"><span class="rmb">元</span>
                     </div>                                        
                 </div>
                 <div class="component">
                     <h2>优惠券链接</h2>
                     <div class="Choice">
-                       <input class="input" type="text" placeholder="将产品对应优惠券链接输入或粘贴于此">
+                       <input class="input" v-model="link" type="text" placeholder="将产品对应优惠券链接输入或粘贴于此">
                     </div>                                        
                 </div>
                  <div class="component">
                     <h2>优惠券总量</h2>
                     <div class="Choice flex">
-                       <input class="Price" type="number">
+                       <input class="Price" type="number" v-model="yhnumber">
                        <span class="span">要求：优惠券跟商品对应，券名无敏感词，总量不能少于5000张</span>
                     </div>                                        
                 </div>
                  <div class="component">
                     <h2>佣金比率</h2>
                     <div class="Choice">
-                       <input class="Price" type="number"><span class="rmb">%</span>
+                       <input class="Price" type="number" v-model="Commission"><span class="rmb">%</span>
                     </div>                                        
                 </div>
                  <div class="component">
                     <h2>佣金类型</h2>
-                    <div class="Choice">
+                    <div class="Choice" >
                         <el-radio v-model="radio2" label="1">营销</el-radio>
                         <el-radio v-model="radio2" label="2">通用</el-radio>
                         <el-radio v-model="radio2" label="3">定向</el-radio>
@@ -105,28 +111,37 @@
                  <div class="component">
                     <h2>导购文案</h2>
                     <div class="Choice">
-                        <textarea data-v-716a6b68="" name="" id="" cols="30" rows="10" 
+                        <textarea data-v-716a6b68="" v-model="Copywriting" name="" id="" cols="30" rows="10" 
                         placeholder="要求：20-200字精简文案，突出产品亮点，需求交痛点，为什么值得买！注意不要用空格"></textarea>
                     </div>                    
                 </div>
                  <div class="bottom">
-                        <span @click="go">提交审核</span>
+                        <span @click="Submission">提交审核</span>
                         <button @click="cancel">取消</button>
                 </div>
         </div>
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import api from '../../http/api'
 export default {
   data() {
     return {
-      active: 0,
-      radio: "1",
+      goodsid:'',
+      goodslink:'',
+      radio: "立即开始",
+      radio3:'2',
       radio1: "1",
+      title:'',
+      Price:'',
+      link:'',
+      yhnumber:'',
+      Commission:'',
       radio2:'1',
+      Copywriting:'',
       dialogImageUrl: '',
-      dialogVisible: false,
-      msg:''
+      dialogVisible: false,      
     };
   },
 
@@ -150,15 +165,54 @@ export default {
           this.$router.push({
               path:"/Apply"
           })
-      }
+      },
+    //   //开始时间
+    //   time(){
+    //       console.log(this.radio)
+    //   },
+    //   //活动类型
+    //   activity(){
+    //       console.log(this.radio1)
+    //   },
+    //   //佣金类型
+    //   yjleixing(){
+    //       console.log(this.radio2)
+    //   },
+      //提交表单信息
+      Submission(){
+          let data={
+             goodsid:this.goodsid,
+             goodslink:this.goodslink,
+             goodstitle:this.title,
+             coverimage:'',
+             commissiontype:this.radio2,
+             commissionrate:this.Commission,
+             copywriting:this.Copywriting,
+             copywritingimage:'',
+             voucherprice:this.Price,
+             couponlink:this.link,
+             coupontotal:this.yhnumber,
+             begintime:this.radio,
+             coupontype:this.radio3,
+             activitytype:this.radio1,
 
+          }
+          console.log(data)
+      }
+      
   },
   created(){
         console.log(this.$route.query.link)
+        console.log(this.$route.query.goodsid)
         // 取到路由带过来的参数 
         let routerquery = this.$route.query.link
         // 将数据放在当前组件的数据内        
-        this.msg = routerquery  
+        this.goodslink = routerquery  
+
+        let routequery = this.$route.query.goodsid
+        this.goodsid =routequery
+        // console.log(this.$store.state.loginStatus)
+
   }
 };
 </script>

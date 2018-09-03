@@ -27,28 +27,36 @@ export default {
   data() {
     return {
         link:'',
+        goodsid:'',
         query:{} 
     };
   },
  methods:{
       go: function() {
+        let data={
+            link:this.link,
+            gid:this.goodsid
+        }
+        api.tbinfo(data).then(res =>{
+            console.log(res.data)
+        })
         this.$router.push({
             path: "/Flatfrom",           
-            query:{link:this.link}
+            query:{link:this.link,goodsid:this.goodsid}
         });
          console.log(this.link)
          
       },
       Backoff: function() {
         this.$router.push({
-            path: "/Submission",
-            
+            path: "/Submission",            
         });
       },
       Starttesting:function(){
          let link=this.link;
          api.checklink({link}).then(res=>{
-             console.log(res)
+             console.log(res.data.goodsid)
+             this.goodsid=res.data.goodsid
          })
       }
  }

@@ -89,5 +89,8 @@ export default {
     },
     checklink(params){
         return fetch('usercenter/checklink',params)
+    },
+    tbinfo(params){
+        return fetch('usercenter/tbinfo',params)
     }
 }

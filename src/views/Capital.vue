@@ -14,17 +14,17 @@
           <div class="centent-left">
               <h2 class="Title">消费记录</h2>
               <div class="dynamic">
-                  <div class="flex left-list" v-for="item in capital" :key="item">
+                  <div class="flex left-list" v-for="(item,index) in capital" :key="index">
                       <h1>商品[<span class="blue">{{item.goodstitle}}</span>]发布成功，使用100点券</h1>
                       <div>{{item.created_at}}</div>
                   </div>
               </div>
           </div>
           <div class="centent-right">
-              <h2 class="Title">充值记录</h2>
+              <h2 class="Title">充值记录1</h2>
               <div class="rule">
                   <ul v-for="(item,index) in Record" :key="index">
-                     <li><span>{{item.money}}</span><span class="span">{{item.created_at}}</span></li>
+                     <li><span class="color">成功充值{{item.money}}元</span><span class="span">{{item.created_at}}</span></li>
                   </ul>
               </div>
           </div>
@@ -47,27 +47,27 @@
        setmenu() {
        let that = this;
      
-    }
+      }
     },
     created() {
         //获取用户使用点券记录
         api.Accountfunds().then(res =>{
-            console.log(res.data)
+            // console.log(res.data)
             this.capital= res.data.data
-            console.log(this.capital)
+            // console.log(this.capital)
         })
        
         //获取用户点券信息
         api.getUserVoucher().then(res =>{
-            console.log(res.data)
+            // console.log(res.data)
             this.Voucher=res.data
-            console.log(this.Voucher)
+            // console.log(this.Voucher)
         })
         //获取用户充值记录
         api.getRechargeLog().then(res =>{
-            console.log(res.data)
+            // console.log(res.data)
             this.Record=res.data.data
-            console.log(this.Record)
+            // console.log(this.Record)
         })
     },
     computed: {
@@ -169,18 +169,23 @@
 }
 .rule{
     display: block;
-    padding: 16px 16px 16px 45px;
+    padding: 20px 30px;
     background-color: #fff;
     height: 83%;
+}
+.rule .color{
+    color: #49a6f7;
 }
 .rule ul li{
     margin: 20px 0;
     font-size: 12px;
     color: #3c3c3c;
     list-style-type:disc;
+        display: flex;
+    justify-content: space-between;
 }
-.rule .span{
+/* .rule .span{
     margin-left: 120px;
-}
+} */
 </style>
 

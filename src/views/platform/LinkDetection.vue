@@ -6,7 +6,7 @@
         </div>
         <div class="centent">
             <h2 class="Title">填写商品信息</h2>
-            <div class="detection"><input type="text" placeholder="将商品链接粘贴于此"><span class="start">开始测试</span></div>
+            <div class="detection"><input type="text" v-model="link" placeholder="将商品链接粘贴于此"><span class="start" @click="Starttesting">开始测试</span></div>
             <div class="text">
                 说明：<br/>
                 1.正在显示推广的商品，不能重复提交<br/>
@@ -22,21 +22,35 @@
     </div>
 </template>
 <script>
+import api from '../../http/api'
 export default {
   data() {
-    return {};
+    return {
+        link:'',
+        query:{} 
+    };
   },
  methods:{
       go: function() {
         this.$router.push({
-            path: "/Flatfrom"
+            path: "/Flatfrom",           
+            query:{link:this.link}
         });
+         console.log(this.link)
+         
       },
       Backoff: function() {
         this.$router.push({
-            path: "/Submission"
+            path: "/Submission",
+            
         });
       },
+      Starttesting:function(){
+         let link=this.link;
+         api.checklink({link}).then(res=>{
+             console.log(res)
+         })
+      }
  }
 };
 </script>
@@ -68,6 +82,7 @@ export default {
     color: #fff;
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
+    cursor: pointer;
 }
 .detection{
     display: flex;

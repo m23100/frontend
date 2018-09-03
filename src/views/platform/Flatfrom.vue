@@ -5,21 +5,25 @@
         <div class="centent">
                 <div class="component">
                     <h2>商品ID</h2>
-                    <div class="detection"><input type="text" placeholder="https://detail.tmall.com/item.htm?id=557848943365"><span class="start">已检测通过</span></div>
+                    <div class="detection">
+                        <!-- <input type="text" placeholder="{{msg}}"> -->
+                        <div>{{msg}}</div>
+                        <span class="start">已检测通过</span>
+                    </div>
                 </div>
                 <div class="component">
                     <h2>开始时间</h2>
                     <div class="Choice">
-                         <el-radio v-model="radio" label="1">备选项</el-radio>
-                         <el-radio v-model="radio" label="2">备选项</el-radio>
+                         <el-radio v-model="radio" label="1">立即开始</el-radio>
+                         <el-radio v-model="radio" label="2">预约开始</el-radio>
                     </div>                   
                 </div>
                 <div class="component">
                     <h2>活动类型</h2>
                     <div class="Choice">
-                        <el-radio v-model="radio1" label="1">备选项</el-radio>
-                        <el-radio v-model="radio1" label="2">备选项</el-radio>
-                        <el-radio v-model="radio1" label="3">备选项</el-radio>
+                        <el-radio v-model="radio1" label="1">无活动</el-radio>
+                        <el-radio v-model="radio1" label="2">淘抢购</el-radio>
+                        <el-radio v-model="radio1" label="3">聚划算</el-radio>
                     </div>                    
                 </div>
                 <div class="component">
@@ -27,7 +31,7 @@
                     <div class="Choice">
                         <el-upload
                         
-                        action="https://jsonplaceholder.typicode.com/posts/"
+                        action="http://dev.ruomengtv.com/image/imageUpload"
                         list-type="picture-card"
                         :on-preview="handlePictureCardPreview"
                         :on-remove="handleRemove">
@@ -120,12 +124,14 @@ export default {
       radio: "1",
       radio1: "1",
       radio2:'1',
-       dialogImageUrl: '',
-        dialogVisible: false
+      dialogImageUrl: '',
+      dialogVisible: false,
+      msg:''
     };
   },
 
   methods: {
+
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
@@ -134,7 +140,7 @@ export default {
         this.dialogVisible = true;
         console.log(this.dialogImageUrl, this.dialogVisible);
       },
-
+      
       go: function() {
         this.$router.push({
             path: "/Viptesting"
@@ -146,6 +152,13 @@ export default {
           })
       }
 
+  },
+  created(){
+        console.log(this.$route.query.link)
+        // 取到路由带过来的参数 
+        let routerquery = this.$route.query.link
+        // 将数据放在当前组件的数据内        
+        this.msg = routerquery  
   }
 };
 </script>
@@ -166,9 +179,22 @@ export default {
 }
 .detection {
   display: flex;
-      margin: 25px 0;
-    width: 565px;
+  margin: 25px 0;
+  width: 565px;
   justify-content: space-between;
+}
+.detection>div{
+    width: 423px;
+    height: 17px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    border: 1px solid #eee;
+    background-color: #f4f4f4;
+    padding-left: 30px;
+    padding: 10px 0 10px 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .detection > input {
   width: 423px;
@@ -189,6 +215,7 @@ export default {
   color: #fff;
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
+  cursor: pointer;
 }
 .component {
 }

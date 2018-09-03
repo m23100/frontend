@@ -9,7 +9,7 @@
               <h2 class="Title">扣分详情</h2>
               <div class="dynamic">
                   <div v-for="(item,index) in integral" :key="index">
-                      <img class="somllicon" src="../assets/img/qier.jpg" alt="">
+                      <img class="somllicon" :src="item.coverimage.img1" alt="">
                       <div class="deduction">
                           <div><span class="large">扣除{{item.number}}积分</span><span class="samll">{{item.created_at}}</span></div>
                           <h2>{{item.content}}，被扣1积分</h2>
@@ -20,18 +20,8 @@
           <div class="centent-right">
               <h2 class="Title">扣分规则</h2>
               <div class="rule">
-                  <ul>
-                      <li>总分为20分，积分减为0时，将失去提交功能</li>
-                      <li>价格、佣金不对 扣3分</li>
-                      <li>主图不对  扣1分</li>
-                      <li>券名出现敏感词 扣1分</li>
-                      <li>标题描述与商品实情不符 扣1分</li>
-                      <li>预约时间不符 扣2分</li>
-                      <li>优惠券链接与商品不对应 扣3分</li>
-                      <li>恶意撬单 扣5分</li>
-                      <li>出现商家拉人短信、卡片 扣3分</li>
-                      <li>损害平台利益扣 20分</li>
-                      <li>其他  酌情扣分</li>
+                  <ul v-for="(item,index) in rule" :key="index">
+                      <li>{{item.content}}</li>
                   </ul>
               </div>
           </div>
@@ -55,10 +45,16 @@ export default {
   created(){
       //获取用户的积分扣分详情
       api.getUserIntegralLog().then(res =>{
-          console.log('获取用户的积分扣分详情')
-          console.log(res.data)
+
           this.integral=res.data.data
-          console.log(this.integral)
+        //   console.log(this.integral)
+        //   console.log(this.integral.coverimage)
+        //   this.integral.forEach(function(value, index, array){
+        //              this.integral[index]=value*2;
+        //              console.log(value)
+        //     },this)
+        //   var obj = JSON.parse(this.integral.coverimage);
+        //   console.log(obj)
       })
       //获取用户的积分规则
       api.getIntegralRule().then(res =>{

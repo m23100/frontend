@@ -4,83 +4,27 @@
       <div class="navdata">
           <h2 class="Title">秒杀数据</h2>
           <div class="dataimg">
-              <div class="data1"><h1>1</h1><h4>正在秒杀中</h4></div>
-              <div class="data2"><h1>13</h1><h4>已提交</h4></div>
-              <div class="data3"><h1>11</h1><h4>被审拒</h4></div>
-              <div class="data4"><h1>1</h1><h4>待审核中</h4></div>
+              <div class="data1"><h1>{{this.Number.killConductNumber}}</h1><h4>正在秒杀中</h4></div>
+              <div class="data2"><h1>{{this.Number.killSubmissionNumber}}</h1><h4>已提交</h4></div>
+              <div class="data3"><h1>{{this.Number.killRefuseNumber}}</h1><h4>被审拒</h4></div>
+              <div class="data4"><h1>{{this.Number.killWaitNumber}}</h1><h4>待审核中</h4></div>
           </div>
       </div>
       <div class="centent">
           <div class="centent-left">
               <h2 class="Title">审核动态</h2>
               <div class="dynamic">
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                   <div class="flex left-list">
-                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                   <div class="flex left-list">
-                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                   <div class="flex left-list">
-                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                   <div class="flex left-list">
-                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                   <div class="flex left-list">
-                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                  <div class="flex left-list">
-                      <h1>商品[<span class="blue">【天堂伞】防紫外线折叠晴雨两用伞</span>]已核审通过</h1>
-                      <div>2018-05-18</div>
-                  </div>
-                   <div class="flex left-list">
-                      <h1>商品[<span class="blue">[仙醇兰花香铁观音盒装250g]</span>已核审被拒，原因：商品已存在</h1>
-                      <div>2018-05-18</div>
+                  <div class="flex left-list" v-for="(item,index) in DataDynamic" :key="index">
+                      <h1>商品[<span class="blue">{{item.title}}</span>]{{item.state}}</h1>
+                      <div>{{item.created_at}}</div>
                   </div>
               </div>
           </div>
           <div class="centent-right">
               <h2 class="Title">秒杀规则</h2>
               <div class="rule">
-                  <ul>
-                      <li>每个秒杀单提交成功并审核通过将会消耗500点券</li>
-                      <li>确认秒杀单力度明显大于普通平推单</li>
-                      <li>确认店铺DSR不低于4.7，动态偏移非三绿</li>
-                      <li>确认单品具有一定基础销量和基础评价，不低于10</li>
-                      <li>确认店铺为C店时等级不低于4皇冠</li>
+                  <ul v-for="(item,index) in Rule" :key="index">
+                      <li>{{item.content}}</li>
                   </ul>
               </div>
           </div>
@@ -88,16 +32,44 @@
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {};
-  }
-};
+  import { mapGetters } from 'vuex';
+  import api from '../../http/api';
+  export default {
+    data() {
+      return {
+        Number:{},
+        Rule:[],
+        DataDynamic:[]
+      }
+    },
+    created(){
+
+      //获取秒杀平台的用户数据
+        api.GetKillnum().then(res =>{
+          this.Number = res.data;
+        }),
+
+          //获取秒杀平台的规则
+        api.getKillRule().then(res=>{
+          this.Rule = res.data.data;
+        }),
+
+          //获取秒杀平台的审核动态
+          api.getKillDataDynamic().then(res=>{
+            this.DataDynamic = res.data.data;
+          })
+      },
+    computed: {
+      ...mapGetters([
+        'getAccountFunds',
+      ]),
+    }
+  };
 </script>
 <style scoped>
 .flex{
     display: flex;
-    justify-content: space-between;      
+    justify-content: space-between;
 }
 .Seconddata {
 }
@@ -167,11 +139,11 @@ export default {
 }
 .dynamic .flex>h1{
     font-size: 12px;
-    line-height: 46px;     
+    line-height: 46px;
 }
 .dynamic .flex>div{
     font-size: 12px;
-    line-height: 46px;     
+    line-height: 46px;
 }
 .flex .blue{
     color: #49a6f7;

@@ -1,9 +1,9 @@
 <template>
     <!-- 秒杀单检测页 -->
-    <div class="Testing">
+    <div class="Killcheckout">
          <h2 class="Title">商品链接测试</h2>
         <div class="centent">
-            <div class="detection"><input type="text" placeholder="将商品链接粘贴于此"><span class="start">开始测试</span></div>
+            <div class="detection"><input type="text" placeholder="将商品链接粘贴于此"><span class="start" @click="checkout">开始测试</span></div>
             <div class="text">
                 说明：<br/>
                 1.正在显示推广的商品，不能重复提交<br/>
@@ -16,7 +16,7 @@
                      <h2 class="title">秒杀日期</h2>
                      <span>说明:为保证商品及优惠券有效性，只能预约近3天的秒杀</span>
                 </div>
-               
+
                 <el-date-picker
                 v-model="value1"
                 type="date"
@@ -44,14 +44,29 @@
     </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex';
+  import api from '../../http/api';
 export default {
   data() {
     return {
         value1:'',
-        radio:'1'
+        radio:'1',
     };
   },
  methods:{
+   //开始检测
+   checkout:function(){
+     api.Killcheckout().then((res) =>{
+       console.log(res)
+
+
+       /* if(res.code == 0){
+          alert("检测成功，可以添加")
+        }else{
+          alert("检测失败，您可能已经添加或者放单资格达不到")
+        }*/
+     })
+   } ,
      //下一步
       go: function() {
         this.$router.push({
@@ -122,7 +137,7 @@ export default {
 }
 .date{
     width: 60%;
-    margin: 10px auto;    
+    margin: 10px auto;
 }
 .flex{
     display: flex;
@@ -175,4 +190,3 @@ export default {
 }
 
 </style>
-             

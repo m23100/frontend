@@ -14,7 +14,7 @@
           <div class="centent-left">
               <h2 class="Title">消费记录</h2>
               <div class="dynamic">
-                  <div class="flex left-list" v-for="item in capital" :key="item">
+                  <div class="flex left-list" v-for="(item,index) in capital" :key="index">
                       <h1>商品[<span class="blue">{{item.goodstitle}}</span>]发布成功，使用100点券</h1>
                       <div>{{item.created_at}}</div>
                   </div>
@@ -34,7 +34,6 @@
 <script>
   import { mapGetters } from 'vuex'
   import api from '../http/api'
-  console.log('a')
   export default {
     data(){
       return {
@@ -46,17 +45,13 @@
     methods:{
        setmenu() {
        let that = this;
-     
+
     }
     },
     created() {
         //获取用户使用点券记录
-        api.Accountfunds().then(res =>{
-            console.log(res.data)
-            this.capital= res.data.data
-            console.log(this.capital)
-        })
-       
+
+
         //获取用户点券信息
         api.getUserVoucher().then(res =>{
             console.log(res.data)
@@ -71,17 +66,17 @@
         })
     },
     computed: {
-      ...mapGetters([          
+      ...mapGetters([
         'getAccountFunds',
-      ]),     
-      
+      ]),
+
     }
   };
 </script>
 <style scoped>
 .flex{
     display: flex;
-    justify-content: space-between;      
+    justify-content: space-between;
 }
 .Capital {
 }
@@ -151,11 +146,11 @@
 }
 .dynamic .flex>h1{
      font-size: 12px;
-     line-height: 46px;     
+     line-height: 46px;
 }
 .dynamic .flex>div{
      font-size: 12px;
-     line-height: 46px;     
+     line-height: 46px;
 }
 .flex .blue{
     color: #49a6f7;

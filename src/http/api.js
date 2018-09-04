@@ -4,7 +4,7 @@ const api = axios.create();
 api.defaults.baseURL = 'http://dev.ruomengtv.com/api';
 api.defaults.timeout = 5000;
 api.defaults.headers.post['Content-Type'] = 'application/json';
-api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
+api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';
 
 
 //POST传参序列化
@@ -18,7 +18,7 @@ api.interceptors.request.use(
   err => {
     return Promise.reject(err)
   },
-)
+);
 
 
 //返回状态判断
@@ -78,5 +78,51 @@ export default {
     },
     getIntegralRule(params){
         return fetch('integral/getIntegralRule')
-    }
+    },
+
+
+  /*秒杀平台*/
+
+  //获取秒杀平台的用户数据
+  GetKillnum(params){
+    return fetch('kill/getKillData')
+  },
+
+  //获取秒杀平台的规则
+  getKillRule(params){
+    return fetch('kill/getKillRule')
+  },
+
+  //获取秒杀平台的审核动态
+  getKillDataDynamic(params){
+    return fetch('kill/getKillDataDynamic')
+  },
+
+  //测试商品链接
+  Killcheckout(params){
+    return fetch('usercenter/checklink')
+  },
+
+  //提交秒杀
+  saveKillGood(params){
+    return fetch('kill/saveKillGood')
+  },
+
+
+
+  // 提交秒杀审核中
+  getExamine(params){
+    return fetch('kill/getExamine')
+  },
+
+  //获取提交秒杀未通过用户数据
+  getKillRefuseGoods(params){
+      return fetch('kill/getKillRefuseGoods')
+    },
+
+  //获取提交秒杀通过用户数据
+  getKillExaminePass(params){
+    return fetch('kill/getKillExaminePass')
+  }
 }
+

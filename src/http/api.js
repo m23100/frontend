@@ -61,6 +61,10 @@ export default {
     UserData(params) {
         return fetch('/usercenter/indexdata')
     },
+     //客服帮助
+     getCustomerService(params){
+        return fetch('service/getCustomerService',params)
+    },
     // 账户资金
     Accountfunds(params){
         return fetch('user/getVoucherLogList?page=1')
@@ -93,9 +97,14 @@ export default {
     tbinfo(params){
         return fetch('usercenter/tbinfo',params)
     },
-    //查看审核中的商品数据（平推
-    auditing(params){
-        return fetch('usercenter/auditing',params)
-    }
+        //查看审核中的商品数据（平推
+        auditing(params){
+            return fetch('usercenter/auditing',params)
+        },
+        //提交平推单数据
+        createnormal(params){
+            return fetch('usercenter/createnormal',params)
+        },
+   
 
 }

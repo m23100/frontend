@@ -14,37 +14,40 @@
                 <div class="component">
                     <h2>开始时间</h2>
                     <div class="Choice">
-                         <el-radio v-model="radio" label="立即开始">立即开始</el-radio>
-                         <el-radio v-model="radio" label="预约开始">预约开始</el-radio>
+                         <el-radio v-model="radioo" label="立即开始">立即开始</el-radio>
+                         <el-radio v-model="radioo" label="预约开始">预约开始</el-radio>
                     </div>                   
                 </div>
                 <div class="component">
                     <h2>优惠券类型</h2>
                     <div class="Choice">
-                         <el-radio v-model="radio3" label="2">阿里妈妈优惠券</el-radio>
+                         <el-radio v-model="coupontype" label="2">阿里妈妈优惠券</el-radio>
                     </div>                   
                 </div>
                 <div class="component">
                     <h2>活动类型</h2>
                     <div class="Choice">
-                        <el-radio v-model="radio1" label="0">无活动</el-radio>
-                        <el-radio v-model="radio1" label="1">淘抢购</el-radio>
-                        <el-radio v-model="radio1" label="2">聚划算</el-radio>
+                        <el-radio v-model="activitytype" label="0">无活动</el-radio>
+                        <el-radio v-model="activitytype" label="1">淘抢购</el-radio>
+                        <el-radio v-model="activitytype" label="2">聚划算</el-radio>
                     </div>                    
                 </div>
                 <div class="component">
                     <h2>封面图</h2>
                     <div class="Choice">
                         <el-upload
+                        :headers="uploadHeaders"
                         :limit="1"
                         action="http://dev.ruomengtv.com/api/image/imageUpload"
                         list-type="picture-card"
                         :on-preview="handlePictureCardPreview"
-                        :on-remove="handleRemove">
-                        <!-- <i class="el-icon-plus"></i> -->
+                        :on-remove="handleRemove"
+                        :file-list="filelist"
+                        :on-success="filesuccess1">
+                        <i class="el-icon-plus"></i>
                         </el-upload>
                         <el-dialog :visible.sync="dialogVisible">
-                        <img width="100%" :src="dialogImageUrl" alt="">
+                           <img width="100%" :src="dialogImageUrl" alt="">
                         </el-dialog>
                         <span>要求：图片大小400*400px，干净清晰，突显产品,不能出现牛皮癣、大量文字</span> 
                     </div>
@@ -54,11 +57,14 @@
                     <h2>文档主图</h2>
                     <div class="Choice">
                         <el-upload
-                        
-                        action="https://jsonplaceholder.typicode.com/posts/"
+                        :headers="uploadHeaders"
+                        :limit="1"
+                        action="http://dev.ruomengtv.com/api/image/imageUpload"
                         list-type="picture-card"
                         :on-preview="handlePictureCardPreview"
-                        :on-remove="handleRemove">
+                        :on-remove="handleRemove"
+                        :file-list="filelist"
+                        :on-success="filesuccess">
                         <i class="el-icon-plus"></i>
                         </el-upload>
                         <el-dialog :visible.sync="dialogVisible">
@@ -102,10 +108,10 @@
                  <div class="component">
                     <h2>佣金类型</h2>
                     <div class="Choice" >
-                        <el-radio v-model="radio2" label="1">营销</el-radio>
-                        <el-radio v-model="radio2" label="2">通用</el-radio>
-                        <el-radio v-model="radio2" label="3">定向</el-radio>
-                        <el-radio v-model="radio2" label="4">鹊桥</el-radio>
+                        <el-radio v-model="commissiontype" label="1">营销</el-radio>
+                        <el-radio v-model="commissiontype" label="2">通用</el-radio>
+                        <el-radio v-model="commissiontype" label="3">定向</el-radio>
+                        <el-radio v-model="commissiontype" label="4">鹊桥</el-radio>
                     </div>                    
                 </div>
                  <div class="component">
@@ -128,34 +134,47 @@ import api from '../../http/api'
 export default {
   data() {
     return {
-      goodsid:'',
-      goodslink:'',
-      radio: "立即开始",
-      radio3:'2',
-      radio1: "1",
-      title:'',
-      Price:'',
-      link:'',
-      yhnumber:'',
-      Commission:'',
-      radio2:'1',
-      Copywriting:'',
-      dialogImageUrl: '',
-      dialogVisible: false,      
+      radioo:'',
+      goodsid:'',         //淘宝商品ID
+      goodslink:'',       //淘宝商品链接
+      radio: "2018-09-04 00:01:00",    //商品开始上线时间
+      coupontype:'2',      //优惠券类型
+      activitytype: "1",    //活动类型
+      title:'',             //商品标题
+      Price:'',             //券后价格
+      link:'',              //优惠券链接
+      yhnumber:'',          //优惠券总量
+      Commission:'',        //佣金比率
+      commissiontype:'1',   //佣金类型
+      Copywriting:'',       //导购文案
+      coverimage:'',         //封面图
+      copywritingimage:'',   //文案图
+      dialogImageUrl: '',    
+      dialogVisible: false,   
+      filelist:[],
+      uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`}
     };
   },
 
   methods: {
-
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
       handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
+        this.dialogImageUrl = file;
         this.dialogVisible = true;
         console.log(this.dialogImageUrl, this.dialogVisible);
       },
-      
+      //图片上传成功时的钩子
+      filesuccess(response, file){
+        // console.log(response,file);
+        console.log(response.data.url)
+        this.coverimage=response.data.url
+      },
+      filesuccess1(response, file){
+        console.log(response.data.url)
+        this.copywritingimage=response.data.url
+      },
       go: function() {
         this.$router.push({
             path: "/Viptesting"
@@ -166,38 +185,30 @@ export default {
               path:"/Apply"
           })
       },
-    //   //开始时间
-    //   time(){
-    //       console.log(this.radio)
-    //   },
-    //   //活动类型
-    //   activity(){
-    //       console.log(this.radio1)
-    //   },
-    //   //佣金类型
-    //   yjleixing(){
-    //       console.log(this.radio2)
-    //   },
+
       //提交表单信息
       Submission(){
           let data={
              goodsid:this.goodsid,
              goodslink:this.goodslink,
              goodstitle:this.title,
-             coverimage:'',
-             commissiontype:this.radio2,
+             coverimage:this.coverimage,
+             commissiontype:this.commissiontype,
              commissionrate:this.Commission,
              copywriting:this.Copywriting,
-             copywritingimage:'',
+             copywritingimage:this.copywritingimage,
              voucherprice:this.Price,
              couponlink:this.link,
              coupontotal:this.yhnumber,
              begintime:this.radio,
-             coupontype:this.radio3,
-             activitytype:this.radio1,
-
+             coupontype:this.coupontype,
+             activitytype:this.activitytype,
+             startsales:'10000'
           }
           console.log(data)
+          api.createnormal(data).then(res =>{
+              console.log(res)
+          })
       }
       
   },

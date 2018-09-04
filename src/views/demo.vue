@@ -1,16 +1,11 @@
 
 <template>
     <div>
-        <el-upload
-        action="https://jsonplaceholder.typicode.com/posts/"
-        list-type="picture-card"
-        :on-preview="handlePictureCardPreview"
-        :on-remove="handleRemove">
-        <i class="el-icon-plus"></i>
-        </el-upload>
-        <el-dialog :visible.sync="dialogVisible">
-        <img width="100%" :src="dialogImageUrl" alt="">
-        </el-dialog>
+      <el-upload  :action="UploadUrl()"  :on-success="UploadSuccess" :file-list="fileList">
+        <el-button size="small" type="primary" >点击上传</el-button>
+     </el-upload>
+
+ 
     </div>
 </template>
 
@@ -22,16 +17,10 @@
         dialogVisible: false
       };
     },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-        console.log(this.dialogImageUrl)
-        console.log(this.dialogVisible)
-      }
-    }
+    methods:{
+    UploadUrl:function(){
+        return "返回需要上传的地址";     
+    }   
+}  
   }
 </script>

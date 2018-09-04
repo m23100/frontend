@@ -3,75 +3,50 @@
         <div class="call">
             <h2 class="Title">运营客服</h2>
             <div class="four">
-                <div class="kefu">
+                <div class="kefu" v-for="(item,index) in Operate" :key="index">
                     <img src="../assets/img/qq.png" alt="">
-                    <span>客服UU</span>
-                </div>
-                <div class="kefu">
-                    <img src="../assets/img/qq.png" alt="">
-                    <span>客服UU</span>
-                </div>
-                <div class="kefu">
-                    <img src="../assets/img/qq.png" alt="">
-                    <span>客服UU</span>
-                </div>
-                <div class="kefu">
-                    <img src="../assets/img/qq.png" alt="">
-                    <span>客服UU</span>
+                    <span>{{item.qq}}</span>
                 </div>
             </div>
         </div>
          <div class="call">
             <h2 class="Title">商务合作客服</h2>
             <div class="four">
-                <div class="kefu">
+                <div class="kefu" v-for="(item,index) in Business" :key="index">
                     <img src="../assets/img/qq.png" alt="">
-                    <span>客服UU</span>
-                </div>
-                <div class="kefu">
-                    <img src="../assets/img/qq.png" alt="">
-                    <span>客服UU</span>
-                </div>
-                <div class="kefu">
-                    <img src="../assets/img/qq.png" alt="">
-                    <span>客服UU</span>
-                </div>
-                <div class="kefu">
-                    <img src="../assets/img/qq.png" alt="">
-                    <span>客服UU</span>
+                    <span>{{item.qq}}</span>
                 </div>
             </div>
         </div>
          <div class="call">
             <h2 class="Title">技术客服</h2>
             <div class="four">
-                <div class="kefu">
+                <div class="kefu" v-for="(item,index) in technology" :key="index">
                     <img src="../assets/img/qq.png" alt="">
-                    <span>客服UU</span>
-                </div>
-                <div class="kefu">
-                    <img src="../assets/img/qq.png" alt="">
-                    <span>客服UU</span>
-                </div>
-                <div class="kefu">
-                    <img src="../assets/img/qq.png" alt="">
-                    <span>客服UU</span>
-                </div>
-                <div class="kefu">
-                    <img src="../assets/img/qq.png" alt="">
-                    <span>客服UU</span>
+                    <span>{{item.qq}}</span>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import api from '../http/api'
     export default{
         data(){
            return{
-
+              Operate:[],
+              Business:[],
+              technology:[]
            }
-        }           
+        },
+        created(){
+            api.getCustomerService().then(res =>{
+                console.log(res.data)
+                this.Operate=res.data.CustomerService[1]
+                this.Business=res.data.CustomerService[2]
+                this.technology=res.data.CustomerService[3]
+            })
+        }          
         
     }
 </script>

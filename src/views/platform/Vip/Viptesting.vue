@@ -141,24 +141,32 @@
     </div>
 </template>
 <script>
+import api from '../../../http/api'
 export default {
   data() {
       
     return {
-        btnText:"隐藏",
-		isShow:false
+      isShow:false,
+      
     };
+
   },
   methods:{
 			showToggle:function(){
 				this.isShow = !this.isShow
-				// if(this.isShow){
-				// 	this.btnText = "隐藏"
-				// }else{
-				// 	this.btnText = "显示"
-				// }
 			}
-		}
+  },
+  created(){
+      console.log(1)
+      let data={
+        type:0,
+        parpage:1
+      }
+      console.log(2)
+      api.auditing(data).then(res =>{
+          console.log(res.data)
+      })
+  }
 
 };
 </script>

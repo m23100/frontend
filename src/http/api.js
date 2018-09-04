@@ -92,5 +92,10 @@ export default {
     },
     tbinfo(params){
         return fetch('usercenter/tbinfo',params)
+    },
+    //查看审核中的商品数据（平推
+    auditing(params){
+        return fetch('usercenter/auditing',params)
     }
+
 }

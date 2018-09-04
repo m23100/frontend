@@ -8,7 +8,11 @@ const state = {
     // 用户登录信息
     userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
     // 用户数据信息
-    userData: [],
+    userData: {
+        realdata: {},
+        auditdata: {},
+        advertdata: {}
+    },
     userToken: JSON.parse(localStorage.getItem('userToken')) || {},
     AccountFunds:[]
 

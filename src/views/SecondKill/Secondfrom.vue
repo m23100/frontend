@@ -18,27 +18,27 @@
                         <el-dialog :visible.sync="dialogVisible">
                         <img width="100%" :src="dialogImageUrl" alt="">
                         </el-dialog>
-                        <span>要求：图片大小400*400px，干净清晰，突显产品,不能出现牛皮癣、大量文字</span> 
-                    </div>                                       
+                        <span>要求：图片大小400*400px，干净清晰，突显产品,不能出现牛皮癣、大量文字</span>
+                    </div>
                 </div>
                 <div class="component">
                     <h2>标题</h2>
                     <div class="Choice flex">
                        <input class="input" type="text" placeholder="将产品短标题输入或粘贴于此">
                        <span class="span">要求：精简干练，表达重点信息,如品牌、产品名、数量、克重等</span>
-                    </div>                                        
+                    </div>
                 </div>
                 <div class="component">
                     <h2>券后价</h2>
                     <div class="Choice">
                        <input class="Price" type="number"><span class="rmb">元</span>
-                    </div>                                        
+                    </div>
                 </div>
                  <div class="component">
                     <h2>佣金比率</h2>
                     <div class="Choice">
                        <input class="Price" type="number"><span class="rmb">%</span>
-                    </div>                                        
+                    </div>
                 </div>
                  <div class="component">
                     <h2>佣金类型</h2>
@@ -47,14 +47,14 @@
                         <el-radio v-model="radio2" label="2">通用</el-radio>
                         <el-radio v-model="radio2" label="3">定向</el-radio>
                         <el-radio v-model="radio2" label="4">鹊桥</el-radio>
-                    </div>                    
+                    </div>
                 </div>
                  <div class="component">
                     <h2>优惠券总量</h2>
                     <div class="Choice flex">
                        <input class="Price" type="number">
                        <span class="span">要求：优惠券跟商品对应，券名无敏感词，总量不能少于5000张</span>
-                    </div>                                        
+                    </div>
                 </div>
                 <div class="component upwenan">
                     <h2>文案主图</h2>
@@ -67,26 +67,26 @@
                         list-type="picture">
                         <el-button size="small" type="primary">点击上传</el-button>
                         <span>要求：图片大小800*1200px，干净清晰，结构美观，突出产品卖点</span>
-                    </el-upload>                                     
+                    </el-upload>
                 </div>
                  <div class="component">
                     <h2>商品链接</h2>
                     <div class="Choice">
                        <input class="input" type="text" placeholder="将产品对应商品链接输入或粘贴于此">
-                    </div>                                        
+                    </div>
                 </div>
                  <div class="component">
                     <h2>优惠券链接</h2>
                     <div class="Choice">
                        <input class="input" type="text" placeholder="将产品对应优惠券链接输入或粘贴于此">
-                    </div>                                        
+                    </div>
                 </div>
                  <div class="component">
                     <h2>导购文案</h2>
                     <div class="Choice">
-                        <textarea data-v-716a6b68="" name="" id="" cols="30" rows="10" 
+                        <textarea data-v-716a6b68="" name="" id="" cols="30" rows="10"
                         placeholder="要求：20-200字精简文案，突出产品亮点，需求交痛点，为什么值得买！注意不要用空格"></textarea>
-                    </div>                    
+                    </div>
                 </div>
                  <div class="component">
                     <h2>活动类型</h2>
@@ -94,7 +94,7 @@
                         <el-radio v-model="radio1" label="1">无活动</el-radio>
                         <el-radio v-model="radio1" label="2">淘抢购</el-radio>
                         <el-radio v-model="radio1" label="3">聚划算</el-radio>
-                    </div>                    
+                    </div>
                 </div>
                 <div class="bottom">
                     <div class="up">
@@ -105,6 +105,8 @@
     </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex';
+  import api from '../../http/api';
 export default {
   data() {
     return {
@@ -116,7 +118,11 @@ export default {
         dialogVisible: false
     };
   },
-
+  created(){
+    api.saveKillGood().then(res =>{
+      console.log(res)
+    })
+  },
   methods: {
       handleRemove(file, fileList) {
         console.log(file, fileList);
@@ -129,7 +135,7 @@ export default {
       handlePreview(file) {
         console.log(file);
       },
-    
+
       go: function() {
         this.$router.push({
             path: "/Flatfrom"
@@ -194,7 +200,7 @@ export default {
 }
 .Choice>input{
     padding-left: 10px;
-    outline:none; 
+    outline:none;
 }
 .Choice>textarea{
     width: 64.5%;
@@ -202,7 +208,7 @@ export default {
     border: solid 1px #d3d3d3;
     padding: 10px;
     resize: none;
-    outline:none; 
+    outline:none;
 }
 .Choice>span{
     color: #cfcfcf;
@@ -217,7 +223,7 @@ export default {
     width: 467px;
     border: 1px solid #eee;
     border-radius: 10px;
-    outline:none; 
+    outline:none;
 }
 .span{
     line-height: 69px;
@@ -252,7 +258,7 @@ export default {
     width: 30%;
     margin: 0 auto;
 }
-.upone{   
+.upone{
     display: block;
     width: 110px;
     line-height: 38px;
@@ -276,4 +282,4 @@ export default {
     cursor: pointer;
 }
 </style>
-             
+

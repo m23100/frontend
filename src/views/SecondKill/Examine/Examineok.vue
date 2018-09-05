@@ -8,101 +8,33 @@
             <div style=" width: 20%;">操作</div>
         </div>
         <div class="content">
-            <div class="testlist">
+            <div class="testlist" v-for="(item,index) in getKillExaminePass" :key="index">
                <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
+                   <img v-bind:src="item.coverimage" alt=""><span>{{item.goodstitle}}</span>
                </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">09:00</div>
-                <div style=" width: 20%;"><span class="preview">已下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">09:00</div>
-                <div style=" width: 20%;"><span>主动下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">09:00</div>
-                <div style=" width: 20%;"><span class="preview">已下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">09:00</div>
-                <div style=" width: 20%;"><span>主动下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">09:00</div>
-                <div style=" width: 20%;"><span class="preview">已下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">09:00</div>
-                <div style=" width: 20%;"><span>主动下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">09:00</div>
-                <div style=" width: 20%;"><span class="preview">已下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">09:00</div>
-                <div style=" width: 20%;"><span>主动下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">09:00</div>
-                <div style=" width: 20%;"><span class="preview">已下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">09:00</div>
-                <div style=" width: 20%;"><span>主动下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">09:00</div>
+                <div style=" width: 15%;">{{item.startdate}}</div>
+                <div style=" width: 20%;">{{item.startfield}}</div>
                 <div style=" width: 20%;"><span class="preview">已下架</span></div>
             </div>
         </div>
     </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex';
+  import api from '../../../http/api';
 export default {
   data() {
-    return {};
+    return {
+      getKillExaminePass:[]
+    };
+  },
+  created(){
+    //获取提交秒杀通过用户数据
+    api.getKillExaminePass().then(res =>{
+      this.getKillExaminePass = res.data.data;
+      console.log(this.getKillExaminePass);
+    })
+
   }
 };
 </script>
@@ -166,4 +98,8 @@ export default {
     padding-left: 10px;
     cursor: pointer;
 }
+  img{
+    height: 25px;
+    width: 25px;
+  }
 </style>

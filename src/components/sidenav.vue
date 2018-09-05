@@ -47,7 +47,7 @@
               </template>
               <el-menu-item-group>
                 <el-menu-item index="9-1" @click="$router.push({name:'Seconddata'})"><i class="iconfont icon-home-l"></i>秒杀数据</el-menu-item>
-                <el-menu-item index="9-2" @click="$router.push({name:'Testing'})"><i class="iconfont icon-home-k"></i>提交秒杀</el-menu-item>
+                <el-menu-item index="9-2" @click="$router.push({name:'Killcheckout'})"><i class="iconfont icon-home-k"></i>提交秒杀</el-menu-item>
                 <el-menu-item index="9-3" @click="$router.push({name:'Examineing'})"><i class="iconfont icon-home-l"></i>审核中</el-menu-item>
                 <el-menu-item index="9-4" @click="$router.push({name:'Examineok'})"><i class="iconfont icon-home-m"></i>审核通过</el-menu-item>
                 <el-menu-item index="9-5" @click="$router.push({name:'Examineno'})"><i class="iconfont icon-home-m"></i>审核被拒</el-menu-item>
@@ -79,7 +79,7 @@
               <i class="iconfont icon-customerservice_fill"></i>
               <span slot="title">客服帮助</span>
             </el-menu-item>
-           
+
           </el-menu>
         </el-col>
       </el-row>

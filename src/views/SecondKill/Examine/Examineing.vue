@@ -8,101 +8,33 @@
             <div style=" width: 20%;">操作</div>
         </div>
         <div class="content">
-            <div class="testlist">
+            <div class="testlist" v-for="(item,index) in Examine" :key="index">
                <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
+                   <img v-bind:src="item.coverimage" alt=""><span>{{item.goodstitle}}</span>
                </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08</div>
-                <div style=" width: 20%;">立即开始</div>
+                <div style=" width: 15%;">{{item.startdate}}</div>
+                <div style=" width: 20%;">{{item.startfield}}</div>
                 <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
             </div>
         </div>
     </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex';
+  import api from '../../../http/api';
 export default {
   data() {
-    return {};
+    return {
+      Examine:[]
+    };
+  },
+  created(){
+    // 提交审核中
+    api.getExamine().then(res =>{
+      console.log(res)
+      this.Examine = res.data.data;
+      console.log(this.Examine)
+    })
   }
 };
 </script>
@@ -162,4 +94,8 @@ export default {
     padding-left: 10px;
     cursor: pointer;
 }
+  img{
+    height: 20px;
+    width: 20px;
+  }
 </style>

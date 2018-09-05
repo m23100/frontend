@@ -24,7 +24,7 @@ import Sviptestno from '@/views/platform/Svip/Sviptestno'
 //放单end
 
 //秒杀平台
-import Testing from '@/views/SecondKill/Testing'
+import Killcheckout from '@/views/SecondKill/Killcheckout'
 import Seconddata from '@/views/SecondKill/Seconddata'
 import Secondfrom from '@/views/SecondKill/Secondfrom'
 import Examineing from '@/views/SecondKill/Examine/Examineing'
@@ -187,17 +187,20 @@ const router = new Router({
         },
         //放单平台end
 
+
         //秒杀平台
+
         //秒杀单链接检测
         {
-          path:'/testing',
-          name:'Testing',
-          component:Testing,
+          path:'/killcheckout',
+          name:'Killcheckout',
+          component:Killcheckout,
           meta:{
             requireAuth:true
           }
         },
-        //秒杀数据视图
+
+    //秒杀数据视图
         {
           path:'/seconddata',
           name:'Seconddata',
@@ -270,7 +273,7 @@ const router = new Router({
 
 
       ]
-      
+
     },
 
 
@@ -292,4 +295,6 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-export default router
+
+
+export default router;

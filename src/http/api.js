@@ -149,5 +149,12 @@ export default {
     //获取提交秒杀通过用户数据
     getKillExaminePass(params){
       return fetch('kill/getKillExaminePass')
+    },
+
+    getProvince(params){
+        return fetch('region/getProvinceInfo')
+    },
+    getCity(params){
+        return fetch('region/getCity',params)
     }
 }

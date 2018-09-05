@@ -14,7 +14,7 @@
           <div class="centent-left">
               <h2 class="Title">审核动态</h2>
               <div class="dynamic">
-                  <div class="flex left-list" v-for="item in getUserData.auditdata" :key="item">
+                  <div class="flex left-list" v-for="(item,index) in getUserData.auditdata" :key="index">
                       <h1>商品[<span class="blue">{{item.title}}</span>]{{item.state}}</h1>
                       <div>{{item.created_at}}</div>
                   </div>
@@ -25,7 +25,7 @@
               <h2 class="Title">公告</h2>
               <div class="rule">
                   <ul>
-                      <li v-for="item in getUserData.advertdata" :key="item">{{item.title}}</li>
+                      <li v-for="(item,index) in getUserData.advertdata" :key="index">{{item.title}}</li>
                   </ul>
               </div>
           </div>
@@ -33,22 +33,24 @@
   </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex'
+import api from '../http/api'
   
-  export default {
+export default {
     data(){
       return {
+        getUserData: {
+            realdata: {},
+            auditdata: {},
+            advertdata: {}
+        }
       }
     },
     created() {
-        if (this.getUserData.length == 0) {
-            this.$store.dispatch('getUserData')
-        }
-    },
-    computed: {
-      ...mapGetters([
-        'getUserData'
-      ])
+        api.UserData().then(res =>{
+            console.log(res.data)
+            this.getUserData=res.data
+            // console.log(this.Voucher)
+        })
     }
   };
 </script>

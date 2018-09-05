@@ -71,11 +71,11 @@
               <i class="iconfont icon-renzhengshangjia"></i>
               <span slot="title">认证信息</span>
             </el-menu-item>
-            <el-menu-item index="7"  @click="$router.push('demo')">
+            <!-- <el-menu-item index="7"  @click="$router.push('demo')">
               <i class="iconfont icon-iconfont5"></i>
               <span slot="title">账户安全</span>
-            </el-menu-item>
-            <el-menu-item index="8" @click="$router.push('Customer')">
+            </el-menu-item> -->
+            <el-menu-item index="7" @click="$router.push('Customer')">
               <i class="iconfont icon-customerservice_fill"></i>
               <span slot="title">客服帮助</span>
             </el-menu-item>

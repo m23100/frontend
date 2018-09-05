@@ -69,12 +69,6 @@
             this.Record=res.data.data
             // console.log(this.Record)
         })
-    },
-    computed: {
-      ...mapGetters([          
-        'getAccountFunds',
-      ]),     
-      
     }
   };
 </script>

@@ -12,28 +12,34 @@
       <div class="centent">
               <h2 class="Title">认证信息</h2>
             <div class="PersonalData">
-                <div class="name">
-                    <span>昵称</span>
-                    <div>张三</div>
+                <div class="Personalcol">
+                    <div class="Personalspan">昵称</div>
+                    <div class="Personalright">
+                      <el-input v-model="input" placeholder="请输入内容"></el-input>
+                    </div>
                 </div>
-                 <div class="number">
-                    <span>签名</span>
-                    <div>13037851234</div>
+                 <div class="Personalcol">
+                    <div class="Personalspan">签名</div>
+                    <div class="Personalright">
+                      <el-input v-model="input" placeholder="请输入内容"></el-input>
+                    </div>
                 </div>
-                 <div class="income">
-                    <span>城市</span>
-                     <el-select v-model="value" placeholder="请选择">
-                        <el-option
-                        v-for="item in options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                        </el-option>
-                    </el-select>
+                 <div class="Personalcol">
+                    <div class="Personalspan">城市</div>
+                    <div class="Personalright">
+                      <el-cascader
+                        :options="options2"
+                        @active-item-change="handleItemChange"
+                        @change="handleChange"
+                        :props="props"
+                      ></el-cascader>
+                    </div>
                 </div>
-                <div class="channel">
-                    <span>QQ</span>
-                    <div>输入对外公开联系的QQ</div>
+                <div class="Personalcol">
+                    <div class="Personalspan">QQ</div>
+                    <div class="Personalright">
+                      <el-input v-model="input" placeholder="请输入内容"></el-input>
+                    </div>
                 </div>                
             </div>
             <div class="update">
@@ -43,31 +49,53 @@
       </div>
 </template>
 <script>
+ import api from '../http/api' 
  export default {
     data() {
       return {
-        options: [{
-          value: '选项1',
-          label: '北京'
-        }, {
-          value: '选项2',
-          label: '上海'
-        }, {
-          value: '选项3',
-          label: '深圳'
-        }, {
-          value: '选项4',
-          label: '南昌'
-        }, {
-          value: '选项5',
-          label: '杭州'
-        }],
-        value: ''
+        options2: [],
+        value: '',
+        input: '',
+        props:{
+          value:'id',
+          // pid:'id',
+          label:'name',
+          children:'cities'
+        }
       }
+    },
+     methods: {
+      handleItemChange(val) {
+        console.log('active item:', val);
+        api.getCity({'province_id':val[0]}).then(res =>{
+          this.options2.forEach((item,index) => {
+            if(item.id==val[0]){
+              res.data.forEach(element => {
+                this.options2[index].cities.push({label:element.name})
+              })
+            }
+          })
+        
+        })
+      },
+      handleChange(val){
+        console.log('dsfaddddaaaaaassssssssssssssss',val)
+      }
+    },
+    created() {
+        //获取省份信息
+        api.getProvince().then(res =>{
+            //this.options2= res.data
+          res.data.forEach(element => {
+            this.options2.push({label:element.name,cities:[],id:element.id})
+          })
+          console.log(this.options2)
+        })
+       
     }
   };
 </script>
-<style scoped>
+<style>
 .Capital {
 }
 .archives {
@@ -149,28 +177,49 @@
   padding: 5px 25px;
 }
 .PersonalData > div {
-  padding: 12px 0;
+  /* padding: 12px 0; */
 }
 .PersonalData > div > div {
-  padding-left: 12px;
-  color: #394853;
+  /* padding-left: 12px; */
+  /* color: #394853; */
 }
 .PersonalData > div > span {
   font-size: 14px;
   line-height: 36px;
   color: #989898;
 }
-.name{
+.Personalcol{
   display: flex;
   justify-content: space-between;
-  width: 240px;
+  width: 70%;
 }
-.number {
+.el-input{
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.Personalspan{
+  width:50px;
+  font-size: 14px;
+  line-height: 36px;
+  color: #989898;
+}
+.Personalright{
+  width:  100%
+}
+.el-input__inner{
+  height: 35px;
+  line-height: 35px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+/* .number {
   display: flex;
   justify-content: space-between;
   width: 500px;
-}
-.name > div {
+} */
+/* .name > div {
   width: 163px;
   height: 36px;
   line-height: 36px;
@@ -186,22 +235,22 @@
   background-color: #f0f0f0;
   border-radius: 4px;
   text-align: left;
-}
-.income {
+} */
+/* .income {
   display: flex;
   justify-content: space-between;
   width: 238px;
-}
-.income > div {
+} */
+/* .income > div {
   width: 173px;
   height: 36px;
-}
-.channel {
+} */
+/* .channel {
   display: flex;
   justify-content: space-between;
   width: 380px;
-}
-.channel > div {
+} */
+/* .channel > div {
   width: 306px;
   height: 36px;
   line-height: 36px;
@@ -209,7 +258,7 @@
   background-color: #f0f0f0;
   border-radius: 4px;
   text-align: left;
-}
+} */
 .update {
   width: 100%;
 }

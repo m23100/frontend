@@ -58,9 +58,7 @@ export default {
       })
       //获取用户的积分规则
       api.getIntegralRule().then(res =>{
-          console.log(res.data)
           this.rule=res.data
-          console.log(this.rule)
       })
   }
 };

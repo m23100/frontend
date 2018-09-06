@@ -3,21 +3,6 @@
     <div class="archives">
       <h2 class="Title">头像</h2>
       <div class="Photo">
-        <!-- <el-upload
-            :headers="uploadHeaders"
-            :limit="1"
-            action="http://dev.ruomengtv.com/api/user/userEditAvatar"
-            list-type="picture-card"
-            :on-preview="handlePictureCardPreview"
-            :on-remove="handleRemove"
-            :file-list="filelist"
-            :on-success="filesuccess1">
-            <i class="el-icon-plus"></i>
-          </el-upload>
-          <el-dialog :visible.sync="dialogVisible">
-              <img width="100%" :src="dialogImageUrl" alt="">
-          </el-dialog> -->
-          <!-- <span>要求：图片大小400*400px，干净清晰，突显产品,不能出现牛皮癣、大量文字</span>  -->
         <el-upload
           class="avatar-uploader"
           :headers="uploadHeaders"

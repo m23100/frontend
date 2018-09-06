@@ -162,5 +162,8 @@ export default {
     },
     getUserInfo(params){
         return fetch('user/getUserInfo',params)
-    }
+    },
+    getUserAuth(params){
+        return fetch('user/getUserAuth')
+    },
 }

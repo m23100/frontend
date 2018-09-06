@@ -47,9 +47,7 @@ export default {
     },
     created() {
         api.UserData().then(res =>{
-            console.log(res.data)
             this.getUserData=res.data
-            // console.log(this.Voucher)
         })
     }
   };

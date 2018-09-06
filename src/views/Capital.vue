@@ -34,7 +34,6 @@
 <script>
   import { mapGetters } from 'vuex'
   import api from '../http/api'
-  console.log('a')
   export default {
     data(){
       return {

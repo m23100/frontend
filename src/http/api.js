@@ -156,5 +156,11 @@ export default {
     },
     getCity(params){
         return fetch('region/getCity',params)
+    },
+    userEditInfo(params){
+        return fetch('user/userEditInfo',params)
+    },
+    getUserInfo(params){
+        return fetch('user/getUserInfo',params)
     }
 }

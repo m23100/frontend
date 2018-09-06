@@ -1,52 +1,76 @@
 <template>
   <div class="Personal">
-      <div class="archives">
-          <h2 class="Title">头像</h2>
-          <div class="Photo">
-              <div></div>
-              <h2>修改</h2>
-              <span class="baocun">保存</span>
+    <div class="archives">
+      <h2 class="Title">头像</h2>
+      <div class="Photo">
+        <!-- <el-upload
+            :headers="uploadHeaders"
+            :limit="1"
+            action="http://dev.ruomengtv.com/api/user/userEditAvatar"
+            list-type="picture-card"
+            :on-preview="handlePictureCardPreview"
+            :on-remove="handleRemove"
+            :file-list="filelist"
+            :on-success="filesuccess1">
+            <i class="el-icon-plus"></i>
+          </el-upload>
+          <el-dialog :visible.sync="dialogVisible">
+              <img width="100%" :src="dialogImageUrl" alt="">
+          </el-dialog> -->
+          <!-- <span>要求：图片大小400*400px，干净清晰，突显产品,不能出现牛皮癣、大量文字</span>  -->
+        <el-upload
+          class="avatar-uploader"
+          :headers="uploadHeaders"
+          action="http://dev.ruomengtv.com/api/image/imageUpload?type=user"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload">
+          <img v-if="avatar_url" :src="avatar_url" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+      </div>    
+    </div>
+    <div class="centent">
+      <h2 class="Title">基本资料</h2>
+      <div class="PersonalData">
+        <div class="Personalcol">
+          <div class="Personalspan">昵称</div>
+          <div class="Personalright">
+            <el-input v-model="name" placeholder="请输入昵称"></el-input>
+        </div>
+        </div>
+        <div class="Personalcol">
+          <div class="Personalspan">签名</div>
+          <div class="Personalright">
+            <el-input v-model="signature" placeholder="请输入签名"></el-input>
           </div>
-          
-      </div>
-      <div class="centent">
-              <h2 class="Title">认证信息</h2>
-            <div class="PersonalData">
-                <div class="Personalcol">
-                    <div class="Personalspan">昵称</div>
-                    <div class="Personalright">
-                      <el-input v-model="input" placeholder="请输入内容"></el-input>
-                    </div>
-                </div>
-                 <div class="Personalcol">
-                    <div class="Personalspan">签名</div>
-                    <div class="Personalright">
-                      <el-input v-model="input" placeholder="请输入内容"></el-input>
-                    </div>
-                </div>
-                 <div class="Personalcol">
-                    <div class="Personalspan">城市</div>
-                    <div class="Personalright">
-                      <el-cascader
-                        :options="options2"
-                        @active-item-change="handleItemChange"
-                        @change="handleChange"
-                        :props="props"
-                      ></el-cascader>
-                    </div>
-                </div>
-                <div class="Personalcol">
-                    <div class="Personalspan">QQ</div>
-                    <div class="Personalright">
-                      <el-input v-model="input" placeholder="请输入内容"></el-input>
-                    </div>
-                </div>                
-            </div>
-            <div class="update">
-                <span>保存</span>
-            </div>
+        </div>
+        <div class="Personalcol">
+          <div class="Personalspan">城市</div>
+          <div class="Personalright">
+            <el-cascader
+              :options="options2"
+              @active-item-change="handleItemChange"
+              @change="handleChange"
+              :props="props"
+              :value="value"
+              :load-data="loadData"
+              v-model="city_name"
+            ></el-cascader>
           </div>
+        </div>
+        <div class="Personalcol">
+          <div class="Personalspan">QQ</div>
+          <div class="Personalright">
+            <el-input v-model="qq" placeholder="输入对外公开的联系QQ"></el-input>
+          </div>
+        </div>                
       </div>
+      <div class="update">
+        <span @click="save">保存</span>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
  import api from '../http/api' 
@@ -54,48 +78,129 @@
     data() {
       return {
         options2: [],
-        value: '',
+        value: [],
         input: '',
         props:{
-          value:'id',
-          // pid:'id',
-          label:'name',
+          value:'label',
           children:'cities'
-        }
+        },
+        province_id:0,
+        city_id: 0,
+        qq:'',
+        name:'',
+        signature:'',
+        avatar:'',
+        avatar_url:'',
+        city_name:[],
+        uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`}
       }
     },
-     methods: {
+    methods: {
       handleItemChange(val) {
-        console.log('active item:', val);
-        api.getCity({'province_id':val[0]}).then(res =>{
-          this.options2.forEach((item,index) => {
-            if(item.id==val[0]){
+        this.options2.forEach((item,index) => {
+          if(item.label==val[0]){
+            api.getCity({'province_id':item.value}).then(res =>{
               res.data.forEach(element => {
-                this.options2[index].cities.push({label:element.name})
+                this.options2[index].cities.push({label:element.name,value:element.id})
               })
-            }
-          })
-        
+            })
+          }
         })
       },
-      handleChange(val){
-        console.log('dsfaddddaaaaaassssssssssssssss',val)
+      handleChange(val,selectedData){
+        console.log(selectedData)
+        this.options2.forEach((item,index) => {
+          if(item.label==val[0]){
+            this.province_id = item.value
+            item.cities.forEach((citem,cindex)=>{
+              if(citem.label==val[1]){
+                this.city_id = citem.value
+              }
+            })
+          }
+        })
+      },
+      save(){
+        let data={
+          name:this.name,
+          signature:this.signature,
+          province_id:this.province_id,
+          city_id:this.city_id,
+          qq:this.qq,
+          avatar:this.avatar
+        }
+        api.userEditInfo(data).then(res =>{
+            console.log(res.data)
+        })
+      },
+      handleAvatarSuccess(res, file) {
+        this.avatar_url = 'http://image.ruomengtv.com/'+res.data.url
+        this.avatar = res.data.url//URL.createObjectURL(file.raw);
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = (file.type === 'image/jpeg' || file.type==='image/png');
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
+      },
+      loadData(item){
+        console.log(item)
+        console.log(this.city_id)
       }
     },
     created() {
-        //获取省份信息
-        api.getProvince().then(res =>{
-            //this.options2= res.data
-          res.data.forEach(element => {
-            this.options2.push({label:element.name,cities:[],id:element.id})
-          })
-          console.log(this.options2)
+      //获取省份信息
+      api.getProvince().then(res =>{
+        res.data.forEach(element => {
+          this.options2.push({label:element.name,cities:[],value:element.id})
         })
-       
-    }
+      })
+
+      //获取用户信息
+      api.getUserInfo().then(res=>{
+        this.name = res.data.name
+        this.signature = res.data.signature
+        this.signature = res.data.signature
+        this.province_id = res.data.province_id
+        this.city_id = res.data.city_id
+        this.qq = res.data.qq
+        this.avatar = res.data.avatar
+        this.avatar_url = 'http://image.ruomengtv.com/'+res.data.avatar
+        this.city_name = [res.data.province.name,res.data.city.name]
+        if(this.city_id > 0){
+          this.options2.forEach((item,index) => {
+            if(item.value==this.province_id){
+              api.getCity({'province_id':item.value}).then(res =>{
+                res.data.forEach(element => {
+                  this.options2[index].cities.push({label:element.name,value:element.id})
+                })
+              })
+            }
+          })
+        }
+      })
+
+      if(this.city_id > 0){
+        this.options2.forEach((item,index) => {
+          if(item.value==this.province_id){
+            api.getCity({'province_id':item.value}).then(res =>{
+              res.data.forEach(element => {
+                this.options2[index].cities.push({label:element.name,value:element.id})
+              })
+            })
+          }
+        })
+      }
+    },
   };
 </script>
-<style>
+<style scoped>
 .Capital {
 }
 .archives {
@@ -116,18 +221,7 @@
   height: 174px;
   position: relative;
 }
-.Photo > div {
-  width: 144px;
-  height: 144px;
-  border-radius: 50%;
-  background-color: #ebebeb;
-  float: left;
-}
-.Photo > h2 {
-  float: left;
-  margin: 57px 0 0 50px;
-  color: #43b5f9;
-}
+
 .baocun {
   position: absolute;
   bottom: 0;
@@ -189,6 +283,7 @@
   color: #989898;
 }
 .Personalcol{
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   width: 70%;
@@ -274,4 +369,27 @@
   float: right;
   text-align: center;
 }
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
 </style>

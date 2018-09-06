@@ -31,7 +31,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import api from '../http/api'
-console.log('积分')
+// console.log('积分')
 export default {
   data() {
     return {

@@ -47,10 +47,10 @@
           title="上传放单权限资格申请资料"
           :visible.sync="centerDialogVisible" width="36%" center>
           <div class="from">
-            <div class="flex"><span>真实姓名</span> <input type="text" v-model="name" placeholder="填写真实姓名"></div>
-            <div class="flex"><span>身份证号</span> <input type="text" v-model="name" placeholder="填写身份证号码"></div>
-            <div class="flex"><span>手机号</span> <input type="text" v-model="name" placeholder="填写手机号"></div>
-            <div class="flex2">
+            <div class="flex"><span>真实姓名</span> <input type="text" v-model="real_name" placeholder="填写真实姓名"></div>
+            <div class="flex"><span>身份证号</span> <input type="text" v-model="id_number" placeholder="填写身份证号码"></div>
+            <div class="flex"><span>手机号</span> <input type="text" v-model="phone" placeholder="填写手机号"></div>
+            <div class="flex2 ">
                 <span>上传身份证</span>
                  <el-upload
                     :headers="uploadHeaders"
@@ -60,8 +60,15 @@
                     :before-upload="beforeAvatarUpload"
                     :on-preview="handlePictureCardPreview"
                     :on-exceed="handleExceed"
-                    :on-remove="handleRemove">
-                    <i class="el-icon-plus"></i>
+                    :on-remove="handleRemove"
+                    :on-success="IDhandleSuccess"
+                    >
+                    <div class="image_show_flex">
+                           <img v-if="id_image_just" :src="id_image_just" class="image_show_id">
+                    <img v-if="id_image_back" :src="id_image_back"   class="image_left">
+                    <i v-else class="el-icon-plus "></i>
+                    </div>
+               
                     <div class="el-upload__tip" slot="tip">上传身份证正反面</div>
                     </el-upload>
                     <el-dialog :visible.sync="dialogVisible">
@@ -69,9 +76,9 @@
                 </el-dialog>
             </div>
             <div class="flex2"><span>收入水平</span>
-              <el-select v-model="value" placeholder="请选择">
+              <el-select v-model="user_income" placeholder="请选择">
                 <el-option
-                  v-for="item in options"
+                  v-for="item in options2"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
@@ -84,17 +91,19 @@
                     action="http://dev.ruomengtv.com/api/image/imageUpload?type=auth"
                     list-type="picture-card"
                     :before-upload="beforeAvatarUpload"
-                    :on-preview="handlePictureCardPreview"
+                    :on-preview="handlePictureCardPreviewIncome"
                     :limit="1"
                     :on-exceed="handleExceed"
-                    :on-remove="handleRemove">
-                    <i class="el-icon-plus"></i>
+                    :on-remove="IncomehandleRemove"
+                     :on-success="IncomehandleSuccess">
+                   <img v-if="income_prove" :src="income_prove" class="image_show" >
+                    <i v-else class="el-icon-plus "></i>
                     </el-upload>
-                    <el-dialog :visible.sync="dialogVisible">
-                    <img width="100%" :src="dialogImageUrl" alt="">
+                    <el-dialog :visible.sync="incomeProveVisible">
+                    <img width="100%" :src="income_prove" alt="">
                 </el-dialog>
             </div>
-            <div class="flex1"><span>自有渠道</span> <input type="text" v-model="name" placeholder="填写自有渠道信息">
+            <div class="flex1"><span>自有渠道</span> <input type="text" v-model="channel_info" placeholder="填写自有渠道信息">
             </div>
             <div class="flex2">
                 <span>上传图片</span>
@@ -104,77 +113,240 @@
                     list-type="picture-card"
                     :limit="1"
                     :before-upload="beforeAvatarUpload"
-                    :on-preview="handlePictureCardPreview"
+                    :on-preview="handlePictureCardPreviewChannel"
                     :on-exceed="handleExceed"
-                    :on-remove="handleRemove">
-                    <i class="el-icon-plus"></i>
+                    :on-remove="ChannelhandleRemove"
+                     :on-success="ChannelhandleSuccess">
+                    <img v-if="channel_prove" :src="channel_prove" class="image_show">
+                    <i v-else class="el-icon-plus "></i>
                     </el-upload>
-                    <el-dialog :visible.sync="dialogVisible">
-                    <img width="100%" :src="dialogImageUrl" alt="">
+                    <el-dialog :visible.sync="channelProveVisible">
+                    <img width="100%" :src="channel_prove" alt="">
                 </el-dialog>
             </div>
           </div>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="centerDialogVisible = false" type="primary">提交</el-button>
+            <el-button @click="saveUserAuth" type="primary">提交</el-button>
             <el-button @click="centerDialogVisible = false">取消</el-button>
           </span>
         </el-dialog>
     </div>
 </template>
 <script>
-import api from '../http/api'
+import api from "../http/api";
 export default {
   data() {
     return {
-      dialogImageUrl: '',
+      imgage_http_url: "http://image.ruomengtv.com/",
+      dialogImageUrl: "", //身份证正反面
       dialogVisible: false,
       centerDialogVisible: false,
+      incomeProveVisible: false,
+      channelProveVisible: false,
       state: 0,
       name: "",
       options: [],
       value: "",
-      uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`}
-    }
+      uploadHeaders: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      },
+      real_name: "",
+      id_number: "",
+      id_image_just: "",
+      id_image_back: "",
+      user_income: "",
+      income_prove: "",
+      phone: "",
+      channel_info: "",
+      channel_prove: "",
+      options2: []
+    };
   },
-  
+
   methods: {
-     handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-      },
+    handleAvatarSuccess(res, file) {
+      console.log("handleAvatarSuccess");
+      console.log(res);
+      console.log(file);
+    },
+    handleRemove(file, fileList) {
+      if (file.response.data.url == this.id_image_just) {
+        this.id_image_just = "";
+      } else if (file.response.data.url == this.id_image_back) {
+        this.id_image_back = "";
+      }
+    },
+    IncomehandleRemove(file, fileList) {
+      this.income_prove = "";
+    },
+    ChannelhandleRemove(file, fileList) {
+      this.channel_prove = "";
+    },
+    IDhandleSuccess(response, file, fileList) {
+      if (this.id_image_just == "" && this.id_image_back == "") {
+        this.id_image_just = response.data.url;
+      } else if (this.id_image_back == "") {
+        this.id_image_back = response.data.url;
+      } else if (this.id_image_just == "") {
+        this.id_image_just = response.data.url;
+      }
+    },
+    IncomehandleSuccess(response, file, fileList) {
+      this.income_prove = response.data.url;
+    },
+    ChannelhandleSuccess(response, file, fileList) {
+      this.channel_prove = response.data.url;
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    handlePictureCardPreviewIncome(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    handlePictureCardPreviewChannel(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+
+    handleExceed(files, fileList) {
+      this.$message.warning(
+        `当前限制选择 3 个文件，本次选择了 ${
+          files.length
+        } 个文件，共选择了 ${files.length + fileList.length} 个文件`
+      );
+    },
     //   handleAvatarSuccess(res, file) {
     //     this.imageUrl = URL.createObjectURL(file.raw);
     //   },
-      beforeAvatarUpload(file) {
-        const isJPG = (file.type === 'image/jpeg' || file.type==='image/png');
-        const isLt2M = file.size / 1024 / 1024 < 2;
- 
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg" || file.type === "image/png";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
       }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    },
+    showErrorMessage(messageContent) {
+      this.$message({
+        showClose: true,
+        message: messageContent,
+        type: "error"
+      });
+    },
+    //验证表单信息
+    fromValidate() {
+      let nameValidata = /^([\u4e00-\u9fa5]{1,20}|[a-zA-Z\.\s]{1,20})$/;
+      if (!nameValidata.test(this.real_name)) {
+        return { status: false, message: "真实姓名为空或填写有误!" };
+      }
+      //let IdNumberValidate=/^\d{18}$/
+      if (!/^\d{18}$/.test(this.id_number)) {
+        return { status: false, message: "身份证号填写有误!" };
+      }
+      let phoneValidate = /^1[34578]{1}\d{9}$/;
+      if (!phoneValidate.test(this.phone)) {
+        return { status: false, message: "用户手机号填写有误!" };
+      }
+      if (!this.id_image_just) {
+        return { status: false, message: "身份证正面照片未进行上传!" };
+      }
+      if (!this.id_image_back) {
+        return { status: false, message: "身份证反面照片未进行上传!" };
+      }
+      if (!this.user_income) {
+        return { status: false, message: "收入信息未进行选择!" };
+      }
+      if (!this.income_prove) {
+        return { status: false, message: "收入照片未进行上传!" };
+      }
+      if (!this.channel_info) {
+        return { status: false, message: "渠道信息未进行填写!" };
+      }
+      if (!this.channel_prove) {
+        return { status: false, message: "渠道照片未进行上传!" };
+      }
+      return { status: true, message: "" };
+    },
+    saveUserAuth() {
+      console.log("00000");
+      console.log(this.id_image_just);
+      let id_image_just_ = this.id_image_just.replace(
+        "http://image.ruomengtv.com/",
+        ""
+      );
+      let id_image_back_ = this.id_image_back.replace(
+        "http://image.ruomengtv.com/",
+        ""
+      );
+      let income_prove_ = this.income_prove.replace(
+        "http://image.ruomengtv.com/",
+        ""
+      );
+      let  channel_prove_ = this.channel_prove.replace(
+        "http://image.ruomengtv.com/",
+        ""
+      );
+      let validate = this.fromValidate();
+      if (!validate.status) {
+        this.showErrorMessage(validate.message);
+        return false;
+      }
+      let fromdata = {
+        real_name: this.real_name,
+        id_number: this.id_number,
+        id_image_just: id_image_just_,
+        id_image_back: id_image_back_,
+        user_income: this.user_income,
+        income_prove: income_prove_,
+        phone: this.phone,
+        channel_info: this.channel_info,
+        channel_prove: channel_prove_
+      };
+      console.log("9999999");
+      console.log(fromdata);
+
+      api.saveUserAuth(fromdata).then(res => {
+        console.log("请求后的数据!");
+        console.log(res);
+        this.centerDialogVisible = false;
+      });
+     
+    }
   },
 
   created() {
-    api.getUserAuth().then(res =>{
-      this.state = res.data.isAuth
-      res.data.userIncomeList.forEach((element,index) => {
-        this.options2.push({label:element,value:index})
-      })
-    })
+    api.getUserAuth().then(res => {
+      this.state = -1;
+      // this.state = res.data.isAuth;
+      res.data.userIncomeList.forEach((element, index) => {
+        this.options2.push({
+          label: element.income,
+          value: element.income_type
+        });
+      });
+      if (res.data.isAuth >= 0) {
+        let userAuthInfo = res.data.userAuthInfo;
+        this.real_name = userAuthInfo.real_name;
+        this.id_number = userAuthInfo.id_number;
+        this.id_image_just = this.imgage_http_url + userAuthInfo.id_image_just;
+        this.id_image_back = this.imgage_http_url + userAuthInfo.id_image_back;
+        this.user_income = userAuthInfo.user_income;
+        this.income_prove = this.imgage_http_url + userAuthInfo.income_prove;
+        this.phone = userAuthInfo.phone;
+        this.channel_info = userAuthInfo.channel_info;
+        this.channel_prove = this.imgage_http_url + userAuthInfo.channel_prove;
+      }
+      console.log("-------------999-");
+      console.log(this.income_prove);
+    });
   }
-  
-}
+};
 </script>
 <style scoped>
 .Authentication {
@@ -351,5 +523,26 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 84%;
+}
+.image_show {
+  width: 115px;
+  height: 115px;
+  display: block;
+}
+.image_show_id {
+  width: 113px;
+  height: 112px;
+  display: block;
+}
+.image_show_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 230px;
+}
+.image_left {
+  margin-left: 10px;
+  width: 113px;
+  height: 112px;
 }
 </style>

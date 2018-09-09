@@ -166,4 +166,7 @@ export default {
     getUserAuth(params){
         return fetch('user/getUserAuth')
     },
+    saveUserAuth(params){
+        return fetch('user/addUserAuth',params)
+    },
 }

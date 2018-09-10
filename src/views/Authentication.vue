@@ -4,29 +4,34 @@
             <img src="../assets/img/vip.png" alt="">
         </div>
         <!-- 未认证 -->
-        <div class="centent" v-if="state===-1">
+        <div class="centent" v-if="state==-1">
             <h2 class="Title">认证信息</h2>
              <div class="xx"><img src="../assets/img/renzhenxiong.png" alt=""></div>
             <h3>当前处于未认证状态</h3>
             <div class="xxx"><el-button type="text" class="test" @click="centerDialogVisible = true">去认证</el-button></div> 
         </div>
+         <div class="centent" v-if="state==0">
+            <h2 class="Title">认证信息</h2>
+             <div class="xx"><img src="../assets/img/imgtwo.png" alt=""></div>
+            <h3>当前处于认证审核中</h3>
+        </div>
         <!-- 认证成功后 -->
-        <div class="centent" v-else-if="state==='1'">
+        <div class="centent" v-else-if="state==1">
             <h2 class="Title">认证信息</h2>
             <div class="PersonalData">
                 <div class="name">
                     <span>真实姓名</span>
-                    <div>张三</div>
+                    <div>{{real_name}}</div>
                 </div>
                  <div class="number" >
                     <span>身份证号</span>
-                    <div>13037851234"</div>
+                    <div>{{id_number}}</div>
                 </div>
                  <div class="income" >
                     <span>收入水平</span>
-                   <el-select v-model="value" placeholder="请选择">
+                   <el-select v-model="user_income" placeholder="请选择">
                         <el-option
-                        v-for="item in options"
+                        v-for="item in options2"
                         :key="item.value"
                         :label="item.label"
                         :value="item.value">
@@ -35,7 +40,7 @@
                 </div>
                 <div class="channel">
                     <span>自有渠道</span>
-                    <div> 5个采集群，10个2000人用户群，一个CMS站"</div>
+                    <div> {{channel_info}}</div>
                 </div>                
             </div>
             <div class="update">
@@ -179,16 +184,24 @@ export default {
       this.fileList2 = fileList;
     },
     IDhandleSuccess(response, file, fileList) {
-      this.fileList.push({
-        name: "image",
-        url: this.imgage_http_url + response.data.url
-      });
+      if (this.fileList.length == 0) {
+        this.fileList = [
+          {
+            name: "image",
+            url: this.imgage_http_url + response.data.url
+          }
+        ];
+      } else {
+        this.fileList.push({
+          name: "image",
+          url: this.imgage_http_url + response.data.url
+        });
+      }
     },
     IncomehandleSuccess(response, file, fileList) {
       this.fileList1 = [
         { name: "image", url: this.imgage_http_url + response.data.url }
       ];
-      console.log(this.fileList1);
     },
     ChannelhandleSuccess(response, file, fileList) {
       this.fileList2 = [
@@ -320,8 +333,8 @@ export default {
 
   created() {
     api.getUserAuth().then(res => {
-      this.state = -1;
-      //this.state = res.data.isAuth;
+      //this.state = 1;
+      this.state = res.data.isAuth;
       res.data.userIncomeList.forEach((element, index) => {
         this.options2.push({
           label: element.income,

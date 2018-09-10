@@ -62,13 +62,9 @@
                     :on-exceed="handleExceed"
                     :on-remove="handleRemove"
                     :on-success="IDhandleSuccess"
+                    :file-list="fileList"
                     >
-                    <div class="image_show_flex">
-                           <img v-if="id_image_just" :src="id_image_just" class="image_show_id">
-                    <img v-if="id_image_back" :src="id_image_back"   class="image_left">
-                    <i v-else class="el-icon-plus "></i>
-                    </div>
-               
+                    <i class="el-icon-plus "></i>
                     <div class="el-upload__tip" slot="tip">上传身份证正反面</div>
                     </el-upload>
                     <el-dialog :visible.sync="dialogVisible">
@@ -93,11 +89,11 @@
                     :before-upload="beforeAvatarUpload"
                     :on-preview="handlePictureCardPreviewIncome"
                     :limit="1"
+                    :file-list="fileList1"
                     :on-exceed="handleExceed"
                     :on-remove="IncomehandleRemove"
                      :on-success="IncomehandleSuccess">
-                   <img v-if="income_prove" :src="income_prove" class="image_show" >
-                    <i v-else class="el-icon-plus "></i>
+                    <i  class="el-icon-plus "></i>
                     </el-upload>
                     <el-dialog :visible.sync="incomeProveVisible">
                     <img width="100%" :src="income_prove" alt="">
@@ -116,9 +112,9 @@
                     :on-preview="handlePictureCardPreviewChannel"
                     :on-exceed="handleExceed"
                     :on-remove="ChannelhandleRemove"
+                     :file-list="fileList2"
                      :on-success="ChannelhandleSuccess">
-                    <img v-if="channel_prove" :src="channel_prove" class="image_show">
-                    <i v-else class="el-icon-plus "></i>
+                    <i  class="el-icon-plus "></i>
                     </el-upload>
                     <el-dialog :visible.sync="channelProveVisible">
                     <img width="100%" :src="channel_prove" alt="">
@@ -137,6 +133,9 @@ import api from "../http/api";
 export default {
   data() {
     return {
+      fileList: [],
+      fileList2: [],
+      fileList1: [],
       imgage_http_url: "http://image.ruomengtv.com/",
       dialogImageUrl: "", //身份证正反面
       dialogVisible: false,
@@ -170,32 +169,31 @@ export default {
       console.log(file);
     },
     handleRemove(file, fileList) {
-      if (file.response.data.url == this.id_image_just) {
-        this.id_image_just = "";
-      } else if (file.response.data.url == this.id_image_back) {
-        this.id_image_back = "";
-      }
+      //console.log(fileList)
+      this.fileList = fileList;
     },
     IncomehandleRemove(file, fileList) {
-      this.income_prove = "";
+      this.fileList1 = fileList;
     },
     ChannelhandleRemove(file, fileList) {
-      this.channel_prove = "";
+      this.fileList2 = fileList;
     },
     IDhandleSuccess(response, file, fileList) {
-      if (this.id_image_just == "" && this.id_image_back == "") {
-        this.id_image_just = response.data.url;
-      } else if (this.id_image_back == "") {
-        this.id_image_back = response.data.url;
-      } else if (this.id_image_just == "") {
-        this.id_image_just = response.data.url;
-      }
+      this.fileList.push({
+        name: "image",
+        url: this.imgage_http_url + response.data.url
+      });
     },
     IncomehandleSuccess(response, file, fileList) {
-      this.income_prove = response.data.url;
+      this.fileList1 = [
+        { name: "image", url: this.imgage_http_url + response.data.url }
+      ];
+      console.log(this.fileList1);
     },
     ChannelhandleSuccess(response, file, fileList) {
-      this.channel_prove = response.data.url;
+      this.fileList2 = [
+        { name: "image", url: this.imgage_http_url + response.data.url }
+      ];
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
@@ -253,50 +251,51 @@ export default {
       if (!phoneValidate.test(this.phone)) {
         return { status: false, message: "用户手机号填写有误!" };
       }
-      if (!this.id_image_just) {
-        return { status: false, message: "身份证正面照片未进行上传!" };
-      }
-      if (!this.id_image_back) {
-        return { status: false, message: "身份证反面照片未进行上传!" };
+      if (this.fileList.length != 2) {
+        return { status: false, message: "身份证正反面照片未进行上传!" };
       }
       if (!this.user_income) {
         return { status: false, message: "收入信息未进行选择!" };
       }
-      if (!this.income_prove) {
+      if (this.fileList1.length != 1) {
         return { status: false, message: "收入照片未进行上传!" };
       }
       if (!this.channel_info) {
         return { status: false, message: "渠道信息未进行填写!" };
       }
-      if (!this.channel_prove) {
+      if (this.fileList2.length != 1) {
         return { status: false, message: "渠道照片未进行上传!" };
       }
       return { status: true, message: "" };
     },
     saveUserAuth() {
-      console.log("00000");
-      console.log(this.id_image_just);
-      let id_image_just_ = this.id_image_just.replace(
-        "http://image.ruomengtv.com/",
-        ""
-      );
-      let id_image_back_ = this.id_image_back.replace(
-        "http://image.ruomengtv.com/",
-        ""
-      );
-      let income_prove_ = this.income_prove.replace(
-        "http://image.ruomengtv.com/",
-        ""
-      );
-      let  channel_prove_ = this.channel_prove.replace(
-        "http://image.ruomengtv.com/",
-        ""
-      );
       let validate = this.fromValidate();
       if (!validate.status) {
         this.showErrorMessage(validate.message);
         return false;
       }
+      console.log(this.fileList2[0].url);
+      console.log(this.fileList1);
+      console.log(this.fileList);
+      console.log("000---00");
+      //return false;
+      console.log(this.id_image_just);
+      let id_image_just_ = this.fileList[0].url.replace(
+        "http://image.ruomengtv.com/",
+        ""
+      );
+      let id_image_back_ = this.fileList[1].url.replace(
+        "http://image.ruomengtv.com/",
+        ""
+      );
+      let income_prove_ = this.fileList1[0].url.replace(
+        "http://image.ruomengtv.com/",
+        ""
+      );
+      let channel_prove_ = this.fileList2[0].url.replace(
+        "http://image.ruomengtv.com/",
+        ""
+      );
       let fromdata = {
         real_name: this.real_name,
         id_number: this.id_number,
@@ -316,14 +315,13 @@ export default {
         console.log(res);
         this.centerDialogVisible = false;
       });
-     
     }
   },
 
   created() {
     api.getUserAuth().then(res => {
       this.state = -1;
-      // this.state = res.data.isAuth;
+      //this.state = res.data.isAuth;
       res.data.userIncomeList.forEach((element, index) => {
         this.options2.push({
           label: element.income,
@@ -334,13 +332,31 @@ export default {
         let userAuthInfo = res.data.userAuthInfo;
         this.real_name = userAuthInfo.real_name;
         this.id_number = userAuthInfo.id_number;
-        this.id_image_just = this.imgage_http_url + userAuthInfo.id_image_just;
-        this.id_image_back = this.imgage_http_url + userAuthInfo.id_image_back;
+        this.fileList = [
+          {
+            name: "image",
+            url: this.imgage_http_url + userAuthInfo.id_image_just
+          },
+          {
+            name: "image",
+            url: this.imgage_http_url + userAuthInfo.id_image_back
+          }
+        ];
+        this.fileList1 = [
+          {
+            name: "image",
+            url: this.imgage_http_url + userAuthInfo.income_prove
+          }
+        ];
+        this.fileList2 = [
+          {
+            name: "image",
+            url: this.imgage_http_url + userAuthInfo.channel_prove
+          }
+        ];
         this.user_income = userAuthInfo.user_income;
-        this.income_prove = this.imgage_http_url + userAuthInfo.income_prove;
         this.phone = userAuthInfo.phone;
         this.channel_info = userAuthInfo.channel_info;
-        this.channel_prove = this.imgage_http_url + userAuthInfo.channel_prove;
       }
       console.log("-------------999-");
       console.log(this.income_prove);

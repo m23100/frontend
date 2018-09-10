@@ -333,8 +333,8 @@ export default {
 
   created() {
     api.getUserAuth().then(res => {
-      //this.state = 1;
-      this.state = res.data.isAuth;
+      this.state = -1;
+      //this.state = res.data.isAuth;
       res.data.userIncomeList.forEach((element, index) => {
         this.options2.push({
           label: element.income,

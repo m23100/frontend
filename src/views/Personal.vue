@@ -18,41 +18,32 @@
     <div class="centent">
       <h2 class="Title">基本资料</h2>
       <div class="PersonalData">
-        <div class="Personalcol">
-          <div class="Personalspan">昵称</div>
-          <div class="Personalright">
-            <el-input v-model="name" placeholder="请输入昵称"></el-input>
-        </div>
-        </div>
-        <div class="Personalcol">
-          <div class="Personalspan">签名</div>
-          <div class="Personalright">
-            <el-input v-model="signature" placeholder="请输入签名"></el-input>
-          </div>
-        </div>
-        <div class="Personalcol">
-          <div class="Personalspan">城市</div>
-          <div class="Personalright">
+        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="110px" class="demo-ruleForm">
+          <el-form-item label="昵称" prop="name">
+            <el-input v-model="ruleForm.name" placeholder="请输入昵称"></el-input>
+          </el-form-item>
+          <el-form-item label="签名" prop="signature">
+            <el-input v-model="ruleForm.signature" placeholder="请输入签名"></el-input>
+          </el-form-item>
+          <el-form-item label="城市" prop="options2" class="is-required">
             <el-cascader
               :options="options2"
               @active-item-change="handleItemChange"
               @change="handleChange"
               :props="props"
               :value="value"
-              :load-data="loadData"
               v-model="city_name"
             ></el-cascader>
-          </div>
-        </div>
-        <div class="Personalcol">
-          <div class="Personalspan">QQ</div>
-          <div class="Personalright">
-            <el-input v-model="qq" placeholder="输入对外公开的联系QQ"></el-input>
-          </div>
-        </div>                
-      </div>
-      <div class="update">
-        <span @click="save">保存</span>
+          </el-form-item>
+          <el-form-item label="QQ" prop="qq">
+            <el-input v-model="ruleForm.qq" placeholder="请输入对外公开的联系QQ"></el-input>
+          </el-form-item>
+
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
+            <el-button @click="resetForm('ruleForm')">重置</el-button>
+          </el-form-item>
+        </el-form>              
       </div>
     </div>
   </div>
@@ -71,13 +62,27 @@
         },
         province_id:0,
         city_id: 0,
-        qq:'',
-        name:'',
-        signature:'',
         avatar:'',
         avatar_url:'',
         city_name:[],
-        uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+        uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+        ruleForm:{
+          name: '',
+          signature:'',
+          qq:'',
+          city:[]
+        },
+        rules:{
+          name: [
+            { required: true, message: '请输入昵称', trigger: 'blur' },
+          ],
+          signature: [
+            { required: true, message: '请输入签名', trigger: 'blur' },
+          ],
+          qq: [
+            { required: true, message: '请输入QQ', trigger: 'blur' },
+          ],
+        }
       }
     },
     methods: {
@@ -105,18 +110,39 @@
           }
         })
       },
-      save(){
-        let data={
-          name:this.name,
-          signature:this.signature,
-          province_id:this.province_id,
-          city_id:this.city_id,
-          qq:this.qq,
-          avatar:this.avatar
-        }
-        api.userEditInfo(data).then(res =>{
-            console.log(res.data)
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if(this.city_id<1|| this.province_id<1){
+            this.$refs.ruleForm.fields[2].error="请选择城市"
+            return false
+          }
+          if (valid) {
+            if(this.city_id<1|| this.province_id<1){
+              this.$refs.ruleForm.fields[2].error="请选择城市"
+              return false
+            }
+            let data={
+              name:this.ruleForm.name,
+              signature:this.ruleForm.signature,
+              province_id:this.province_id,
+              city_id:this.city_id,
+              qq:this.ruleForm.qq,
+              avatar:this.avatar
+            }
+            api.userEditInfo(data).then(res =>{
+              if(res.code==0){
+                this.$message.success('提交成功!')
+              }else{
+                this.$message.error('提交失败')
+              }
+            })
+          } else {
+            return false;
+          }
         })
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       },
       handleAvatarSuccess(res, file) {
         this.avatar_url = 'http://image.ruomengtv.com/'+res.data.url
@@ -134,10 +160,6 @@
         }
         return isJPG && isLt2M;
       },
-      loadData(item){
-        console.log(item)
-        console.log(this.city_id)
-      }
     },
     created() {
       //获取省份信息
@@ -149,12 +171,11 @@
 
       //获取用户信息
       api.getUserInfo().then(res=>{
-        this.name = res.data.name
-        this.signature = res.data.signature
-        this.signature = res.data.signature
+        this.ruleForm.name = res.data.name
+        this.ruleForm.signature = res.data.signature
         this.province_id = res.data.province_id
         this.city_id = res.data.city_id
-        this.qq = res.data.qq
+        this.ruleForm.qq = res.data.qq
         this.avatar = res.data.avatar
         this.avatar_url = 'http://image.ruomengtv.com/'+res.data.avatar
         this.city_name = [res.data.province.name,res.data.city.name]
@@ -186,12 +207,7 @@
   };
 </script>
 <style scoped>
-.Capital {
-}
-.archives {
-  padding: 20px 10px;
-  background-color: #fff;
-}
+
 .Title {
   font-size: 18px;
   color: #000;
@@ -207,20 +223,6 @@
   position: relative;
 }
 
-.baocun {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 70px;
-  height: 36px;
-  background-color: #49a6f7;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #fff;
-  cursor: pointer;
-  text-align: center;
-  line-height: 36px;
-}
 /* lk */
 .centent {
   background-color: #fff;
@@ -228,56 +230,13 @@
   height: 330px;
   border-top: 1px solid #eee;
 }
-.xx {
-  text-align: center;
-}
-.centent h3 {
-  color: #a0a0a0;
-  font-size: 14px;
-  text-align: center;
-  margin: 20px 0;
-}
-.xxx {
-  text-align: center;
-  margin: 0 auto;
-}
-.test {
-  width: 80px;
-  height: 36px;
-  background-color: #49a6f7;
-  border-radius: 4px;
-  border-radius: 8px;
-  font-size: 14px;
-  /* line-height: 36px; */
-  color: #fff;
-  cursor: pointer;
-}
-.PersonalData {
-  padding: 5px 25px;
-}
-.PersonalData > div {
-  /* padding: 12px 0; */
-}
-.PersonalData > div > div {
-  /* padding-left: 12px; */
-  /* color: #394853; */
-}
-.PersonalData > div > span {
-  font-size: 14px;
-  line-height: 36px;
-  color: #989898;
-}
-.Personalcol{
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  width: 70%;
-}
 .el-input{
   background-color: #f0f0f0;
   border-radius: 4px;
 }
-
+.archives{
+  background-color: #fff;
+}
 .Personalspan{
   width:50px;
   font-size: 14px;
@@ -294,66 +253,6 @@
   border-radius: 4px;
 }
 
-/* .number {
-  display: flex;
-  justify-content: space-between;
-  width: 500px;
-} */
-/* .name > div {
-  width: 163px;
-  height: 36px;
-  line-height: 36px;
-  background-color: #f0f0f0;
-  border-radius: 4px;
-  text-align: left;
-}
-.number > div {
-  width: 423px;
-  height: 36px;
-  line-height: 36px;
-  color: #394853;
-  background-color: #f0f0f0;
-  border-radius: 4px;
-  text-align: left;
-} */
-/* .income {
-  display: flex;
-  justify-content: space-between;
-  width: 238px;
-} */
-/* .income > div {
-  width: 173px;
-  height: 36px;
-} */
-/* .channel {
-  display: flex;
-  justify-content: space-between;
-  width: 380px;
-} */
-/* .channel > div {
-  width: 306px;
-  height: 36px;
-  line-height: 36px;
-  color: #394853;
-  background-color: #f0f0f0;
-  border-radius: 4px;
-  text-align: left;
-} */
-.update {
-  width: 100%;
-}
-.update > span {
-  width: 88px;
-  height: 36px;
-  background-color: #49a6f7;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 36px;
-  color: #fff;
-  cursor: pointer;
-  float: right;
-  text-align: center;
-}
 .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;

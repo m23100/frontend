@@ -1,101 +1,182 @@
 <template>
     <!-- 秒杀单审核中 -->
-    <div class="Examineing">
-        <div class="list-head">
-            <div style=" width: 50%;text-align: left;">商品名</div>
-            <div style=" width: 15%;">秒杀日期</div>
-            <div style=" width: 20%;">秒杀场次</div>
-            <div style=" width: 20%;">操作</div>
-        </div>
-        <div class="content">
-            <div class="testlist" v-for="(item,index) in Examine" :key="index">
-               <div class="commodity">
-                   <img v-bind:src="item.coverimage" alt=""><span>{{item.goodstitle}}</span>
-               </div>
-                <div style=" width: 15%;">{{item.startdate}}</div>
-                <div style=" width: 20%;">{{item.startfield}}</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
+  <div class="Examineing">
+    <el-table
+      :data="list"
+      highlight-current-row
+      style="width: 100%"> 
+      <el-table-column
+        prop="goodstitle"
+        label="商品标题"
+        width="280">
+      </el-table-column>
+      <el-table-column
+        label="文案信息">
+        <template slot-scope="scope">
+          <el-popover
+            placement="right"
+            trigger="click"
+            v-model="scope.row.visible">
+            <div class="item-content">
+                <div class="item">
+                  <div class="copys">
+                    <div class="photo"><img src="http://temp.im/220x280" height="280" alt="商品"></div>
+                    <div class="descr">
+                      全网最低！全网最低！<br>
+                      【火爆ins】高腰韩版九分缩脚裤！<br>
+                      【原价39.9元】券后【19.9元】包邮<br>
+                      领券：https://uland.taobao.com/quan/detail?sellerId=3857273069&amp;activityId=17b37d22e22a444caa809fedcc80d9e6<br>
+                      抢购：https://detail.tmall.com/item.htm?id=568895965597<br>
+                      【全网最低价】黑色帅气自信，粉色仙女本尊！超多颜色，任卿翻牌！夏天清凉标配~超多size，各种身材轻松驾驭！【赠运费险】
+                    </div>
+                  </div>
+                  <div class="mask showmore hover">
+                    <div class="cover">
+                      <a href="#"><img src="http://temp.im/260x260" alt="产品名"></a>
+                      <div class="btns">
+                        <span>加入选品</span><span class="doCopy">点击复制</span>
+                      </div>
+                    </div>
+                    <div class="content">
+                      <h1 class="title">【三只松鼠旗舰店】夏威夷果185gx2袋艺术硕士 顶起</h1>
+                      <div class="line"><div></div></div>
+                      <div class="sales">
+                        <div>券后<span>￥<b>28.90</b></span></div>
+                        <p>月销：22222</p>
+                      </div>
+                      <div class="fee">佣金：通用 <b>30%</b>（10元）</div>
+                      <div class="coupon">
+                        <div>
+                          <span>10元</span>
+                        </div>
+                        <p>
+                          <span><img src="/assets/images/icon-tmall.png" alt="tmall"></span>
+                          <span><img src="/assets/images/icon-qiang.png" alt="tmall"></span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="extras">
+                      <div class="row">
+                        <span>推广销量增长：<b>2000</b></span>
+                        <a href="#" class="error"><i>!</i> 商品纠错</a>
+                      </div>
+                      <div class="row">
+                        <span>优惠券剩余：<b>2000</b>/2000</span>
+                      </div>
+                      <div class="row">
+                        <span>店铺：三只松鼠旗舰店</span>
+                      </div>
+                      <div class="row">
+                        <span>放单人：某用户</span>
+                        <span>1分钟前</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
-        </div>
+            <el-button type="text" slot="reference">预览文案</el-button>
+          </el-popover>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="startdate"
+        label="秒杀日期">
+      </el-table-column>
+      <el-table-column
+        prop="startfield"
+        label="秒杀场次">
+      </el-table-column>
+      <el-table-column
+        label="操作"
+        width="180">
+         <template slot-scope="scope">
+          <el-button @click="editView(scope.row)" type="text" size="small">修改</el-button>
+          <el-button type="text" size="small" @click="deleteGoods(scope.row)" >撤销提交</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="pagination">
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :page-size="2"
+        layout="total, prev, pager, next"
+        :total="total">
+      </el-pagination>
     </div>
+  </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex';
-  import api from '../../../http/api';
+  import { mapActions } from 'vuex';
+  import api from '@/http/api';
 export default {
   data() {
     return {
-      Examine:[]
+      list:[],
+      total:0,
+      page:1
     };
+  },
+  methods:{
+    ...mapActions({ setGoodsType: 'setGoodsType',setGoodsLink: 'setGoodsLink',setGoodsKill:'setGoodsKill'}),
+    editView(info){
+      console.log(info)
+      this.setGoodsType('kill')
+      this.setGoodsLink({link:info.goodslink,id:info.goodsid,editId:info.id})
+      this.setGoodsKill({goodsTime:info.startfield,goodsDate:info.startdate})
+      // this.$router.push({
+      //   path: "/Secondfrom",
+      // })
+    },
+    deleteGoods(info){
+      this.$confirm('此操作将删除该商品, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        api.deleteGoods({id:info.id}).then(res=>{
+          if(res.code==0){
+            this.$message({
+              type: 'success',
+              message: '操作成功!'
+            })
+          }else{
+            this.$message({
+              type: 'info',
+              message: '操作失败'
+            })
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消操作'
+        })      
+      })
+    },
+    handleCurrentChange(val) {
+      api.getUserKillList({type:'unaudited',page:val}).then(res =>{
+        this.list = res.data.data
+        this.total = res.data.total
+        this.page = val
+      })
+    }
   },
   created(){
     // 提交审核中
-    api.getExamine().then(res =>{
-      console.log(res)
-      this.Examine = res.data.data;
-      console.log(this.Examine)
+    api.getUserKillList({type:'unaudited',page:0}).then(res =>{
+      this.list = res.data.data
+      this.total = res.data.total
     })
   }
 };
 </script>
-<style scoped>
-.list-head {
-  display: flex;
-  padding: 20px 20px 10px 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
-}
-.list-head > div {
-  color: #8697ac;
-  font-size: 16px;
-  text-align: center;
-}
-.content {
-  background-color: #fff;
-}
-.testlist {
-  display: flex;
-  padding: 12px 0px;
-  margin: 0 20px;
-  border-bottom: 1px solid #eee;
-}
-.testlist > div {
-  text-align: center;
-  line-height: 32px;
-}
-.testlist .commodity {
-  width: 50%;
-  text-align: left;
-}
-.commodity > span {
-  margin-left: 20px;
-}
-.testlist .preview {
-  display: block;
-  width: 82px;
-  height: 24px;
-  background-color: #49a6f7;
-  color: #fff;
-  margin: 0 auto;
-  margin-top: 6px;
-  border-radius: 15px;
-  line-height: 24px;
-  cursor: pointer;
-}
-.modify{
-    width: 30px;height: 16px;
-    border-right: 1px solid #eee;
-    padding-right: 10px;
-    cursor: pointer;
-}
-.again{
-    width: 58px;height: 16px;
-    border-left: 1px solid #eee;
-    padding-left: 10px;
-    cursor: pointer;
-}
-  img{
-    height: 20px;
-    width: 20px;
+<style lang="scss" scoped  type="text/css">
+.Examineing{
+  padding-bottom: 20px;
+  background-color: #fff; 
+  .pagination{
+    margin-top: 20px;
+    text-align: center;
   }
+}
 </style>

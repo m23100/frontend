@@ -1,319 +1,190 @@
 <template>
-    <div class="Viptesting">
-
-        <div class="list-head">
-            <div style=" width: 30%;text-align: left;">商品名</div>
-            <div style=" width: 15%;">文案信息</div>
-            <div style=" width: 20%;">提交时间</div>
-            <div style=" width: 15%;">开始时间</div>
-            <div style=" width: 20%;">操作</div>
-        </div>
-        <div class="content">
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;"><span class="preview"  @click="showToggle">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>马丁男士竹炭洁面乳洗面奶</span>
-               </div>
-                <div style=" width: 15%;"><span class="preview">预览文案</span></div>
-                <div style=" width: 20%;">2018-06-08</div>
-                <div style=" width: 15%;">立即开始</div>
-                <div style=" width: 20%;"><span class="modify">修改</span><span class="again">撤销提交</span></div>
-            </div>
-            <div class="Location" v-show="isShow">
-                <!-- 遮罩层 -->
-            </div>
-            <div class="Copywriting" v-show="isShow">
-                    <div><img src="../../../assets/img/demoimg.png" alt=""></div>
-                    <h2>[三只松鼠旗舰店]夏威夷果185g×2袋</h2>
-                    <el-progress :percentage="50" color="#f23539"></el-progress>
-                    <div class="felx">
-                        <div>券后 <span class="yuan">￥</span><span class="number">28.9</span> </div>
-                        <div class="linel">月销:21654</div>
+  <div class="Viptesting">
+    <el-table
+      :data="list"
+      highlight-current-row
+      style="width: 100%"> 
+      <el-table-column
+        prop="goodstitle"
+        label="商品名"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        label="文案信息">
+        <template slot-scope="scope">
+          <el-popover
+            placement="right"
+            trigger="click"
+            v-model="scope.row.visible">
+            <div class="item-content">
+                <div class="item">
+                  <div class="copys">
+                    <div class="photo"><img src="http://temp.im/220x280" height="280" alt="商品"></div>
+                    <div class="descr">
+                      全网最低！全网最低！<br>
+                      【火爆ins】高腰韩版九分缩脚裤！<br>
+                      【原价39.9元】券后【19.9元】包邮<br>
+                      领券：https://uland.taobao.com/quan/detail?sellerId=3857273069&amp;activityId=17b37d22e22a444caa809fedcc80d9e6<br>
+                      抢购：https://detail.tmall.com/item.htm?id=568895965597<br>
+                      【全网最低价】黑色帅气自信，粉色仙女本尊！超多颜色，任卿翻牌！夏天清凉标配~超多size，各种身材轻松驾驭！【赠运费险】
                     </div>
-                    <div class="Commission">通用:佣金 <span>30%</span> (10元)</div>
-                    <div class="felx">
-                        <div class="quan"><img src="../../../assets/img/quan.png" alt=""><span>10元</span></div>
-                        <div><img src="../../../assets/img/qian.png" alt="" style="margin-right:6px;"><img src="../../../assets/img/tianmao.png" alt=""></div>
+                  </div>
+                  <div class="mask showmore hover">
+                    <div class="cover">
+                      <a href="#"><img src="http://temp.im/260x260" alt="产品名"></a>
+                      <div class="btns">
+                        <span>加入选品</span><span class="doCopy">点击复制</span>
+                      </div>
                     </div>
-                    <div class="felx">
-                        <div>推广销量增长: <span class="zen">2000</span> </div>
-                        <div><img src="../../../assets/img/cuo.png" alt="">商品纠错</div>
-                    </div>
-                    <h4>优惠券剩余：<span class="zen">5000</span> /10000</h4>
-                    <h4>店铺：三只松鼠旗舰店</h4>
-                    <div class="people">
+                    <div class="content">
+                      <h1 class="title">【三只松鼠旗舰店】夏威夷果185gx2袋艺术硕士 顶起</h1>
+                      <div class="line"><div></div></div>
+                      <div class="sales">
+                        <div>券后<span>￥<b>28.90</b></span></div>
+                        <p>月销：22222</p>
+                      </div>
+                      <div class="fee">佣金：通用 <b>30%</b>（10元）</div>
+                      <div class="coupon">
                         <div>
-                            <img src="../../../assets/img/people.png" alt=""><span class="peoleft">放单人:某用户</span>
+                          <span>10元</span>
                         </div>
-                        <div>10分钟前</div>
+                        <p>
+                          <span><img src="/assets/images/icon-tmall.png" alt="tmall"></span>
+                          <span><img src="/assets/images/icon-qiang.png" alt="tmall"></span>
+                        </p>
+                      </div>
                     </div>
+                    <div class="extras">
+                      <div class="row">
+                        <span>推广销量增长：<b>2000</b></span>
+                        <a href="#" class="error"><i>!</i> 商品纠错</a>
+                      </div>
+                      <div class="row">
+                        <span>优惠券剩余：<b>2000</b>/2000</span>
+                      </div>
+                      <div class="row">
+                        <span>店铺：三只松鼠旗舰店</span>
+                      </div>
+                      <div class="row">
+                        <span>放单人：某用户</span>
+                        <span>1分钟前</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-        </div>
+            </div>
+            <el-button type="text" slot="reference">预览文案</el-button>
+          </el-popover>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="created_at"
+        label="提交时间">
+      </el-table-column>
+      <el-table-column
+        prop="begintime"
+        label="开始时间">
+      </el-table-column>
+      <el-table-column
+        prop="begintime"
+        label="操作"
+        width="180">
+         <template slot-scope="scope">
+          <el-button @click="editView(scope.row)" type="text" size="small">修改</el-button>
+          <el-button type="text" size="small" @click="deleteGoods(scope.row)" >撤销提交</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="pagination">
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :page-size="2"
+        layout="total, prev, pager, next"
+        :total="total">
+      </el-pagination>
     </div>
+  </div>
 </template>
 <script>
-import api from '../../../http/api'
-export default {
-  data() {
-      
-    return {
-      isShow:false,
-      
-    };
-
-  },
-  methods:{
-			showToggle:function(){
-				this.isShow = !this.isShow
-			}
-  },
-  created(){
-      console.log(1)
-      let data={
-        type:0,
-        parpage:1
+  import api from '@/http/api'
+  import { mapActions } from 'vuex'
+  export default {
+    data() {
+      return {
+        list:[],
+        total:0,
+        page:1
       }
-      console.log(2)
-      api.auditing(data).then(res =>{
-          console.log(res.data)
+
+    },
+    methods:{
+      ...mapActions({ setGoodsType: 'setGoodsType',setGoodsLink: 'setGoodsLink'}),
+      editView(info){
+        this.setGoodsLink({link:info.goodslink,id:info.goodsid,editId:info.id})
+        this.setGoodsType('normal')
+        this.$router.push({
+          path: "/Flatfrom",
+        })
+      },
+      viewCopy(info){
+        console.log(info)
+        api.viewCopy({id:info.id}).then(res=>{
+          if(res.code==0){
+            // this.isShow = true
+
+          }
+        })
+      },
+      deleteGoods(info){
+        this.$confirm('此操作将删除该商品, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          api.deleteGoods({id:info.id}).then(res=>{
+            if(res.code==0){
+              this.$message({
+                type: 'success',
+                message: '操作成功!'
+              })
+            }else{
+              this.$message({
+                type: 'info',
+                message: '操作失败'
+              })
+            }
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消操作'
+          })      
+        })
+      },
+      handleCurrentChange(val) {
+        api.auditing({type:0,state:0,page:val}).then(res =>{
+          this.list = res.data.data
+          this.total = res.data.total
+          this.page = val
+        })
+      }
+    },
+    created(){
+      api.auditing({type:0,state:0}).then(res =>{
+        this.list = res.data.data
+        this.total = res.data.total
       })
-  }
-
-};
+    }
+  };
 </script>
-<style scoped>
-.list-head {
-  display: flex;
-  padding: 20px 20px 10px 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
-}
-.list-head > div {
-  color: #8697ac;
-  font-size: 16px;
-  text-align: center;
-}
-.content {
-  background-color: #fff;
-  position: relative;
-}
-/* 定位预览文案 */
-.Location {
-  left: 50%;
-  position: absolute;
-  top: 5px;
-  color: #fff;
-  background-color: #252638;
-  opacity: 0.9;
-  height: 582px;
-  width: 310px;
-  z-index: 100;
-}
-.Copywriting {
-  background-color: #fff;
-  left: 50%;
-  position: absolute;
-  top: 5px;
-  padding: 10px;
-  z-index: 101;
-  margin: 12px 11px;
-}
-.Copywriting > h2 {
-  font-size: 14px;
-  line-height: 44px;
-  font-weight: 400;
-}
-.Copywriting > h4 {
-  font-size: 12px;
-  color: #9f9c9d;
-  font-weight: 400;
-  margin: 7px 0;
-}
-.felx {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px 0px;
-}
-.felx > div {
-  font-size: 12px;
-  color: #9f9c9d;
-}
-.felx .yuan {
-  color: #f5475c;
-  font-size: 12px;
-}
-.felx .number {
-  color: #f5475c;
-  font-size: 20px;
-}
-.felx .linel {
-  line-height: 30px;
-}
-.Commission {
-  color: #9f9c9d;
-  font-size: 12px;
-  margin-bottom: 10px;
-}
-.Commission > span {
-  color: #49a6f7;
-  font-size: 16px;
-}
-.felx .quan {
-  position: relative;
-}
-.felx .quan > span {
-  position: absolute;
-  top: 3px;
-  left: 35px;
-}
-.zen {
-  color: #f5475c;
-}
-.people {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
-.people > div {
-  font-size: 12px;
-  color: #9f9c9d;
-  line-height: 18px;
-}
-.peoleft {
-  margin-left: 8px;
-}
-/* 预览文案end */
 
-.testlist {
-  display: flex;
-  padding: 12px 0px;
-  margin: 0 20px;
-  border-bottom: 1px solid #eee;
-}
-.testlist > div {
-  text-align: center;
-  line-height: 32px;
-}
-.testlist .commodity {
-  width: 30%;
-  text-align: left;
-}
-.commodity > span {
-  margin-left: 20px;
-}
-.testlist .preview {
-  display: block;
-  width: 82px;
-  height: 24px;
-  background-color: #49a6f7;
-  color: #fff;
-  margin: 0 auto;
-  margin-top: 6px;
-  border-radius: 15px;
-  line-height: 24px;
-  cursor: pointer;
-}
-.modify {
-  width: 30px;
-  height: 16px;
-  border-right: 1px solid #eee;
-  padding-right: 10px;
-  cursor: pointer;
-}
-.again {
-  width: 58px;
-  height: 16px;
-  border-left: 1px solid #eee;
-  padding-left: 10px;
-  cursor: pointer;
+<style lang="scss" scoped  type="text/css">
+.Viptesting{
+  padding-bottom: 20px;
+  background-color: #fff; 
+  .pagination{
+    margin-top: 20px;
+    text-align: center;
+  }
 }
 </style>

@@ -17,3 +17,11 @@ export const SET_USER_INFO      = 'SETUSERINFO'      //设置用户信息
 export const SET_LOGIN_STATUS   = 'SET_LOGIN_STATUS' //设置登录状态
 export const GET_USER_DATA      = 'GET_USER_DATA'    //获取用户数据信息
 export const GET_ACCOUNT_FUNDS      = 'GET_ACCOUNT_FUNDS'    //获取账户资金信息
+
+
+export const SET_GOODS_TYPE = 'SET_GOODS_TYPE'
+export const SET_GOODS_LINK = 'SET_GOODS_LINK'
+export const SET_GOODS_ID = 'SET_GOODS_ID'
+export const SET_GOODS_EDIT_ID = 'SET_GOODS_EDIT_ID'
+export const SET_GOODS_KILL_TIME = 'SET_GOODS_KILL_TIME'
+export const SET_GOODS_KILL_DATE = 'SET_GOODS_KILL_DATE'

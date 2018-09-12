@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 
 import user from './modules/user'
 import com from './modules/com'
+import goods from './modules/goods'
 
 // 注册vuex
 Vue.use(Vuex)
@@ -12,6 +13,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
       user,
-      com
+      com,
+      goods
   }
 })

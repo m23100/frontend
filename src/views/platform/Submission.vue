@@ -6,28 +6,33 @@
         <div class="centent">
             <h2 class="Title">选择放单类型</h2>
             <div class="twoChoice">
-                <img src="../../assets/img/choice1.png" alt="入口" @click="go">
-                <img src="../../assets/img/choice2.png" alt="入口" @click="gofire">
+                <img src="../../assets/img/choice1.png" alt="入口" @click="gotype('normal')">
+                <img src="../../assets/img/choice2.png" alt="入口" @click="gotype('fire')">
             </div>
         </div>
     </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data() {
     return {};
   },
   methods:{
-      go: function() {
+      ...mapActions({ setGoodsType: 'setGoodsType'}),
+      gotype: function(type) {
+        this.setGoodsType(type)
         this.$router.push({
           path: "/LinkDetection"
         });
       },
-     gofire: function() {
-        this.$router.push({
-          path: "/Firefrom"
-        });
-     },
+     // gofire: function() {
+     //    this.setGoodsType('fire')
+     //    this.$router.push({
+     //      path: "/Firefrom"
+     //    });
+     // },
  }
 };
 </script>

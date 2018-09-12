@@ -55,6 +55,6 @@ export default {
   }
   .box{
     width: 100%;
-    margin: 24px 20px 0 17px;
+    margin: 24px 20px 10px 17px;
   }
 </style>

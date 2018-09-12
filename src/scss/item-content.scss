@@ -1,0 +1,210 @@
+.item-content{
+    width:600px;
+    height:540px;
+    .item{
+      width:290px;
+      background:#FFF;
+      float:left;
+      margin-left:12px;
+      margin-bottom:12px;
+      position:relative;
+      .rank-number{
+        position:absolute;
+        top:0;
+        left:0;
+        width:45px;
+        height:45px;
+        padding:5px;
+        background:url('/assets/img/icon-rankbg.png') no-repeat center;
+        background-size:contain;
+        font-size:20px;
+        color:#FFF;
+        z-index:5;
+      }
+      .mask{
+        float:left;
+        width:100%;
+        padding-bottom:10px;
+        border:solid 1px #F4F4F4;
+      }
+      .hover{
+        border:solid 1px #f5475c;
+        .cover .btns{
+          display:block;
+        }
+        .extras{
+          display:block;
+        }
+      }
+      .cover{
+        margin:15px;
+        width:260px;
+        height:260px;
+        position:relative;
+        img{
+          display:block;
+        }
+        .btns{
+          display:none;
+          position:absolute;
+          width:100%;
+          bottom:0;
+          cursor:pointer;
+          span{
+            display:inline-block;
+            text-align:center;
+            width:50%;
+            padding:5px 0;
+            background:#f5475c;
+            color:#FFF;
+          }
+          span:hover{
+            background:#34383b;
+          }
+        }
+        .timers{
+          position:absolute;
+          width:100%;
+          bottom:0;
+          padding:10px 0;
+          background:rgba(0,0,0,0.5);
+          color:#FFF;
+          text-align:center;
+          font-weight:bold;
+        }
+      }
+      .content{
+        padding:0 15px;
+        color:#999;
+        line-height:24px;
+        .rank-sale{
+          margin-top:-10px;
+          text-align:center;
+          span{
+            color:#49a6f7;
+          }
+        }
+        .title{
+          color:#333;
+          width:260px;
+          font-size:14px;
+          font-weight:normal;
+          overflow:hidden;
+          white-space:nowrap;
+          text-overflow:ellipsis;
+        }
+        .line{
+          height:2px;
+          width:100%;
+          background:#F4F4F4;
+          margin:10px 0;
+          div{
+            width:50%;
+            height:2px;
+            background:#f5475c;
+          }
+        }
+        .sales{
+          display:flex;
+          justify-content: space-between;
+          align-items:center;
+          span{
+            color:#f5475c;
+            b{
+              font-weight:normal;
+              font-size:18px;
+            }
+          }
+        }
+        .fee b{
+          color:#49a6f7;
+          font-weight:normal;
+        }
+        .coupon{
+          display:flex;
+          justify-content:space-between;
+          padding-top:5px;
+          div{
+            span{
+              display:inline-block;
+              width:70px;
+              height:20px;
+              line-height:20px;
+              background:url('/assets/img/icon-coupon.png') no-repeat center;
+              background-size:100% 100%;
+              color:#49a6f7;
+              text-indent:3em;
+              font-size:12px;
+            }
+          }
+          p{
+            span{
+              display:inline-block;
+              width:20px;
+              height:20px;
+              img{
+                width:100%;
+                height:100%;
+              }
+            }
+          }
+        }
+      }
+      .extras{
+        // display:none;
+        line-height:24px;
+        color:#999;
+        position: absolute;
+        bottom:-110px;
+        left:0;
+        width:100%;
+        background:#FFF;
+        padding-bottom:15px;
+        border:solid 1px #f5475c;
+        border-top:none;
+        z-index:2;
+        .row{
+          padding:0 15px;
+          display:flex;
+          justify-content: space-between;
+          .error{
+            color:#999;
+            i{
+              display:inline-block;
+              width:16px;
+              height:16px;
+              border-radius:16px;
+              line-height:16px;
+              background:#f5475c;
+              color:#FFF;
+              text-align:center;
+              font-style:normal;
+            }
+          }
+        }
+        span b{
+          font-weight:normal;
+          color:#f5475c;
+        }
+      }
+      .copys{
+        // display:none;
+        position:absolute;
+        top:0;
+        left:300px;
+        width:260px;
+        padding:15px;
+        height:505px;
+        background:rgba(37,38,56,0.9);
+        color:#FFF;
+        z-index:10;
+        font-size:12px;
+        .descr{
+          white-space:normal;
+          text-overflow:ellipsis;
+          overflow:hidden;
+          line-height:18px;
+        }
+      }
+    }
+  }

@@ -1,181 +1,80 @@
 <template>
-    <div class="Viptestok">
-
-        <div class="list-head">
-            <div style=" width: 30%;text-align: left;">商品名</div>
-            <div style=" width: 15%;">通用时间</div>
-            <div style=" width: 20%;">增长量</div>
-            <div style=" width: 15%;">领券信息</div>
-            <div style=" width: 20%;">操作</div>
-        </div>
-        <div class="content">
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
-                <div style=" width: 20%;"><span class="preview">已下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
-                <div style=" width: 20%;"><span>主动下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
-                <div style=" width: 20%;"><span class="preview">已下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
-                <div style=" width: 20%;"><span>主动下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
-                <div style=" width: 20%;"><span class="preview">已下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
-                <div style=" width: 20%;"><span>主动下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
-                <div style=" width: 20%;"><span class="preview">已下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
-                <div style=" width: 20%;"><span>主动下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
-                <div style=" width: 20%;"><span class="preview">已下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
-                <div style=" width: 20%;"><span>主动下架</span></div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 15%;">2018-06-08  09:23</div>
-                <div style=" width: 20%;">999件</div>
-                <div style=" width: 15%;">5000(5000/10000)</div>
-                <div style=" width: 20%;"><span class="preview">已下架</span></div>
-            </div>
-        </div>
+  <div class="Viptestok">
+    <el-table
+      :data="list"
+      highlight-current-row
+      style="width: 100%"> 
+      <el-table-column
+        prop="goodstitle"
+        label="商品名"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="passtime"
+        label="通过时间">
+      </el-table-column>
+      <el-table-column
+        prop="couponremain"
+        label="销量增长">
+      </el-table-column>
+      <el-table-column
+        prop="increment"
+        label="领券信息">
+      </el-table-column>
+      <el-table-column
+        prop="begintime"
+        label="操作"
+        width="180">
+         <template slot-scope="scope">
+          <el-button @click="editView(scope.row)" type="text" size="small">修改</el-button>
+          <el-button type="text" size="small" @click="deleteGoods(scope.row)" >撤销提交</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="pagination">
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :page-size="2"
+        layout="total, prev, pager, next"
+        :total="total">
+      </el-pagination>
     </div>
+  </div>
 </template>
 <script>
-export default {
-  data() {
-    return {};
+  import api from '@/http/api'
+  export default {
+    data() {
+      return {
+        list:[],
+        total:0,
+        page:1
+      }
+    },
+    methods:{
+      handleCurrentChange(val) {
+        api.auditedGoods({type:0,page:val}).then(res =>{
+          this.list = res.data.data
+          this.total = res.data.total
+          this.page = val
+        })
+      }
+    },
+    created(){
+      api.auditedGoods({type:0}).then(res =>{
+        this.list = res.data.data
+        this.total = res.data.total
+      })
+    }
   }
-};
 </script>
-<style scoped>
-.list-head {
-  display: flex;
-  padding: 20px 20px 10px 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
-}
-.list-head > div {
-  color: #8697ac;
-  font-size: 16px;
-  text-align: center;
-}
-.content {
-  background-color: #fff;
-}
-.testlist {
-  display: flex;
-  padding: 12px 0px;
-  margin: 0 20px;
-  border-bottom: 1px solid #eee;
-}
-.testlist > div {
-  text-align: center;
-  line-height: 32px;
-}
-.testlist>div>span{
-    color: #000;
-    cursor: pointer;
-}
-.testlist .commodity {
-  width: 30%;
-  text-align: left;
-}
-.commodity > span {
-  margin-left: 20px;
-}
-.testlist .preview {
-  display: block;
-  width: 82px;
-  height: 24px;
-  background-color: #ccc;
-  color: #000;
-  margin: 0 auto;
-  margin-top: 6px;
-  border-radius: 15px;
-  line-height: 24px;
-  cursor: pointer;
-}
-.modify{
-    width: 30px;height: 16px;
-    border-right: 1px solid #eee;
-    padding-right: 10px;
-    cursor: pointer;
-}
-.again{
-    width: 58px;height: 16px;
-    border-left: 1px solid #eee;
-    padding-left: 10px;
-    cursor: pointer;
+<style lang="scss" scoped  type="text/css">
+.Viptestok{
+  padding-bottom: 20px;
+  background-color: #fff; 
+  .pagination{
+    margin-top: 20px;
+    text-align: center;
+  }
 }
 </style>

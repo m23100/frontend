@@ -8,6 +8,7 @@ import VueAxios from 'vue-axios'
 import ElementUI from 'element-ui';
 import store from './vuex/store'
 import 'element-ui/lib/theme-chalk/index.css'
+import './scss/item-content.scss'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);

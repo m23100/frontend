@@ -1,285 +1,391 @@
 <template>
-    <!-- 秒杀表单 -->
+    <!-- 平推表单 -->
     <div class="Firefrom">
-        <h2 class="Title">填写秒杀单产品信息</h2>
-        <div class="centent">
-                <div class="component">
-                    <h2>封面图</h2>
-                    <div class="Choice">
-                        <el-upload
-                        :limit="1"
-                        action="https://jsonplaceholder.typicode.com/posts/"
-                        list-type="picture-card"
-                        :on-preview="handlePictureCardPreview"
-                        :on-remove="handleRemove">
-                        <!-- <i class="el-icon-plus"></i> -->
-                        <el-button slot="trigger" size="small" type="primary">上传封面</el-button>
-                        </el-upload>
-                        <el-dialog :visible.sync="dialogVisible">
-                        <img width="100%" :src="dialogImageUrl" alt="">
-                        </el-dialog>
-                        <span>要求：图片大小400*400px，干净清晰，突显产品,不能出现牛皮癣、大量文字</span>
-                    </div>
-                </div>
-                <div class="component">
-                    <h2>标题</h2>
-                    <div class="Choice flex">
-                       <input class="input" type="text" placeholder="将产品短标题输入或粘贴于此">
-                       <span class="span">要求：精简干练，表达重点信息,如品牌、产品名、数量、克重等</span>
-                    </div>
-                </div>
-                <div class="component">
-                    <h2>券后价</h2>
-                    <div class="Choice">
-                       <input class="Price" type="number"><span class="rmb">元</span>
-                    </div>
-                </div>
-                 <div class="component">
-                    <h2>佣金比率</h2>
-                    <div class="Choice">
-                       <input class="Price" type="number"><span class="rmb">%</span>
-                    </div>
-                </div>
-                 <div class="component">
-                    <h2>佣金类型</h2>
-                    <div class="Choice">
-                        <el-radio v-model="radio2" label="1">营销</el-radio>
-                        <el-radio v-model="radio2" label="2">通用</el-radio>
-                        <el-radio v-model="radio2" label="3">定向</el-radio>
-                        <el-radio v-model="radio2" label="4">鹊桥</el-radio>
-                    </div>
-                </div>
-                 <div class="component">
-                    <h2>优惠券总量</h2>
-                    <div class="Choice flex">
-                       <input class="Price" type="number">
-                       <span class="span">要求：优惠券跟商品对应，券名无敏感词，总量不能少于5000张</span>
-                    </div>
-                </div>
-                <div class="component upwenan">
-                    <h2>文案主图</h2>
-                    <el-upload
-                        :limit="1"
-                        class="upload-demo"
-                        action="https://jsonplaceholder.typicode.com/posts/"
-                        :on-preview="handlePreview"
-                        :on-remove="handleRemove"
-                        list-type="picture">
-                        <el-button size="small" type="primary">点击上传</el-button>
-                        <span>要求：图片大小800*1200px，干净清晰，结构美观，突出产品卖点</span>
-                    </el-upload>
-                </div>
-                 <div class="component">
-                    <h2>商品链接</h2>
-                    <div class="Choice">
-                       <input class="input" type="text" placeholder="将产品对应商品链接输入或粘贴于此">
-                    </div>
-                </div>
-                 <div class="component">
-                    <h2>优惠券链接</h2>
-                    <div class="Choice">
-                       <input class="input" type="text" placeholder="将产品对应优惠券链接输入或粘贴于此">
-                    </div>
-                </div>
-                 <div class="component">
-                    <h2>导购文案</h2>
-                    <div class="Choice">
-                        <textarea data-v-716a6b68="" name="" id="" cols="30" rows="10"
-                        placeholder="要求：20-200字精简文案，突出产品亮点，需求交痛点，为什么值得买！注意不要用空格"></textarea>
-                    </div>
-                </div>
-                 <div class="component">
-                    <h2>活动类型</h2>
-                    <div class="Choice">
-                        <el-radio v-model="radio1" label="1">无活动</el-radio>
-                        <el-radio v-model="radio1" label="2">淘抢购</el-radio>
-                        <el-radio v-model="radio1" label="3">聚划算</el-radio>
-                    </div>
-                </div>
-                <div class="bottom">
-                    <div class="up">
-                        <span class="upone">上一步</span><span class="Submission">提交</span>
-                    </div>
-                </div>
-        </div>
+      <h2 class="Title">填写秒杀商品信息</h2>
+      <div class="centent">
+        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="110px" class="demo-ruleForm">
+          <el-form-item label="商品链接" prop="goodslink">
+            <el-input v-model="ruleForm.goodslink" placeholder=""></el-input>
+          </el-form-item>
+          <el-form-item label="短标题" prop="goodstitle">
+            <el-input v-model="ruleForm.goodstitle" placeholder="将商品短标题输入于此"></el-input>
+          </el-form-item>
+          <el-form-item label="初始销量" prop="startsales">
+            <el-input v-model="ruleForm.startsales" placeholder="0" class="medium"></el-input>
+          </el-form-item>
+          <el-form-item
+            v-for="(item, index) in ruleForm.keyword"
+            :label="'产品关键词'"
+            :key="item.key"
+            :prop="'keyword.' + index + '.value'"
+            :rules="[{
+              required: true, message: '关键词不能为空', trigger: 'blur'
+            },
+
+            { min: 2, max: 6, message: '每个关键词2到6个字符', trigger: 'blur' }]"
+          >
+            <el-input v-model="item.value" class="mini-keyword"></el-input>
+            <el-button @click="addKeyword" v-if="index==0" type="primary" icon="el-icon-circle-plus" circle></el-button>
+
+            <el-button @click.prevent="removeKeyword(item)" v-if="index>1"type="primary" icon="el-icon-remove" circle></el-button>
+          </el-form-item>
+
+          <el-form-item label="活动类型" prop="activitytype">
+            <el-radio-group v-model="ruleForm.activitytype">
+              <el-radio label="0">无活动</el-radio>
+              <el-radio label="1">淘抢购</el-radio>
+              <el-radio label="2">聚划算</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="封面图" prop="coverimage_url">
+            <el-upload
+              class="avatar-uploader"
+              :headers="uploadHeaders"
+              :action="uploadUrl"
+              :show-file-list="false"
+              :limit="1"
+              :before-upload="beforeAvatarUpload"
+              :on-preview="handlePictureCardPreview"
+              :on-exceed="handleExceed"
+              :on-success="coverImage"
+              :before-remove="beforeRemove"
+              :on-remove="coverImageRemove"
+              >
+              <img v-if="ruleForm.coverimage_url" :src="ruleForm.coverimage_url" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              <div class="el-upload__tip" slot="tip">要求：图片大小400*400px，干净清晰，突显产品,不能出现牛皮癣、大量文字</div>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="优惠券类型" prop="coupontype">
+            <el-radio-group v-model="ruleForm.coupontype">
+              <el-radio label="2">阿里妈妈优惠券</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="券后价" prop="voucherprice">
+            <el-input v-model="ruleForm.voucherprice" placeholder="0" class="medium"></el-input>元
+          </el-form-item>
+          <el-form-item label="券面额" prop="couponmoney">
+            <el-input v-model="ruleForm.couponmoney" placeholder="0" class="medium"></el-input>元
+          </el-form-item>
+          <el-form-item label="优惠券总量" prop="coupontotal">
+            <el-input v-model="ruleForm.coupontotal" placeholder="0" class="medium"></el-input>张
+          </el-form-item>
+          <el-form-item label="优惠券链接" prop="couponlink">
+            <el-input v-model="ruleForm.couponlink" placeholder="将优惠券链接输入于此"></el-input>
+          </el-form-item>
+          <el-form-item label="佣金类型" prop="commissiontype">
+            <el-radio-group v-model="ruleForm.commissiontype">
+              <el-radio label="1">营销</el-radio>
+              <el-radio label="2">通用</el-radio>
+              <el-radio label="3">定向</el-radio>
+              <el-radio label="4">鹊桥</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="佣金比率" prop="commissionrate">
+            <el-input v-model="ruleForm.commissionrate" placeholder="0" class="medium"></el-input>%
+          </el-form-item>
+          <el-form-item label="文案主图" prop="copywritingimage_url">
+            <el-upload
+              class="avatar-uploader"
+              :headers="uploadHeaders"
+              :action="uploadUrl"
+              :show-file-list="false"
+              :limit="1"
+              :before-upload="beforeAvatarUpload"
+              :on-preview="handlePictureCardPreview"
+              :on-exceed="handleExceed"
+              :on-success="copyImage"
+              :before-remove="copyImageRemove"
+              :on-remove="coverImageRemove"
+              >
+              <img v-if="ruleForm.copywritingimage_url" :src="ruleForm.copywritingimage_url" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              <div class="el-upload__tip" slot="tip">要求：图片大小800*1200px，干净清晰，结构美观，突出产品卖点</div>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="导购文案" prop="copywriting">
+            <el-input type="textarea" v-model="ruleForm.copywriting"></el-input>
+          </el-form-item>
+          <el-form-item label="完整秒杀文案" prop="content">
+            <el-input type="textarea" v-model="ruleForm.content"></el-input>
+          </el-form-item>
+          <el-form-item label="朋友圈文案" prop="friends">
+            <el-input type="textarea" v-model="ruleForm.friends"></el-input>
+          </el-form-item>
+
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm')">提交审核</el-button>
+            <el-button @click="resetForm('ruleForm')">重置</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
     </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex';
-  import api from '../../http/api';
+import { mapGetters } from 'vuex'
+import api from '../../http/api'
+import {formatDate} from '../../util/tool';
 export default {
   data() {
     return {
-      active: 0,
-      radio: "1",
-      radio1: "1",
-      radio2:'1',
-       dialogImageUrl: '',
-        dialogVisible: false
+      ruleForm: {
+        goodslink: '',
+        goodstitle: '',
+        coverimage:'',
+        coverimage_url:'',
+        commissiontype:'',
+        commissionrate:'',
+        copywriting:'',
+        copywritingimage:'',
+        copywritingimage_url:'',
+        voucherprice:'',
+        couponlink:'',
+        coupontotal:'',
+        begintime:'',
+        begintimetype:'',
+        coupontype:'',
+        activitytype:'',
+        startsales:'',
+        couponmoney:'',
+        keyword:[{key:1,value: ''},{key:2,value: ''}],
+        startdate:'',
+        startfield:'',
+        content:'',
+        friends:''
+      },
+      rules: {
+        goodslink: [
+          { required: true, message: '请输入商品链接', trigger: 'blur' },
+        ],
+        begintimetype: [
+          { required: true, message: '请选择开始时间', trigger: 'change' },
+        ],
+        coupontype: [
+          { required: true, message: '请选择优惠券类型', trigger: 'change' }
+        ],
+        activitytype: [
+          { required: true, message: '请选择活动类型', trigger: 'change' }
+        ],
+        coverimage_url: [
+          { required: true, message: '请上传封面图', trigger: 'change' },
+        ],
+        copywritingimage_url: [
+          { required: true, message: '请上传文案主图', trigger: 'change' },
+        ],
+        goodstitle: [
+          { required: true, message: '请输入短标题', trigger: 'blur' },
+        ],
+        voucherprice: [
+          { required: true, message: '请输入券后价', trigger: 'blur' },
+          // { type: 'number', message: '券后价必须为数字值'}
+        ],
+        couponlink: [
+          { required: true, message: '请输入优惠券链接', trigger: 'blur' },
+        ],
+        coupontotal: [
+          { required: true, message: '请输入优惠券总量', trigger: 'blur' },
+          // { type: 'number', message: '优惠券总量必须为数字值'}
+        ],
+        commissionrate: [
+          { required: true, message: '请输入佣金比例', trigger: 'blur' },
+          // { type: 'number', message: '佣金比例必须为数字值'}
+        ],
+        commissiontype: [
+          { required: true, message: '请输入佣金类型', trigger: 'blur' },
+        ],
+        copywriting: [
+          { required: true, message: '请输入导购文案', trigger: 'blur' },
+        ],
+        startsales: [
+          { required: true, message: '请输入入库初始销量', trigger: 'change' },
+        ],
+        couponmoney:[
+          { required: true, message: '请输入券面额', trigger: 'change' },
+        ],
+        content:[
+          { required: true, message: '请输入完整秒杀文案', trigger: 'change' },
+        ],
+        friends:[
+          { required: true, message: '请输入朋友圈文案', trigger: 'change' },
+        ],
+      },
+      uploadUrl:'http://dev.ruomengtv.com/api/image/imageUpload?type=goods',
+      uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+      startdate:''
     };
   },
-  created(){
-    api.saveKillGood().then(res =>{
-      console.log(res)
-    })
-  },
+
   methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-        console.log(this.dialogImageUrl, this.dialogVisible);
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
+    handlePictureCardPreview(file) {
+    },
+    handleExceed(files) {
+      this.$message.warning('只能上传1个文件');
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = (file.type === 'image/jpeg' || file.type==='image/png');
+      const isLt2M = file.size / 1024 / 1024 < 2;
 
-      go: function() {
-        this.$router.push({
-            path: "/Flatfrom"
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    },
+    beforeRemove(file, fileList) {
+      // 增加一个询问框
+      return this.$confirm(`确定移除 ${file.name}？`)
+    },
+    coverImage(response,file){
+      this.ruleForm.coverimage_url = URL.createObjectURL(file.raw)
+      this.ruleForm.coverimage = response.data.url
+    },
+    coverImageRemove(){
+      this.ruleForm.coverimage =''
+    },
+    copyImage(response,file){
+      this.ruleForm.copywritingimage_url = URL.createObjectURL(file.raw)
+      this.ruleForm.copywritingimage = response.data.url
+    },
+    copyImageRemove(){
+      this.ruleForm.copywritingimage =''
+    },
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        console.log(this.ruleForm)
+        if (valid) {
+          let data=this.ruleForm
+          console.log(data)
+          // if(data.begintimetype==1){
+            // data.begintime = formatDate(new Date(),'yyyy-MM-dd hh:mm:ss')
+          // }else{
+            data.startdate = formatDate(this.startdate,'yyyy-MM-dd hh:mm:ss')
+          // }
+          api.saveKillGood(data).then(res =>{
+            if(res.code==0){
+              this.$message.success('提交成功!')
+            }else{
+              this.$message.error('提交失败')
+            }
+          })
+        } else {
+          return false;
+        }
+      })
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
+    addKeyword(){
+      if(this.ruleForm.keyword.length<5){
+        this.ruleForm.keyword.push({
+          value: '',
+          key: this.ruleForm.keyword.length+1
         });
-      },
-
+      }
+      
+    },
+    removeKeyword(item) {
+      var index = this.ruleForm.keyword.indexOf(item)
+      if (index !== -1) {
+        this.ruleForm.keyword.splice(index, 1)
+      }
+    },
+  },
+  created(){
+    this.ruleForm.goodsid = this.getGoodsId
+    this.ruleForm.goodslink = this.getGoodsLink
+    this.ruleForm.getGoodsDate = this.getGoodsDate
+    this.startdate = this.getGoodsDate
+    this.ruleForm.startfield = this.getGoodsTime
+    console.log(this.getGoodsId,this.getGoodsLink,this.getGoodsDate,this.getGoodsTime)
+    console.log(this.ruleForm)
+    if(this.ruleForm.goodsid<1 || this.ruleForm.getGoodsLink=='' || this.ruleForm.startdate=='' || this.ruleForm.startfield==''){
+      // this.$router.push({
+      //     path: "/killcheckout"
+      // })
+    }
+    if(this.getEditId>0){
+      api.editView({id:this.getEditId}).then(res=>{
+        console.log(res)
+      })
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'getGoodsLink',
+      'getGoodsId',
+      'getEditId',
+      'getGoodsTime',
+      'getGoodsDate'
+    ])
   }
 };
 </script>
-<style scoped>
-.Firefrom{height: 2280px;}
-.Title {
-  font-size: 18px;
-  color: #000;
-  border-left: 4px solid #43b5f9;
-  line-height: 22px;
-  padding-left: 10px;
-  font-weight: 400;
-  margin-bottom: 25px;
-}
-.centent {
-  background-color: #fff;
-  padding: 20px;
-}
-.detection {
-  display: flex;
-      margin: 25px 0;
-    width: 565px;
-  justify-content: space-between;
-}
-.detection > input {
-  width: 423px;
-  height: 35px;
-  border-bottom-left-radius: 20px;
-  border-top-left-radius: 20px;
-  border: 1px solid #eee;
-  background-color: #f4f4f4;
-  padding-left: 30px;
-  outline: none;
-}
-.start {
-  display: block;
-  width: 110px;
-  line-height: 38px;
-  background-color: #7d6db1;
-  text-align: center;
-  color: #fff;
-  border-bottom-right-radius: 20px;
-  border-top-right-radius: 20px;
-}
-.component {
-}
-.upwenan{
-    width: 52%;
-    margin-bottom: 20px;
-}
-.component > h2 {
-  font-weight: 400;
-}
-.Choice{
-    margin: 20px 0;
-}
-.Choice>input{
-    padding-left: 10px;
-    outline:none;
-}
-.Choice>textarea{
-    width: 64.5%;
-    border-radius: 4px;
-    border: solid 1px #d3d3d3;
-    padding: 10px;
-    resize: none;
-    outline:none;
-}
-.Choice>span{
-    color: #cfcfcf;
-    font-size: 14px;
-}
-.flex{
-    display: flex;
-    justify-content: space-between;
-}
-.input{
-    height: 40px;
-    width: 467px;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    outline:none;
-}
-.span{
-    line-height: 69px;
-    color: #d0d0d0;
-    font-size: 15px;
-}
-
-.Price{
-    height: 40px;
-    border-radius: 10px;
-    width: 80px;
-    padding-left: 20px;
-    border: 1px solid #eee;
-}
-.rmb{
+<style lang="scss" scoped  type="text/css">
+.Firefrom{
+  background-color: #fff; 
+  .Title {
+    font-size: 18px;
     color: #000;
-    font-size: 16px;
-    margin-left: 15px;
-}
-/*上传图片*/
-.el-upload--picture-card{
-
-}
-.bottom{
-    margin-top: 62px;
-    padding-top: 25px;
-    border-top:1px solid #eee;
-}
-.up{
-    display: flex;
-    justify-content: space-between;
-    width: 30%;
-    margin: 0 auto;
-}
-.upone{
-    display: block;
-    width: 110px;
-    line-height: 38px;
+    border-left: 4px solid #43b5f9;
+    line-height: 22px;
+    padding-left: 10px;
+    font-weight: 400;
+    margin-bottom: 25px;
+  }
+  .centent {
     background-color: #fff;
-    text-align: center;
-    color: #848484;
-    margin: 0 auto;
-    border:1px solid #848484;
+    padding: 20px;
+  }
+  .el-input{
+    display: inline-block;
+    width: 423px;
+  }
+  .medium{
+    margin-right: 5px;
+    width: 100px;
+  }
+  .datetime{
+    width: 220px;
+  }
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
-}
-.Submission{
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 115px;
+    height: 115px;
+    line-height: 115px;
+    text-align: center;
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    margin-right: 15px;
+  }
+  .avatar-uploader-icon:hover{
+    border-color: #409EFF;
+  }
+  .avatar {
+    width: 115px;
+    height: 115px;
     display: block;
-    width: 110px;
-    line-height: 38px;
-    background-color: red;
-    text-align: center;
-    color: #fff;
-    margin: 0 auto;
-    border-radius: 6px;
-    cursor: pointer;
+  }
+  .mini{
+    width: 80px;
+  }
+  .mini-keyword{
+    width: 140px;
+  }
+  
 }
 </style>
-
+             

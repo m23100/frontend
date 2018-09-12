@@ -2,7 +2,7 @@
    <!-- 账户资金 -->
   <div class="Capital">
       <div class="navdata">
-          <h2 class="Title">我都点券</h2>
+          <h2 class="Title">我的点券</h2>
           <div class="dataimg">
               <div class="data1"><h1>{{Voucher.dayNumer}}</h1><h4>可以点券</h4></div>
               <div class="data2"><h1>{{Voucher.mouthNumber}}</h1><h4>今日已使用</h4></div>

@@ -99,14 +99,28 @@ export default {
     },
     //查看审核中的商品数据（平推
     auditing(params){
-        return fetch('usercenter/auditing',params)
+        return fetch('usercenter/goodslist',params)
     },
     //提交平推单数据
     createnormal(params){
-        return fetch('usercenter/createnormal',params)
+        return fetch('usercenter/savenormal',params)
     },
-
-
+    //获取要修改的商品数据信息 
+    editView(params){
+        return fetch('usercenter/editview',params)
+    },
+    //预览文案
+    viewCopy(params){
+        return fetch('usercenter/viewcopy',params)
+    },
+    //撤销提交商品
+    deleteGoods(params){
+        return fetch('usercenter/delete',params)
+    },
+    //审核通过商品 updatenormal
+    auditedGoods(params){
+        return fetch('usercenter/audited',params)
+    },
     /*秒杀平台*/
 
     //获取秒杀平台的用户数据
@@ -125,30 +139,23 @@ export default {
     },
 
     //测试商品链接
-    Killcheckout(params){
-      return fetch('usercenter/checklink')
-    },
+    // Killcheckout(params){
+    //   return fetch('usercenter/checklink')
+    // },
 
     //提交秒杀
     saveKillGood(params){
-      return fetch('kill/saveKillGood')
+      return fetch('kill/saveKillGood',params)
     },
 
-
+    //秒杀场次
+    getKillField(){
+      return fetch('kill/getKillField')
+    },
 
     // 提交秒杀审核中
-    getExamine(params){
-      return fetch('kill/getExamine')
-    },
-
-    //获取提交秒杀未通过用户数据
-    getKillRefuseGoods(params){
-        return fetch('kill/getKillRefuseGoods')
-      },
-
-    //获取提交秒杀通过用户数据
-    getKillExaminePass(params){
-      return fetch('kill/getKillExaminePass')
+    getUserKillList(params){
+      return fetch('kill/getUserKillList',params)
     },
 
     getProvince(params){
@@ -166,4 +173,7 @@ export default {
     getUserAuth(params){
         return fetch('user/getUserAuth')
     },
+    addUserAuth(params){
+        return fetch('user/addUserAuth',params)
+    }
 }

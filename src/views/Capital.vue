@@ -4,32 +4,33 @@
       <div class="navdata">
           <h2 class="Title">我的点券</h2>
           <div class="dataimg">
-              <div class="data1"><h1>{{Voucher.dayNumer}}</h1><h4>可以点券</h4></div>
-              <div class="data2"><h1>{{Voucher.mouthNumber}}</h1><h4>今日已使用</h4></div>
-              <div class="data3"><h1>{{Voucher.userVoucherNumber}}</h1><h4>单月共用</h4></div>
+              <div class="data1"><h1>{{Voucher.userVoucherNumber}}</h1><h4>可用点券</h4></div>
+              <div class="data2"><h1>{{Voucher.dayNumer}}</h1><h4>今日已使用</h4></div>
+              <div class="data3"><h1>{{Voucher.mouthNumber}}</h1><h4>当月已使用</h4></div>
               <div class="data4"><h1 style="margin-top:28px;">充值</h1></div>
           </div>
       </div>
       <div class="centent">
           <div class="centent-left">
-              <h2 class="Title">消费记录</h2>
+              <h2 class="Title">充值/消费记录</h2>
               <div class="dynamic">
-                  <div class="flex left-list" v-for="(item,index) in capital" :key="index">
-                      <h1 v-if="item.status==1">商品[<span class="blue">{{item.goodstitle}}</span>]发布成功，使用{{item.number}}点券</h1>
-                      <h1 v-if="item.status==0">商品[<span class="blue">{{item.goodstitle}}</span>]审核被拒，退回{{item.number}}点券</h1>
-                      <div>{{item.created_at}}</div>
-                  </div>
-              </div>
-              <div class="pagination">
-                <el-pagination
-                  @current-change="handleCurrentChange"
-                  :page-size="2"
-                  layout="total, prev, pager, next"
-                  :total="capital_total">
-                </el-pagination>
+                <div class="flex left-list" v-for="(item,index) in capital" :key="index">
+                    <h1 v-if="item.status==0">商品[<span class="blue">{{item.goodstitle}}</span>]发布成功，使用{{item.number}}点券</h1>
+                    <h1 v-if="item.status==1">商品[<span class="blue">{{item.goodstitle}}</span>]审核被拒，退回{{item.number}}点券</h1>
+                    <h1 v-if="item.status==2">充值{{item.number}}点券</h1>
+                    <div>{{item.created_at}}</div>
+                </div>
+                <div class="pagination">
+                  <el-pagination
+                    @current-change="handleCurrentChange"
+                    :page-size="10"
+                    layout="total, prev, pager, next"
+                    :total="capital_total">
+                  </el-pagination>
+                </div>
               </div>
           </div>
-          <div class="centent-right">
+          <!-- <div class="centent-right">
               <h2 class="Title">充值记录</h2>
               <div class="rule">
                   <ul v-for="(item,index) in Record" :key="index">
@@ -44,7 +45,7 @@
                   :total="record_total">
                 </el-pagination>
               </div>
-          </div>
+          </div> -->
       </div>
   </div>
 </template>
@@ -164,7 +165,7 @@
     margin: 40px 0 25px 0;
 }
 .centent-left{
-    width: 62%;
+    width: 100%;
     margin-right: 20px;
 }
 .dynamic{
@@ -207,8 +208,9 @@
         display: flex;
     justify-content: space-between;
 }
-/* .rule .span{
-    margin-left: 120px;
-} */
+.pagination{
+  margin-top: 20px;
+  text-align: center;
+}
 </style>
 

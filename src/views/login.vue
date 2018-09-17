@@ -68,8 +68,8 @@
             </div>
       
             <div class="other">
-              <a href="">注册</a>
-              <a href="">忘记密码？</a>
+              <a href="/register">注册</a>
+              <a href="/forgot">忘记密码？</a>
             </div>
           </div>
         </div>
@@ -111,24 +111,22 @@ import api from '@/http/api'
             password: this.password
         }
         api.Login(data)
-            .then(res => {
-                if(res.code == 0) {
-                  this.setUserToken(res.data)
-                  api.UserInfo().then(
-                    res => {
-                      this.setUserInfo(res.data)
-                      this.$router.replace('/home')
-                    }
-                  )
-                    
-                }
-            })
-            .catch(error => {
-                console.log(error)
-            })
-
-
-
+          .then(res => {
+              if(res.code == 0) {
+                this.setUserToken(res.data)
+                api.UserInfo().then(
+                  res => {
+                    this.setUserInfo(res.data)
+                    this.$router.replace('/home')
+                  }
+                )
+              }else{
+                this.$message.error(res.msg)
+              }
+          })
+          .catch(error => {
+              console.log(error)
+          })
      },
      
     //登录并检查输入信息

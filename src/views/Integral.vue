@@ -7,10 +7,14 @@
         <h2 class="Title">扣分详情</h2>
         <div class="dynamic">
           <div v-for="(item,index) in integral" :key="index">
-              <img class="somllicon" :src="item.coverimage.main" alt="">
+              <img v-if="item.coverimage" class="somllicon" :src="item.coverimage.main" alt="">
               <div class="deduction">
-                  <div><span class="large">扣除{{item.number}}积分</span><span class="samll">{{item.created_at}}</span></div>
-                  <h2>{{item.content}}，被扣1积分</h2>
+                  <div>
+                    <span class="large" v-if="item.status==0">扣除{{item.number}}积分</span>
+                    <span class="large" v-if="item.status==1">增加{{item.number}}积分</span>
+                    <span class="samll">{{item.created_at}}</span>
+                  </div>
+                  <h2>{{item.content}}</h2>
               </div>
           </div>
           <div class="pagination">
@@ -152,7 +156,7 @@ export default {
       //获取用户的积分扣分详情
       api.getUserIntegralLog().then(res =>{
         res.data.data.forEach(function(item,index){
-          item.coverimage = JSON.parse(item.coverimage)
+          if(item.coverimage) item.coverimage = JSON.parse(item.coverimage)
         })
         this.integral=res.data.data
         this.total = res.data.total

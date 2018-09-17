@@ -284,8 +284,9 @@ export default {
           api.saveFire(data).then(res =>{
             if(res.code==0){
               this.$message.success('提交成功!')
+              this.$router.replace('/Sviptesting')
             }else{
-              this.$message.error('提交失败')
+              this.$message.error('提交失败'+res.msg)
             }
           })
         } else {

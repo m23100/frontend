@@ -4,14 +4,32 @@
             <img src="../assets/img/vip.png" alt="">
         </div>
         <!-- 未认证 -->
-        <div class="centent" v-if="state===-1">
+        <div class="centent" v-if="state===1">
             <h2 class="Title">认证信息</h2>
              <div class="xx"><img src="../assets/img/renzhenxiong.png" alt=""></div>
             <h3>当前处于未认证状态</h3>
-            <div class="xxx"><el-button type="text" class="test" @click="centerDialogVisible = true">去认证</el-button></div> 
+            <div class="xxx">
+              <el-button type="text" class="test" @click="centerDialogVisible = true">去认证</el-button>
+            </div> 
+        </div>
+        <div class="centent" v-if="state===2">
+            <h2 class="Title">认证信息</h2>
+             <div class="xx"><img src="../assets/img/renzhenxiong.png" alt=""></div>
+            <h3>正在全力审核中</h3>
+            <div class="xxx">
+              <el-button type="text" class="test" @click="centerDialogVisible = true">修改资料</el-button>
+            </div> 
+        </div>
+        <div class="centent" v-if="state===3">
+            <h2 class="Title">认证信息</h2>
+             <div class="xx"><img src="../assets/img/renzhenxiong.png" alt=""></div>
+            <h3>资料被打回</h3>
+            <div class="xxx">
+              <el-button type="text" class="test" @click="centerDialogVisible = true">修改资料</el-button>
+            </div> 
         </div>
         <!-- 认证成功后 -->
-        <div class="centent" v-else-if="(state===1  || state===0) ">
+        <div class="centent" v-else-if="(state===0) ">
             <h2 class="Title">认证信息</h2>
             <div class="PersonalData">
               <el-row>
@@ -54,7 +72,7 @@
           <el-form-item label="身份证号" prop="id_number">
             <el-input v-model="ruleForm.id_number" placeholder="请填写身份证号码"></el-input>
           </el-form-item>
-          <el-form-item label="身份证图片">
+          <el-form-item label="身份证图片" prop="id_image_just">
             <el-upload
               class="avatar-uploader"
               :headers="uploadHeaders"
@@ -90,7 +108,7 @@
               <div class="el-upload__tip" slot="tip">上传身份证反面</div>
             </el-upload>
           </el-form-item>
-          <el-form-item label="收入水平">
+          <el-form-item label="收入水平" prop="user_income">
             <el-select v-model="ruleForm.user_income" placeholder="请选择" @change="handleChange">
               <el-option
                 v-for="item in ruleForm.options"
@@ -100,7 +118,7 @@
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="上传照片">
+          <el-form-item label="上传照片" prop="income_prove">
             <el-upload
               class="avatar-uploader"
               :headers="uploadHeaders"
@@ -122,7 +140,7 @@
           <el-form-item label="自有渠道" prop="channel_info">
             <el-input v-model="ruleForm.channel_info" placeholder="填写自有渠道信息"></el-input>
           </el-form-item>
-          <el-form-item label="上传照片">     
+          <el-form-item label="上传照片" prop="channel_prove">     
             <el-upload
               class="avatar-uploader"
               :headers="uploadHeaders"
@@ -159,7 +177,7 @@ export default {
       uploadUrl:'http://dev.ruomengtv.com/api/image/imageUpload?type=auth',
       dialogVisible: false,
       centerDialogVisible: false,
-      state: 0,
+      state: -1,
       options: [],
       value: "",
       user_income_str:'',
@@ -272,6 +290,7 @@ export default {
           api.addUserAuth(data).then(res =>{
             if(res.code==0){
               this.$message.success('提交成功!')
+              this.$router.go(0)
             }else{
               this.$message.error('提交失败')
             }
@@ -283,54 +302,49 @@ export default {
           return false;
         }
       })
-
-      // let data={
-      //    real_name:this.ruleForm.real_name,
-      //    phone:this.ruleForm.phone,
-      //    id_number:this.ruleForm.id_number,
-      //    id_image_just:this.ruleForm.id_image_just,
-      //    id_image_back:this.ruleForm.id_image_back,
-      //    user_income:this.ruleForm.user_income,
-      //    income_prove:this.ruleForm.income_prove,
-      //    channel_info:this.ruleForm.channel_info,
-      //    channel_prove:this.ruleForm.channel_prove,
-      // }
-      // console.log(data)
-      // api.addUserAuth(data).then(res =>{
-      //     if(res.code==0){
-      //       this.$message.success('提交成功!')
-      //     }else{
-      //       this.$message.error('提交失败')
-      //     }
-      // })
     }
   },
 
   created() {
     api.getUserAuth().then(res =>{
-      this.state = res.data.isAuth
-      this.ruleForm.real_name = res.data.userAuthInfo.real_name
-      this.ruleForm.id_number = res.data.userAuthInfo.id_number
-      this.ruleForm.user_income = res.data.userAuthInfo.user_income
-      this.ruleForm.phone = res.data.userAuthInfo.phone
-      this.ruleForm.channel_info = res.data.userAuthInfo.channel_info
-      this.ruleForm.id_image_just = res.data.userAuthInfo.id_image_just
-      this.ruleForm.id_image_back = res.data.userAuthInfo.id_image_back
-      this.ruleForm.income_prove = res.data.userAuthInfo.income_prove
-      this.ruleForm.channel_prove = res.data.userAuthInfo.channel_prove
+        this.state = res.code //0用户审核通过,1用户暂未提交审核,2用户认证暂未审核,3用户审核被拒
+      if(res.code!=1){
+        this.ruleForm = res.data.userAuthInfo
+        this.ruleForm.options = []
+      }
       res.data.userIncomeList.forEach((element,index) => {
         if(element.income_type==this.ruleForm.user_income){
           this.user_income_str = element.income
         }
         this.ruleForm.options.push({label:element.income,value:element.income_type})
       })
+      
     })
-    // console.log(this.ruleForm.options)
   }
   
 }
 </script>
 <style type="text/css" lang="scss" scoped="">
+
+  .centent {
+    background-color: #fff;
+    display: inline-block;
+    width: 100%;
+    padding-top: 20px;
+  }
+  .xx {
+    text-align: center;
+  }
+  .centent h3 {
+    color: #a0a0a0;
+    font-size: 14px;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .xxx {
+    text-align: center;
+    margin: 0 auto;
+  }
   .el-row {
     margin-bottom: 20px;
     &:last-child {

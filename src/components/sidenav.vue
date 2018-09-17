@@ -109,13 +109,12 @@ import {imgBaseUrl} from '@/util/env'
     methods: {
       ...mapActions({ setSignOut: 'setSignOut'}),
       handleOpen(key, keyPath) {
-        console.log(key, keyPath);
+        // console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
-        console.log(key, keyPath);
+        // console.log(key, keyPath);
       },
       Logout:function(){
-        console.log('a')
         this.setSignOut()
         this.$router.replace('/')
         api.Logout().then(res=>{
@@ -132,6 +131,8 @@ import {imgBaseUrl} from '@/util/env'
         this.signature = res.data.signature
         this.voucher_number = res.data.voucher_number
         this.integral = res.data.integral
+      }).catch((error)=>{
+        this.$router.replace('/')
       })
       api.GetUserKillStatus().then(res=>{
         if(res.code==0){

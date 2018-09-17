@@ -264,6 +264,7 @@ export default {
           api.saveKillGood(data).then(res =>{
             if(res.code==0){
               this.$message.success('提交成功!')
+              this.$router.replace('/Examineing')
             }else{
               this.$message.error('提交失败'+res.msg)
             }

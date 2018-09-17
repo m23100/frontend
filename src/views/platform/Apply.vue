@@ -5,35 +5,35 @@
             <img src="../../assets/img/vip.png" alt="">
         </div>
         <!-- 去申请 -->
-        <div class="box" v-if="state =='3'">
+        <div class="box" v-if="state =='6'">
             <h2 class="Title">放单权限</h2>
             <div class="centent"><img src="../../assets/img/imgone.png" alt=""></div>
             <h3>您的放单权限处于未申请状态</h3>
             <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = true">去申请</el-button></div>            
         </div>
         <!-- 审核中 -->
-         <div class="box" v-else-if="state =='0'">
+         <div class="box" v-else-if="state =='1'">
             <h2 class="Title">放单权限</h2>
             <div class="centent"><img src="../../assets/img/imgtwo.png" alt=""></div>
             <h3>放单权限资格正在全力审核中，请耐心等待</h3>
-            <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = false">审核中</el-button></div>            
+            <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = true">修改资料</el-button></div>            
         </div>
         <!-- 拥有放单权限 -->
-        <div class="box" v-else-if="state =='1'">
+        <div class="box" v-else-if="state =='0'">
             <h2 class="Title">放单权限</h2>
             <div class="centent"><img src="../../assets/img/imgthree.png" alt=""></div>
             <h3>上传时请注意仔细阅读积分规则，以免扣分影响正常放单权限~</h3>
             <div class="center"><el-button type="text" class="test" @click="go">去放单</el-button></div>            
         </div>
         <!-- 审核失败 -->
-        <div class="box" v-else-if="state =='2'">
+        <div class="box" v-else-if="state =='3'">
             <h2 class="Title">放单权限</h2>
             <div class="centent"><img src="../../assets/img/imgfour.png" alt=""></div>
-            <h3>审核未通过！<span class="Tips">被拒原因：无法联系到填写的QQ</span></h3>
-            <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = true">重新审核</el-button></div>            
+            <h3>审核未通过！<span class="Tips">被拒原因：{{this.ruleForm.refuse}}</span></h3>
+            <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = true">修改资料</el-button></div>            
         </div>
         <!-- 积分被扣完 -->
-        <div class="box" v-else>
+        <div class="box" v-else-if="state=='4'">
             <h2 class="Title">放单权限</h2>
             <div class="centent"><img src="../../assets/img/imgfour.png" alt=""></div>
             <h3>您的积分被扣完了!<span class="Tips">放单资格将在下月1号恢复</span></h3>
@@ -75,7 +75,7 @@ export default {
   data() {
     return {
       centerDialogVisible: false,
-      state:'3',
+      state:'6',//  1:放单权限审核中,   3放单权限审核被拒 4积分用完停用  6暂未开通放单权限
       ruleForm: {
         industry: '',
         linker: '',
@@ -117,6 +117,7 @@ export default {
           api.applyaudit(data).then(res =>{
             if(res.code==0){
               this.$message.success('提交成功!')
+              this.$router.go(0)
             }else{
               this.$message.error('提交失败')
             }
@@ -133,18 +134,13 @@ export default {
   created(){
       console.log(this.state)
     //用户获取放单权限资格申请资料审核数据
-     api.lastapply().then(res =>{
-        // console.log(res.data)
-        this.state=res.data[0].state
-        // console.log(this.state)
-     })
      api.GetUserIsSend().then(res=>{
-      if(res.code==0){
-        this.state = 1
-      }else{
-
+      this.state = res.code
+      if(res.code==1 || res.code==3){
+        this.ruleForm = res.submit_audit
       }
      })
+     console.log(this.ruleForm)
   }
 };
 </script>

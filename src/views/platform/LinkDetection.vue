@@ -39,18 +39,22 @@ export default {
       if (value === '') {
         callback(new Error('请输入商品链接'))
       } else {
-        let res = false
         this.checkout().then(res=>{
-          console.log(res)
             if(res.code==0){
               this.setGoodsType(this.getGoodsType)
-              this.setGoodsLink({link:this.ruleForm.link,id:res.data.goodsid})
+              this.setGoodsInfo({
+                link:res.data.goodslink,
+                id:res.data.goodsid,
+                salecount:res.data.salecount,
+                coverimage:res.data.images[0]
+              })
               callback()
             }else{
               callback(new Error('商品链接检测失败'))
             }
         })
         .catch(function(error) {
+          console.log(error)
           callback(new Error('商品链接检测失败,网络错误！'))
         })
       }
@@ -69,7 +73,7 @@ export default {
     };
   },
   methods:{
-    ...mapActions({setGoodsType:'setGoodsType', setGoodsLink: 'setGoodsLink'}),
+    ...mapActions({setGoodsType:'setGoodsType', setGoodsInfo: 'setGoodsInfo'}),
     checkout:function(){  
       return api.checklink({link:this.ruleForm.link})
     } ,

@@ -1,5 +1,5 @@
 <template>
-    <div class="Authentication">
+    <div class="Authentication right-content">
         <div class="vipimg">
             <img src="../assets/img/vip.png" alt="">
         </div>
@@ -14,159 +14,144 @@
         <div class="centent" v-else-if="(state===1  || state===0) ">
             <h2 class="Title">认证信息</h2>
             <div class="PersonalData">
-                <div class="name">
-                    <span>真实姓名</span>
-                    <div>{{real_name}}</div>
-                </div>
-                <div class="name">
-                    <span>手机号</span>
-                    <div>{{phone}}</div>
-                </div>
-                 <div class="number" >
-                    <span>身份证号</span>
-                    <div>{{id_number}}</div>
-                </div>
-                 <div class="name" >
-                    <span>收入水平</span>
-                    <div>13037851234</div>
-                </div>
-                <div class="channel">
-                    <span>自有渠道</span>
-                    <div>{{channel_info}}</div>
-                </div>                
-            </div>
-            <div class="update">
-                <span @click="centerDialogVisible = true">申请更新</span>
+              <el-row>
+                <el-col :span="3"><div class="grid-content bg-purple">真实姓名</div></el-col>
+                <el-col :span="14"><div class="grid-content bg-purple-light">{{ruleForm.real_name}}</div></el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="3"><div class="grid-content bg-purple">手机号</div></el-col>
+                <el-col :span="14"><div class="grid-content bg-purple-light">{{ruleForm.phone}}</div></el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="3"><div class="grid-content bg-purple">身份证号</div></el-col>
+                <el-col :span="14"><div class="grid-content bg-purple-light">{{ruleForm.id_number}}</div></el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="3"><div class="grid-content bg-purple">收入水平</div></el-col>
+                <el-col :span="14"><div class="grid-content bg-purple-light">{{user_income_str}}</div></el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="3"><div class="grid-content bg-purple">自有渠道</div></el-col>
+                <el-col :span="14"><div class="grid-content bg-purple-light">{{ruleForm.channel_info}}</div></el-col>
+              </el-row>
+              <el-row>
+                <el-button @click="centerDialogVisible = true" type="primary">申请更新</el-button>
+              </el-row>             
             </div>
         </div>
         <!-- 弹窗提交申请放单表单 -->
         <el-dialog
           title="上传放单权限资格申请资料"
-          :visible.sync="centerDialogVisible" width="36%" center>
-          <div class="from">
-            <div class="flex1">
-              <div class="flex-left">真实姓名</div> 
-              <input type="text" v-model="real_name" placeholder="填写真实姓名">
-            </div>
-            <div class="flex1">
-              <div class="flex-left">手机号</div> 
-              <input type="text" v-model="phone" placeholder="填写手机号">
-            </div>
-            <div class="flex1">
-              <div class="flex-left">身份证号</div> 
-              <input type="text" v-model="id_number" placeholder="填写身份证号码">
-            </div>
-            <div class="flex2">
-              <div class="flex-left">上传身份证</div>
-              <div class="flex-right"> 
-                <el-upload
-                  class="avatar-uploader"
-                  :headers="uploadHeaders"
-                  :action="uploadUrl"
-                  :show-file-list="false"
-                  :limit="1"
-                  :before-upload="beforeAvatarUpload"
-                  :on-preview="handlePictureCardPreview"
-                  :on-exceed="handleExceed"
-                  :on-success="idImageFront"
-                  :before-remove="beforeRemove"
-                  :on-remove="idImageFrontRemove"
-                  >
-                  <img v-if="id_image_just_url" :src="id_image_just_url" class="avatar">
-                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                  <div class="el-upload__tip" slot="tip">上传身份证正面</div>
-                </el-upload>
+          :visible.sync="centerDialogVisible" width="40%" center>
 
-                <el-upload
-                  class="avatar-uploader"
-                  :headers="uploadHeaders"
-                  :action="uploadUrl"
-                  :show-file-list="false"
-                  :limit="1"
-                  :before-upload="beforeAvatarUpload"
-                  :on-preview="handlePictureCardPreview"
-                  :on-exceed="handleExceed"
-                  :on-success="idImageBack"
-                  :on-remove="idImageBackRemove"
-                  :before-remove="beforeRemove"
-                  >
-                  <img v-if="id_image_back_url" :src="id_image_back_url" class="avatar">
-                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                  <div class="el-upload__tip" slot="tip">上传身份证反面</div>
-                </el-upload>
-              </div>
-            </div>
-            <div class="flex2">
-              <div class="flex-left">收入水平</div>
-              <div class="flex-right"> 
-                <el-select v-model="value" placeholder="请选择" @change="handleChange">
-                  <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                  </el-option>
-                </el-select>
-              </div>
-            </div>
-            <div class="flex2">
-              <div class="flex-left">上传图片</div>
-              <div class="flex-right"> 
-                <el-upload
-                  class="avatar-uploader"
-                  :headers="uploadHeaders"
-                  :action="uploadUrl"
-                  :show-file-list="false"
-                  :before-upload="beforeAvatarUpload"
-                  :on-preview="handlePictureCardPreview"
-                  :limit="1"
-                  :on-exceed="handleExceed"
-                  :on-success="incomeProve"
-                  :before-remove="beforeRemove"
-                  :on-remove="incomeProveRemove"
-                  >
-                  <img v-if="income_prove_url" :src="income_prove_url" class="avatar">
-                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                  <!-- <div class="el-upload__tip" slot="tip">上传身份证正面</div> -->
-                </el-upload>
-              </div>
-            </div>
-            <div class="flex1">
-              <div class="flex-left">自有渠道</div> 
-              <input type="text" v-model="channel_info" placeholder="填写自有渠道信息">
-            </div>
-            <div class="flex2">
-              <div class="flex-left">上传图片</div>
-              <div class="flex-right"> 
-                <el-upload
-                  class="avatar-uploader"
-                  :headers="uploadHeaders"
-                  :action="uploadUrl"
-                  :show-file-list="false"
-                  :limit="1"
-                  :before-upload="beforeAvatarUpload"
-                  :on-preview="handlePictureCardPreview"
-                  :on-exceed="handleExceed"
-                  :on-success="channelProve"
-                  :before-remove="beforeRemove"
-                  :on-remove="channelProveRemove"
-                  >
-                  <img v-if="channel_prove_url" :src="channel_prove_url" class="avatar">
-                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                  <!-- <div class="el-upload__tip" slot="tip">上传身份证正面</div> -->
-                </el-upload>
-              </div>
-            </div>
-          </div>
+          <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="110px" class="demo-ruleForm">
+          <el-form-item label="真实姓名" prop="real_name">
+            <el-input v-model="ruleForm.real_name" placeholder="请填写真实姓名"></el-input>
+          </el-form-item>
+          <el-form-item label="手机号" prop="phone">
+            <el-input v-model="ruleForm.phone" placeholder="请填写手机号"></el-input>
+          </el-form-item>
+          <el-form-item label="身份证号" prop="id_number">
+            <el-input v-model="ruleForm.id_number" placeholder="请填写身份证号码"></el-input>
+          </el-form-item>
+          <el-form-item label="身份证图片">
+            <el-upload
+              class="avatar-uploader"
+              :headers="uploadHeaders"
+              :action="uploadUrl"
+              :show-file-list="false"
+              :limit="1"
+              :before-upload="beforeAvatarUpload"
+              :on-preview="handlePictureCardPreview"
+              :on-exceed="handleExceed"
+              :on-success="idImageFront"
+              :before-remove="beforeRemove"
+              :on-remove="idImageFrontRemove"
+              >
+              <img v-if="ruleForm.id_image_just" :src="ruleForm.id_image_just" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              <div class="el-upload__tip" slot="tip">上传身份证正面</div>
+            </el-upload>
+            <el-upload
+              class="avatar-uploader"
+              :headers="uploadHeaders"
+              :action="uploadUrl"
+              :show-file-list="false"
+              :limit="1"
+              :before-upload="beforeAvatarUpload"
+              :on-preview="handlePictureCardPreview"
+              :on-exceed="handleExceed"
+              :on-success="idImageBack"
+              :on-remove="idImageBackRemove"
+              :before-remove="beforeRemove"
+              >
+              <img v-if="ruleForm.id_image_back" :src="ruleForm.id_image_back" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              <div class="el-upload__tip" slot="tip">上传身份证反面</div>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="收入水平">
+            <el-select v-model="ruleForm.user_income" placeholder="请选择" @change="handleChange">
+              <el-option
+                v-for="item in ruleForm.options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="上传照片">
+            <el-upload
+              class="avatar-uploader"
+              :headers="uploadHeaders"
+              :action="uploadUrl"
+              :show-file-list="false"
+              :before-upload="beforeAvatarUpload"
+              :on-preview="handlePictureCardPreview"
+              :limit="1"
+              :on-exceed="handleExceed"
+              :on-success="incomeProve"
+              :before-remove="beforeRemove"
+              :on-remove="incomeProveRemove"
+              >
+              <img v-if="ruleForm.income_prove" :src="ruleForm.income_prove" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              <!-- <div class="el-upload__tip" slot="tip">上传身份证正面</div> -->
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="自有渠道" prop="channel_info">
+            <el-input v-model="ruleForm.channel_info" placeholder="填写自有渠道信息"></el-input>
+          </el-form-item>
+          <el-form-item label="上传照片">     
+            <el-upload
+              class="avatar-uploader"
+              :headers="uploadHeaders"
+              :action="uploadUrl"
+              :show-file-list="false"
+              :limit="1"
+              :before-upload="beforeAvatarUpload"
+              :on-preview="handlePictureCardPreview"
+              :on-exceed="handleExceed"
+              :on-success="channelProve"
+              :before-remove="beforeRemove"
+              :on-remove="channelProveRemove"
+              >
+              <img v-if="ruleForm.channel_prove" :src="ruleForm.channel_prove" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              <!-- <div class="el-upload__tip" slot="tip">上传身份证正面</div> -->
+            </el-upload>
+          </el-form-item>
+          </el-form>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="Submission" type="primary">提交</el-button>
+            <el-button @click="Submission('ruleForm')" type="primary">提交</el-button>
             <el-button @click="centerDialogVisible = false">取消</el-button>
           </span>
         </el-dialog>
     </div>
 </template>
 <script>
-import api from '../http/api'
+import api from '@/http/api'
+import {imgBaseUrl} from '@/util/env' 
 export default {
   data() {
     return {
@@ -177,20 +162,49 @@ export default {
       state: 0,
       options: [],
       value: "",
+      user_income_str:'',
       uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`},
-      real_name:'',
-      phone:'',
-      id_number:'',
-      id_image_just:'',
-      id_image_just_url:'',
-      id_image_back:'',
-      id_image_back_url:'',
-      user_income:'',
-      income_prove:'',
-      income_prove_url:'',
-      channel_info:'',
-      channel_prove:'',
-      channel_prove_url:''
+      ruleForm: {
+        real_name: '',
+        phone: '',
+        id_number:'',
+        user_income:'',
+        income_prove:'',
+        options: [],
+        id_image_just:'',
+        id_image_back:'',
+        channel_info:'',
+        channel_prove:''
+      },
+      rules: {
+        real_name: [
+          { required: true, message: '请输入真实姓名', trigger: 'blur' },
+        ],
+        phone: [
+          { required: true, message: '请输入手机号', trigger: 'change' },
+        ],
+        id_number: [
+          { required: true, message: '请输入身份证号', trigger: 'change' }
+        ],
+        user_income: [
+          { required: true, message: '请选择收入水平', trigger: 'change' }
+        ],
+        income_prove: [
+          { required: true, message: '请上传收入水平图片', trigger: 'change' }
+        ],
+        id_image_just: [
+          { required: true, message: '请上身份证正面', trigger: 'change' }
+        ],
+        id_image_back: [
+          { required: true, message: '请上传身份证反而', trigger: 'change' }
+        ],
+        channel_info: [
+          { required: true, message: '请输入渠道信息', trigger: 'change' }
+        ],
+        channel_prove: [
+          { required: true, message: '请上传渠道信息图片', trigger: 'change' }
+        ],
+      },
     }
   },
   
@@ -219,235 +233,153 @@ export default {
       return this.$confirm(`确定移除 ${file.name}？`)
     },
     idImageFront(response,file){
-      this.id_image_just_url = URL.createObjectURL(file.raw)
-      this.id_image_just = response.data.url
+      // this.id_image_just_url = URL.createObjectURL(file.raw)
+      this.ruleForm.id_image_just = imgBaseUrl + response.data.url
     },
     idImageFrontRemove(file,idImageList){
-      this.id_image_just = ''
+      this.ruleForm.id_image_just = ''
     },
     idImageBack(response){
-      this.id_image_back_url = URL.createObjectURL(file.raw)
-      this.id_image_back = response.data.url
+      // this.id_image_back_url = URL.createObjectURL(file.raw)
+      this.ruleForm.id_image_back = imgBaseUrl + response.data.url
     },
     idImageBackRemove(){
-      this.id_image_back = ''
+      this.ruleForm.id_image_back = ''
     },
     incomeProve(response){
-      this.income_prove_url = URL.createObjectURL(file.raw)
-      this.income_prove = response.data.url
+      // this.income_prove_url = URL.createObjectURL(file.raw)
+      this.ruleForm.income_prove = imgBaseUrl + response.data.url
     },
     incomeProveRemove(){
-      this.income_prove = ''
+      this.ruleForm.income_prove = ''
     },
     channelProve(response){
-      this.channel_prove_url = URL.createObjectURL(file.raw)
-      this.channel_prove = response.data.url
+      // this.channel_prove_url = URL.createObjectURL(file.raw)
+      this.ruleForm.channel_prove = imgBaseUrl + response.data.url
     },
     channelProveRemove(){
-      this.channel_prove = ''
+      this.ruleForm.channel_prove = ''
     },
     handleChange(val){
-      this.user_income = val
+      this.ruleForm.user_income = val
     },
 
     //提交表单信息
-    Submission(){
-      let data={
-         real_name:this.real_name,
-         phone:this.phone,
-         id_number:this.id_number,
-         id_image_just:this.id_image_just,
-         id_image_back:this.id_image_back,
-         user_income:this.user_income,
-         income_prove:this.income_prove,
-         channel_info:this.channel_info,
-         channel_prove:this.channel_prove,
-      }
-      // console.log(data)
-      api.addUserAuth(data).then(res =>{
-          console.log(res)
+    Submission(formName){
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          let data=this.ruleForm
+          api.addUserAuth(data).then(res =>{
+            if(res.code==0){
+              this.$message.success('提交成功!')
+            }else{
+              this.$message.error('提交失败')
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        } else {
+          return false;
+        }
       })
+
+      // let data={
+      //    real_name:this.ruleForm.real_name,
+      //    phone:this.ruleForm.phone,
+      //    id_number:this.ruleForm.id_number,
+      //    id_image_just:this.ruleForm.id_image_just,
+      //    id_image_back:this.ruleForm.id_image_back,
+      //    user_income:this.ruleForm.user_income,
+      //    income_prove:this.ruleForm.income_prove,
+      //    channel_info:this.ruleForm.channel_info,
+      //    channel_prove:this.ruleForm.channel_prove,
+      // }
+      // console.log(data)
+      // api.addUserAuth(data).then(res =>{
+      //     if(res.code==0){
+      //       this.$message.success('提交成功!')
+      //     }else{
+      //       this.$message.error('提交失败')
+      //     }
+      // })
     }
   },
 
   created() {
     api.getUserAuth().then(res =>{
       this.state = res.data.isAuth
-      this.real_name = res.data.userAuthInfo.real_name
-      this.id_number = res.data.userAuthInfo.id_number
-      this.user_income = res.data.userAuthInfo.user_income
-      this.phone = res.data.userAuthInfo.phone
-      this.channel_info = res.data.userAuthInfo.channel_info
+      this.ruleForm.real_name = res.data.userAuthInfo.real_name
+      this.ruleForm.id_number = res.data.userAuthInfo.id_number
+      this.ruleForm.user_income = res.data.userAuthInfo.user_income
+      this.ruleForm.phone = res.data.userAuthInfo.phone
+      this.ruleForm.channel_info = res.data.userAuthInfo.channel_info
+      this.ruleForm.id_image_just = res.data.userAuthInfo.id_image_just
+      this.ruleForm.id_image_back = res.data.userAuthInfo.id_image_back
+      this.ruleForm.income_prove = res.data.userAuthInfo.income_prove
+      this.ruleForm.channel_prove = res.data.userAuthInfo.channel_prove
       res.data.userIncomeList.forEach((element,index) => {
-        this.options.push({label:element.income,value:element.income_type})
+        if(element.income_type==this.ruleForm.user_income){
+          this.user_income_str = element.income
+        }
+        this.ruleForm.options.push({label:element.income,value:element.income_type})
       })
     })
+    // console.log(this.ruleForm.options)
   }
   
 }
 </script>
-<style  lang="scss" scoped type="text/css">
-  .Title {
-    font-size: 18px;
-    color: #000;
-    border-left: 4px solid #43b5f9;
-    line-height: 22px;
-    padding-left: 10px;
-    font-weight: 400;
+<style type="text/css" lang="scss" scoped="">
+  .el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    width:100% !important;
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .bg-purple-dark {
+    background: #99a9bf;
+  }
+  .bg-purple {
+    // background: #d3dce6;
+    color:#989898;
+    line-height:36px;
+    font-size:16px;
+  }
+  .bg-purple-light {
+    padding-left:12px;
+    background: #f0f0f0;
+    line-height:36px;
+    font-size:14px;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
   }
   .centent {
     background-color: #fff;
-    padding: 20px 12px;
-    height: 310px;
-  }
-  .xx {
-    text-align: center;
-  }
-  .centent h3 {
-    color: #a0a0a0;
-    font-size: 14px;
-    text-align: center;
-    margin: 20px 0;
-  }
-  .xxx {
-    text-align: center;
-    margin: 0 auto;
-  }
-  .test {
-    width: 80px;
-    height: 36px;
-    background-color: #49a6f7;
-    border-radius: 4px;
-    border-radius: 8px;
-    font-size: 14px;
-    /* line-height: 36px; */
-    color: #fff;
-    cursor: pointer;
-  }
-  .PersonalData {
-    padding: 5px 25px;
-  }
-  .PersonalData > div {
-    padding: 12px 0;
-  }
-  .PersonalData > div > div {
-    padding-left: 12px;
-    color: #394853;
-  }
-  .PersonalData > div > span {
-    font-size: 14px;
-    line-height: 36px;
-    color: #989898;
-  }
-  .name,
-  .number {
-    display: flex;
-    justify-content: space-between;
-    width: 400px;
-  }
-  .name > div {
-    width: 323px;
-    height: 36px;
-    line-height: 36px;
-    background-color: #f0f0f0;
-    border-radius: 4px;
-    text-align: left;
-  }
-  .number > div {
-    width: 323px;
-    height: 36px;
-    line-height: 36px;
-    color: #394853;
-    background-color: #f0f0f0;
-    border-radius: 4px;
-    text-align: left;
-  }
-  .income {
-    display: flex;
-    justify-content: space-between;
-    width: 241px;
-  }
-  .income > div {
-    width: 173px;
-    height: 36px;
-  }
-  .channel {
-    display: flex;
-    justify-content: space-between;
-    width: 660px;
-  }
-  .channel > div {
-    width: 586px;
-    height: 36px;
-    line-height: 36px;
-    color: #394853;
-    background-color: #f0f0f0;
-    border-radius: 4px;
-    text-align: left;
-  }
-  .update {
+    display: inline-block;
     width: 100%;
+    padding-top: 20px;
   }
-  .update > span {
-    width: 88px;
-    height: 36px;
-    background-color: #49a6f7;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 36px;
-    color: #fff;
-    cursor: pointer;
-    float: right;
-    text-align: center;
+  .PersonalData{
+    padding-top:10px;
+    padding-left:30px;
+    padding-bottom:30px;
   }
-  /* 弹窗 */
-  .flex1 ,.flex2{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin: 12px 0;
+  .Title{
+    background-color:#fff;
   }
-  .flex-left{
-    /* span */
-    /* padding: 30px 20px; */
-    color: #989898;
-    font-size: 14px;
-    line-height: 36px;
-    width: 90px;
-    margin-right: 15px;
-  }
-  .flex-right{
-    display: flex;
-    width: 100%;
-  }
-  .flex1 > input,.flex2 > input {
-    width: 100%;
-    border-radius: 4px;
-    border: solid 1px #d3d3d3;
-    padding: 10px;
-  }
-
-  /*.flex2 {
-    display: flex;
-    width: 100%;
-    margin: 12px 0;
-  }*/
-  /*.flex2 > span {
-    color: #989898;
-    font-size: 14px;
-    line-height: 36px;
-    margin-right: 35px;
-  }*/
-  /*.flex2 > input {
-    width: 525px;
-    border-radius: 4px;
-    border: solid 1px #d3d3d3;
-    padding: 10px;
-  }*/
-  .textarea {
-    display: flex;
-    justify-content: space-between;
-    width: 84%;
+  .avatar-uploader{
+    display:inline-block;
   }
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
@@ -477,5 +409,8 @@ export default {
     width: 115px;
     height: 115px;
     display: block;
+  }
+  .el-upload__tip{
+    width:100px;
   }
 </style>

@@ -6,35 +6,35 @@
         </div>
         <!-- 去申请 -->
         <div class="box" v-if="state =='3'">
-            <h2 class="Title">实时数据</h2>
+            <h2 class="Title">放单权限</h2>
             <div class="centent"><img src="../../assets/img/imgone.png" alt=""></div>
             <h3>您的放单权限处于未申请状态</h3>
             <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = true">去申请</el-button></div>            
         </div>
         <!-- 审核中 -->
          <div class="box" v-else-if="state =='0'">
-            <h2 class="Title">实时数据</h2>
+            <h2 class="Title">放单权限</h2>
             <div class="centent"><img src="../../assets/img/imgtwo.png" alt=""></div>
             <h3>放单权限资格正在全力审核中，请耐心等待</h3>
             <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = false">审核中</el-button></div>            
         </div>
         <!-- 拥有放单权限 -->
         <div class="box" v-else-if="state =='1'">
-            <h2 class="Title">实时数据</h2>
+            <h2 class="Title">放单权限</h2>
             <div class="centent"><img src="../../assets/img/imgthree.png" alt=""></div>
             <h3>上传时请注意仔细阅读积分规则，以免扣分影响正常放单权限~</h3>
             <div class="center"><el-button type="text" class="test" @click="go">去放单</el-button></div>            
         </div>
         <!-- 审核失败 -->
         <div class="box" v-else-if="state =='2'">
-            <h2 class="Title">实时数据</h2>
+            <h2 class="Title">放单权限</h2>
             <div class="centent"><img src="../../assets/img/imgfour.png" alt=""></div>
             <h3>审核未通过！<span class="Tips">被拒原因：无法联系到填写的QQ</span></h3>
             <div class="center"><el-button type="text" class="test" @click="centerDialogVisible = true">重新审核</el-button></div>            
         </div>
         <!-- 积分被扣完 -->
         <div class="box" v-else>
-            <h2 class="Title">实时数据</h2>
+            <h2 class="Title">放单权限</h2>
             <div class="centent"><img src="../../assets/img/imgfour.png" alt=""></div>
             <h3>您的积分被扣完了!<span class="Tips">放单资格将在下月1号恢复</span></h3>
             <div class="center"><el-button type="text" class="test">默默等待</el-button></div>            
@@ -43,16 +43,26 @@
         <el-dialog
           title="上传放单权限资格申请资料"
           :visible.sync="centerDialogVisible" width="45%" center>
-          <div  class="from">
-            <div class="flex"><span>行业名称</span> <input type="text" v-model="name" placeholder="填写行业内熟知的名称"></div>
-            <div class="flex"><span>联系人</span> <input type="text" v-model="people" placeholder="填写帐号联系人真实姓名"></div>
-            <div class="flex"><span>联系QQ</span> <input type="number" v-model="qq" placeholder="填写行业内熟知的名称"></div>
-            <div class="flex"><span>手机号</span> <input type="number" v-model="plonenumber" placeholder="填写帐号联系人的11位手机号码"></div>
-            <div class="textarea"><span>详细介绍</span><textarea v-model="text" name="" id="" cols="30" rows="10"  placeholder="详细介绍描述个人/团队情况，所在地、成员人数、收入实力等"></textarea></div>
-          </div>
+          <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="110px" class="demo-ruleForm">
+          <el-form-item label="行业名称" prop="industry">
+            <el-input v-model="ruleForm.industry" placeholder="填写行业名称"></el-input>
+          </el-form-item>
+          <el-form-item label="联系人" prop="linker">
+            <el-input v-model="ruleForm.linker" placeholder="填写帐号联系人"></el-input>
+          </el-form-item>
+          <el-form-item label="联系QQ" prop="qq">
+            <el-input v-model="ruleForm.qq" placeholder="请填写联系QQ"></el-input>
+          </el-form-item>
+          <el-form-item label="手机号" prop="phone">
+            <el-input v-model="ruleForm.phone" placeholder="请填写手机号"></el-input>
+          </el-form-item>
+          <el-form-item label="详细介绍" prop="content">
+            <el-input type="textarea" v-model="ruleForm.content" placeholder="详细介绍描述个人/团队情况，所在地、成员人数、收入实力等"></el-input>
+          </el-form-item>
+          </el-form>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="centerDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="Submission">确 定</el-button>
+            <el-button @click="Submission('ruleForm')" type="primary">提交</el-button>
+            <el-button @click="centerDialogVisible = false">取消</el-button>
           </span>
         </el-dialog>
 
@@ -65,12 +75,31 @@ export default {
   data() {
     return {
       centerDialogVisible: false,
-      name: "",
-      people:'',
-      qq:'',
-      plonenumber:'',
-      text:'',
-      state:'3'
+      state:'3',
+      ruleForm: {
+        industry: '',
+        linker: '',
+        qq:'',
+        phone:'',
+        content:'',
+      },
+      rules: {
+        industry: [
+          { required: true, message: '请输入行业名称', trigger: 'blur' },
+        ],
+        linker: [
+          { required: true, message: '请输入联系人', trigger: 'change' },
+        ],
+        qq: [
+          { required: true, message: '请输入联系QQ', trigger: 'change' }
+        ],
+        phone: [
+          { required: true, message: '请输入手机号', trigger: 'change' }
+        ],
+        content: [
+          { required: true, message: '请输入详细介绍', trigger: 'change' }
+        ],
+      },
     };
   },
   methods: {
@@ -81,25 +110,23 @@ export default {
     },
 
     //用户上传放单权限资格申请资料
-    Submission:function(){
-      let data ={
-          industry:this.name,
-          linker:this.people,
-          qq:this.qq,
-          phone:this.plonenumber,
-          content:this.text
-      }
-      console.log(data)
-      api.applyaudit(data).then(res =>{
-          if(res.code == 0) {
-              console.log(res)
-            //   this.$router.push({
-            //   path: "/Submission"
-            // });
-          }        
-      })
-      .catch(error => {
-          console.log(error)
+    Submission:function(formName){
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          let data=this.ruleForm
+          api.applyaudit(data).then(res =>{
+            if(res.code==0){
+              this.$message.success('提交成功!')
+            }else{
+              this.$message.error('提交失败')
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        } else {
+          return false;
+        }
       })
     }
   },
@@ -107,9 +134,16 @@ export default {
       console.log(this.state)
     //用户获取放单权限资格申请资料审核数据
      api.lastapply().then(res =>{
-        console.log(res.data)
+        // console.log(res.data)
         this.state=res.data[0].state
-        console.log(this.state)
+        // console.log(this.state)
+     })
+     api.GetUserIsSend().then(res=>{
+      if(res.code==0){
+        this.state = 1
+      }else{
+
+      }
      })
   }
 };

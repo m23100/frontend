@@ -1,13 +1,17 @@
 <template>
-  <div class="Viptesting">
+  <div class="Viptesting right-content">
+    <h2 class="Title">平推审核中</h2>
     <el-table
       :data="list"
       highlight-current-row
       style="width: 100%"> 
       <el-table-column
-        prop="goodstitle"
         label="商品名"
-        width="180">
+        width="280">
+        <template slot-scope="scope">
+          <img :src="scope.row.coverimage.main" alt="商品" class="coverimage">
+          <span style="margin-left: 10px">{{ scope.row.goodstitle }}</span>
+        </template>
       </el-table-column>
       <el-table-column
         label="文案信息">
@@ -19,56 +23,56 @@
             <div class="item-content">
                 <div class="item">
                   <div class="copys">
-                    <div class="photo"><img src="http://temp.im/220x280" height="280" alt="商品"></div>
+                    <div class="photo"><img :src="scope.row.coverimage.main" width="220" height="280" alt="商品"></div>
                     <div class="descr">
-                      全网最低！全网最低！<br>
-                      【火爆ins】高腰韩版九分缩脚裤！<br>
-                      【原价39.9元】券后【19.9元】包邮<br>
-                      领券：https://uland.taobao.com/quan/detail?sellerId=3857273069&amp;activityId=17b37d22e22a444caa809fedcc80d9e6<br>
-                      抢购：https://detail.tmall.com/item.htm?id=568895965597<br>
-                      【全网最低价】黑色帅气自信，粉色仙女本尊！超多颜色，任卿翻牌！夏天清凉标配~超多size，各种身材轻松驾驭！【赠运费险】
+                      {{scope.row.goodstitle}}<br>
+                      【原价{{scope.row.origprice}}元】券后【{{scope.row.voucherprice}}】<br>
+                      领券：{{scope.row.couponlink}}<br>
+                      抢购：{{scope.row.goodslink}}<br>
+                      {{scope.row.copywriting.first}}
                     </div>
                   </div>
                   <div class="mask showmore hover">
                     <div class="cover">
-                      <a href="#"><img src="http://temp.im/260x260" alt="产品名"></a>
+                      <a href="#"><img :src="scope.row.copywritingimage.first" width="260" height="260" alt="产品名"></a>
                       <div class="btns">
-                        <span>加入选品</span><span class="doCopy">点击复制</span>
+                        <!-- <span>加入选品</span><span class="doCopy">点击复制</span> -->
                       </div>
                     </div>
                     <div class="content">
-                      <h1 class="title">【三只松鼠旗舰店】夏威夷果185gx2袋艺术硕士 顶起</h1>
+                      <h1 class="title">
+                      {{scope.row.goodstitle}}</h1>
                       <div class="line"><div></div></div>
                       <div class="sales">
-                        <div>券后<span>￥<b>28.90</b></span></div>
-                        <p>月销：22222</p>
+                        <div>券后<span>￥<b>{{scope.row.voucherprice}}</b></span></div>
+                        <p>月销：{{scope.row.monthsales}}</p>
                       </div>
-                      <div class="fee">佣金：通用 <b>30%</b>（10元）</div>
+                      <div class="fee">佣金：{{scope.row.commissiontype}} <b>{{scope.row.commissionrate}}%</b>（{{scope.row.couponmoney}}元）</div>
                       <div class="coupon">
                         <div>
-                          <span>10元</span>
+                          <span>{{scope.row.couponmoney}}元</span>
                         </div>
                         <p>
-                          <span><img src="/assets/images/icon-tmall.png" alt="tmall"></span>
-                          <span><img src="/assets/images/icon-qiang.png" alt="tmall"></span>
+                          <span><img v-if="scope.row.shoptype==1" src="@/assets/img/icon-taobao.png" alt="taobao"><img v-if="scope.row.shoptype==2" src="@/assets/img/icon-tmall.png" alt="tmall"></span>
+                          <span><img v-if="scope.row.activitytype==1" src="@/assets/img/icon-ju.png" alt="tmall"><img v-if="scope.row.activitytype==2" src="@/assets/img/icon-qiang.png" alt="tmall"></span>
                         </p>
                       </div>
                     </div>
                     <div class="extras">
                       <div class="row">
-                        <span>推广销量增长：<b>2000</b></span>
-                        <a href="#" class="error"><i>!</i> 商品纠错</a>
+                        <span>推广销量增长：<b>{{scope.row.increment}}</b></span>
+                        <!-- <a href="#" class="error"><i>!</i> 商品纠错</a> -->
                       </div>
                       <div class="row">
-                        <span>优惠券剩余：<b>2000</b>/2000</span>
+                        <span>优惠券剩余：<b>{{scope.row.couponremain}}</b>/{{scope.row.coupontotal}}</span>
                       </div>
                       <div class="row">
-                        <span>店铺：三只松鼠旗舰店</span>
+                        <span>店铺：{{scope.row.shopname}}</span>
                       </div>
-                      <div class="row">
-                        <span>放单人：某用户</span>
-                        <span>1分钟前</span>
-                      </div>
+                      <!-- <div class="row">
+                        <span>*</span>
+                        <span>*</span>
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -113,14 +117,23 @@
       return {
         list:[],
         total:0,
-        page:1
+        page:1,
+        type:0,
+        state:0,
+        commissiontype:{
+          1:"通用",
+          2:"定向", 
+          3:"鹊桥", 
+          4:"营销"
+        }
       }
 
     },
     methods:{
-      ...mapActions({ setGoodsType: 'setGoodsType',setGoodsLink: 'setGoodsLink'}),
+      ...mapActions({ setGoodsType: 'setGoodsType',setGoodsInfo: 'setGoodsInfo'}),
       editView(info){
-        this.setGoodsLink({link:info.goodslink,id:info.goodsid,editId:info.id})
+        console.log(info)
+        this.setGoodsInfo({link:info.goodslink,id:info.goodsid,editId:info.id})
         this.setGoodsType('normal')
         this.$router.push({
           path: "/Flatfrom",
@@ -162,7 +175,16 @@
         })
       },
       handleCurrentChange(val) {
-        api.auditing({type:0,state:0,page:val}).then(res =>{
+        api.auditing({type:this.type,state:this.state,page:val}).then(res =>{
+          let that = this
+          res.data.data.forEach(function(item,index){
+            item.coverimage = JSON.parse(item.coverimage)
+            let copywritingimage = JSON.parse(item.copywritingimage)
+            let copywriting = JSON.parse(item.copywriting)
+            item.copywriting = copywriting
+            item.copywritingimage = copywritingimage
+            item.commissiontype = that.commissiontype[item.commissiontype]
+          })
           this.list = res.data.data
           this.total = res.data.total
           this.page = val
@@ -170,9 +192,19 @@
       }
     },
     created(){
-      api.auditing({type:0,state:0}).then(res =>{
+      api.auditing({type:this.type,state:this.state}).then(res =>{
+        let that = this
+        res.data.data.forEach(function(item,index){
+          item.coverimage = JSON.parse(item.coverimage)
+          let copywritingimage = JSON.parse(item.copywritingimage)
+          let copywriting = JSON.parse(item.copywriting)
+          item.copywriting = copywriting
+          item.copywritingimage = copywritingimage
+          item.commissiontype = that.commissiontype[item.commissiontype]
+        })
         this.list = res.data.data
         this.total = res.data.total
+
       })
     }
   };

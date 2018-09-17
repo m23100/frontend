@@ -8,7 +8,9 @@ const state = {
     goodsId:0,
     editId:0,
     goodsTime:'',
-    goodsDate:''
+    goodsDate:'',
+    goodsCoverimg:'',
+    goodsSalecout:''
 }
 
 const actions = {
@@ -18,10 +20,12 @@ const actions = {
     setGoodsType({ commit }, str) {
         commit(types.SET_GOODS_TYPE, str)
     },
-    setGoodsLink({ commit }, res){
+    setGoodsInfo({ commit }, res){
         commit(types.SET_GOODS_LINK, res.link)
         commit(types.SET_GOODS_ID, res.id)
         commit(types.SET_GOODS_EDIT_ID, res.editId)
+        commit(types.SET_GOODS_COVERIMG, res.coverimage)
+        commit(types.SET_GOODS_SALECOUNT, res.salecount)
     },
     setGoodsKill({ commit }, res) {
         commit(types.SET_GOODS_KILL_TIME, res.goodsTime)
@@ -35,7 +39,9 @@ const getters = {
     getGoodsId: state => state.goodsId,
     getEditId: state=>state.editId,
     getGoodsTime: state=>state.goodsTime,
-    getGoodsDate: state=>state.goodsDate
+    getGoodsDate: state=>state.goodsDate,
+    getGoodsSalecount: state=>state.goodsSalecout,
+    getGoodsCoverimg: state=>state.goodsCoverimg
 }
 
 const mutations = {
@@ -50,6 +56,12 @@ const mutations = {
     },
     [types.SET_GOODS_EDIT_ID](state, str) {
         state.editId = str
+    },
+    [types.SET_GOODS_COVERIMG](state, str) {
+        state.goodsCoverimg = str
+    },
+    [types.SET_GOODS_SALECOUNT](state, str) {
+        state.goodsSalecout = str
     },
     [types.SET_GOODS_KILL_TIME](state, str) {
         state.goodsTime = str

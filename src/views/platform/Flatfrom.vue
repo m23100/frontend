@@ -5,35 +5,35 @@
       <div class="centent">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label="商品链接" prop="goodslink">
-            <el-input v-model="ruleForm.goodslink" placeholder=""></el-input>
+            <el-input v-model="ruleForm.goodslink" placeholder="" readonly></el-input>
           </el-form-item>
           <el-form-item label="短标题" prop="goodstitle">
             <el-input v-model="ruleForm.goodstitle" placeholder="将商品短标题输入于此"></el-input>
           </el-form-item>
           <el-form-item label="初始销量" prop="startsales">
-            <el-input v-model="ruleForm.startsales" placeholder="0" class="medium"></el-input>
+            <el-input v-model="ruleForm.startsales" placeholder="0" class="medium" readonly></el-input>
           </el-form-item>
           <el-form-item label="开始时间" prop="begintimetype">
             <el-radio-group v-model="ruleForm.begintimetype">
-              <el-radio label="1">立即开始</el-radio>
-              <el-radio label="2">预约开始</el-radio>
+              <el-radio :label="1">立即开始</el-radio>
+              <el-radio :label="2">预约开始</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="时间" v-if="ruleForm.begintimetype==2">
             <el-date-picker
               v-model="ruleForm.begintime"
               type="datetime"
-              placeholder="选择日期时间" class="datetime">
+              placeholder="选择日期时间"  :picker-options="ruleForm.endDateOpt" class="datetime">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="活动类型" prop="activitytype">
             <el-radio-group v-model="ruleForm.activitytype">
-              <el-radio label="0">无活动</el-radio>
-              <el-radio label="1">淘抢购</el-radio>
-              <el-radio label="2">聚划算</el-radio>
+              <el-radio :label="0">无活动</el-radio>
+              <el-radio :label="1">淘抢购</el-radio>
+              <el-radio :label="2">聚划算</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="封面图" prop="coverimage_url">
+          <el-form-item label="封面图" prop="coverimage">
             <el-upload
               class="avatar-uploader"
               :headers="uploadHeaders"
@@ -47,14 +47,14 @@
               :before-remove="beforeRemove"
               :on-remove="coverImageRemove"
               >
-              <img v-if="ruleForm.coverimage_url" :src="ruleForm.coverimage_url" class="avatar">
+              <img v-if="ruleForm.coverimage" :src="ruleForm.coverimage" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               <div class="el-upload__tip" slot="tip">要求：图片大小400*400px，干净清晰，突显产品,不能出现牛皮癣、大量文字</div>
             </el-upload>
           </el-form-item>
           <el-form-item label="优惠券类型" prop="coupontype">
             <el-radio-group v-model="ruleForm.coupontype">
-              <el-radio label="2">阿里妈妈优惠券</el-radio>
+              <el-radio :label="2">阿里妈妈优惠券</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="券后价" prop="voucherprice">
@@ -68,10 +68,10 @@
           </el-form-item>
           <el-form-item label="佣金类型" prop="commissiontype">
             <el-radio-group v-model="ruleForm.commissiontype">
-              <el-radio label="1">营销</el-radio>
-              <el-radio label="2">通用</el-radio>
-              <el-radio label="3">定向</el-radio>
-              <el-radio label="4">鹊桥</el-radio>
+              <el-radio :label="1">通用</el-radio>
+              <el-radio :label="2">定向</el-radio>
+              <el-radio :label="3">鹊桥</el-radio>
+              <el-radio :label="4">营销</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="佣金比率" prop="commissionrate">
@@ -88,10 +88,10 @@
               :on-preview="handlePictureCardPreview"
               :on-exceed="handleExceed"
               :on-success="copyImage"
-              :before-remove="copyImageRemove"
+              :before-remove="beforeRemove"
               :on-remove="coverImageRemove"
               >
-              <img v-if="ruleForm.copywritingimage_url" :src="ruleForm.copywritingimage_url" class="avatar">
+              <img v-if="ruleForm.copywritingimage" :src="ruleForm.copywritingimage" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               <div class="el-upload__tip" slot="tip">要求：图片大小800*1200px，干净清晰，结构美观，突出产品卖点</div>
             </el-upload>
@@ -110,8 +110,9 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import api from '../../http/api'
-import {formatDate} from '../../util/tool';
+import api from '@/http/api'
+import {formatDate} from '@/util/tool'
+import {imgBaseUrl} from '@/util/env'
 export default {
   data() {
     return {
@@ -119,17 +120,22 @@ export default {
         goodslink: '',
         goodstitle: '',
         coverimage:'',
-        coverimage_url:'',
+        // coverimage_url:'',
         commissiontype:'',
         commissionrate:'',
         copywriting:'',
         copywritingimage:'',
-        copywritingimage_url:'',
+        // copywritingimage_url:'',
         voucherprice:'',
         couponlink:'',
         coupontotal:'',
         begintime:'',
         begintimetype:'',
+        endDateOpt: {
+            disabledDate: (time) => {
+              return time.getTime() < Date.now() 
+            }
+        },
         coupontype:'',
         activitytype:'',
         startsales:''
@@ -147,10 +153,10 @@ export default {
         activitytype: [
           { required: true, message: '请选择活动类型', trigger: 'change' }
         ],
-        coverimage_url: [
+        coverimage: [
           { required: true, message: '请上传封面图', trigger: 'change' },
         ],
-        copywritingimage_url: [
+        copywritingimage: [
           { required: true, message: '请上传文案主图', trigger: 'change' },
         ],
         goodstitle: [
@@ -214,15 +220,15 @@ export default {
       return this.$confirm(`确定移除 ${file.name}？`)
     },
     coverImage(response,file){
-      this.ruleForm.coverimage_url = URL.createObjectURL(file.raw)
-      this.ruleForm.coverimage = response.data.url
+      // this.ruleForm.coverimage_url = URL.createObjectURL(file.raw)
+      this.ruleForm.coverimage = imgBaseUrl+response.data.url
     },
     coverImageRemove(){
       this.ruleForm.coverimage =''
     },
     copyImage(response,file){
-      this.ruleForm.copywritingimage_url = URL.createObjectURL(file.raw)
-      this.ruleForm.copywritingimage = response.data.url
+      // this.ruleForm.copywritingimage_url = URL.createObjectURL(file.raw)
+      this.ruleForm.copywritingimage = imgBaseUrl+response.data.url
     },
     copyImageRemove(){
       this.ruleForm.copywritingimage =''
@@ -254,20 +260,38 @@ export default {
     }
   },
   created(){
-    this.ruleForm.goodsid = this.getGoodsId
-    this.ruleForm.goodslink = this.getGoodsLink
-    console.log(this.getGoodsId,this.getGoodsLink)
     if(this.getEditId>0){
       api.editView({id:this.getEditId}).then(res=>{
-        console.log(res)
+        if(res.code==0){
+          res.data.coverimage = JSON.parse(res.data.coverimage)
+          let copywritingimage = JSON.parse(res.data.copywritingimage)
+          let copywriting = JSON.parse(res.data.copywriting)
+          this.ruleForm = res.data
+          this.ruleForm.id = this.getEditId
+          console.log(res.data.coverimage)
+          // this.ruleForm.copywritingimage_url = 'http://image.ruomengtv.com/' + this.ruleForm.copywritingimage.img1
+          this.ruleForm.copywritingimage = copywritingimage.first
+          // this.ruleForm.coverimage_url = 'http://image.ruomengtv.com/' + this.ruleForm.coverimage.img1
+          this.ruleForm.coverimage = this.ruleForm.coverimage.main
+          this.ruleForm.copywriting = copywriting.first
+        }
       })
+    }else{
+      this.ruleForm.coverimage = this.getGoodsCoverimg
+      // this.ruleForm.coverimage_url = this.getGoodsCoverimg
+      this.ruleForm.startsales = this.getGoodsSalecount
+      this.ruleForm.goodsid = this.getGoodsId
+      this.ruleForm.goodslink = this.getGoodsLink
     }
+    
   },
   computed: {
     ...mapGetters([
       'getGoodsLink',
       'getGoodsId',
-      'getEditId'
+      'getEditId',
+      'getGoodsSalecount',
+      'getGoodsCoverimg'
     ])
   }
 };

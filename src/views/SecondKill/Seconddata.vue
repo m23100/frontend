@@ -15,7 +15,7 @@
               <h2 class="Title">审核动态</h2>
               <div class="dynamic">
                   <div class="flex left-list" v-for="(item,index) in DataDynamic" :key="index">
-                      <h1>商品[<span class="blue">{{item.title}}</span>]{{item.state}}</h1>
+                      <h1>商品[<span class="blue">{{item.title}}</span>]{{statetype[item.state]}}</h1>
                       <div>{{item.created_at}}</div>
                   </div>
               </div>
@@ -39,7 +39,14 @@
       return {
         Number:{},
         Rule:[],
-        DataDynamic:[]
+        DataDynamic:[],
+        statetype:{
+          0:"待审核",
+          1:"审核通过", 
+          2:"审核通过", 
+          3:"审核被拒", 
+          4:"下架"
+        }
       }
     },
     created(){

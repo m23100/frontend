@@ -44,11 +44,11 @@
               <div class="login-from" id="tab1">
                 <input v-model="phone" type="text" placeholder="手机号">
                 <input v-model="password" type="password" placeholder="密码">
-                <div id="check-code" class="code-box" style='margin-bottom:0;'>
+                <!-- <div id="check-code" class="code-box" style='margin-bottom:0;'>
                   <input type="text" id="reg-code" maxlength="5" placeholder="验证码">
                   <div class="code" id="data_code" data-value="A4agC" style="color: rgb(94, 68, 68);
                                     text-align: center;line-height: 49px;background-color: #eee;font-size: 20px;cursor:pointer;">A4agC</div>
-                </div>
+                </div> -->
 
                 <div class="choice">
                   <img src="../assets/img/choiceno.png" class='changeimg' alt="">
@@ -91,10 +91,9 @@
 </template>
 <script>
 import Vue from 'vue'
-import axios from 'axios';
 
 import { mapActions } from 'vuex'
-import api from '../http/api'
+import api from '@/http/api'
 
   export default {
     data() {

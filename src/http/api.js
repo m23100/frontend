@@ -55,30 +55,42 @@ export default {
     Login(params) {
         return fetch('/login', params)
     },
+    Logout(params){
+        return fetch('/logout', params)
+    },
     UserInfo() {
         return fetch('/userinfo')
     },
     UserData(params) {
         return fetch('/usercenter/indexdata')
     },
+    GetUserInfo(params){
+        return fetch('user/getUserInfo')
+    },
+    GetUserKillStatus(params){
+        return fetch('user/getUserKillStatus')
+    },
+    GetUserIsSend(params){
+        return fetch('user/getUserIsSend')
+    },
      //客服帮助
-     getCustomerService(params){
+    getCustomerService(params){
         return fetch('service/getCustomerService',params)
     },
     // 账户资金
     Accountfunds(params){
-        return fetch('user/getVoucherLogList?page=1')
+        return fetch('user/getVoucherLogList',params)
     },
     getUserVoucher(params){
         return fetch('user/getUserVoucher')
     },
     getRechargeLog(params){
-        return fetch('user/getRechargeLog?page=1')
+        return fetch('user/getRechargeLog',params)
     },
     //end
     //积分信息
     getUserIntegralLog(params){
-        return fetch('integral/getUserIntegralLog?page=1')
+        return fetch('integral/getUserIntegralLog',params)
     },
     getIntegralRule(params){
         return fetch('integral/getIntegralRule')
@@ -105,6 +117,10 @@ export default {
     createnormal(params){
         return fetch('usercenter/savenormal',params)
     },
+    //提交爆款单数据
+    saveFire(params){
+        return fetch('usercenter/savefire',params)
+    },
     //获取要修改的商品数据信息 
     editView(params){
         return fetch('usercenter/editview',params)
@@ -121,11 +137,15 @@ export default {
     auditedGoods(params){
         return fetch('usercenter/audited',params)
     },
+    //下架商品
+    offGoods(params){
+        return fetch('usercenter/off',params)
+    },
     /*秒杀平台*/
 
     //获取秒杀平台的用户数据
     GetKillnum(params){
-      return fetch('kill/getKillData')
+      return fetch('kill/getKillData',params)
     },
 
     //获取秒杀平台的规则
@@ -135,7 +155,10 @@ export default {
 
     //获取秒杀平台的审核动态
     getKillDataDynamic(params){
-      return fetch('kill/getKillDataDynamic')
+      return fetch('kill/getKillDataDynamic',params)
+    },
+    getIntegralTrajectory(params){
+        return fetch('integral/getIntegralTrajectory',params)
     },
 
     //测试商品链接
@@ -147,6 +170,10 @@ export default {
     saveKillGood(params){
       return fetch('kill/saveKillGood',params)
     },
+    //秒杀商品信息
+    getKillGoodInfo(params){
+      return fetch('kill/getKillGoodInfo',params)
+    },
 
     //秒杀场次
     getKillField(){
@@ -157,7 +184,10 @@ export default {
     getUserKillList(params){
       return fetch('kill/getUserKillList',params)
     },
-
+    //撤销/下架秒杀商品
+    lowerFrameGood(params){
+        return fetch('kill/LowerFrameGood',params)
+    },
     getProvince(params){
         return fetch('region/getProvinceInfo')
     },

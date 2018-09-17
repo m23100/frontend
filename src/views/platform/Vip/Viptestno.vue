@@ -1,21 +1,21 @@
 <template>
-  <div class="Viptestok">
+  <div class="Viptestok right-content">
+    <h2 class="Title">平推被拒</h2>
     <el-table
       :data="list"
       highlight-current-row
       style="width: 100%"> 
       <el-table-column
-        prop="goodstitle"
         label="商品名"
-        width="180">
+        width="280">
+        <template slot-scope="scope">
+          <img :src="scope.row.coverimage.main" alt="商品" class="coverimage">
+          <span style="margin-left: 10px">{{ scope.row.goodstitle }}</span>
+        </template>
       </el-table-column>
       <el-table-column
-        prop="couponremain"
+        prop="refuse.content"
         label="被拒原因">
-      </el-table-column>
-      <el-table-column
-        prop="passtime"
-        label="通过时间">
       </el-table-column>
       <el-table-column
         prop="begintime"
@@ -39,25 +39,45 @@
 </template>
 <script>
   import api from '@/http/api'
+  import { mapActions } from 'vuex'
   export default {
     data() {
       return {
         list:[],
         total:0,
-        page:1
+        page:1,
+        type:0,
+        state:3
       }
     },
     methods:{
+      ...mapActions({ setGoodsType: 'setGoodsType',setGoodsInfo: 'setGoodsInfo'}),
       handleCurrentChange(val) {
-        api.auditedGoods({type:0,page:val}).then(res =>{
+        api.auditing({type:this.type,state:this.state,page:val}).then(res =>{
+          res.data.data.forEach(function(item,index){
+            item.refuse = JSON.parse(item.refuse)
+            item.coverimage = JSON.parse(item.coverimage)
+          })
           this.list = res.data.data
           this.total = res.data.total
           this.page = val
         })
-      }
+      },
+      editView(info){
+        console.log(info)
+        this.setGoodsInfo({link:info.goodslink,id:info.goodsid,editId:info.id})
+        this.setGoodsType('normal')
+        this.$router.push({
+          path: "/Flatfrom",
+        })
+      },
     },
     created(){
-      api.auditedGoods({type:0}).then(res =>{
+      api.auditing({type:this.type,state:this.state}).then(res =>{
+        res.data.data.forEach(function(item,index){
+          item.refuse = JSON.parse(item.refuse)
+          item.coverimage = JSON.parse(item.coverimage)
+        })
         this.list = res.data.data
         this.total = res.data.total
       })

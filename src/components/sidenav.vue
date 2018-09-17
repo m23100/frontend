@@ -3,13 +3,13 @@
     <div class="nav">
       <div class="user">
         <dl>
-          <dt class="userimg"><img src="../assets/img/userimg.png" alt=""></dt>
-          <dd class="user-dd1">ABC团队</dd>
-          <dd class="user-dd2">业内知名招商大户</dd>
+          <dt class="userimg"><img :src="avatar" alt=""></dt>
+          <dd class="user-dd1">{{name}}</dd>
+          <dd class="user-dd2">{{signature}}</dd>
         </dl>
         <div class="deposit">
-          <div class="depositdian"><span>点券</span>10000</div>
-          <div class="depositfen"><span>积分</span>20</div>
+          <div class="depositdian"><span>点券</span>{{voucher_number}}</div>
+          <div class="depositfen"><span>积分</span>{{integral}}</div>
         </div>
       </div>
       <el-row class="tac">
@@ -40,7 +40,7 @@
                 <el-menu-item index="2-3-3" @click="$router.push('Sviptestno')">审核被拒</el-menu-item>
               </el-submenu>
             </el-submenu>
-             <el-submenu index="9">
+             <el-submenu index="9" v-if="this.killstatus==1">
               <template slot="title">
                 <i class="iconfont icon-clock_fill"></i>
                 <span>秒杀平台</span>
@@ -83,28 +83,65 @@
           </el-menu>
         </el-col>
       </el-row>
+      <el-row class="logout">
+        <el-button round @click="Logout" >退出</el-button>
+      </el-row>
     </div>
 
   </div>
 </template>
 <script>
+  import api from '@/http/api';
+  import { mapActions } from 'vuex'
+import {imgBaseUrl} from '@/util/env'
   export default {
     data() {
       return {
-        isCollapse: true
+        isCollapse: true,
+        avatar:'',
+        name:'',
+        signature:'',
+        integral:0,
+        voucher_number:0,
+        killstatus:0
       };
     },
     methods: {
+      ...mapActions({ setSignOut: 'setSignOut'}),
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
+      },
+      Logout:function(){
+        console.log('a')
+        this.setSignOut()
+        this.$router.replace('/')
+        api.Logout().then(res=>{
+          if(res.code==0){
+            
+          }
+        })
       }
+    },
+    created(){
+      api.GetUserInfo().then(res=>{
+        this.avatar = imgBaseUrl+res.data.avatar
+        this.name = res.data.name
+        this.signature = res.data.signature
+        this.voucher_number = res.data.voucher_number
+        this.integral = res.data.integral
+      })
+      api.GetUserKillStatus().then(res=>{
+        if(res.code==0){
+          this.killstatus = 1
+        }
+      })
     }
   };
 </script>
-<style>
+<style  lang="scss" scoped  type="text/css">
   .sidenav {
     width: 241px;
     height: 100%;
@@ -128,6 +165,7 @@
   .userimg img{
     width: 100%;height: 100%;
     background-size: 100%;
+    border-radius:50%;
   }
   .user-dd1{
     font-size: 18px;
@@ -165,5 +203,16 @@
     font-size: 12px;
     color: #fff;
     margin-right: 10px;
+  }
+  .el-button.is-round{
+    padding: 10px 30px;
+    font-size: 15px;
+    border-color: #b3d8ff;
+    color: #409EFF;
+  }
+  .logout{
+    margin-top: 10px;
+    margin-bottom: 17px;
+    text-align: center;
   }
 </style>

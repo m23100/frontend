@@ -42,6 +42,7 @@
 </template>
 <script>
 import api from '@/http/api'
+import {formatDate} from '@/util/tool'
 import { mapActions,mapGetters } from 'vuex'
 export default {
   data() {
@@ -54,14 +55,14 @@ export default {
           console.log(res)
             if(res.code==0){
               this.setGoodsType('kill')
-              this.setGoodsLink({link:this.ruleForm.link,id:res.data.goodsid})
-              this.setGoodsKill({goodsTime:this.ruleForm.startfield,goodsDate:this.ruleForm.startdate})
+              this.setGoodsInfo({link:this.ruleForm.link,id:res.data.goodsid,salecount:res.data.salecount,coverimage:res.data.images[0]})
               callback()
             }else{
-              callback(new Error('商品链接检测失败'))
+              callback(new Error(res.msg))
             }
         })
         .catch(function(error) {
+          console.log(error)
           callback(new Error('商品链接检测失败,网络错误！'))
         })
       }
@@ -93,7 +94,7 @@ export default {
     };
   },
   methods:{
-    ...mapActions({ setGoodsType:'setGoodsType',setGoodsLink: 'setGoodsLink',setGoodsKill:'setGoodsKill'}),
+    ...mapActions({ setGoodsType:'setGoodsType',setGoodsInfo: 'setGoodsInfo',setGoodsKill:'setGoodsKill'}),
     //开始检测
     checkout:function(){  
       return api.checklink({link:this.ruleForm.link})
@@ -101,9 +102,18 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$router.push({
-              path: "/Secondfrom"
+          this.checkout().then(res=>{
+            if(res.code==0){
+              this.setGoodsType('kill')
+              this.setGoodsInfo({link:this.ruleForm.link,id:res.data.goodsid,salecount:res.data.salecount,coverimage:res.data.images[0]})
+              this.ruleForm.startdate = formatDate(this.ruleForm.startdate,'yyyy-MM-dd hh:mm:ss')
+              this.setGoodsKill({goodsTime:this.ruleForm.startfield,goodsDate:this.ruleForm.startdate})
+              this.$router.push({
+                  path: "/Secondfrom"
+              })    
+            }
           })
+          
         } else {
           return false;
         }

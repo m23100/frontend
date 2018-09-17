@@ -1,146 +1,96 @@
 <template>
-    <div class="Viptestok">
-
-        <div class="list-head">
-            <div style=" width: 50%;text-align: left;">商品名</div>
-            <div style=" width: 25%;">被拒原因</div>
-            <div style=" width: 25%;">操作</div>
-        </div>
-        <div class="content">
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
-            </div>
-            <div class="testlist">
-               <div class="commodity">
-                   <img src="../../../assets/img/fenmian.jpg" alt=""><span>无纺布袋1个+清风手帕纸10包</span>
-               </div>
-                <div style=" width: 25%;">优惠力度过低</div>
-                <div style=" width: 25%;">修改并重新提交</div>
-            </div>
-        </div>
+  <div class="Viptestok  right-content">
+    <h2 class="Title">爆款被拒</h2>
+    <el-table
+      :data="list"
+      highlight-current-row
+      style="width: 100%"> 
+      <el-table-column
+        label="商品名"
+        width="280">
+        <template slot-scope="scope">
+          <img :src="scope.row.coverimage.main" alt="商品" class="coverimage">
+          <span style="margin-left: 10px">{{ scope.row.goodstitle }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="refuse.content"
+        label="被拒原因">
+      </el-table-column>
+      <el-table-column
+        prop="begintime"
+        label="操作"
+        width="180">
+         <template slot-scope="scope">
+          <el-button @click="editView(scope.row)" type="text" size="small">修改重新提交</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="pagination">
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :page-size="2"
+        layout="total, prev, pager, next"
+        :total="total">
+      </el-pagination>
     </div>
+
+  </div>
 </template>
 <script>
-export default {
-  data() {
-    return {};
+  import api from '@/http/api'
+  import { mapActions } from 'vuex'
+  export default {
+    data() {
+      return {
+        list:[],
+        total:0,
+        page:1,
+        type:1,
+        state:3
+      }
+    },
+    methods:{
+      ...mapActions({ setGoodsType: 'setGoodsType',setGoodsInfo: 'setGoodsInfo'}),
+      handleCurrentChange(val) {
+        api.auditing({type:this.type,state:this.state,page:val}).then(res =>{
+          res.data.data.forEach(function(item,index){
+            item.refuse = JSON.parse(item.refuse)
+            item.coverimage = JSON.parse(item.coverimage)
+          })
+          this.list = res.data.data
+          this.total = res.data.total
+          this.page = val
+        })
+      },
+      editView(info){
+        console.log(info)
+        this.setGoodsInfo({link:info.goodslink,id:info.goodsid,editId:info.id})
+        this.setGoodsType('fire')
+        this.$router.push({
+          path: "/Firefrom",
+        })
+      },
+    },
+    created(){
+      api.auditing({type:this.type,state:this.state}).then(res =>{
+        res.data.data.forEach(function(item,index){
+          item.refuse = JSON.parse(item.refuse)
+          item.coverimage = JSON.parse(item.coverimage)
+        })
+        this.list = res.data.data
+        this.total = res.data.total
+      })
+    }
   }
-};
 </script>
-<style scoped>
-.list-head {
-  display: flex;
-  padding: 20px 20px 10px 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
+<style lang="scss" scoped  type="text/css">
+.Viptestok{
+  padding-bottom: 20px;
+  background-color: #fff; 
+  .pagination{
+    margin-top: 20px;
+    text-align: center;
+  }
 }
-.list-head > div {
-  color: #8697ac;
-  font-size: 16px;
-  text-align: center;
-}
-.content {
-  background-color: #fff;
-}
-.testlist {
-  display: flex;
-  padding: 12px 0px;
-  margin: 0 20px;
-  border-bottom: 1px solid #eee;
-}
-.testlist > div {
-  text-align: center;
-  line-height: 32px;
-}
-.testlist>div>span{
-    color: #000;
-    cursor: pointer;
-}
-.testlist .commodity {
-   width: 50%;
-  text-align: left;
-}
-.commodity > span {   
-  margin-left: 20px;
-}
-.testlist .preview {
-  display: block;
-  width: 82px;
-  height: 24px;
-  background-color: #ccc;
-  color: #000;
-  margin: 0 auto;
-  margin-top: 6px;
-  border-radius: 15px;
-  line-height: 24px;
-  cursor: pointer;
-}
-
 </style>

@@ -15,17 +15,34 @@
               <h2 class="Title">消费记录</h2>
               <div class="dynamic">
                   <div class="flex left-list" v-for="(item,index) in capital" :key="index">
-                      <h1>商品[<span class="blue">{{item.goodstitle}}</span>]发布成功，使用100点券</h1>
+                      <h1 v-if="item.status==1">商品[<span class="blue">{{item.goodstitle}}</span>]发布成功，使用{{item.number}}点券</h1>
+                      <h1 v-if="item.status==0">商品[<span class="blue">{{item.goodstitle}}</span>]审核被拒，退回{{item.number}}点券</h1>
                       <div>{{item.created_at}}</div>
                   </div>
               </div>
+              <div class="pagination">
+                <el-pagination
+                  @current-change="handleCurrentChange"
+                  :page-size="2"
+                  layout="total, prev, pager, next"
+                  :total="capital_total">
+                </el-pagination>
+              </div>
           </div>
           <div class="centent-right">
-              <h2 class="Title">充值记录1</h2>
+              <h2 class="Title">充值记录</h2>
               <div class="rule">
                   <ul v-for="(item,index) in Record" :key="index">
-                     <li><span class="color">成功充值{{item.money}}元</span><span class="span">{{item.created_at}}</span></li>
+                     <li><span class="color">成功充值{{item.money}}点券</span><span class="span">{{item.created_at}}</span></li>
                   </ul>
+              </div>
+              <div class="pagination">
+                <el-pagination
+                  @current-change="CurrentChange"
+                  :page-size="2"
+                  layout="total, prev, pager, next"
+                  :total="record_total">
+                </el-pagination>
               </div>
           </div>
       </div>
@@ -39,20 +56,32 @@
       return {
           capital:[],
           Voucher:{},
-          Record:[]
+          Record:[],
+          capital_total:0,
+          record_total:0
       }
     },
     methods:{
-       setmenu() {
-       let that = this;
-     
+      handleCurrentChange(val) {
+        console.log(val)
+        api.getUserVoucher({page:val}).then(res =>{
+          this.capital = res.data.data
+          this.capital_total = res.data.total
+        })
+      },
+      CurrentChange(val){
+        api.getRechargeLog({page:val}).then(res =>{
+          this.Record = res.data.data
+          this.record_total = res.data.total
+        })
       }
     },
     created() {
         //获取用户使用点券记录
         api.Accountfunds().then(res =>{
             // console.log(res.data)
-            this.capital= res.data.data
+          this.capital= res.data.data
+          this.capital_total = res.data.total
             // console.log(this.capital)
         })
        
@@ -65,7 +94,8 @@
         //获取用户充值记录
         api.getRechargeLog().then(res =>{
             // console.log(res.data)
-            this.Record=res.data.data
+          this.Record=res.data.data
+          this.record_total = res.data.total
             // console.log(this.Record)
         })
     }

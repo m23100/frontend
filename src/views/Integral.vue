@@ -1,69 +1,174 @@
 <template>
-   <!-- 积分信息页面 -->
+  <!--为echarts准备一个具备大小的容器dom-->
   <div class="Integral">
-       <div class="vipimg">
-            <img src="../assets/img/vip.png" alt="">
+    <div id="main" style="width: 850px;height: 300px;"></div>
+    <div class="centent">
+      <div class="centent-left">
+        <h2 class="Title">扣分详情</h2>
+        <div class="dynamic">
+          <div v-for="(item,index) in integral" :key="index">
+              <img class="somllicon" :src="item.coverimage.main" alt="">
+              <div class="deduction">
+                  <div><span class="large">扣除{{item.number}}积分</span><span class="samll">{{item.created_at}}</span></div>
+                  <h2>{{item.content}}，被扣1积分</h2>
+              </div>
+          </div>
+          <div class="pagination">
+            <el-pagination
+              @current-change="handleCurrentChange"
+              :page-size="2"
+              layout="total, prev, pager, next"
+              :total="total">
+            </el-pagination>
+          </div>
         </div>
-      <div class="centent">
-          <div class="centent-left">
-              <h2 class="Title">扣分详情</h2>
-              <div class="dynamic">
-                  <div v-for="(item,index) in integral" :key="index">
-                      <img class="somllicon" :src="item.coverimage.img1" alt="">
-                      <div class="deduction">
-                          <div><span class="large">扣除{{item.number}}积分</span><span class="samll">{{item.created_at}}</span></div>
-                          <h2>{{item.content}}，被扣1积分</h2>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="centent-right">
-              <h2 class="Title">扣分规则</h2>
-              <div class="rule">
-                  <ul v-for="(item,index) in rule" :key="index">
-                      <li>{{item.content}}</li>
-                  </ul>
-              </div>
-          </div>
       </div>
+      <div class="centent-right">
+        <h2 class="Title">扣分规则</h2>
+        <div class="rule">
+            <ul v-for="(item,index) in rule" :key="index">
+                <li>{{item.content}}</li>
+            </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
 import api from '../http/api'
-// console.log('积分')
 export default {
-  data() {
-    return {
-        integral:[],
-        rule:[]
-    };
+  data () {
+  return {
+    integral:[],
+    rule:[],
+    page:1,
+    total:0,
+    charts: '',
+    xdata:[],
+    ydata:[]
+    }
   },
   methods:{
+    handleCurrentChange(val) {
+      console.log(val)
+      api.getUserIntegralLog({page:val}).then(res =>{
+        res.data.data.forEach(function(item,index){
+          item.coverimage = JSON.parse(item.coverimage)
+        })
+        this.integral = res.data.data
+        this.total = res.data.total
+        this.page = val
+      })
+    },
+    drawPie(id){
+      let echarts = require('echarts/lib/echarts')
+      // 引入柱状图组件
+      require('echarts/lib/chart/line')
+      // 引入提示框和title组件
+      require('echarts/lib/component/tooltip')
+      require('echarts/lib/component/title')
+      this.charts = echarts.init(document.getElementById(id))
 
+      this.charts.setOption( {
+        title : {
+            text: '积分轨迹'
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['积分']
+        },
+        toolbox: {
+          show : true,
+          feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+          }
+        },
+        calculable : true,
+        xAxis : [
+          {
+            type : 'category',
+            boundaryGap : false,
+            data : ['2018-09-01','2018-09-02','2018-09-03','2018-09-04','2018-09-05','2018-09-06','2018-09-07']
+          }
+        ],
+        yAxis : [
+          {
+              type : 'value'
+          }
+        ],
+        series : [
+          {
+              name:'积分',
+              type:'line',
+              smooth:true,
+              itemStyle: {normal: {areaStyle: {type: 'default'}}},
+              data:[1320, 1132, 601, 234, 120, 90, 20]
+          }
+        ]
+      })
+      api.getIntegralTrajectory().then(res=>{
+        let xdata = res.data.map((item, index, array) => {
+        　　return item.date;
+        })
+        let ydata = res.data.map((item, index, array) => {
+        　　return item.integralNumber;
+        })
+
+        this.charts.setOption({
+          xAxis : [
+            {
+              type : 'category',
+              boundaryGap : false,
+              data : xdata
+            }
+          ],
+          series : [
+            {
+              name:'积分',
+              type:'line',
+              smooth:true,
+              itemStyle: {normal: {areaStyle: {type: 'default'}}},
+              data:ydata
+            }
+          ]
+        })
+      })
+    }
+  },
+//调用
+  mounted(){
+      this.$nextTick(function() {
+          this.drawPie('main')
+      })
   },
   created(){
       //获取用户的积分扣分详情
       api.getUserIntegralLog().then(res =>{
+        res.data.data.forEach(function(item,index){
+          item.coverimage = JSON.parse(item.coverimage)
+        })
+        this.integral=res.data.data
+        this.total = res.data.total
 
-          this.integral=res.data.data
-        //   console.log(this.integral)
-        //   console.log(this.integral.coverimage)
-        //   this.integral.forEach(function(value, index, array){
-        //              this.integral[index]=value*2;
-        //              console.log(value)
-        //     },this)
-        //   var obj = JSON.parse(this.integral.coverimage);
-        //   console.log(obj)
       })
       //获取用户的积分规则
       api.getIntegralRule().then(res =>{
           this.rule=res.data
       })
-  }
-};
+      
+      
+  },
+}
 </script>
 <style scoped>
+
 .flex{
     display: flex;
     justify-content: space-between;      
@@ -149,4 +254,3 @@ export default {
     list-style-type:disc;
 }
 </style>
-

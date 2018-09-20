@@ -52,7 +52,6 @@ export default {
       } else {
         let res = false
         this.checkout().then(res=>{
-          console.log(res)
             if(res.code==0){
               this.setGoodsType('kill')
               this.setGoodsInfo({link:this.ruleForm.link,id:res.data.goodsid,salecount:res.data.salecount,coverimage:res.data.images[0]})

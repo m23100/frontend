@@ -86,6 +86,7 @@ import {imgBaseUrl} from '@/util/env'
         }
       }
     },
+    inject:['reload'],
     methods: {
       handleItemChange(val) {
         this.options2.forEach((item,index) => {
@@ -99,7 +100,6 @@ import {imgBaseUrl} from '@/util/env'
         })
       },
       handleChange(val,selectedData){
-        console.log(selectedData)
         this.options2.forEach((item,index) => {
           if(item.label==val[0]){
             this.province_id = item.value
@@ -133,7 +133,8 @@ import {imgBaseUrl} from '@/util/env'
             api.userEditInfo(data).then(res =>{
               if(res.code==0){
                 this.$message.success('提交成功!')
-                this.$router.go(0)
+                // this.$router.go(0)
+                this.reload()
               }else{
                 this.$message.error('提交失败')
               }

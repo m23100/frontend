@@ -115,6 +115,7 @@ export default {
       },
     };
   },
+  inject:['reload'],
   methods: {
     go: function() {
       this.$router.push({
@@ -130,7 +131,7 @@ export default {
           api.applyaudit(data).then(res =>{
             if(res.code==0){
               this.$message.success('提交成功!')
-              this.$router.go(0)
+              this.reload()
             }else{
               this.$message.error('提交失败')
             }
@@ -145,7 +146,6 @@ export default {
     }
   },
   created(){
-      console.log(this.state)
     //用户获取放单权限资格申请资料审核数据
      api.GetUserIsSend().then(res=>{
       this.state = res.code
@@ -153,7 +153,6 @@ export default {
         this.ruleForm = res.submit_audit
       }
      })
-     console.log(this.ruleForm)
   }
 };
 </script>

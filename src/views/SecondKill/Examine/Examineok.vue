@@ -40,7 +40,7 @@
         width="180">
          <template slot-scope="scope">
           <el-button v-if="scope.row.goodsstate==2" @click="offGoods(scope.row)" type="success" round size="small">下架</el-button>
-          <el-button v-if="scope.row.goodsstate==4" type="warning" round size="small">已下架</el-button>
+          <el-button v-if="scope.row.goodsstate==4 ||scope.row.goodsstate==6" type="warning" round size="small">已下架</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -67,6 +67,7 @@ export default {
       pageSize:pageSize
     };
   },
+  inject:['reload'],
   methods:{
     handleCurrentChange(val) {
       api.getUserKillList({type:'allow',page:val}).then(res =>{
@@ -90,11 +91,13 @@ export default {
               type: 'success',
               message: '操作成功!'
             })
+            this.reload()
           }else{
             this.$message({
               type: 'info',
               message: '操作失败'
             })
+            this.reload()
           }
         })
       }).catch(() => {

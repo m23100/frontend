@@ -67,7 +67,6 @@
     },
     methods:{
       handleCurrentChange(val) {
-        console.log(val)
         api.Accountfunds({page:val}).then(res =>{
           this.capital = res.data.data
           this.capital_total = res.data.total
@@ -83,25 +82,14 @@
     created() {
         //获取用户使用点券记录
         api.Accountfunds().then(res =>{
-            // console.log(res.data)
           this.capital= res.data.data
           this.capital_total = res.data.total
-            // console.log(this.capital)
         })
        
         //获取用户点券信息
         api.getUserVoucher().then(res =>{
-            // console.log(res.data)
             this.Voucher=res.data
-            // console.log(this.Voucher)
         })
-        //获取用户充值记录
-        // api.getRechargeLog().then(res =>{
-        //     // console.log(res.data)
-        //   this.Record=res.data.data
-        //   this.record_total = res.data.total
-        //     // console.log(this.Record)
-        // })
     }
   };
 </script>

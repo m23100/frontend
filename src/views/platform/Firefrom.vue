@@ -190,7 +190,7 @@ export default {
         ],
         goodstitle: [
           { required: true, message: '请输入短标题', trigger: 'blur' },
-          { min: 3, max: 15, message: '短标题3到15个字符', trigger: 'blur' }
+          { min: 3, max: 20, message: '短标题3到20个字符', trigger: 'blur' }
         ],
         voucherprice: [
           { required: true, message: '请输入券后价', trigger: 'blur' },
@@ -289,7 +289,6 @@ export default {
     //二段文案图片
     WritingImage(response,file){
       this.ruleForm.copywritingimage_second = imgBaseUrl+response.data.url
-      console.log(this.ruleForm.copywritingimage_second)
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = imgBaseUrl+res.data.url//URL.createObjectURL(file.raw);
@@ -300,7 +299,6 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           let data=this.ruleForm
-          console.log(data)
           if(data.begintimetype==1){
             data.begintime = formatDate(new Date(),'yyyy-MM-dd hh:mm:ss')
           }else{
@@ -328,7 +326,6 @@ export default {
   created(){
     this.ruleForm.goodsid = this.getGoodsId
     this.ruleForm.goodslink = this.getGoodsLink
-    // console.log(this.getGoodsId,this.getGoodsLink)
     if(this.getEditId>0){
       api.editView({id:this.getEditId}).then(res=>{
         if(res.code==0){
@@ -337,7 +334,7 @@ export default {
           let copywriting = JSON.parse(res.data.copywriting)
           this.ruleForm = res.data
           this.ruleForm.copywritingimage_second=''
-          console.log(this.ruleForm)
+          
           this.ruleForm.id = this.getEditId
           if(this.ruleForm.begintimetype==2){
             let begtime = this.ruleForm.begintime

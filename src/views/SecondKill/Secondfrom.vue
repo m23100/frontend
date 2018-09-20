@@ -136,7 +136,7 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 Quill.register('modules/ImageExtend', ImageExtend)
-// console.log(container)
+
 export default {
   components: {quillEditor},
   data() {
@@ -187,7 +187,7 @@ export default {
         ],
         goodstitle: [
           { required: true, message: '请输入短标题', trigger: 'blur' },
-          { min: 3, max: 15, message: '短标题3到15个字符', trigger: 'blur' }
+          { min: 3, max: 20, message: '短标题3到20个字符', trigger: 'blur' }
         ],
         voucherprice: [
           { required: true, message: '请输入券后价', trigger: 'blur' },
@@ -290,14 +290,12 @@ export default {
       return this.$confirm(`确定移除 ${file.name}？`)
     },
     coverImage(response,file){
-      // this.ruleForm.coverimage_url = URL.createObjectURL(file.raw)
       this.ruleForm.coverimage = imgBaseUrl+response.data.url
     },
     coverImageRemove(){
       this.ruleForm.coverimage =''
     },
     copyImage(response,file){
-      // this.ruleForm.copywritingimage_url = URL.createObjectURL(file.raw)
       this.ruleForm.copywritingimage = imgBaseUrl+response.data.url
     },
     copyImageRemove(){
@@ -305,14 +303,8 @@ export default {
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
-        // console.log(this.ruleForm)
         if (valid) {
           let data=this.ruleForm
-          console.log(data)
-          // if(data.begintimetype==1){
-            // data.begintime = formatDate(new Date(),'yyyy-MM-dd hh:mm:ss')
-          // }else{
-          // // }
           api.saveKillGood(data).then(res =>{
             if(res.code==0){
               this.$message.success('提交成功!')
@@ -375,8 +367,6 @@ export default {
       this.ruleForm.startsales = this.getGoodsSalecount
     //}
     
-    // console.log(this.getGoodsId,this.getGoodsLink,this.getGoodsDate,this.getGoodsTime)
-    // console.log(this.ruleForm.goodsid,this.ruleForm.goodslink,this.ruleForm.startdate,this.ruleForm.startfield,this.ruleForm.startsales,this.ruleForm.coverimage)
     if(this.ruleForm.goodsid<1 || this.ruleForm.goodslink=='' || this.ruleForm.startdate=='' || this.ruleForm.startfield==''){
       this.$router.push({
           path: "/killcheckout"

@@ -9,7 +9,7 @@
         </dl>
         <div class="deposit">
           <div class="depositdian"><span>点券</span>{{voucher_number}}</div>
-          <div class="depositfen"><span>积分</span>{{integral}}</div>
+          <div class="depositfen"><span>积分</span>{{integral_number}}</div>
         </div>
       </div>
       <el-row class="tac">
@@ -101,7 +101,7 @@ import {imgBaseUrl} from '@/util/env'
         avatar:'',
         name:'',
         signature:'',
-        integral:0,
+        integral_number:0,
         voucher_number:0,
         killstatus:0
       };
@@ -130,7 +130,7 @@ import {imgBaseUrl} from '@/util/env'
         this.name = res.data.name
         this.signature = res.data.signature
         this.voucher_number = res.data.voucher_number
-        this.integral = res.data.integral
+        this.integral_number = res.data.integral
       }).catch((error)=>{
         this.$router.replace('/')
       })

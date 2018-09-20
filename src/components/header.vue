@@ -1,21 +1,21 @@
 <template>
    <div class="head">
        <div class="header">
-           <ul class="fl" @click="$router.push('Home')">若梦TV首页</ul>
+           <div class="fl"><a href="/" target="_blank">若梦TV首页</a></div>
            <ul class="fr">
                <!-- <li> <a href="">开发API</a> </li> -->
                <li>开发API</li>
                <li class="spacer"></li>
-               <li>商品库</li>
+               <li><a href="/" target="_blank">商品库</a></li>
                <li class="spacer"></li>
-               <li>积分规则</li>
+               <li @click="$router.push('Integral')">积分规则</li>
                <li class="spacer"></li>
                <li @click="$router.push('Customer')">客服帮助</li>
            </ul>
        </div>
    </div>
 </template>
-<style>
+<style lang="scss" scoped  type="text/css">
 .head {
   width: 100%;
   height: 40px;
@@ -28,7 +28,7 @@
   color: #fff;
   margin: 0 auto;
 }
-.fl {
+.fl a {
   display: block;
   float: left;
   width: 75px;
@@ -40,6 +40,10 @@
   letter-spacing: 0px;
   color: #ffffff;
   cursor: pointer;
+  &:hover{
+    color: #49a6f7;
+    text-decoration: none;
+  }
 }
 .fl:hover{
   color: #49a6f7;
@@ -63,6 +67,13 @@
   line-height: 40px;
   color: #fff;
   cursor: pointer;
+  a{
+    color: #fff;
+    &:hover{
+      color:#49a6f7;
+      text-decoration: none;
+    }
+  }
 }
 .fr li:hover{
   color: #49a6f7

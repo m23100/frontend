@@ -62,7 +62,6 @@
     methods:{
       ...mapActions({ setGoodsType: 'setGoodsType',setGoodsInfo: 'setGoodsInfo',setGoodsKill:'setGoodsKill'}),
       editView(info){
-        // console.log(info.coverimage.main)
         this.setGoodsType('kill')
         this.setGoodsInfo({link:info.goodslink,id:info.goodsid,editId:info.id,salecount:info.salecount,coverimage:info.coverimage.main})
         this.setGoodsKill({goodsTime:info.startfield,goodsDate:info.startdate})

@@ -174,7 +174,7 @@ export default {
         ],
         goodstitle: [
           { required: true, message: '请输入短标题', trigger: 'blur' },
-          { min: 3, max: 15, message: '短标题3到15个字符', trigger: 'blur' }
+          { min: 3, max: 20, message: '短标题3到20个字符', trigger: 'blur' }
         ],
         voucherprice: [
           { required: true, message: '请输入券后价', trigger: 'blur' },

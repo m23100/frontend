@@ -14,7 +14,9 @@ const state = {
         advertdata: {}
     },
     userToken: JSON.parse(localStorage.getItem('userToken')) || {},
-    AccountFunds:[]
+    AccountFunds:[],
+    voucherNumber:0,
+    integralNumber:0,
 
 }
 
@@ -56,7 +58,7 @@ const actions = {
             commit(types.GET_USER_DATA, res.data)
         })
     },
-    // 账户资金
+    // 账户资金(点券)
     getAccountFunds({commit}){
         api.Accountfunds()
         .then(res =>{

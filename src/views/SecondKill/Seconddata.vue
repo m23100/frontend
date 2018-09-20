@@ -62,7 +62,6 @@
     },
     methods:{
       handleCurrentChange(val) {
-        console.log(val)
         api.getKillDataDynamic({page:val}).then(res =>{
           this.DataDynamic = res.data.data
           this.total = res.data.total

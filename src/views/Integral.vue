@@ -57,7 +57,6 @@ export default {
   },
   methods:{
     handleCurrentChange(val) {
-      console.log(val)
       api.getUserIntegralLog({page:val}).then(res =>{
         res.data.data.forEach(function(item,index){
           item.coverimage = JSON.parse(item.coverimage)

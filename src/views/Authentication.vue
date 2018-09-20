@@ -237,7 +237,7 @@ export default {
       },
     }
   },
-  
+  inject:['reload'],
   methods: {
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
@@ -302,7 +302,7 @@ export default {
           api.addUserAuth(data).then(res =>{
             if(res.code==0){
               this.$message.success('提交成功!')
-              this.$router.go(0)
+              this.reload()
             }else{
               this.$message.error('提交失败'+res.msg)
             }

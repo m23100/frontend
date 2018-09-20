@@ -134,7 +134,6 @@
     methods:{
       ...mapActions({ setGoodsType: 'setGoodsType',setGoodsInfo: 'setGoodsInfo'}),
       editView(info){
-        console.log(info)
         this.setGoodsInfo({link:info.goodslink,id:info.goodsid,editId:info.id})
         this.setGoodsType('normal')
         this.$router.push({
@@ -142,7 +141,6 @@
         })
       },
       viewCopy(info){
-        console.log(info)
         api.viewCopy({id:info.id}).then(res=>{
           if(res.code==0){
             // this.isShow = true

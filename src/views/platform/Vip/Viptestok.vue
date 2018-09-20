@@ -34,7 +34,7 @@
         width="180">
          <template slot-scope="scope">
           <el-button v-if="scope.row.goodsstate==2" @click="offGoods(scope.row)" type="success" round size="small">下架</el-button>
-          <el-button v-if="scope.row.goodsstate==4" type="warning" round size="small">已下架</el-button>
+          <el-button v-if="scope.row.goodsstate==4 ||scope.row.goodsstate==6" type="warning" round size="small">已下架</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -62,6 +62,7 @@
         pageSize:pageSize
       }
     },
+    inject:['reload'],
     methods:{
       handleCurrentChange(val) {
         api.auditing({type:this.type,state:this.state,page:val}).then(res =>{
@@ -79,12 +80,13 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          api.offGoods({id:info.id}).then(res=>{
+          api.lowerFrameGood({id:info.id,status:6}).then(res=>{
             if(res.code==0){
               this.$message({
                 type: 'success',
                 message: '操作成功!'
               })
+              this.reload()
             }else{
               this.$message({
                 type: 'info',
@@ -97,6 +99,7 @@
             type: 'info',
             message: '已取消操作'
           })      
+          this.reload()
         })
 
       },

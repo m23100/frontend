@@ -66,7 +66,6 @@
         })
       },
       editView(info){
-        console.log(info)
         this.setGoodsInfo({link:info.goodslink,id:info.goodsid,editId:info.id})
         this.setGoodsType('fire')
         this.$router.push({

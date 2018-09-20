@@ -181,7 +181,6 @@
       handleCurrentChange(val) {
         api.auditing({type:this.type,state:this.state,page:val}).then(res =>{
           let that = this
-          // console.log(res.data.data)
           res.data.data.forEach(function(item,index){
             item.coverimage = JSON.parse(item.coverimage)
             let copywritingimage = JSON.parse(item.copywritingimage)
@@ -208,7 +207,6 @@
           item.commissiontype = that.commissiontype[item.commissiontype]
         })
         this.list = res.data.data
-        // console.log(this.list)
         this.total = res.data.total
       })
     }

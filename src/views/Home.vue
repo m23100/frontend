@@ -7,7 +7,7 @@
               <div class="data1"><h1>{{getUserData.realdata.shelfCount}}</h1><h4>当前正常在架</h4></div>
               <div class="data2"><h1>{{getUserData.realdata.todayCreate}}</h1><h4>今日已提交</h4></div>
               <div class="data3"><h1>{{getUserData.realdata.todayRefuse}}</h1><h4>今日被审拒</h4></div>
-              <div class="data4"><h1>{{getUserData.realdata.waitAudit}}</h1><h4>等待审核中</h4></div>
+              <div class="data4"><h1>{{getUserData.realdata.waitAudit}}</h1><h4>等待审核</h4></div>
           </div>
       </div>
       <div class="centent">

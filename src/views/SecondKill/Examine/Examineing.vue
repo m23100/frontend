@@ -36,7 +36,7 @@
                   </div>
                   <div class="mask showmore hover">
                     <div class="cover">
-                      <a href="#"><img :src="scope.row.coverimage.main" width="260" height="260" alt="产品名"></a>
+                      <a href="#"><img :src="scope.row.copywritingimage.first" width="260" height="260" alt="产品名"></a>
                       <div class="btns">
                         <!-- <span>加入选品</span><span class="doCopy">点击复制</span> -->
                       </div>
@@ -103,7 +103,7 @@
     <div class="pagination">
       <el-pagination
         @current-change="handleCurrentChange"
-        :page-size="2"
+        :page-size="pageSize"
         layout="total, prev, pager, next"
         :total="total">
       </el-pagination>
@@ -111,8 +111,9 @@
   </div>
 </template>
 <script>
-  import { mapActions } from 'vuex';
-  import api from '@/http/api';
+  import { mapActions } from 'vuex'
+  import api from '@/http/api'
+  import {pageSize} from '@/util/env' 
 export default {
   data() {
     return {
@@ -124,7 +125,8 @@ export default {
         2:"定向", 
         3:"鹊桥", 
         4:"营销"
-      }
+      },
+      pageSize:pageSize
     };
   },
   methods:{
@@ -132,7 +134,7 @@ export default {
     editView(info){
       console.log(info)
       this.setGoodsType('kill')
-      this.setGoodsInfo({link:info.goodslink,id:info.goodsid,editId:info.id,salecount:info.salecount,coverimage:info.coverimage.main})
+      this.setGoodsInfo({link:info.goodslink,id:info.goodsid,editId:info.id,salecount:info.startsales,coverimage:info.coverimage.main})
       this.setGoodsKill({goodsTime:info.startfield,goodsDate:info.startdate})
       this.$router.push({
         path: "/Secondfrom",
@@ -169,10 +171,10 @@ export default {
         let that = this
         res.data.data.forEach(function(item,index){
           item.coverimage = JSON.parse(item.coverimage)
-          // let copywritingimage = JSON.parse(item.copywritingimage)
+          let copywritingimage = JSON.parse(item.copywritingimage)
           let copywriting = JSON.parse(item.copywriting)
           item.copywriting = copywriting
-          // item.copywritingimage = copywritingimage
+          item.copywritingimage = copywritingimage
           item.commissiontype = that.commissiontype[item.commissiontype]
         })
         this.list = res.data.data
@@ -187,10 +189,10 @@ export default {
         let that = this
         res.data.data.forEach(function(item,index){
           item.coverimage = JSON.parse(item.coverimage)
-          // let copywritingimage = JSON.parse(item.copywritingimage)
+          let copywritingimage = JSON.parse(item.copywritingimage)
           let copywriting = JSON.parse(item.copywriting)
           item.copywriting = copywriting
-          // item.copywritingimage = copywritingimage
+          item.copywritingimage = copywritingimage
           item.commissiontype = that.commissiontype[item.commissiontype]
         })
       this.list = res.data.data

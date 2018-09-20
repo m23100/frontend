@@ -10,7 +10,7 @@
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">
-          <img v-if="avatar_url" :src="avatar_url" class="avatar">
+          <img v-if="avatar" :src="avatar" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </div>    
@@ -49,7 +49,8 @@
   </div>
 </template>
 <script>
- import api from '../http/api' 
+ import api from '@/http/api' 
+import {imgBaseUrl} from '@/util/env'
  export default {
     data() {
       return {
@@ -146,8 +147,8 @@
         this.$refs[formName].resetFields();
       },
       handleAvatarSuccess(res, file) {
-        this.avatar_url = 'http://image.ruomengtv.com/'+res.data.url
-        this.avatar = res.data.url//URL.createObjectURL(file.raw);
+        // this.avatar_url = 'http://image.ruomengtv.com/'+res.data.url
+        this.avatar = imgBaseUrl + res.data.url//URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload(file) {
         const isJPG = (file.type === 'image/jpeg' || file.type==='image/png');
@@ -178,7 +179,7 @@
         this.city_id = res.data.city_id
         this.ruleForm.qq = res.data.qq
         this.avatar = res.data.avatar
-        this.avatar_url = 'http://image.ruomengtv.com/'+res.data.avatar
+        this.avatar_url = imgBaseUrl+res.data.avatar
         this.city_name = [res.data.province.name,res.data.city.name]
         if(this.city_id > 0){
           this.options2.forEach((item,index) => {

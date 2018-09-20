@@ -126,7 +126,7 @@ import {imgBaseUrl} from '@/util/env'
     },
     created(){
       api.GetUserInfo().then(res=>{
-        this.avatar = imgBaseUrl+res.data.avatar
+        this.avatar = res.data.avatar
         this.name = res.data.name
         this.signature = res.data.signature
         this.voucher_number = res.data.voucher_number

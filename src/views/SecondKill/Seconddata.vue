@@ -15,8 +15,16 @@
               <h2 class="Title">审核动态</h2>
               <div class="dynamic">
                   <div class="flex left-list" v-for="(item,index) in DataDynamic" :key="index">
-                      <h1>商品[<span class="blue">{{item.title}}</span>]{{statetype[item.state]}}</h1>
+                      <h1>商品[<span class="blue">{{item.title}}</span>]{{statetype[item.state]}} <span v-if="item.state==3">原因：{{item.content}}</span></h1>
                       <div>{{item.created_at}}</div>
+                  </div>
+                  <div class="pagination">
+                    <el-pagination
+                      @current-change="handleCurrentChange"
+                      :page-size="pageSize"
+                      layout="total, prev, pager, next"
+                      :total="total">
+                    </el-pagination>
                   </div>
               </div>
           </div>
@@ -33,7 +41,8 @@
 </template>
 <script>
   import { mapGetters } from 'vuex';
-  import api from '../../http/api';
+  import api from '@/http/api';
+  import {pageSize} from '@/util/env' 
   export default {
     data() {
       return {
@@ -46,26 +55,38 @@
           2:"审核通过", 
           3:"审核被拒", 
           4:"下架"
-        }
+        },
+        total:0,
+        pageSize:pageSize
+      }
+    },
+    methods:{
+      handleCurrentChange(val) {
+        console.log(val)
+        api.getKillDataDynamic({page:val}).then(res =>{
+          this.DataDynamic = res.data.data
+          this.total = res.data.total
+        })
       }
     },
     created(){
 
       //获取秒杀平台的用户数据
-        api.GetKillnum().then(res =>{
-          this.Number = res.data;
-        }),
+      api.GetKillnum().then(res =>{
+        this.Number = res.data;
+      }),
 
-          //获取秒杀平台的规则
-        api.getKillRule().then(res=>{
-          this.Rule = res.data.data;
-        }),
+        //获取秒杀平台的规则
+      api.getKillRule().then(res=>{
+        this.Rule = res.data.data;
+      }),
 
-          //获取秒杀平台的审核动态
-          api.getKillDataDynamic().then(res=>{
-            this.DataDynamic = res.data.data;
-          })
-      },
+      //获取秒杀平台的审核动态
+      api.getKillDataDynamic().then(res=>{
+        this.DataDynamic = res.data.data
+        this.total = res.data.total
+      })
+    },
     computed: {
       ...mapGetters([
         'getAccountFunds',

@@ -36,12 +36,13 @@
         <div class="door-center">
           <div class="login-box">
             <ul class="login-nav">
-              <li>账号登录</li>
+              <li :class="type=='phone'? 'current':''"  @click="logintype('phone')">账号登录</li>
               <span class="spacer1"></span>
-              <li>验证码登录</li>
+              <li :class="type=='code'? 'current':''"  @click="logintype('code')">验证码登录</li>
             </ul>
             <div class="form-box">
-              <div class="login-from" id="tab1">
+              <el-form>
+              <div v-if="type=='phone'" class="login-from" id="tab1">
                 <input v-model="phone" type="text" placeholder="手机号">
                 <input v-model="password" type="password" placeholder="密码">
                 <!-- <div id="check-code" class="code-box" style='margin-bottom:0;'>
@@ -54,17 +55,18 @@
                   <img src="../assets/img/choiceno.png" class='changeimg' alt="">
                   <span>记住登录状态</span>
                 </div>
-                <button class="login-button" @click="save1">登录</button>
+                <button class="login-button" @click="login">登录</button>
               </div>
-              <div class="login-from item" id="tab2">
-                <input type="text" class="phonelogin" placeholder="手机号">
+              <div v-if="type=='code'" class="login-from" id="tab2">
+                <input type="text" v-model="codephone" class="phonelogin" placeholder="手机号">
                 <div class="code-box">
-                  <input type="text" placeholder="手机短信验证码">
-                  <span class="spacer2"></span>
-                  <button class="code">获取验证码</button>
+                  <input type="text" v-model="code" placeholder="手机短信验证码">
+                  <!-- <span class="spacer2"></span> -->
+                  <span class="code" @click="getCode">{{code_str}}</span>
                 </div>
-                <button class="login-button" @click="save">登录</button>
+                <button class="login-button" @click="login">登录</button>
               </div>
+              </el-form> 
             </div>
       
             <div class="other">
@@ -94,104 +96,124 @@ import Vue from 'vue'
 
 import { mapActions } from 'vuex'
 import api from '@/http/api'
+  import {isPhone} from '@/util/tool' 
 
   export default {
     data() {
       return {
         phone: "",
         password: "",
+        type:'phone',
+        codephone:'',
+        code:'',
+        code_str: '获取验证码',  // 按钮里显示的内容
+        totalTime: 60,
+        canClick:true
       };
     },
     methods: {
-        ...mapActions({ setUserInfo: 'setUserInfo', setUserToken:'setUserToken'}),
-     
-     save1:function(){
-        let data = {
-            phone: this.phone,
-            password: this.password
-        }
-        api.Login(data)
-          .then(res => {
-              if(res.code == 0) {
-                this.setUserToken(res.data)
-                api.UserInfo().then(
-                  res => {
-                    this.setUserInfo(res.data)
-                    this.$router.replace('/home')
-                  }
-                )
-              }else{
-                this.$message.error(res.msg)
-              }
+      ...mapActions({ setUserInfo: 'setUserInfo', setUserToken:'setUserToken'}),
+      login(){
+        if(this.type=='phone'){
+          let data = {
+              phone: this.phone,
+              password: this.password
+          }
+          if(data.phone==''){
+            this.$message.error("请输入手机号")
+            return false
+          } 
+          if(!isPhone(data.phone)){
+            this.$message.error("请输入正确的手机号")
+            return false
+          } 
+          if(data.password=='') {
+            this.$message.error("请输入密码")
+            return false
+          }
+          api.Login(data).then(res => {
+            console.log(res)
+            if(res.code == 0) {
+              this.setUserToken(res.data)
+              api.UserInfo().then(
+                res => {
+                  this.setUserInfo(res.data)
+                  this.$router.replace('/home')
+                }
+              )
+            }else{
+              this.$message.error(res.msg)
+            }
           })
           .catch(error => {
-              console.log(error)
+              this.$message.error(error)
           })
+        }else{
+          let data = {
+              phone: this.codephone,
+              code: this.code
+          }
+          if(data.phone=='') {
+            this.$message.error("请输入手机号")
+            return false
+          }
+          if(!isPhone(data.phone)) {
+            this.$message.error("请输入正确的手机号")
+            return false
+          }
+          if(data.code=='') {
+            this.$message.error("请输入验证码")
+            return false
+          }
+
+          api.LoginByCode(data).then(res => {
+            if(res.code == 0) {
+              this.setUserToken(res.data)
+              api.UserInfo().then(
+                res => {
+                  this.setUserInfo(res.data)
+                  this.$router.replace('/home')
+                }
+              )
+            }else{
+              this.$message.error(res.msg)
+            }
+          })
+          .catch(error => {
+              this.$message.error(error)
+          })
+        }
+        
      },
-     
-    //登录并检查输入信息
-    save:function(){
-        // let that=this;
-          // console.log(this.phone)
-
-        // that.axios.post('http://dev.ruomengtv.com/api/login?phone=18658831530&password=123456',{
-        //   phone: that.phone,
-        //   password: that.password,
-        //   })
-        //   .then(function (response) {
-        //       console.log(1)
-        //       console.log(response);
-        //   })
-        //   .catch(function (error) {
-        //       console.log(error);
-        //   })
+    logintype(type){
+      this.type = type
     },
-    // save: function () {
-    //   console.log(this.phone)
-    //   console.log(this.password)
-        // let that=this;
-        // that.axios.post('/login', {
-        // phone: that.phone,
-        // password: that.password,
-    //   }).then(res => {
-    //     console.log(res)
-        // if (res.data.code == 200) {
-        //   if (that.phone == res.data.data.name && that.password == res.data.data.password) {
-        //     localStorage.userInfo = JSON.stringify(res.data.data);
-        //     that.$message({
-        //       showClose: false,
-        //       message: '登录成功',
-        //       type: 'success',
-        //       center: false
-        //     })
-        //     that.$router.push({
-        //       path: '/home'
-        //     })
-        //   } else {
-        //     that.$message({
-        //       showClose: true,
-        //       message: '账号密码不匹配',
-        //       type: 'error',
-        //       center: true
-        //     });
-        //   }
-        // }else{
-        //     that.$message({
-        //         showClose: true,
-        //         message: '网络异常或账号密码不匹配',
-        //         type: 'error',
-        //         center: true
-        //       });
-        // }
-
-    //   })
-    // },
-    
-
-    goregistered: function () {
-      this.$router.push({
-        path: 'home'
-      })
+    getCode(){   
+      if(this.codephone==''){
+        this.$message.error("请输入手机号")
+      }else if(!isPhone(this.codephone)){
+        this.$message.error("请输入正确的手机号")
+      }else{
+        api.GetSmsCode({phone:this.codephone,type:'login'}).then(res=>{
+          if(res.code==0){
+            if (!this.canClick) return  //改动的是这两行代码
+            this.canClick = false
+            this.code_str = this.totalTime + 's后重新发送'
+            let clock = window.setInterval(() => {
+              this.totalTime--
+              this.code_str = this.totalTime + 's后重新发送'
+              if (this.totalTime < 0) {
+                window.clearInterval(clock)
+                this.content = '重新发送验证码'
+                this.totalTime = 60
+                this.canClick = true  //这里重新开启
+              }
+            },1000)
+          }else{
+            this.$message.error(res.msg)
+          }
+        })
+      }
     }
   },
 
@@ -275,7 +297,7 @@ import api from '@/http/api'
   }
 
   .code-box {
-    height: 49px;
+    /*height: 49px;*/
     width: 333px;
     display: flex;
     justify-content: space-between;
@@ -283,11 +305,14 @@ import api from '@/http/api'
   }
 
   .login-from .code-box input {
-    height: 47px;
+    height: 100%;
     padding-left: 12px;
-    border-radius: 2px;
     border: solid 1px #dadada;
+
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
     width: 175px;
+    height: 47px;
     margin: 0 0 0 36px !important;
     border-right: 0px !important;
   }
@@ -298,6 +323,8 @@ import api from '@/http/api'
     border: 1px solid #dadada;
     background-color: #fff;
     width: 108px;
+    height: 49px;
+    line-height: 49px;
     border-left: 0px !important;
   }
 
@@ -332,8 +359,6 @@ import api from '@/http/api'
     height: 15px;
     background-color: #b3abab;
   }
-
-  .login-from {}
 
   .login-from input {
     margin: 0 36px;

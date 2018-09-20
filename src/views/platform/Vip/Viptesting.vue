@@ -102,7 +102,7 @@
     <div class="pagination">
       <el-pagination
         @current-change="handleCurrentChange"
-        :page-size="2"
+        :page-size="pageSize"
         layout="total, prev, pager, next"
         :total="total">
       </el-pagination>
@@ -112,6 +112,7 @@
 <script>
   import api from '@/http/api'
   import { mapActions } from 'vuex'
+  import {pageSize} from '@/util/env' 
   export default {
     data() {
       return {
@@ -125,7 +126,8 @@
           2:"定向", 
           3:"鹊桥", 
           4:"营销"
-        }
+        },
+        pageSize:pageSize
       }
 
     },

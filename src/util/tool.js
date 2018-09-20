@@ -73,10 +73,18 @@ export function isURL(str_url) {
     + "(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
     var re = new RegExp(strRegex);
     if (re.test(str_url)) {
-        console.log('a')
         return true;
     } else {
-        console.log('b')
         return false;
+    }
+}
+
+export function isPhone(phone){
+    var strRegex=/^[1][3,4,5,7,8][0-9]{9}$/
+    var re = new RegExp(strRegex)
+    if(re.test(phone)){
+        return true
+    }else{
+        return false
     }
 }

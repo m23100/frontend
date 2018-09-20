@@ -41,7 +41,7 @@
     <div class="pagination">
       <el-pagination
         @current-change="handleCurrentChange"
-        :page-size="2"
+        :page-size="pageSize"
         layout="total, prev, pager, next"
         :total="total">
       </el-pagination>
@@ -50,6 +50,7 @@
 </template>
 <script>
   import api from '@/http/api'
+  import {pageSize} from '@/util/env' 
   export default {
     data() {
       return {
@@ -57,7 +58,8 @@
         total:0,
         page:1,
         type:1,
-        state:1
+        state:1,
+        pageSize:pageSize
       }
     },
     methods:{

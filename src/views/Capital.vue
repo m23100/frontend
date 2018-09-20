@@ -18,12 +18,13 @@
                     <h1 v-if="item.status==0">商品[<span class="blue">{{item.goodstitle}}</span>]发布成功，使用{{item.number}}点券</h1>
                     <h1 v-if="item.status==1">商品[<span class="blue">{{item.goodstitle}}</span>]审核被拒，退回{{item.number}}点券</h1>
                     <h1 v-if="item.status==2">充值{{item.number}}点券</h1>
+                    <h1 v-if="item.status==3">扣除{{item.number}}点券,原因：{{item.content}}</h1>
                     <div>{{item.created_at}}</div>
                 </div>
                 <div class="pagination">
                   <el-pagination
                     @current-change="handleCurrentChange"
-                    :page-size="10"
+                    :page-size="pageSize"
                     layout="total, prev, pager, next"
                     :total="capital_total">
                   </el-pagination>
@@ -52,6 +53,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import api from '../http/api'
+  import {pageSize} from '@/util/env' 
   export default {
     data(){
       return {
@@ -59,13 +61,14 @@
           Voucher:{},
           Record:[],
           capital_total:0,
-          record_total:0
+          record_total:0,
+          pageSize:pageSize
       }
     },
     methods:{
       handleCurrentChange(val) {
         console.log(val)
-        api.getUserVoucher({page:val}).then(res =>{
+        api.Accountfunds({page:val}).then(res =>{
           this.capital = res.data.data
           this.capital_total = res.data.total
         })
@@ -93,12 +96,12 @@
             // console.log(this.Voucher)
         })
         //获取用户充值记录
-        api.getRechargeLog().then(res =>{
-            // console.log(res.data)
-          this.Record=res.data.data
-          this.record_total = res.data.total
-            // console.log(this.Record)
-        })
+        // api.getRechargeLog().then(res =>{
+        //     // console.log(res.data)
+        //   this.Record=res.data.data
+        //   this.record_total = res.data.total
+        //     // console.log(this.Record)
+        // })
     }
   };
 </script>

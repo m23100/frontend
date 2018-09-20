@@ -15,7 +15,7 @@
               <h2 class="Title">审核动态</h2>
               <div class="dynamic">
                   <div class="flex left-list" v-for="(item,index) in getUserData.auditdata" :key="index">
-                      <h1>商品[<span class="blue">{{item.title}}</span>]{{statetype[item.state]}}</h1>
+                      <h1>商品[<span class="blue">{{item.title}}</span>]{{statetype[item.state]}}<span v-if="item.state==3">原因：{{item.content}}</span></h1>
                       <div>{{item.created_at}}</div>
                   </div>
                   

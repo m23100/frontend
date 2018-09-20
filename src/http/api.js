@@ -55,6 +55,9 @@ export default {
     Login(params) {
         return fetch('/login', params)
     },
+    LoginByCode(params) {
+        return fetch('/loginbycode', params)
+    },
     Logout(params){
         return fetch('/logout', params)
     },
@@ -66,6 +69,9 @@ export default {
     },
     GetUserInfo(params){
         return fetch('user/getUserInfo')
+    },
+    GetSmsCode(params){
+        return fetch('/getsmscode',params)
     },
     GetUserKillStatus(params){
         return fetch('user/getUserKillStatus')
@@ -205,5 +211,5 @@ export default {
     },
     addUserAuth(params){
         return fetch('user/addUserAuth',params)
-    }
+    },
 }

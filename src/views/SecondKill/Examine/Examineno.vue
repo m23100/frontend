@@ -39,7 +39,7 @@
     <div class="pagination">
       <el-pagination
         @current-change="handleCurrentChange"
-        :page-size="2"
+        :page-size="pageSize"
         layout="total, prev, pager, next"
         :total="total">
       </el-pagination>
@@ -47,14 +47,16 @@
   </div>
 </template>
 <script>
-  import { mapGetters,mapActions } from 'vuex';
-  import api from '@/http/api';
+  import { mapGetters,mapActions } from 'vuex'
+  import api from '@/http/api'
+  import {pageSize} from '@/util/env' 
   export default {
     data() {
       return {
         list:[],
         total:0,
-        page:1
+        page:1,
+        pageSize:pageSize
       };
     },
     methods:{

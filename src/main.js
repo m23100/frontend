@@ -10,6 +10,7 @@ import store from './vuex/store'
 import 'element-ui/lib/theme-chalk/index.css'
 import './scss/index.scss'
 
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)

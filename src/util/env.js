@@ -1,5 +1,6 @@
 let baseUrl = 'http://dev.ruomengtv.com'
 let imgBaseUrl = 'http://image.ruomengtv.com'
+let pageSize = 10
 // if (process.env.NODE_ENV == 'development') {
 //     imgBaseUrl = '/img/';
 
@@ -10,4 +11,5 @@ let imgBaseUrl = 'http://image.ruomengtv.com'
 export {
 	baseUrl,
 	imgBaseUrl,
+	pageSize,
 }

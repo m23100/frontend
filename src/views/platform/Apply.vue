@@ -35,7 +35,7 @@
         <!-- 积分被扣完 -->
         <div class="box" v-else-if="state=='4'">
             <h2 class="Title">放单权限</h2>
-            <div class="centent"><img src="../../assets/img/imgfour.png" alt=""></div>
+            <div class="centent"><img src="../../assets/img/fangdan_locked.png" alt=""></div>
             <h3>您的积分被扣完了!<span class="Tips">放单资格将在下月1号恢复</span></h3>
             <div class="center"><el-button type="text" class="test">默默等待</el-button></div>            
         </div>
@@ -70,9 +70,21 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import api from '../../http/api'
+import api from '@/http/api'
+import {isPhone} from '@/util/tool' 
 export default {
   data() {
+
+    var checkPhone = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入手机号'))
+      } else {
+        if (!isPhone(value)) {
+          callback(new Error('请输入正确的手机号'))
+        }
+        callback();
+      }
+    }
     return {
       centerDialogVisible: false,
       state:'6',//  1:放单权限审核中,   3放单权限审核被拒 4积分用完停用  6暂未开通放单权限
@@ -94,7 +106,8 @@ export default {
           { required: true, message: '请输入联系QQ', trigger: 'change' }
         ],
         phone: [
-          { required: true, message: '请输入手机号', trigger: 'change' }
+          { required: true, message: '请输入手机号', trigger: 'change' },
+          { validator: checkPhone, trigger: 'change' }
         ],
         content: [
           { required: true, message: '请输入详细介绍', trigger: 'change' }

@@ -20,7 +20,7 @@
           <div class="pagination">
             <el-pagination
               @current-change="handleCurrentChange"
-              :page-size="2"
+              :page-size="pageSize"
               layout="total, prev, pager, next"
               :total="total">
             </el-pagination>
@@ -40,17 +40,19 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import api from '../http/api'
+import api from '@/http/api'
+  import {pageSize} from '@/util/env' 
 export default {
   data () {
-  return {
-    integral:[],
-    rule:[],
-    page:1,
-    total:0,
-    charts: '',
-    xdata:[],
-    ydata:[]
+    return {
+      integral:[],
+      rule:[],
+      page:1,
+      total:0,
+      charts: '',
+      xdata:[],
+      ydata:[],
+      pageSize:pageSize
     }
   },
   methods:{

@@ -19,12 +19,29 @@
               <el-radio :label="2">预约开始</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="时间" v-if="ruleForm.begintimetype==2">
+          <el-form-item label="时间" v-if="ruleForm.begintimetype==2" prop="begindate">
             <el-date-picker
-              v-model="ruleForm.begintime"
-              type="datetime"
-              placeholder="选择日期时间"  :picker-options="ruleForm.endDateOpt" class="datetime">
+              v-model="ruleForm.begindate"
+              align="right"
+              type="date"
+              :clearable=false
+              placeholder="选择日期"
+              format="yyyy 年 MM 月 dd 日"
+              value-format="yyyy-MM-dd"
+              :picker-options="pickerOptions1">
             </el-date-picker>
+            <el-time-select
+              v-if="ruleForm.begindate"
+              v-model="ruleForm.begintime"
+              :clearable=false
+              :picker-options="{
+                start: '00:00',
+                step: '1:00',
+                end: '23:00'
+              }"
+              placeholder="时间"
+              class="mini-date">
+            </el-time-select>
           </el-form-item>
           <el-form-item label="活动类型" prop="activitytype">
             <el-radio-group v-model="ruleForm.activitytype">
@@ -131,14 +148,10 @@ export default {
         coupontotal:'',
         begintime:'',
         begintimetype:'',
-        endDateOpt: {
-            disabledDate: (time) => {
-              return time.getTime() < Date.now() 
-            }
-        },
         coupontype:'',
         activitytype:'',
-        startsales:''
+        startsales:'',
+        begindate:''
       },
       rules: {
         goodslink: [
@@ -161,6 +174,7 @@ export default {
         ],
         goodstitle: [
           { required: true, message: '请输入短标题', trigger: 'blur' },
+          { min: 3, max: 15, message: '短标题3到15个字符', trigger: 'blur' }
         ],
         voucherprice: [
           { required: true, message: '请输入券后价', trigger: 'blur' },
@@ -186,13 +200,41 @@ export default {
         startsales: [
           { required: true, message: '请输入入库初始销量', trigger: 'change' },
         ],
+        begintime:[{ required: true, message: '请选择预约开始时间', trigger: 'change' }],
+        begindate:[{ required: true, message: '请选择预约开始时间', trigger: 'change' }]
       },
       uploadUrl:'http://dev.ruomengtv.com/api/image/imageUpload?type=goods',
       dialogImageUrl: '',    
       dialogVisible: false,   
       filelist:[],
-      uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`}
-    };
+      uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+
+      pickerOptions1: {
+        disabledDate(time) {
+          return time.getTime() < Date.now()|| time.getTime() > Date.now()+8.64e7*3;
+        },
+        shortcuts: [{
+          text: '今天',
+          onClick(picker) {
+            picker.$emit('pick', new Date());
+          }
+        }, {
+          text: '明天',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() + 3600 * 1000 * 24);
+            picker.$emit('pick', date);
+          }
+        }, {
+          text: '后天',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() + 3600 * 1000 * 24 * 2);
+            picker.$emit('pick', date);
+          }
+        }]
+      },
+    }
   },
 
   methods: {
@@ -237,11 +279,12 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           let data=this.ruleForm
-          console.log(data)
+          
           if(data.begintimetype==1){
             data.begintime = formatDate(new Date(),'yyyy-MM-dd hh:mm:ss')
           }else{
-            data.begintime = formatDate(data.begintime,'yyyy-MM-dd hh:mm:ss')
+            let begtime = data.begindate+" "+data.begintime+":00"
+            data.begintime = begtime
           }
           api.createnormal(data).then(res =>{
             if(res.code==0){
@@ -269,10 +312,15 @@ export default {
           let copywriting = JSON.parse(res.data.copywriting)
           this.ruleForm = res.data
           this.ruleForm.id = this.getEditId
-          console.log(res.data.coverimage)
-          // this.ruleForm.copywritingimage_url = 'http://image.ruomengtv.com/' + this.ruleForm.copywritingimage.img1
+          if(this.ruleForm.begintimetype==2){
+            let begtime = this.ruleForm.begintime
+            this.ruleForm.begindate = this.ruleForm.begintime
+            this.ruleForm.begintime = formatDate(new Date(begtime),'hh:mm')
+          }else{
+            // this.ruleForm.begindate = ''
+            this.ruleForm.begintime = ''
+          }
           this.ruleForm.copywritingimage = copywritingimage.first
-          // this.ruleForm.coverimage_url = 'http://image.ruomengtv.com/' + this.ruleForm.coverimage.img1
           this.ruleForm.coverimage = this.ruleForm.coverimage.main
           this.ruleForm.copywriting = copywriting.first
         }
@@ -313,10 +361,7 @@ export default {
     background-color: #fff;
     padding: 20px;
   }
-  .el-input{
-    display: inline-block;
-    width: 423px;
-  }
+
   .medium{
     margin-right: 5px;
     width: 100px;
@@ -353,7 +398,9 @@ export default {
     height: 115px;
     display: block;
   }
-
+  .mini-date{
+    width: 110px;
+  }
 }
 </style>
              

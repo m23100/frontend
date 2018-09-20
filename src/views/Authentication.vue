@@ -170,8 +170,19 @@
 <script>
 import api from '@/http/api'
 import {imgBaseUrl} from '@/util/env' 
+import {isPhone} from '@/util/tool' 
 export default {
   data() {
+    var checkPhone = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入手机号'))
+      } else {
+        if (!isPhone(value)) {
+          callback(new Error('请输入正确的手机号'))
+        }
+        callback();
+      }
+    }
     return {
       dialogImageUrl: '',
       uploadUrl:'http://dev.ruomengtv.com/api/image/imageUpload?type=auth',
@@ -200,6 +211,7 @@ export default {
         ],
         phone: [
           { required: true, message: '请输入手机号', trigger: 'change' },
+          { validator: checkPhone, trigger: 'change' }
         ],
         id_number: [
           { required: true, message: '请输入身份证号', trigger: 'change' }
@@ -292,7 +304,7 @@ export default {
               this.$message.success('提交成功!')
               this.$router.go(0)
             }else{
-              this.$message.error('提交失败')
+              this.$message.error('提交失败'+res.msg)
             }
           })
           .catch(error => {

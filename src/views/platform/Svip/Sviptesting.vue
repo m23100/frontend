@@ -104,7 +104,7 @@
     <div class="pagination">
       <el-pagination
         @current-change="handleCurrentChange"
-        :page-size="2"
+        :page-size="pageSize"
         layout="total, prev, pager, next"
         :total="total">
       </el-pagination>
@@ -114,6 +114,7 @@
 <script>
   import api from '@/http/api'
   import { mapActions } from 'vuex'
+  import {pageSize} from '@/util/env' 
   export default {
     data() {
       return {
@@ -127,14 +128,15 @@
           2:"定向", 
           3:"鹊桥", 
           4:"营销"
-        }
+        },
+        pageSize:pageSize
       }
 
     },
     methods:{
       ...mapActions({ setGoodsType: 'setGoodsType',setGoodsInfo: 'setGoodsInfo'}),
       editView(info){
-        console.log(info)
+        // console.log(info)
         this.setGoodsInfo({link:info.goodslink,id:info.goodsid,editId:info.id})
         this.setGoodsType('fire')
         this.$router.push({
@@ -142,7 +144,7 @@
         })
       },
       viewCopy(info){
-        console.log(info)
+        // console.log(info)
         api.viewCopy({id:info.id}).then(res=>{
           if(res.code==0){
             // this.isShow = true
@@ -179,7 +181,7 @@
       handleCurrentChange(val) {
         api.auditing({type:this.type,state:this.state,page:val}).then(res =>{
           let that = this
-          console.log(res.data.data)
+          // console.log(res.data.data)
           res.data.data.forEach(function(item,index){
             item.coverimage = JSON.parse(item.coverimage)
             let copywritingimage = JSON.parse(item.copywritingimage)
@@ -206,7 +208,7 @@
           item.commissiontype = that.commissiontype[item.commissiontype]
         })
         this.list = res.data.data
-        console.log(this.list)
+        // console.log(this.list)
         this.total = res.data.total
       })
     }

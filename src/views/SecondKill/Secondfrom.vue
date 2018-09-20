@@ -107,7 +107,12 @@
             <el-input type="textarea" v-model="ruleForm.copywriting"></el-input>
           </el-form-item>
           <el-form-item label="完整秒杀文案" prop="content">
-            <el-input type="textarea" v-model="ruleForm.content"></el-input>
+            <quill-editor
+              v-model="ruleForm.content"
+              ref="myQuillEditor"
+              :options="editorOption"
+            >
+            </quill-editor>
           </el-form-item>
           <el-form-item label="朋友圈文案" prop="friends">
             <el-input type="textarea" v-model="ruleForm.friends"></el-input>
@@ -125,7 +130,15 @@
 import { mapGetters } from 'vuex'
 import api from '@/http/api'
 import {imgBaseUrl} from '@/util/env'
+import {quillEditor, Quill} from 'vue-quill-editor'
+import {container, ImageExtend, QuillWatch} from 'quill-image-extend-module'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+Quill.register('modules/ImageExtend', ImageExtend)
+// console.log(container)
 export default {
+  components: {quillEditor},
   data() {
     return {
       ruleForm: {
@@ -174,6 +187,7 @@ export default {
         ],
         goodstitle: [
           { required: true, message: '请输入短标题', trigger: 'blur' },
+          { min: 3, max: 15, message: '短标题3到15个字符', trigger: 'blur' }
         ],
         voucherprice: [
           { required: true, message: '请输入券后价', trigger: 'blur' },
@@ -211,7 +225,45 @@ export default {
       },
       uploadUrl:'http://dev.ruomengtv.com/api/image/imageUpload?type=goods',
       uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`},
-      startdate:''
+      startdate:'',
+      editorOption: {
+        modules: {
+          // ImageResize: {},
+          ImageExtend: {
+            loading: true,
+            name: 'file',
+            size: 2,  // 单位为M, 1M = 1024KB
+            action: 'http://dev.ruomengtv.com/api/image/imageUpload?type=goods',
+            headers: (xhr) => {
+              xhr.setRequestHeader('Authorization',`Bearer ${localStorage.getItem('token')}`)
+            },
+            response: (res) => {
+              return imgBaseUrl+res.data.url
+            }
+          },
+          toolbar: {
+            container: [
+              [{ 'size': ['small', false, 'large', 'huge'] }],
+              [{ 'header': [1, 2, 3, 4, 5, 6, false] }], 
+              ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+              [{ 'color': [] }, { 'background': [] }], 
+              [{ 'font': [] }],
+              [{ 'align': [] }]
+              [{ 'list': 'ordered'}, { 'list': 'bullet' }], 
+              [{ 'script': 'sub'}, { 'script': 'super' }],
+              [{ 'indent': '-1'}, { 'indent': '+1' }],
+              [{ 'direction': 'rtl' }], 
+              ['blockquote', 'code-block','formula','image','clean'],
+            ],
+            handlers: {
+              'image': function () {
+                  QuillWatch.emit(this.quill.id)
+              }
+            }
+          }
+        }
+      }
+      
     };
   },
 
@@ -253,14 +305,14 @@ export default {
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
-        console.log(this.ruleForm)
+        // console.log(this.ruleForm)
         if (valid) {
           let data=this.ruleForm
           console.log(data)
           // if(data.begintimetype==1){
             // data.begintime = formatDate(new Date(),'yyyy-MM-dd hh:mm:ss')
           // }else{
-          // }
+          // // }
           api.saveKillGood(data).then(res =>{
             if(res.code==0){
               this.$message.success('提交成功!')
@@ -292,6 +344,8 @@ export default {
         this.ruleForm.keyword.splice(index, 1)
       }
     },
+        
+    
   },
   created(){
     if(this.getEditId>0){
@@ -322,7 +376,7 @@ export default {
     //}
     
     // console.log(this.getGoodsId,this.getGoodsLink,this.getGoodsDate,this.getGoodsTime)
-    console.log(this.ruleForm.goodsid,this.ruleForm.goodslink,this.ruleForm.startdate,this.ruleForm.startfield,this.ruleForm.startsales,this.ruleForm.coverimage)
+    // console.log(this.ruleForm.goodsid,this.ruleForm.goodslink,this.ruleForm.startdate,this.ruleForm.startfield,this.ruleForm.startsales,this.ruleForm.coverimage)
     if(this.ruleForm.goodsid<1 || this.ruleForm.goodslink=='' || this.ruleForm.startdate=='' || this.ruleForm.startfield==''){
       this.$router.push({
           path: "/killcheckout"
@@ -339,7 +393,8 @@ export default {
       'getGoodsSalecount',
       'getGoodsCoverimg'
     ])
-  }
+  },
+
 };
 </script>
 <style lang="scss" scoped  type="text/css">
@@ -404,7 +459,11 @@ export default {
   .mini-keyword{
     width: 140px;
   }
-  
+  .quill-editor{
+    display: inline-block;
+    width: 500px;
+    height: 300px;
+  }
 }
 </style>
              

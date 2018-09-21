@@ -126,7 +126,7 @@
     </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters,mapActions } from 'vuex'
 import api from '@/http/api'
 import {formatDate} from '@/util/tool'
 import {imgBaseUrl} from '@/util/env'
@@ -238,6 +238,7 @@ export default {
   },
 
   methods: {
+    ...mapActions({ setUserBalane: 'setUserBalane'}),
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
@@ -289,6 +290,7 @@ export default {
           api.createnormal(data).then(res =>{
             if(res.code==0){
               this.$message.success('提交成功!')
+              this.setUserBalane({voucherNumber:res.data.voucher_number,integralNumber:res.data.integral})
               this.$router.replace('/Viptesting')
             }else{
               this.$message.error('提交失败'+res.msg)

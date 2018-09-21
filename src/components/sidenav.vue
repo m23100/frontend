@@ -92,7 +92,7 @@
 </template>
 <script>
   import api from '@/http/api';
-  import { mapActions } from 'vuex'
+  import { mapGetters,mapActions } from 'vuex'
 import {imgBaseUrl} from '@/util/env'
   export default {
     data() {
@@ -103,7 +103,7 @@ import {imgBaseUrl} from '@/util/env'
         signature:'',
         integral_number:0,
         voucher_number:0,
-        killstatus:0
+        killstatus:0,
       };
     },
     methods: {
@@ -124,6 +124,12 @@ import {imgBaseUrl} from '@/util/env'
         })
       }
     },
+    computed: {
+      ...mapGetters([
+        'getVoucherNumber',
+        'getIntegralNumber'
+      ])
+    },
     created(){
       api.GetUserInfo().then(res=>{
         this.avatar = res.data.avatar
@@ -139,7 +145,15 @@ import {imgBaseUrl} from '@/util/env'
           this.killstatus = 1
         }
       })
-    }
+    },
+    watch:{
+        getVoucherNumber(newVal,oldVal){
+          this.voucher_number = newVal
+        },
+        getIntegralNumber(newVal,oldVal){
+          this.integral_number = newVal
+        }
+    },
   };
 </script>
 <style  lang="scss" scoped  type="text/css">

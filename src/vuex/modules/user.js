@@ -17,7 +17,6 @@ const state = {
     AccountFunds:[],
     voucherNumber:0,
     integralNumber:0,
-
 }
 
 const actions = {
@@ -64,14 +63,19 @@ const actions = {
         .then(res =>{
             commit(types.GET_ACCOUNT_FUNDS, res.data)
         })
-    }
+    },
+    setUserBalane({commit},res){
+        commit(types.SET_USERS_BALANCE,res)
+    },
 }
 
 const getters = {
     getAccountFunds: state => state.accountFunds,
     getUserData: state => state.userData,
     loginStatus: state => state.loginStatus,
-    userInfo: state => state.userInfo
+    userInfo: state => state.userInfo,
+    getVoucherNumber:state=>state.voucherNumber,
+    getIntegralNumber:state=>state.integralNumber
 }
 
 const mutations = {
@@ -88,7 +92,11 @@ const mutations = {
     },
     [types.GET_ACCOUNT_FUNDS](state,res){
         state.accountFunds = res
-    }
+    },
+    [types.SET_USERS_BALANCE](state,res){
+        state.voucherNumber =res.voucherNumber
+        state.integralNumber = res.integralNumber
+    },
     
 }
 

@@ -127,7 +127,7 @@
     </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters,mapActions } from 'vuex'
 import api from '@/http/api'
 import {imgBaseUrl} from '@/util/env'
 import {quillEditor, Quill} from 'vue-quill-editor'
@@ -268,6 +268,7 @@ export default {
   },
 
   methods: {
+    ...mapActions({ setUserBalane: 'setUserBalane'}),
     handlePictureCardPreview(file) {
     },
     handleExceed(files) {
@@ -308,6 +309,7 @@ export default {
           api.saveKillGood(data).then(res =>{
             if(res.code==0){
               this.$message.success('提交成功!')
+              this.setUserBalane({voucherNumber:res.data.voucher_number,integralNumber:res.data.integral})
               this.$router.replace('/Examineing')
             }else{
               this.$message.error('提交失败'+res.msg)

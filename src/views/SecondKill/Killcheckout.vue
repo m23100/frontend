@@ -10,7 +10,7 @@
               <el-form-item label="活动时间">
                 <el-col>
                   <el-form-item prop="startdate">
-                    <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.startdate" :picker-options="ruleForm.endDateOpt" style="width: 20%;"></el-date-picker>
+                    <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.startdate" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" :picker-options="ruleForm.endDateOpt" style="width: 20%;"></el-date-picker>
                      <span class="text">说明:为保证商品及优惠券有效性，只能预约近3天的秒杀</span>
                   </el-form-item>
                 </el-col>
@@ -74,7 +74,22 @@ export default {
         endDateOpt: {
             disabledDate: (time) => {
               return time.getTime() < Date.now() || time.getTime() > Date.now()+8.64e7*3
-            }
+            },
+            shortcuts: [ {
+              text: '明天',
+              onClick(picker) {
+                const date = new Date();
+                date.setTime(date.getTime() + 3600 * 1000 * 24);
+                picker.$emit('pick', date);
+              }
+            }, {
+              text: '后天',
+              onClick(picker) {
+                const date = new Date();
+                date.setTime(date.getTime() + 3600 * 1000 * 24 * 2);
+                picker.$emit('pick', date);
+              }
+            }]
         },
       },
       rules: {
@@ -83,7 +98,7 @@ export default {
           { validator: validateLink, trigger: 'change' }
         ],
         startdate: [
-          { type: 'date',required: true, message: '请选择秒杀日期', trigger: 'blur' },
+          { required: true, message: '请选择秒杀日期', trigger: 'change' },
         ],
         startfield: [
           { required: true, message: '请选择秒杀场次', trigger: 'blur' },
@@ -105,7 +120,6 @@ export default {
             if(res.code==0){
               this.setGoodsType('kill')
               this.setGoodsInfo({link:this.ruleForm.link,id:res.data.goodsid,salecount:res.data.salecount,coverimage:res.data.images[0]})
-              this.ruleForm.startdate = formatDate(this.ruleForm.startdate,'yyyy-MM-dd hh:mm:ss')
               this.setGoodsKill({goodsTime:this.ruleForm.startfield,goodsDate:this.ruleForm.startdate})
               this.$router.push({
                   path: "/Secondfrom"

@@ -137,7 +137,7 @@
     </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters,mapActions } from 'vuex'
 import api from '@/http/api'
 import {formatDate,isURL} from '@/util/tool'
 import {imgBaseUrl} from '@/util/env'
@@ -260,7 +260,7 @@ export default {
   },
 
   methods: {
-
+    ...mapActions({ setUserBalane: 'setUserBalane'}),
     handleExceed(files) {
       this.$message.warning('只能上传1个文件');
     },
@@ -309,6 +309,7 @@ export default {
           api.saveFire(data).then(res =>{
             if(res.code==0){
               this.$message.success('提交成功!')
+              this.setUserBalane({voucherNumber:res.data.voucher_number,integralNumber:res.data.integral})
               this.$router.replace('/Sviptesting')
             }else{
               this.$message.error('提交失败'+res.msg)

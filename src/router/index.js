@@ -35,7 +35,7 @@ import Examineok from '@/views/SecondKill/Examine/Examineok'
 import Authentication from '@/views/Authentication'
 //客服帮助
 import Customer from '@/views/Customer'
-import demo from '@/views/demo'
+// import demo from '@/views/demo'
 Vue.use(Router)
 
 const router = new Router({
@@ -262,14 +262,14 @@ const router = new Router({
           }
         },
         //测试
-        {
-          path:'/demo',
-          name:'demo',
-          component:demo,
-          meta:{
-            requireAuth:true
-          }
-        },
+        // {
+        //   path:'/demo',
+        //   name:'demo',
+        //   component:demo,
+        //   meta:{
+        //     requireAuth:true
+        //   }
+        // },
 
 
       ]

@@ -115,13 +115,14 @@ import {imgBaseUrl} from '@/util/env'
         // console.log(key, keyPath);
       },
       Logout:function(){
-        this.setSignOut()
-        this.$router.replace('/')
         api.Logout().then(res=>{
           if(res.code==0){
-            
+            this.setSignOut()
+          }else{
+            this.setSignOut()
           }
         })
+        this.$router.replace('/')
       }
     },
     computed: {
@@ -132,6 +133,7 @@ import {imgBaseUrl} from '@/util/env'
     },
     created(){
       api.GetUserInfo().then(res=>{
+        if(res.code>0) this.$router.replace('/')
         this.avatar = res.data.avatar
         this.name = res.data.name
         this.signature = res.data.signature

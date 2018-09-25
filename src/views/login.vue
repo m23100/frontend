@@ -92,10 +92,10 @@
     </div>
 </template>
 <script>
-import Vue from 'vue'
+  import Vue from 'vue'
 
-import { mapActions } from 'vuex'
-import api from '@/http/api'
+  import { mapActions } from 'vuex'
+  import api from '@/http/api'
   import {isPhone} from '@/util/tool' 
 
   export default {
@@ -114,109 +114,119 @@ import api from '@/http/api'
     methods: {
       ...mapActions({ setUserInfo: 'setUserInfo', setUserToken:'setUserToken'}),
       login(){
-        if(this.type=='phone'){
-          let data = {
-              phone: this.phone,
-              password: this.password
-          }
-          if(data.phone==''){
-            this.$message.error("请输入手机号")
-            return false
-          } 
-          if(!isPhone(data.phone)){
-            this.$message.error("请输入正确的手机号")
-            return false
-          } 
-          if(data.password=='') {
-            this.$message.error("请输入密码")
-            return false
-          }
-          api.Login(data).then(res => {
-            console.log(res)
-            if(res.code == 0) {
-              this.setUserToken(res.data)
-              api.UserInfo().then(
-                res => {
-                  this.setUserInfo(res.data)
-                  this.$router.replace('/home')
-                }
-              )
-            }else{
-              this.$message.error(res.msg)
-            }
-          })
-          .catch(error => {
-              this.$message.error(error)
-          })
-        }else{
-          let data = {
-              phone: this.codephone,
-              code: this.code
-          }
-          if(data.phone=='') {
-            this.$message.error("请输入手机号")
-            return false
-          }
-          if(!isPhone(data.phone)) {
-            this.$message.error("请输入正确的手机号")
-            return false
-          }
-          if(data.code=='') {
-            this.$message.error("请输入验证码")
-            return false
-          }
+        console.log('v')
+        // if(this.type=='phone'){
+        //   let data = {
+        //       phone: this.phone,
+        //       password: this.password
+        //   }
+        //   if(data.phone==''){
+        //     this.$message.error("请输入手机号")
+        //     return false
+        //   } 
+        //   if(!isPhone(data.phone)){
+        //     this.$message.error("请输入正确的手机号")
+        //     return false
+        //   } 
+        //   if(data.password=='') {
+        //     this.$message.error("请输入密码")
+        //     return false
+        //   }
+        //   // api.Login(data).then(res => {
+        //   //   console.log(res)
+        //   //   if(res.code == 0) {
+        //   //     this.setUserToken(res.data)
+        //   //     api.UserInfo().then(
+        //   //       res => {
+        //   //         this.setUserInfo(res.data)
+        //   //         this.$router.replace('/home')
+        //   //       }
+        //   //     )
+        //   //   }else{
+        //   //     this.$message.error(res.msg)
+        //   //     return false
+        //   //   }
+        //   // })
+        //   // .catch(error => {
+        //   //     this.$message.error(error)
+        //   //     return false
+        //   // })
+        // }else{
+        //   console.log('b')
+        //   let data = {
+        //       phone: this.codephone,
+        //       code: this.code
+        //   }
+        //   if(data.phone=='') {
+        //     this.$message.error("请输入手机号")
+        //     return false
+        //   }
+        //   if(!isPhone(data.phone)) {
+        //     this.$message.error("请输入正确的手机号")
+        //     return false
+        //   }
+        //   if(data.code=='') {
+        //     this.$message.error("请输入验证码")
+        //     return false
+        //   }
 
-          api.LoginByCode(data).then(res => {
-            if(res.code == 0) {
-              this.setUserToken(res.data)
-              api.UserInfo().then(
-                res => {
-                  this.setUserInfo(res.data)
-                  this.$router.replace('/home')
+        //   api.LoginByCode(data).then(res => {
+        //     if(res.code == 0) {
+        //       this.setUserToken(res.data)
+        //       api.UserInfo().then(
+        //         res => {
+        //           this.setUserInfo(res.data)
+        //           this.$router.replace('/home')
+        //         }
+        //       )
+        //     }else{
+        //       this.$message.error(res.msg)
+        //       return false
+        //     }
+        //   })
+        //   .catch(error => {
+        //       this.$message.error(error)
+        //       return false
+        //   })
+        // }
+        
+      },
+      logintype(type){
+        this.type = type
+      },
+      getCode(){
+        if(this.codephone==''){
+          this.$message.error("请输入手机号")
+        }else if(!isPhone(this.codephone)){
+          this.$message.error("请输入正确的手机号")
+        }else{
+          api.GetSmsCode({phone:this.codephone,type:'login'}).then(res=>{
+            if(res.code==0){
+              if (!this.canClick) return  //改动的是这两行代码
+              this.canClick = false
+              this.code_str = this.totalTime + 's后重新发送'
+              let clock = window.setInterval(() => {
+                this.totalTime--
+                this.code_str = this.totalTime + 's后重新发送'
+                if (this.totalTime < 0) {
+                  window.clearInterval(clock)
+                  this.content = '重新发送验证码'
+                  this.totalTime = 60
+                  this.canClick = true  //这里重新开启
                 }
-              )
+              },1000)
             }else{
               this.$message.error(res.msg)
+              return false
             }
-          })
-          .catch(error => {
-              this.$message.error(error)
           })
         }
-        
-     },
-    logintype(type){
-      this.type = type
-    },
-    getCode(){   
-      if(this.codephone==''){
-        this.$message.error("请输入手机号")
-      }else if(!isPhone(this.codephone)){
-        this.$message.error("请输入正确的手机号")
-      }else{
-        api.GetSmsCode({phone:this.codephone,type:'login'}).then(res=>{
-          if(res.code==0){
-            if (!this.canClick) return  //改动的是这两行代码
-            this.canClick = false
-            this.code_str = this.totalTime + 's后重新发送'
-            let clock = window.setInterval(() => {
-              this.totalTime--
-              this.code_str = this.totalTime + 's后重新发送'
-              if (this.totalTime < 0) {
-                window.clearInterval(clock)
-                this.content = '重新发送验证码'
-                this.totalTime = 60
-                this.canClick = true  //这里重新开启
-              }
-            },1000)
-          }else{
-            this.$message.error(res.msg)
-          }
-        })
       }
-    }
-  },
+    },
 
+    created(){
+      console.log('a')
+    },
   };
 </script>
 <style scoped>

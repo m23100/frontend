@@ -60,7 +60,7 @@
         <!-- 弹窗提交申请放单表单 -->
         <el-dialog
           title="上传放单权限资格申请资料"
-          :visible.sync="centerDialogVisible" width="40%" center>
+          :visible.sync="centerDialogVisible" width="700px" center>
 
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="110px" class="demo-ruleForm">
           <el-form-item label="真实姓名" prop="real_name">

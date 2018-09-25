@@ -2,7 +2,7 @@
     <!-- 提交订单审核页 -->
     <div class="Apply">
          <div class="vipimg">
-            <img src="../../assets/img/vip.png" alt="">
+            <img src="../../assets/img/auth.png" alt="">
         </div>
         <!-- 去申请 -->
         <div class="box" v-if="state =='6'">
@@ -42,7 +42,7 @@
         <!-- 弹窗提交申请放单表单 -->
         <el-dialog
           title="上传放单权限资格申请资料"
-          :visible.sync="centerDialogVisible" width="45%" center>
+          :visible.sync="centerDialogVisible" width="700px" center>
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="110px" class="demo-ruleForm">
           <el-form-item label="行业名称" prop="industry">
             <el-input v-model="ruleForm.industry" placeholder="填写行业名称"></el-input>

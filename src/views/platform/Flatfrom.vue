@@ -77,6 +77,9 @@
           <el-form-item label="券后价" prop="voucherprice">
             <el-input v-model="ruleForm.voucherprice" placeholder="0" class="medium"></el-input>元
           </el-form-item>
+          <el-form-item label="券面额" prop="couponmoney">
+            <el-input v-model="ruleForm.couponmoney" placeholder="0" class="medium"></el-input>元
+          </el-form-item>
           <el-form-item label="优惠券总量" prop="coupontotal">
             <el-input v-model="ruleForm.coupontotal" placeholder="0" class="medium"></el-input>张
           </el-form-item>
@@ -151,6 +154,7 @@ export default {
         coupontype:'',
         activitytype:'',
         startsales:'',
+        couponmoney:'',
         begindate:''
       },
       rules: {
@@ -199,6 +203,9 @@ export default {
         ],
         startsales: [
           { required: true, message: '请输入入库初始销量', trigger: 'change' },
+        ],
+        couponmoney:[
+          { required: true, message: '请输入券面额', trigger: 'change' },
         ],
         begintime:[{ required: true, message: '请选择预约开始时间', trigger: 'change' }],
         begindate:[{ required: true, message: '请选择预约开始时间', trigger: 'change' }]

@@ -52,8 +52,7 @@
                 </div> -->
 
                 <div class="choice">
-                  <img src="../assets/img/choiceno.png" class='changeimg' alt="">
-                  <span>记住登录状态</span>
+                  <el-checkbox v-model="checked">记住我</el-checkbox>
                 </div>
                 <button class="login-button" @click="login">登录</button>
               </div>
@@ -108,87 +107,86 @@
         code:'',
         code_str: '获取验证码',  // 按钮里显示的内容
         totalTime: 60,
-        canClick:true
+        canClick:true,
+        checked:false
       };
     },
     methods: {
       ...mapActions({ setUserInfo: 'setUserInfo', setUserToken:'setUserToken'}),
       login(){
-        console.log('v')
-        // if(this.type=='phone'){
-        //   let data = {
-        //       phone: this.phone,
-        //       password: this.password
-        //   }
-        //   if(data.phone==''){
-        //     this.$message.error("请输入手机号")
-        //     return false
-        //   } 
-        //   if(!isPhone(data.phone)){
-        //     this.$message.error("请输入正确的手机号")
-        //     return false
-        //   } 
-        //   if(data.password=='') {
-        //     this.$message.error("请输入密码")
-        //     return false
-        //   }
-        //   // api.Login(data).then(res => {
-        //   //   console.log(res)
-        //   //   if(res.code == 0) {
-        //   //     this.setUserToken(res.data)
-        //   //     api.UserInfo().then(
-        //   //       res => {
-        //   //         this.setUserInfo(res.data)
-        //   //         this.$router.replace('/home')
-        //   //       }
-        //   //     )
-        //   //   }else{
-        //   //     this.$message.error(res.msg)
-        //   //     return false
-        //   //   }
-        //   // })
-        //   // .catch(error => {
-        //   //     this.$message.error(error)
-        //   //     return false
-        //   // })
-        // }else{
-        //   console.log('b')
-        //   let data = {
-        //       phone: this.codephone,
-        //       code: this.code
-        //   }
-        //   if(data.phone=='') {
-        //     this.$message.error("请输入手机号")
-        //     return false
-        //   }
-        //   if(!isPhone(data.phone)) {
-        //     this.$message.error("请输入正确的手机号")
-        //     return false
-        //   }
-        //   if(data.code=='') {
-        //     this.$message.error("请输入验证码")
-        //     return false
-        //   }
+        if(this.type=='phone'){
+          let data = {
+              phone: this.phone,
+              password: this.password,
+              remember_me:this.checked
+          }
+          if(data.phone==''){
+            this.$message.error("请输入手机号")
+            return false
+          } 
+          if(!isPhone(data.phone)){
+            this.$message.error("请输入正确的手机号")
+            return false
+          } 
+          if(data.password=='') {
+            this.$message.error("请输入密码")
+            return false
+          }
+          api.Login(data).then(res => {
+            if(res.code == 0) {
+              this.setUserToken(res.data)
+              api.UserInfo().then(
+                res => {
+                  this.setUserInfo(res.data)
+                  this.$router.replace('/home')
+                }
+              )
+            }else{
+              this.$message.error(res.msg)
+              return false
+            }
+          })
+          .catch(error => {
+              this.$message.error(error)
+              return false
+          })
+        }else{
+          let data = {
+              phone: this.codephone,
+              code: this.code
+          }
+          if(data.phone=='') {
+            this.$message.error("请输入手机号")
+            return false
+          }
+          if(!isPhone(data.phone)) {
+            this.$message.error("请输入正确的手机号")
+            return false
+          }
+          if(data.code=='') {
+            this.$message.error("请输入验证码")
+            return false
+          }
 
-        //   api.LoginByCode(data).then(res => {
-        //     if(res.code == 0) {
-        //       this.setUserToken(res.data)
-        //       api.UserInfo().then(
-        //         res => {
-        //           this.setUserInfo(res.data)
-        //           this.$router.replace('/home')
-        //         }
-        //       )
-        //     }else{
-        //       this.$message.error(res.msg)
-        //       return false
-        //     }
-        //   })
-        //   .catch(error => {
-        //       this.$message.error(error)
-        //       return false
-        //   })
-        // }
+          api.LoginByCode(data).then(res => {
+            if(res.code == 0) {
+              this.setUserToken(res.data)
+              api.UserInfo().then(
+                res => {
+                  this.setUserInfo(res.data)
+                  this.$router.replace('/home')
+                }
+              )
+            }else{
+              this.$message.error(res.msg)
+              return false
+            }
+          })
+          .catch(error => {
+              this.$message.error(error)
+              return false
+          })
+        }
         
       },
       logintype(type){
@@ -224,12 +222,9 @@
       }
     },
 
-    created(){
-      console.log('a')
-    },
   };
 </script>
-<style scoped>
+<style lang="scss" scoped  type="text/css">
   .login {
     width: 100%;
     height: 100%;
@@ -572,4 +567,11 @@ p{
     color: #9A9B9C;
     text-align: center;
 }
+/*.el-checkbox__input.is-focus .el-checkbox__inner{
+  border-color: #f5475c;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+  border-color: #f5475c;
+  background-color: #f5475c; 
+}*/
 </style>

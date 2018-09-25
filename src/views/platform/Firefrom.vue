@@ -346,7 +346,7 @@ export default {
           this.ruleForm.id = this.getEditId
           if(this.ruleForm.begintimetype==2){
             let begtime = this.ruleForm.begintime
-            this.ruleForm.begindate = this.ruleForm.begintime
+            this.ruleForm.begindate = formatDate(new Date(begtime),'yyyy-MM-dd')
             this.ruleForm.begintime = formatDate(new Date(begtime),'hh:mm')
           }else{
             // this.ruleForm.begindate = ''

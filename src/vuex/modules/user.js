@@ -25,6 +25,7 @@ const actions = {
      */
     setUserToken({ commit }, res) {
         localStorage.setItem('token', res.access_token)
+        localStorage.setItem('token_expires', res.expires_at)
     }, 
 
     /**
@@ -44,6 +45,7 @@ const actions = {
         localStorage.removeItem('loginStatus')
         localStorage.removeItem('userInfo')
         localStorage.removeItem('token')
+        localStorage.removeItem('token_expires')
         commit(types.SET_LOGIN_STATUS, false)
         commit(types.SET_USER_INFO, {})
     },

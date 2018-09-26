@@ -115,7 +115,13 @@
             </quill-editor>
           </el-form-item>
           <el-form-item label="朋友圈文案" prop="friends">
-            <el-input type="textarea" v-model="ruleForm.friends"></el-input>
+            <!-- <el-input type="textarea" v-model="ruleForm.friends"></el-input> -->
+            <quill-editor
+              v-model="ruleForm.friends"
+              ref="myQuillEditor"
+              :options="editorOption"
+            >
+            </quill-editor>
           </el-form-item>
 
           <el-form-item>

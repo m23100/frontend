@@ -285,7 +285,7 @@ router.beforeEach((to, from, next) => {
   let token_expires = localStorage.getItem('token_expires')
   if(to.meta.requireAuth) {
     let time_diff = new Date(token_expires).getTime()- new Date().getTime()
-    // console.log(time_diff)
+    console.log(time_diff)
     if(token && time_diff>0) {
       next()
     } else {

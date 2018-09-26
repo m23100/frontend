@@ -275,8 +275,8 @@ import {imgBaseUrl} from '@/util/env'
     text-align: center;
   }
   .avatar {
-    width: 178px;
-    height: 178px;
+    width: 160px;
+    height: 160px;
     display: block;
   }
 </style>

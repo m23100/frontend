@@ -93,7 +93,7 @@
 <script>
   import api from '@/http/api';
   import { mapGetters,mapActions } from 'vuex'
-import {imgBaseUrl} from '@/util/env'
+import {imgBaseUrl,userAvatar} from '@/util/env'
   export default {
     data() {
       return {
@@ -134,7 +134,7 @@ import {imgBaseUrl} from '@/util/env'
     created(){
       api.GetUserInfo().then(res=>{
         if(res.code>0) this.$router.replace('/')
-        this.avatar = res.data.avatar
+        this.avatar = res.data.avatar ? res.data.avatar : imgBaseUrl+userAvatar
         this.name = res.data.name
         this.signature = res.data.signature
         this.voucher_number = res.data.voucher_number

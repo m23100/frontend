@@ -58,7 +58,7 @@
         total:0,
         page:1,
         type:0,
-        state:1,
+        state:2,//审核中0，审核通过2，审核被拒3
         pageSize:pageSize
       }
     },

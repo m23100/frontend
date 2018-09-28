@@ -39,6 +39,13 @@
             <h3>您的积分被扣完了!<span class="Tips">放单资格将在下月1号恢复</span></h3>
             <div class="center"><el-button type="text" class="test">默默等待</el-button></div>            
         </div>
+        <!-- 点券余额不足 -->
+        <div class="box" v-else-if="state=='7'">
+            <h2 class="Title">放单权限</h2>
+            <div class="centent"><img src="../../assets/img/fangdan_locked.png" alt=""></div>
+            <h3>您的点券被扣完了!</h3>
+            <div class="center"><el-button type="text" class="test">默默等待</el-button></div>            
+        </div>
         <!-- 弹窗提交申请放单表单 -->
         <el-dialog
           title="上传放单权限资格申请资料"

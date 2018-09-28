@@ -2,9 +2,9 @@
      <div class="footer">
          <div class="f-center">
              <div class="three">
-                 <a href="">关于我们</a>
-                 <a href="">若梦金冠联盟</a>
-                 <a href="">联系我们</a>
+              <a href="/content?h=about">关于我们</a>
+              <a href="/content?h=introduce">若梦金冠联盟</a>
+              <a href="/content?h=contact">联系我们</a>
              </div>
              <div class="line"></div>
              <p>@2017-2018 ruomengtv.com 若梦TV · 浙ICP备 17035713号-2 杭州若盟网络科技有限公司</p>

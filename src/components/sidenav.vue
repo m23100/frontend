@@ -190,8 +190,13 @@ import {imgBaseUrl,userAvatar} from '@/util/env'
   }
   .user-dd2{
     font-size: 12px;
-    line-height: 52px;
+    line-height: 20px;
     color: #a8a8a8;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   .user .deposit{
     display: flex;

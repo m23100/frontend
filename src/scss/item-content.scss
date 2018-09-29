@@ -1,3 +1,9 @@
+
+$themeColor: #f5475c;
+$themeBlue: #49a6f7;
+$themeSecon: #999;
+$themePageBg: #F4F4F4;
+$themeNavHoverColor: #553c94;
 .item-content{
     width:600px;
     height:540px;
@@ -15,7 +21,7 @@
         width:45px;
         height:45px;
         padding:5px;
-        background:url('../assets/img/icon-rankbg.png') no-repeat center;
+        background:url(../assets/img/icon-rankbg.png) no-repeat center;
         background-size:contain;
         font-size:20px;
         color:#FFF;
@@ -25,11 +31,11 @@
         float:left;
         width:100%;
         padding-bottom:10px;
-        border:solid 1px #F4F4F4;
+        border:solid 1px $themePageBg;
       }
       .hover{
-        border:solid 1px #f5475c;
-        border-botoom:none;
+        border:solid 1px $themeColor;
+        border-bottom:none;
         .cover .btns{
           display:block;
         }
@@ -51,12 +57,13 @@
           width:100%;
           bottom:0;
           cursor:pointer;
+          z-index:11;
           span{
             display:inline-block;
             text-align:center;
             width:50%;
             padding:5px 0;
-            background:#f5475c;
+            background:$themeColor;
             color:#FFF;
           }
           span:hover{
@@ -76,13 +83,13 @@
       }
       .content{
         padding:0 15px;
-        color:#999;
+        color:$themeSecon;
         line-height:24px;
         .rank-sale{
           margin-top:-10px;
           text-align:center;
           span{
-            color:#49a6f7;
+            color:$themeBlue;
           }
         }
         .title{
@@ -97,12 +104,12 @@
         .line{
           height:2px;
           width:100%;
-          background:#F4F4F4;
+          background:$themePageBg;
           margin:10px 0;
           div{
             width:50%;
             height:2px;
-            background:#f5475c;
+            background:$themeColor;
           }
         }
         .sales{
@@ -110,7 +117,7 @@
           justify-content: space-between;
           align-items:center;
           span{
-            color:#f5475c;
+            color:$themeColor;
             b{
               font-weight:normal;
               font-size:18px;
@@ -118,7 +125,7 @@
           }
         }
         .fee b{
-          color:#49a6f7;
+          color:$themeBlue;
           font-weight:normal;
         }
         .coupon{
@@ -128,13 +135,13 @@
           div{
             span{
               display:inline-block;
-              width:70px;
+              width:80px;
               height:20px;
               line-height:20px;
-              background:url('../assets/img/icon-coupon.png') no-repeat center;
+              background:url(../assets/img/icon-coupon.png) no-repeat center;
               background-size:100% 100%;
-              color:#49a6f7;
-              text-indent:3em;
+              color:$themeBlue;
+              text-indent:2.5em;
               font-size:12px;
             }
           }
@@ -154,29 +161,29 @@
       .extras{
         // display:none;
         line-height:24px;
-        color:#999;
+        color:$themeSecon;
         position: absolute;
         bottom:-86px;
         left:0;
         width:100%;
         background:#FFF;
         padding-bottom:15px;
-        border:solid 1px #f5475c;
+        border:solid 1px $themeColor;
         border-top:none;
-        z-index:2;
+        z-index:10;
         .row{
           padding:0 15px;
           display:flex;
           justify-content: space-between;
           .error{
-            color:#999;
+            color:$themeSecon;
             i{
               display:inline-block;
               width:16px;
               height:16px;
               border-radius:16px;
               line-height:16px;
-              background:#f5475c;
+              background:$themeColor;
               color:#FFF;
               text-align:center;
               font-style:normal;
@@ -185,7 +192,7 @@
         }
         span b{
           font-weight:normal;
-          color:#f5475c;
+          color:$themeColor;
         }
       }
       .copys{

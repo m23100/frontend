@@ -88,3 +88,13 @@ export function isPhone(phone){
         return false
     }
 }
+
+export function isIDcard(id){
+    var strRegex = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|[xX])$/
+    var re = new RegExp(strRegex)
+    if(re.test(id)){
+        return true
+    }else{
+        return false
+    }
+}

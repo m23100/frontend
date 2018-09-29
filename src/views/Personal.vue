@@ -76,12 +76,15 @@ import {imgBaseUrl} from '@/util/env'
         rules:{
           name: [
             { required: true, message: '请输入昵称', trigger: 'blur' },
+            { max: 20, message: '昵称不得超过20个字符', trigger: 'blur' }
           ],
           signature: [
             { required: true, message: '请输入签名', trigger: 'blur' },
+            { max: 50, message: '签名不得超过50个字符', trigger: 'blur' }
           ],
           qq: [
             { required: true, message: '请输入QQ', trigger: 'blur' },
+            { max: 15, message: 'QQ不得超过15个字符', trigger: 'blur' }
           ],
         }
       }

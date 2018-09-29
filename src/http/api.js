@@ -212,4 +212,10 @@ export default {
     addUserAuth(params){
         return fetch('user/addUserAuth',params)
     },
+    getAppkey(params){
+        return fetch('/getappkey',params)
+    },
+    resetAppkey(params){
+        return fetch('/resetappkey',params)
+    }
 }

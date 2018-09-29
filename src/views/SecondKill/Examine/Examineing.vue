@@ -49,7 +49,7 @@
                         <div>券后<span>￥<b>{{scope.row.voucherprice}}</b></span></div>
                         <p>月销：{{scope.row.monthsales}}</p>
                       </div>
-                      <div class="fee">佣金：{{scope.row.commissiontype}} <b>{{scope.row.commissionrate}}%</b>（{{scope.row.couponmoney}}元）</div>
+                      <div class="fee">佣金：{{scope.row.commissiontype}} <b>{{scope.row.commissionrate}}%</b></div>
                       <div class="coupon">
                         <div>
                           <span>{{scope.row.couponmoney}}元</span>

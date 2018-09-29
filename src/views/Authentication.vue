@@ -5,7 +5,7 @@
         </div>
         <!-- 未认证 -->
         <div class="centent" v-if="state===1">
-            <h2 class="Title">认证信息</h2>
+            <div class="Title">认证信息</div>
              <div class="xx"><img src="../assets/img/renzhenxiong.png" alt=""></div>
             <h3>当前处于未认证状态</h3>
             <div class="xxx">
@@ -168,173 +168,184 @@
     </div>
 </template>
 <script>
-import api from '@/http/api'
-import {imgBaseUrl} from '@/util/env' 
-import {isPhone} from '@/util/tool' 
-export default {
-  data() {
-    var checkPhone = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入手机号'))
-      } else {
-        if (!isPhone(value)) {
-          callback(new Error('请输入正确的手机号'))
-        }
-        callback();
-      }
-    }
-    return {
-      dialogImageUrl: '',
-      uploadUrl:'http://dev.ruomengtv.com/api/image/imageUpload?type=auth',
-      dialogVisible: false,
-      centerDialogVisible: false,
-      state: -1,
-      options: [],
-      value: "",
-      user_income_str:'',
-      uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`},
-      ruleForm: {
-        real_name: '',
-        phone: '',
-        id_number:'',
-        user_income:'',
-        income_prove:'',
-        options: [],
-        id_image_just:'',
-        id_image_back:'',
-        channel_info:'',
-        channel_prove:''
-      },
-      rules: {
-        real_name: [
-          { required: true, message: '请输入真实姓名', trigger: 'blur' },
-        ],
-        phone: [
-          { required: true, message: '请输入手机号', trigger: 'change' },
-          { validator: checkPhone, trigger: 'change' }
-        ],
-        id_number: [
-          { required: true, message: '请输入身份证号', trigger: 'change' }
-        ],
-        user_income: [
-          { required: true, message: '请选择收入水平', trigger: 'change' }
-        ],
-        income_prove: [
-          { required: true, message: '请上传收入水平图片', trigger: 'change' }
-        ],
-        id_image_just: [
-          { required: true, message: '请上身份证正面', trigger: 'change' }
-        ],
-        id_image_back: [
-          { required: true, message: '请上传身份证反而', trigger: 'change' }
-        ],
-        channel_info: [
-          { required: true, message: '请输入渠道信息', trigger: 'change' }
-        ],
-        channel_prove: [
-          { required: true, message: '请上传渠道信息图片', trigger: 'change' }
-        ],
-      },
-    }
-  },
-  inject:['reload'],
-  methods: {
-    handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
-    },
-    handleExceed(files) {
-      this.$message.warning('只能上传1个文件');
-    },
-    beforeAvatarUpload(file) {
-      const isJPG = (file.type === 'image/jpeg' || file.type==='image/png');
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
-      }
-      return isJPG && isLt2M;
-    },
-    beforeRemove(file, fileList) {
-      // 增加一个询问框
-      return this.$confirm(`确定移除 ${file.name}？`)
-    },
-    idImageFront(response,file){
-      // this.id_image_just_url = URL.createObjectURL(file.raw)
-      this.ruleForm.id_image_just = imgBaseUrl + response.data.url
-    },
-    idImageFrontRemove(file,idImageList){
-      this.ruleForm.id_image_just = ''
-    },
-    idImageBack(response){
-      // this.id_image_back_url = URL.createObjectURL(file.raw)
-      this.ruleForm.id_image_back = imgBaseUrl + response.data.url
-    },
-    idImageBackRemove(){
-      this.ruleForm.id_image_back = ''
-    },
-    incomeProve(response){
-      // this.income_prove_url = URL.createObjectURL(file.raw)
-      this.ruleForm.income_prove = imgBaseUrl + response.data.url
-    },
-    incomeProveRemove(){
-      this.ruleForm.income_prove = ''
-    },
-    channelProve(response){
-      // this.channel_prove_url = URL.createObjectURL(file.raw)
-      this.ruleForm.channel_prove = imgBaseUrl + response.data.url
-    },
-    channelProveRemove(){
-      this.ruleForm.channel_prove = ''
-    },
-    handleChange(val){
-      this.ruleForm.user_income = val
-    },
-
-    //提交表单信息
-    Submission(formName){
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          let data=this.ruleForm
-          api.addUserAuth(data).then(res =>{
-            if(res.code==0){
-              this.$message.success('提交成功!')
-              this.reload()
-            }else{
-              this.$message.error('提交失败'+res.msg)
-            }
-          })
-          .catch(error => {
-            console.log(error)
-          })
+  import api from '@/http/api'
+  import {imgBaseUrl} from '@/util/env' 
+  import {isPhone,isIDcard} from '@/util/tool' 
+  export default {
+    data() {
+      var checkPhone = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入手机号'))
         } else {
-          return false;
+          if (!isPhone(value)) {
+            callback(new Error('请输入正确的手机号'))
+          }
+          callback();
         }
+      }
+      var checkIDcard = (rule,value,callback)=>{
+        if (value === '') {
+          callback(new Error('请输入身份证号'))
+        } else {
+          if (!isIDcard(value)) {
+            callback(new Error('请输入正确的身份证号'))
+          }
+          callback();
+        }
+      }
+      return {
+        dialogImageUrl: '',
+        uploadUrl:'http://dev.ruomengtv.com/api/image/imageUpload?type=auth',
+        dialogVisible: false,
+        centerDialogVisible: false,
+        state: -1,
+        options: [],
+        value: "",
+        user_income_str:'',
+        uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`},
+        ruleForm: {
+          real_name: '',
+          phone: '',
+          id_number:'',
+          user_income:'',
+          income_prove:'',
+          options: [],
+          id_image_just:'',
+          id_image_back:'',
+          channel_info:'',
+          channel_prove:''
+        },
+        rules: {
+          real_name: [
+            { required: true, message: '请输入真实姓名', trigger: 'blur' },
+          ],
+          phone: [
+            { required: true, message: '请输入手机号', trigger: 'change' },
+            { validator: checkPhone, trigger: 'change' }
+          ],
+          id_number: [
+            { required: true, message: '请输入身份证号', trigger: 'change' },
+            { validator: checkIDcard, trigger: 'change' }
+          ],
+          user_income: [
+            { required: true, message: '请选择收入水平', trigger: 'change' }
+          ],
+          income_prove: [
+            { required: true, message: '请上传收入水平图片', trigger: 'change' }
+          ],
+          id_image_just: [
+            { required: true, message: '请上身份证正面', trigger: 'change' }
+          ],
+          id_image_back: [
+            { required: true, message: '请上传身份证反而', trigger: 'change' }
+          ],
+          channel_info: [
+            { required: true, message: '请输入渠道信息', trigger: 'change' }
+          ],
+          channel_prove: [
+            { required: true, message: '请上传渠道信息图片', trigger: 'change' }
+          ],
+        },
+      }
+    },
+    inject:['reload'],
+    methods: {
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
+      },
+      handleExceed(files) {
+        this.$message.warning('只能上传1个文件');
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = (file.type === 'image/jpeg' || file.type==='image/png');
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
+      },
+      beforeRemove(file, fileList) {
+        // 增加一个询问框
+        return this.$confirm(`确定移除 ${file.name}？`)
+      },
+      idImageFront(response,file){
+        // this.id_image_just_url = URL.createObjectURL(file.raw)
+        this.ruleForm.id_image_just = imgBaseUrl + response.data.url
+      },
+      idImageFrontRemove(file,idImageList){
+        this.ruleForm.id_image_just = ''
+      },
+      idImageBack(response){
+        // this.id_image_back_url = URL.createObjectURL(file.raw)
+        this.ruleForm.id_image_back = imgBaseUrl + response.data.url
+      },
+      idImageBackRemove(){
+        this.ruleForm.id_image_back = ''
+      },
+      incomeProve(response){
+        // this.income_prove_url = URL.createObjectURL(file.raw)
+        this.ruleForm.income_prove = imgBaseUrl + response.data.url
+      },
+      incomeProveRemove(){
+        this.ruleForm.income_prove = ''
+      },
+      channelProve(response){
+        // this.channel_prove_url = URL.createObjectURL(file.raw)
+        this.ruleForm.channel_prove = imgBaseUrl + response.data.url
+      },
+      channelProveRemove(){
+        this.ruleForm.channel_prove = ''
+      },
+      handleChange(val){
+        this.ruleForm.user_income = val
+      },
+
+      //提交表单信息
+      Submission(formName){
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            let data=this.ruleForm
+            api.addUserAuth(data).then(res =>{
+              if(res.code==0){
+                this.$message.success('提交成功!')
+                this.reload()
+              }else{
+                this.$message.error('提交失败'+res.msg)
+              }
+            })
+            .catch(error => {
+              console.log(error)
+            })
+          } else {
+            return false;
+          }
+        })
+      }
+    },
+
+    created() {
+      api.getUserAuth().then(res =>{
+          this.state = res.code //0用户审核通过,1用户暂未提交审核,2用户认证暂未审核,3用户审核被拒
+        if(res.code!=1){
+          this.ruleForm = res.data.userAuthInfo
+          this.ruleForm.options = []
+        }
+        res.data.userIncomeList.forEach((element,index) => {
+          if(element.income_type==this.ruleForm.user_income){
+            this.user_income_str = element.income
+          }
+          this.ruleForm.options.push({label:element.income,value:element.income_type})
+        })
+        
       })
     }
-  },
-
-  created() {
-    api.getUserAuth().then(res =>{
-        this.state = res.code //0用户审核通过,1用户暂未提交审核,2用户认证暂未审核,3用户审核被拒
-      if(res.code!=1){
-        this.ruleForm = res.data.userAuthInfo
-        this.ruleForm.options = []
-      }
-      res.data.userIncomeList.forEach((element,index) => {
-        if(element.income_type==this.ruleForm.user_income){
-          this.user_income_str = element.income
-        }
-        this.ruleForm.options.push({label:element.income,value:element.income_type})
-      })
-      
-    })
+    
   }
-  
-}
 </script>
 <style type="text/css" lang="scss" scoped="">
 

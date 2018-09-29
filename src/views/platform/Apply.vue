@@ -94,7 +94,7 @@ export default {
     }
     return {
       centerDialogVisible: false,
-      state:'6',//  1:放单权限审核中,   3放单权限审核被拒 4积分用完停用  6暂未开通放单权限
+      state:'6',//  1:放单权限审核中,   3放单权限审核被拒 4积分用完停用  6暂未开通放单权限 7点券用完
       ruleForm: {
         industry: '',
         linker: '',
@@ -110,7 +110,8 @@ export default {
           { required: true, message: '请输入联系人', trigger: 'change' },
         ],
         qq: [
-          { required: true, message: '请输入联系QQ', trigger: 'change' }
+          { required: true, message: '请输入联系QQ', trigger: 'change' },
+          { max: 15, message: 'QQ不得超过15个字符', trigger: 'blur' }
         ],
         phone: [
           { required: true, message: '请输入手机号', trigger: 'change' },

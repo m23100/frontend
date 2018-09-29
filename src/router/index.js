@@ -31,6 +31,8 @@ import Examineing from '@/views/SecondKill/Examine/Examineing'
 import Examineno from '@/views/SecondKill/Examine/Examineno'
 import Examineok from '@/views/SecondKill/Examine/Examineok'
 
+import Userkey from '@/views/Userkey'
+
 //认证信息
 import Authentication from '@/views/Authentication'
 //客服帮助
@@ -257,6 +259,15 @@ const router = new Router({
           path:'/customer',
           name:'Customer',
           component:Customer,
+          meta:{
+            requireAuth:true
+          }
+        },
+        //客服帮助
+        {
+          path:'/userkey',
+          name:'Userkey',
+          component:Userkey,
           meta:{
             requireAuth:true
           }

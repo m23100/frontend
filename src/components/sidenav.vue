@@ -71,11 +71,11 @@
               <i class="iconfont icon-renzhengshangjia"></i>
               <span slot="title">认证信息</span>
             </el-menu-item>
-            <!-- <el-menu-item index="7"  @click="$router.push('demo')">
+            <el-menu-item index="7"  @click="$router.push('Userkey')" v-if="this.fangdanstatus==1">
               <i class="iconfont icon-iconfont5"></i>
-              <span slot="title">账户安全</span>
-            </el-menu-item> -->
-            <el-menu-item index="7" @click="$router.push('Customer')">
+              <span slot="title">密钥管理</span>
+            </el-menu-item>
+            <el-menu-item index="8" @click="$router.push('Customer')">
               <i class="iconfont icon-customerservice_fill"></i>
               <span slot="title">客服帮助</span>
             </el-menu-item>
@@ -104,6 +104,7 @@ import {imgBaseUrl,userAvatar} from '@/util/env'
         integral_number:0,
         voucher_number:0,
         killstatus:0,
+        fangdanstatus:0
       };
     },
     methods: {
@@ -147,6 +148,11 @@ import {imgBaseUrl,userAvatar} from '@/util/env'
           this.killstatus = 1
         }
       })
+      api.GetUserIsSend().then(res=>{
+        if(res.code==0 || res.code==4 || res.code==7){
+          this.fangdanstatus = 1
+        }
+       })
     },
     watch:{
         getVoucherNumber(newVal,oldVal){

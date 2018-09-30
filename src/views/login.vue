@@ -1,104 +1,94 @@
 <template>
-    <div class="login">
-      <!-- 登录头部 -->
-      <div class="login-head">
-        <a href="/" target="_blank"><img src="../assets/img/loginlogo.png" alt=""></a>
-        <div class="icon">
-          <dl>
-            <dt>
-              <img src="../assets/img/icon1.png" alt="">
-            </dt>
-            <dd>爆款秒杀</dd>
-          </dl>
-          <dl>
-            <dt>
-              <img src="../assets/img/icon2.png" alt="">
-            </dt>
-            <dd>人工审核</dd>
-          </dl>
-          <dl>
-            <dt>
-              <img src="../assets/img/icon3.png" alt="">
-            </dt>
-            <dd>卓越优质</dd>
-          </dl>
-          <dl>
-            <dt>
-              <img src="../assets/img/icon4.png" alt="">
-            </dt>
-            <dd>实况数据</dd>
-          </dl>
-        </div>
+  <div class="login">
+    <!-- 登录头部 -->
+    <div class="login-head">
+      <a href="/" target="_blank"><img src="../assets/img/loginlogo.png" alt=""></a>
+      <div class="icon">
+        <dl>
+          <dt>
+            <img src="../assets/img/icon1.png" alt="">
+          </dt>
+          <dd>爆款秒杀</dd>
+        </dl>
+        <dl>
+          <dt>
+            <img src="../assets/img/icon2.png" alt="">
+          </dt>
+          <dd>人工审核</dd>
+        </dl>
+        <dl>
+          <dt>
+            <img src="../assets/img/icon3.png" alt="">
+          </dt>
+          <dd>卓越优质</dd>
+        </dl>
+        <dl>
+          <dt>
+            <img src="../assets/img/icon4.png" alt="">
+          </dt>
+          <dd>实况数据</dd>
+        </dl>
       </div>
-      <!-- end -->
-      <!-- 内容 -->
-      <div class="door">
-        <div class="door-center">
-          <div class="login-box">
-            <ul class="login-nav">
-              <li :class="type=='phone'? 'current':''"  @click="logintype('phone')">账号登录</li>
-              <span class="spacer1"></span>
-              <li :class="type=='code'? 'current':''"  @click="logintype('code')">验证码登录</li>
-            </ul>
-            <div class="form-box">
-              <el-form>
-              <div v-if="type=='phone'" class="login-from" id="tab1">
-                <input v-model="phone" type="text" placeholder="手机号">
-                <input v-model="password" type="password" placeholder="密码">
-                <!-- <div id="check-code" class="code-box" style='margin-bottom:0;'>
-                  <input type="text" id="reg-code" maxlength="5" placeholder="验证码">
-                  <div class="code" id="data_code" data-value="A4agC" style="color: rgb(94, 68, 68);
-                                    text-align: center;line-height: 49px;background-color: #eee;font-size: 20px;cursor:pointer;">A4agC</div>
-                </div> -->
+    </div>
+    <!-- end -->
+    <!-- 内容 -->
+    <div class="door">
+      <div class="door-center">
+        <div class="login-box">
+          <ul class="login-nav">
+            <li :class="type=='phone'? 'current':''"  @click="logintype('phone')">账号登录</li>
+            <span class="spacer1"></span>
+            <li :class="type=='code'? 'current':''"  @click="logintype('code')">验证码登录</li>
+          </ul>
+          <div class="form-box">
 
-                <div class="choice">
-                  <el-checkbox v-model="checked">记住我</el-checkbox>
-                </div>
-                <button class="login-button" @click="login">登录</button>
+            <div v-if="type=='phone'" class="login-from" id="tab1">
+              <input v-model="phone" type="text" placeholder="手机号">
+              <input v-model="password" type="password" placeholder="密码">
+
+              <div class="choice">
+                <el-checkbox v-model="checked">记住我</el-checkbox>
               </div>
-              <div v-if="type=='code'" class="login-from" id="tab2">
-                <input type="text" v-model="codephone" class="phonelogin" placeholder="手机号">
-                <div class="code-box">
-                  <input type="text" v-model="code" placeholder="手机短信验证码">
-                  <!-- <span class="spacer2"></span> -->
-                  <span class="code" @click="getCode">{{code_str}}</span>
-                </div>
-                <button class="login-button" @click="login">登录</button>
-              </div>
-              </el-form> 
+              <button class="login-button" @click="login">登录</button>
             </div>
-      
-            <div class="other">
-              <a href="/register">注册</a>
-              <a href="/forgot">忘记密码？</a>
+            <div v-if="type=='code'" class="login-from" id="tab2">
+              <input type="text" v-model="codephone" class="phonelogin" placeholder="手机号">
+              <div class="code-box">
+                <input type="text" v-model="code" placeholder="手机短信验证码">
+                <span class="code" @click="getCode">{{code_str}}</span>
+              </div>
+              <button class="login-button" @click="login">登录</button>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- end -->
-      <!-- 登录尾部 -->
-      <div class="footer">
-        <div class="f-center">
-          <div class="three">
-            <a href="/content?h=about">关于我们</a>
-            <a href="/content?h=introduce">若梦金冠联盟</a>
-            <a href="/content?h=contact">联系我们</a>
+    
+          <div class="other">
+            <a href="/register">注册</a>
+            <a href="/forgot">忘记密码？</a>
           </div>
-          <div class="line"></div>
-          <p>@2017-2018 ruomengtv.com 若梦TV · 浙ICP备 17035713号-2 杭州若盟网络科技有限公司</p>
         </div>
       </div>
     </div>
+    <!-- end -->
+    <!-- 登录尾部 -->
+    <div class="footer">
+      <div class="f-center">
+        <div class="three">
+          <a href="/content?h=about">关于我们</a>
+          <a href="/content?h=introduce">若梦金冠联盟</a>
+          <a href="/content?h=contact">联系我们</a>
+        </div>
+        <div class="line"></div>
+        <p>@2017-2018 ruomengtv.com 若梦TV · 浙ICP备 17035713号-2 杭州若盟网络科技有限公司</p>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
-  import Vue from 'vue'
-
   import { mapActions } from 'vuex'
   import api from '@/http/api'
-  import {isPhone} from '@/util/tool' 
-
+  import {isPhone} from '@/util/tool'
   export default {
-    data() {
+    data(){
       return {
         phone: "",
         password: "",
@@ -108,8 +98,12 @@
         code_str: '获取验证码',  // 按钮里显示的内容
         totalTime: 60,
         canClick:true,
-        checked:false
-      };
+        checked:false,
+        targetUrl:''
+      }
+    },
+    computed: {
+
     },
     methods: {
       ...mapActions({ setUserInfo: 'setUserInfo', setUserToken:'setUserToken'}),
@@ -138,7 +132,10 @@
               api.UserInfo().then(
                 res => {
                   this.setUserInfo(res.data)
-                  this.$router.replace('/home')
+                  // this.$router.replace('/home')
+                  this.$router.push({
+                    path: this.targetUrl
+                  })
                 }
               )
             }else{
@@ -174,7 +171,10 @@
               api.UserInfo().then(
                 res => {
                   this.setUserInfo(res.data)
-                  this.$router.replace('/home')
+                  // this.$router.replace('/home')
+                  this.$router.push({
+                    path: this.targetUrl
+                  })
                 }
               )
             }else{
@@ -221,8 +221,13 @@
         }
       }
     },
-
-  };
+    beforeRouteEnter (to, from , next){
+      var targetUrl = to.query.redirect;
+      next((vm) => {
+        vm.targetUrl = targetUrl;
+      })
+    }
+  }
 </script>
 <style lang="scss" scoped  type="text/css">
   .login {
@@ -404,13 +409,13 @@
 
   /* .img-verification{
     width: 298px;
-	height: 45px;
-	background-color: #f4f4f4;
-	border-radius: 2px;
+  height: 45px;
+  background-color: #f4f4f4;
+  border-radius: 2px;
     border: solid 1px #dadada;
     margin: 0 36px;
     outline:none ;
-} */
+  } */
 
   .choice {
     width: 298px;
@@ -439,139 +444,139 @@
     width: 100%;
     height: 279px;
     background: linear-gradient(to right, #fc623c , #e80736);
-}
-.head{
-    width: 1200px;
-    margin: 0 auto;
-}
-.nav{
-   display: flex;
-   justify-content: space-between;
-   margin-bottom: 60px;
-}
-.nav .fl{
-    display: block;
-}
-.nav .fr{
-    display: block;   
-}
-.nav ul>li{
-    color: #FFF;
-    float: left;
-    margin: 0 18px;
-    line-height: 44px;
-    font-size: 14px;
-    cursor: pointer;
-}
-.nav ul>li a{
-    color: #FFF;
-}
+  }
+  .head{
+      width: 1200px;
+      margin: 0 auto;
+  }
+  .nav{
+     display: flex;
+     justify-content: space-between;
+     margin-bottom: 60px;
+  }
+  .nav .fl{
+      display: block;
+  }
+  .nav .fr{
+      display: block;   
+  }
+  .nav ul>li{
+      color: #FFF;
+      float: left;
+      margin: 0 18px;
+      line-height: 44px;
+      font-size: 14px;
+      cursor: pointer;
+  }
+  .nav ul>li a{
+      color: #FFF;
+  }
 
-.circle{
-    display: block;
-    margin: 7px 0; line-height: 28px;
-    width: 70px;height: 28px;
-    border-radius: 10px;
-    border:1px solid #FFF;
-    text-align: center;
-    color: #fff;
-}
-.circle:hover{
-    background-color: #FFF;
-    color: #e80736;
-}
-.search-nav{
-    overflow: hidden;
-}
-.search-nav img{
-    float: left;
-    background-size: 100%;
-}
-.search-box{
-    float: left;
-    margin-left: 66px;
-    margin-top: 20px;
-    height: 40px;
-    display: flex;
-    justify-content: space-between;
-}
+  .circle{
+      display: block;
+      margin: 7px 0; line-height: 28px;
+      width: 70px;height: 28px;
+      border-radius: 10px;
+      border:1px solid #FFF;
+      text-align: center;
+      color: #fff;
+  }
+  .circle:hover{
+      background-color: #FFF;
+      color: #e80736;
+  }
+  .search-nav{
+      overflow: hidden;
+  }
+  .search-nav img{
+      float: left;
+      background-size: 100%;
+  }
+  .search-box{
+      float: left;
+      margin-left: 66px;
+      margin-top: 20px;
+      height: 40px;
+      display: flex;
+      justify-content: space-between;
+  }
 
-.partial{
-    margin-left: 30px;
-}
-.search-box>button>img{
-    margin-left: 20px;
-}
-.key-word{
-    width: 500px;
-    margin: 0 auto;
-}
-.key-word>ul>li{
-    float: left;
-    
-}
-.key-word a{
-    color: #FFF;
-    text-decoration:none; 
-}
-.spacer{
-    line-height: 0;
-    overflow: hidden;
-    margin: 5px 8px 0;
-    width: 1px;
-    height: 15px;
-    background-color: #edeff1;
-}
+  .partial{
+      margin-left: 30px;
+  }
+  .search-box>button>img{
+      margin-left: 20px;
+  }
+  .key-word{
+      width: 500px;
+      margin: 0 auto;
+  }
+  .key-word>ul>li{
+      float: left;
+      
+  }
+  .key-word a{
+      color: #FFF;
+      text-decoration:none; 
+  }
+  .spacer{
+      line-height: 0;
+      overflow: hidden;
+      margin: 5px 8px 0;
+      width: 1px;
+      height: 15px;
+      background-color: #edeff1;
+  }
 
 
 
-/* 尾部样式 */
-.footer{
-    width: 100%;
-    height: 274px;
-    background-color: #34383b;
-    
- }
- .f-center{
-    width: 1200px;
-    margin: 0 auto;
-    color: #ffffff; 
-}
-.three{
-    width: 380px;
-    padding: 59px 0 19px;
-    margin: 0 auto;  
-    display: flex;
-    justify-content: space-between; 
-              
-}
-.three a{
-    text-decoration:none; 
-    color: #fff;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    margin: 0px 22px;
-} 
-.line{
-    width: 580px;
-    height: 1px;
-    background-color: #494c4f;
-    margin: 0 auto;
-}
-p{
-    width: 608px;
-    font-size: 14px;
-    line-height: 36px;
-    margin: 0 auto;
-    color: #9A9B9C;
-    text-align: center;
-}
-/*.el-checkbox__input.is-focus .el-checkbox__inner{
-  border-color: #f5475c;
-}
-.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
-  border-color: #f5475c;
-  background-color: #f5475c; 
-}*/
+  /* 尾部样式 */
+  .footer{
+      width: 100%;
+      height: 274px;
+      background-color: #34383b;
+      
+   }
+   .f-center{
+      width: 1200px;
+      margin: 0 auto;
+      color: #ffffff; 
+  }
+  .three{
+      width: 380px;
+      padding: 59px 0 19px;
+      margin: 0 auto;  
+      display: flex;
+      justify-content: space-between; 
+                
+  }
+  .three a{
+      text-decoration:none; 
+      color: #fff;
+      font-size: 14px;
+      font-weight: normal;
+      font-stretch: normal;
+      margin: 0px 22px;
+  } 
+  .line{
+      width: 580px;
+      height: 1px;
+      background-color: #494c4f;
+      margin: 0 auto;
+  }
+  p{
+      width: 608px;
+      font-size: 14px;
+      line-height: 36px;
+      margin: 0 auto;
+      color: #9A9B9C;
+      text-align: center;
+  }
+  /*.el-checkbox__input.is-focus .el-checkbox__inner{
+    border-color: #f5475c;
+  }
+  .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+    border-color: #f5475c;
+    background-color: #f5475c; 
+  }*/
 </style>

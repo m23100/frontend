@@ -161,7 +161,7 @@
           </el-form-item>
           </el-form>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="Submission('ruleForm')" type="primary">提交</el-button>
+            <el-button @click="Submission('ruleForm')" type="primary" :disabled="button_disabled">提交</el-button>
             <el-button @click="centerDialogVisible = false">取消</el-button>
           </span>
         </el-dialog>
@@ -202,6 +202,7 @@
         options: [],
         value: "",
         user_income_str:'',
+        button_disabled:false,
         uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`},
         ruleForm: {
           real_name: '',
@@ -307,6 +308,7 @@
 
       //提交表单信息
       Submission(formName){
+        this.button_disabled = true
         this.$refs[formName].validate((valid) => {
           if (valid) {
             let data=this.ruleForm
@@ -314,8 +316,10 @@
               if(res.code==0){
                 this.$message.success('提交成功!')
                 this.reload()
+                this.button_disabled = false
               }else{
                 this.$message.error('提交失败'+res.msg)
+                this.button_disabled = false
               }
             })
             .catch(error => {

@@ -68,7 +68,7 @@
           </el-form-item>
           </el-form>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="Submission('ruleForm')" type="primary">提交</el-button>
+            <el-button @click="Submission('ruleForm')" type="primary" :disabled="button_disabled">提交</el-button>
             <el-button @click="centerDialogVisible = false">取消</el-button>
           </span>
         </el-dialog>
@@ -94,6 +94,7 @@ export default {
     }
     return {
       centerDialogVisible: false,
+      button_disabled:false,
       state:'6',//  1:放单权限审核中,   3放单权限审核被拒 4积分用完停用  6暂未开通放单权限 7点券用完
       ruleForm: {
         industry: '',
@@ -133,6 +134,7 @@ export default {
 
     //用户上传放单权限资格申请资料
     Submission:function(formName){
+      this.button_disabled = true
       this.$refs[formName].validate((valid) => {
         if (valid) {
           let data=this.ruleForm
@@ -140,8 +142,10 @@ export default {
             if(res.code==0){
               this.$message.success('提交成功!')
               this.reload()
+              this.button_disabled = false
             }else{
               this.$message.error('提交失败')
+              this.button_disabled = false
             }
           })
           .catch(error => {

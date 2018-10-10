@@ -99,7 +99,7 @@
         totalTime: 60,
         canClick:true,
         checked:false,
-        targetUrl:''
+        targetUrl:'/home'
       }
     },
     computed: {
@@ -222,7 +222,7 @@
       }
     },
     beforeRouteEnter (to, from , next){
-      var targetUrl = to.query.redirect;
+      var targetUrl = to.query.redirect ? to.query.redirect  : '/home';
       next((vm) => {
         vm.targetUrl = targetUrl;
       })

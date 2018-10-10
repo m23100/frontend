@@ -4,7 +4,7 @@
            <div class="fl"><a href="/" target="_blank">若梦TV首页</a></div>
            <ul class="fr">
                <!-- <li> <a href="">开发API</a> </li> -->
-               <li>开发API</li>
+               <li><a href="/openapi?h=detail" target="_blank">开发API</a></li>
                <li class="spacer"></li>
                <li><a href="/" target="_blank">商品库</a></li>
                <li class="spacer"></li>

@@ -73,7 +73,7 @@ import api from '@/http/api'
         
     }
 </script>
-<style>
+<style scoped>
 .centent {
   background-color: #fff;
   padding: 20px 12px;

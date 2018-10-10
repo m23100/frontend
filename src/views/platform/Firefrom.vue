@@ -310,7 +310,7 @@ export default {
             data.begintime = formatDate(new Date(),'yyyy-MM-dd hh:mm:ss')
           }else{
             let begtime = data.begindate+" "+data.begintime+":00"
-            data.begintime = begtime
+            data.begintime = this.getEditId>0? data.begintime : begtime
           }
           data.copywritingimage2 = this.imageUrl
           api.saveFire(data).then(res =>{
@@ -360,6 +360,10 @@ export default {
           this.ruleForm.copywriting2 = copywriting.second
           this.ruleForm.copywritingimage2 = copywritingimage.second
           this.imageUrl = copywritingimage.second
+        }else{
+          this.$router.push({
+              path: "/Submission"
+          })
         }
       })
     }else{
@@ -367,6 +371,11 @@ export default {
       this.ruleForm.startsales = this.getGoodsSalecount
       this.ruleForm.goodsid = this.getGoodsId
       this.ruleForm.goodslink = this.getGoodsLink
+    }
+    if(this.ruleForm.goodsid<1 || this.ruleForm.goodslink==''){
+      this.$router.push({
+          path: "/Submission"
+      })
     }
   },
   computed: {

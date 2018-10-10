@@ -292,7 +292,7 @@ export default {
             data.begintime = formatDate(new Date(),'yyyy-MM-dd hh:mm:ss')
           }else{
             let begtime = data.begindate+" "+data.begintime+":00"
-            data.begintime = begtime
+            data.begintime = this.getEditId>0? data.begintime : begtime
           }
           api.createnormal(data).then(res =>{
             if(res.code==0){
@@ -324,7 +324,7 @@ export default {
           if(this.ruleForm.begintimetype==2){
             let begtime = this.ruleForm.begintime
             this.ruleForm.begindate = this.ruleForm.begintime
-            this.ruleForm.begintime = formatDate(new Date(begtime),'hh:mm')
+            this.ruleForm.begintimetype = formatDate(new Date(begtime),'hh:mm')
           }else{
             // this.ruleForm.begindate = ''
             this.ruleForm.begintime = ''
@@ -332,6 +332,10 @@ export default {
           this.ruleForm.copywritingimage = copywritingimage.first
           this.ruleForm.coverimage = this.ruleForm.coverimage.main
           this.ruleForm.copywriting = copywriting.first
+        }else{
+          this.$router.push({
+              path: "/Submission"
+          })
         }
       })
     }else{
@@ -340,6 +344,12 @@ export default {
       this.ruleForm.startsales = this.getGoodsSalecount
       this.ruleForm.goodsid = this.getGoodsId
       this.ruleForm.goodslink = this.getGoodsLink
+    }
+
+    if(this.ruleForm.goodsid<1 || this.ruleForm.goodslink==''){
+      this.$router.push({
+          path: "/Submission"
+      })
     }
     
   },

@@ -25,7 +25,7 @@
         prop="increment"
         label="领券信息">
         <template slot-scope="scope">
-          {{scope.row.coupontotal}}张({{scope.row.coupontotal}}/{{scope.row.coupontotal-scope.row.couponremain}})
+          {{scope.row.coupontotal}}张({{scope.row.coupontotal-scope.row.couponremain}}/{{scope.row.coupontotal}}/)
         </template>
       </el-table-column>
       <el-table-column

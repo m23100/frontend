@@ -45,7 +45,7 @@
             <div v-if="type=='phone'" class="login-from" id="tab1">
               <input v-model="phone" type="text" placeholder="手机号">
               <input v-model="password" type="password" placeholder="密码">
-
+              <captcha @transferConfirm="setconfirm"></captcha>
               <div class="choice">
                 <el-checkbox v-model="checked">记住我</el-checkbox>
               </div>
@@ -87,6 +87,7 @@
   import { mapActions } from 'vuex'
   import api from '@/http/api'
   import {isPhone} from '@/util/tool'
+  import captcha from '@/components/Captcha'
   export default {
     data(){
       return {
@@ -99,14 +100,22 @@
         totalTime: 60,
         canClick:true,
         checked:false,
-        targetUrl:'/home'
+        targetUrl:'/home',
+        confirm_status:false
       }
+    },
+    components:{
+      captcha
     },
     computed: {
 
     },
     methods: {
       ...mapActions({ setUserInfo: 'setUserInfo', setUserToken:'setUserToken'}),
+      setconfirm(data){
+        console.log(data)
+        this.confirm_status = data
+      }, 
       login(){
         if(this.type=='phone'){
           let data = {
@@ -124,6 +133,10 @@
           } 
           if(data.password=='') {
             this.$message.error("请输入密码")
+            return false
+          }
+          if(!this.confirm_status){
+            this.$message.error("请先滑动验证")
             return false
           }
           api.Login(data).then(res => {

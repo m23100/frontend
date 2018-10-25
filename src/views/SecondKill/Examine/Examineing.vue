@@ -129,6 +129,7 @@ export default {
       pageSize:pageSize
     };
   },
+  inject:['reload'],
   methods:{
     ...mapActions({ setGoodsType: 'setGoodsType',setGoodsInfo: 'setGoodsInfo',setGoodsKill:'setGoodsKill'}),
     editView(info){
@@ -151,11 +152,13 @@ export default {
               type: 'success',
               message: '操作成功!'
             })
+            this.reload()
           }else{
             this.$message({
               type: 'info',
               message: '操作失败'
             })
+            this.reload()
           }
         })
       }).catch(() => {

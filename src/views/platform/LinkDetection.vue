@@ -50,7 +50,7 @@ export default {
               })
               callback()
             }else{
-              callback(new Error('商品链接检测失败'))
+              callback(new Error(res.msg))
             }
         })
         .catch(function(error) {

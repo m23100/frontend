@@ -131,6 +131,7 @@
       }
 
     },
+    inject:['reload'],
     methods:{
       ...mapActions({ setGoodsType: 'setGoodsType',setGoodsInfo: 'setGoodsInfo'}),
       editView(info){
@@ -160,11 +161,13 @@
                 type: 'success',
                 message: '操作成功!'
               })
+              this.reload()
             }else{
               this.$message({
                 type: 'info',
                 message: '操作失败'
               })
+              this.reload()
             }
           })
         }).catch(() => {

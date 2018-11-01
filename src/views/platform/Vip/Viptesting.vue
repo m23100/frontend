@@ -23,7 +23,7 @@
             <div class="item-content">
                 <div class="item">
                   <div class="copys">
-                    <div class="photo"><img :src="scope.row.coverimage.main" width="220" height="280" alt="商品"></div>
+                    <div class="photo"><img :src="scope.row.copywritingimage.first" width="220" height="280" alt="商品"></div>
                     <div class="descr">
                       {{scope.row.goodstitle}}<br>
                       【原价{{scope.row.origprice}}元】券后【{{scope.row.voucherprice}}】<br>
@@ -34,7 +34,7 @@
                   </div>
                   <div class="mask showmore hover">
                     <div class="cover">
-                      <a href="#"><img :src="scope.row.copywritingimage.first" width="260" height="260" alt="产品名"></a>
+                      <a href="#"><img :src="scope.row.coverimage.main" width="260" height="260" alt="产品名"></a>
                       <div class="btns">
                         <!-- <span>加入选品</span><span class="doCopy">点击复制</span> -->
                       </div>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="extras">
                       <div class="row">
-                        <span>推广销量增长：<b>{{scope.row.increment}}</b></span>
+                        <span>推广销量增涨：<b>{{scope.row.increment}}</b></span>
                         <!-- <a href="#" class="error"><i>!</i> 商品纠错</a> -->
                       </div>
                       <div class="row">

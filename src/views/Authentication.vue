@@ -169,7 +169,7 @@
 </template>
 <script>
   import api from '@/http/api'
-  import {imgBaseUrl} from '@/util/env' 
+  import {imgBaseUrl,baseUrl} from '@/util/env' 
   import {isPhone,isIDcard} from '@/util/tool' 
   export default {
     data() {
@@ -195,7 +195,7 @@
       }
       return {
         dialogImageUrl: '',
-        uploadUrl:'http://dev.ruomengtv.com/api/image/imageUpload?type=auth',
+        uploadUrl:baseUrl+'/api/image/imageUpload?type=auth',
         dialogVisible: false,
         centerDialogVisible: false,
         state: -1,

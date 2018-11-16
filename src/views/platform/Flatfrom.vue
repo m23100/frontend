@@ -132,7 +132,7 @@
 import { mapGetters,mapActions } from 'vuex'
 import api from '@/http/api'
 import {formatDate} from '@/util/tool'
-import {imgBaseUrl} from '@/util/env'
+import {imgBaseUrl,baseUrl} from '@/util/env'
 export default {
   data() {
     return {
@@ -210,7 +210,7 @@ export default {
         begintime:[{ required: true, message: '请选择预约开始时间', trigger: 'change' }],
         begindate:[{ required: true, message: '请选择预约开始时间', trigger: 'change' }]
       },
-      uploadUrl:'http://dev.ruomengtv.com/api/image/imageUpload?type=goods',
+      uploadUrl:baseUrl+'/api/image/imageUpload?type=goods',
       dialogImageUrl: '',    
       dialogVisible: false,   
       filelist:[],

@@ -6,7 +6,7 @@
         <el-upload
           class="avatar-uploader"
           :headers="uploadHeaders"
-          action="http://dev.ruomengtv.com/api/image/imageUpload?type=user"
+          :action="uploadUrl"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">
@@ -50,7 +50,7 @@
 </template>
 <script>
  import api from '@/http/api' 
-import {imgBaseUrl} from '@/util/env'
+import {imgBaseUrl,baseUrl} from '@/util/env'
  export default {
     data() {
       return {
@@ -66,6 +66,7 @@ import {imgBaseUrl} from '@/util/env'
         avatar:'',
         avatar_url:'',
         city_name:[],
+        uploadUrl:baseUrl+'/api/image/imageUpload?type=user',
         uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`},
         ruleForm:{
           name: '',

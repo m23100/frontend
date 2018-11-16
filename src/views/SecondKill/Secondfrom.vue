@@ -135,7 +135,7 @@
 <script>
 import { mapGetters,mapActions } from 'vuex'
 import api from '@/http/api'
-import {imgBaseUrl} from '@/util/env'
+import {imgBaseUrl,baseUrl} from '@/util/env'
 import {quillEditor, Quill} from 'vue-quill-editor'
 import {container, ImageExtend, QuillWatch} from 'quill-image-extend-module'
 import 'quill/dist/quill.core.css'
@@ -229,7 +229,7 @@ export default {
           { required: true, message: '请输入朋友圈文案', trigger: 'change' },
         ],
       },
-      uploadUrl:'http://dev.ruomengtv.com/api/image/imageUpload?type=goods',
+      uploadUrl:baseUrl+'/api/image/imageUpload?type=goods',
       uploadHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`},
       startdate:'',
       editorOption: {
@@ -239,7 +239,7 @@ export default {
             loading: true,
             name: 'file',
             size: 2,  // 单位为M, 1M = 1024KB
-            action: 'http://dev.ruomengtv.com/api/image/imageUpload?type=goods',
+            action: baseUrl+'/api/image/imageUpload?type=goods',
             headers: (xhr) => {
               xhr.setRequestHeader('Authorization',`Bearer ${localStorage.getItem('token')}`)
             },

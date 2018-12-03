@@ -1,6 +1,6 @@
+// require('es6-promise').polyfill();
 import axios from 'axios'
 import {baseUrl} from '@/util/env' 
-console.log(baseUrl)
 const api = axios.create();
 api.defaults.baseURL = baseUrl+'/api';
 api.defaults.timeout = 5000;

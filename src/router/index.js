@@ -1,47 +1,61 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import Router from 'vue-router'
 import App from '@/App'
-import Login from '@/views/Login'
-import container from '@/views/container'
-import Home from '@/views/Home'
-import Integral from '@/views/Integral'
-import Capital from '@/views/Capital'
-import Personal from '@/views/Personal'
+
+const Login = r => require.ensure([], () => r(require('@/views/Login')));
+const container = r => require.ensure([], () => r(require('@/views/container')));
+const Home = r => require.ensure([], () => r(require('@/views/Home')));
+const Integral = r => require.ensure([], () => r(require('@/views/Integral')));
+const Capital = r => require.ensure([], () => r(require('@/views/Capital')));
+const Personal = r => require.ensure([], () => r(require('@/views/Personal')));
 
 //放单平台
-import Apply from '@/views/platform/Apply'
-import Submission from '@/views/platform/Submission'
-import LinkDetection from '@/views/platform/LinkDetection'
-import Firefrom from '@/views/platform/Firefrom'
-import Flatfrom from '@/views/platform/Flatfrom'
+
+const Apply = r => require.ensure([], () => r(require('@/views/platform/Apply')));
+const Submission = r => require.ensure([], () => r(require('@/views/platform/Submission')));
+const LinkDetection = r => require.ensure([], () => r(require('@/views/platform/LinkDetection')));
+const Firefrom = r => require.ensure([], () => r(require('@/views/platform/Firefrom')));
+const Flatfrom = r => require.ensure([], () => r(require('@/views/platform/Flatfrom')));
+
 //平推单
-import Viptesting from '@/views/platform/Vip/Viptesting'
-import Viptestok from '@/views/platform/Vip/Viptestok'
-import Viptestno from '@/views/platform/Vip/Viptestno'
+
+const Viptesting = r => require.ensure([], () => r(require('@/views/platform/Vip/Viptesting')));
+const Viptestok = r => require.ensure([], () => r(require('@/views/platform/Vip/Viptestok')));
+const Viptestno = r => require.ensure([], () => r(require('@/views/platform/Vip/Viptestno')));
+
 //爆款单
-import Sviptesting from '@/views/platform/Svip/Sviptesting'
-import Sviptestok from '@/views/platform/Svip/Sviptestok'
-import Sviptestno from '@/views/platform/Svip/Sviptestno'
+
+const Sviptesting = r => require.ensure([], () => r(require('@/views/platform/Svip/Sviptesting')));
+const Sviptestok = r => require.ensure([], () => r(require('@/views/platform/Svip/Sviptestok')));
+const Sviptestno = r => require.ensure([], () => r(require('@/views/platform/Svip/Sviptestno')));
+
 //放单end
 
 //秒杀平台
-import Killcheckout from '@/views/SecondKill/Killcheckout'
-import Seconddata from '@/views/SecondKill/Seconddata'
-import Secondfrom from '@/views/SecondKill/Secondfrom'
-import Examineing from '@/views/SecondKill/Examine/Examineing'
-import Examineno from '@/views/SecondKill/Examine/Examineno'
-import Examineok from '@/views/SecondKill/Examine/Examineok'
 
-import Userkey from '@/views/Userkey'
+const Killcheckout = r => require.ensure([], () => r(require('@/views/SecondKill/Killcheckout')));
+const Seconddata = r => require.ensure([], () => r(require('@/views/SecondKill/Seconddata')));
+const Secondfrom = r => require.ensure([], () => r(require('@/views/SecondKill/Secondfrom')));
+const Examineing = r => require.ensure([], () => r(require('@/views/SecondKill/Examine/Examineing')));
+const Examineno = r => require.ensure([], () => r(require('@/views/SecondKill/Examine/Examineno')));
+const Examineok = r => require.ensure([], () => r(require('@/views/SecondKill/Examine/Examineok')));
+
+
+
+const Userkey = r => require.ensure([], () => r(require('@/views/Userkey')));
 
 //认证信息
-import Authentication from '@/views/Authentication'
+
+const Authentication = r => require.ensure([], () => r(require('@/views/Authentication')));
+
 //客服帮助
-import Customer from '@/views/Customer'
+
+const Customer = r => require.ensure([], () => r(require('@/views/Customer')));
+
+
 Vue.use(Router)
 
 const router =new Router({
-  // mode:'history',
  routes: [
     {
       path:"/",
@@ -215,9 +229,11 @@ const router =new Router({
 router.beforeEach((to, from, next) => {
   let token = localStorage.getItem('token')
   let token_expires = localStorage.getItem('token_expires')
+  if(token_expires){
+    token_expires = Date.parse(token_expires.replace(/-/g,"/"))
+  }
   let time_diff = token ? new Date(token_expires).getTime()- new Date().getTime() : 0
 
-  // console.log("before each - ", to,to.meta.auth,time_diff,to.path,token)
   if(to.meta && to.meta.auth==false){
     next()
   }else{

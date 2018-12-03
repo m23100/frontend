@@ -139,7 +139,7 @@
             this.$message.error("请先滑动验证")
             return false
           }
-          api.Login(data).then(res => {
+          
             if(res.code == 0) {
               this.setUserToken(res.data)
               api.UserInfo().then(

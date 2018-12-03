@@ -114,8 +114,8 @@
             >
             </quill-editor>
           </el-form-item>
-          <el-form-item label="朋友圈文案" prop="friends">
             <!-- <el-input type="textarea" v-model="ruleForm.friends"></el-input> -->
+          <el-form-item label="朋友圈文案" prop="friends">
             <quill-editor
               v-model="ruleForm.friends"
               ref="myQuillEditor"
